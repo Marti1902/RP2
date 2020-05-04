@@ -69,7 +69,7 @@ class Service{
             if( $_POST['log_in'] === 'login_user')
                 $_SESSION['user'] = new User($row['id'], $row['username'], ' ',$row['email'], $row['registration_sequence'], $row['has_registered'] );
             else 
-                $_SESSION['restaurants'] = new Restaurants($row['id'], $row['username'], ' ', $row['name'], $row['address'], $row['email'], $row['registration_sequence'], $row['has_registered'] );
+                $_SESSION['restaurants'] = new Restaurants($row['id'], $row['username'], ' ', $row['name'], $row['address'], $row['email'], $row['registration_sequence'], $row['rating'], $row['description'], $row['has_registered'] );
             return True;
         }
         else
@@ -101,6 +101,21 @@ class Service{
         if( !$isOK )
             exit( 'Greška: ne mogu poslati mail. (Pokrenite na rp2 serveru.)' );
         
+    }
+
+    //                      F-je za prikaz restorana
+    
+    function getRestaurantListByRating()
+    {
+        $restaurants =[];
+
+        $db = DB::getConnection();
+        $st = $db->prepare( 'SELECT * FROM spiza_restaurants ORDER BY rating');
+        $st->execute( );
+
+        while( $row = $st->fetch() )
+            $restaurants[] = new Restaurants($row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['description'], 1 );
+        return $restaurants;
     }
 
 

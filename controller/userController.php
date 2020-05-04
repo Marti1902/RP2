@@ -9,10 +9,13 @@ class UserController extends BaseController{
         debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'User index';
-        //$this->registry->template->channelList = $ls->getMyChannels();
+        $this->registry->template->restaurantList = $ls->getRestaurantListByRating();
         
         $this->registry->template->show( 'user_index' );
     }
+
+
+
 
 };
 

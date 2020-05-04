@@ -2,9 +2,9 @@
 
 class Restaurants{
 
-    protected $id, $username, $password, $name, $address, $email, $registration_sequance, $has_registered;
+    protected $id, $username, $password, $name, $address, $email, $registration_sequance, $rating, $description, $has_registered;
 
-    public function __construct($id, $username, $password, $name, $address, $email, $registration_sequance, $has_registered)
+    public function __construct($id, $username, $password, $name, $address, $email, $registration_sequance, $rating, $description, $has_registered)
     {
         $this->id = $id;
         $this->username = $username;
@@ -14,7 +14,8 @@ class Restaurants{
         $this->has_registerd = $has_registered;
         $this->name = $name;
         $this->address = $address;
-
+        $this->rating = $rating;
+        $this->description = $description;
     }
 
     public function __get( $property )

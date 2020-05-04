@@ -76,6 +76,8 @@ function create_table_restaurants()
 			'address varchar(80) NOT NULL,' .
 			'email varchar(50) NOT NULL,' .
 			'registration_sequence varchar(20) NOT NULL,' .
+			'rating int NOT NULL,' .
+			'description varchar(50) NOT NULL,' .
 			'has_registered int)'
 		);
 
