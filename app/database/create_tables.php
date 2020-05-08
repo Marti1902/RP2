@@ -5,7 +5,10 @@ require_once __DIR__ . '/db.class.php';
 
 create_table_users();
 create_table_restaurants();
-
+create_table_food();
+create_table_feedback();
+create_table_orders();
+create_table_deliverers();
 
 exit( 0 );
 
@@ -84,7 +87,7 @@ function create_table_restaurants()
 
 		$st->execute();
 	}
-	catch( PDOException $e ) { exit( "PDO error [create dz2_restaurants]: " . $e->getMessage() ); }
+	catch( PDOException $e ) { exit( "PDO error [create spiza_restaurants]: " . $e->getMessage() ); }
 
 	echo "Napravio tablicu spiza_restaurants.<br />";
 }
@@ -106,7 +109,6 @@ function create_table_food()
 			'food_type varchar(50) NOT NULL,' .
 			'description varchar(50) NOT NULL,' .
 			'waiting_time int NOT NULL,' .
-			'thumbs_up int NOT NULL,' .
 			'id_restaurant int NOT NULL,' .
 			'price int NOT NULL)'		
 		);
@@ -131,15 +133,16 @@ function create_table_feedback()
 			'CREATE TABLE IF NOT EXISTS spiza_feedback (' .
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'id_user int NOT NULL,' .
-			'id_restaurant NOT NULL,' .
+			'id_restaurant int NOT NULL,' .
 			'content varchar(1000) NOT NULL,' .
+			'rating int NOT NULL,' .
 			'thumbs_up int NOT NULL,' .
 			'thumbs_down int NOT NULL)'		
 		);
 
 		$st->execute();
 	}
-	catch( PDOException $e ) { exit( "PDO error [create spiza_restaurants]: " . $e->getMessage() ); }
+	catch( PDOException $e ) { exit( "PDO error [create spiza_feedback]: " . $e->getMessage() ); }
 
 	echo "Napravio tablicu spiza_restaurants.<br />";
 }
@@ -157,8 +160,8 @@ function create_table_orders()
 			'CREATE TABLE IF NOT EXISTS spiza_orders (' .
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'id_user int NOT NULL,' .
-			'id_restaurant NOT NULL,' .
-			'id_food NOT NULL,' .
+			'id_restaurant int NOT NULL,' .
+			'id_food int NOT NULL,' .
 			'how_many_times int NOT NULL)'		
 		);
 
@@ -168,6 +171,30 @@ function create_table_orders()
 
 	echo "Napravio tablicu spiza_orders.<br />";
 }
+
+function create_table_deliverers()
+{
+	$db = DB::getConnection();
+
+	if( has_table( 'spiza_deliverers' ) )
+		exit( 'Tablica spiza_deliverers vec postoji. Obrisite ju pa probajte ponovno.' );
+
+	try
+	{
+		$st = $db->prepare( 
+			'CREATE TABLE IF NOT EXISTS spiza_deliverers (' .
+			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
+			'username varchar(50) NOT NULL,' .
+			'password_hash varchar(255) NOT NULL)'		
+		);
+
+		$st->execute();
+	}
+	catch( PDOException $e ) { exit( "PDO error [create spiza_deliverers]: " . $e->getMessage() ); }
+
+	echo "Napravio tablicu spiza_deliverers.<br />";
+}
+
 
 
 ?> 
