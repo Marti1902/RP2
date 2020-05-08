@@ -185,7 +185,10 @@ function create_table_deliverers()
 			'CREATE TABLE IF NOT EXISTS spiza_deliverers (' .
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'username varchar(50) NOT NULL,' .
-			'password_hash varchar(255) NOT NULL)'		
+			'password_hash varchar(255) NOT NULL,' .
+			'email varchar(50) NOT NULL,' .
+			'registration_sequence varchar(20) NOT NULL,' .
+			'has_registered int)'		
 		);
 
 		$st->execute();
