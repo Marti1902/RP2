@@ -107,7 +107,7 @@ function create_table_food()
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'name varchar(50) NOT NULL,' .
 			'food_type varchar(50) NOT NULL,' .
-			'description varchar(50) NOT NULL,' .
+			'description varchar(200) NOT NULL,' .
 			'waiting_time int NOT NULL,' .
 			'id_restaurant int NOT NULL,' .
 			'price int NOT NULL)'		
