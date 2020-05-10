@@ -9,9 +9,12 @@
 
 <h1><?php echo $title; ?></h1>
 
-
 <nav>   
-        <a href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a>
+    <ul>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje Narudžbe</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user">Svi restorani</a></li>
+    </ul>
 </nav> 
      <?php
     if( isset($errorFlag))

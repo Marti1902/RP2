@@ -118,6 +118,65 @@ class Service{
         return $restaurants;
     }
 
+    function getRestaurantById( $id )
+    {
+        try
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_restaurants WHERE id=:rest');
+            $st->execute(['rest'=>$id]);
+		}
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount()!==1)
+            return null;
+        else{
+            $row=$st->fetch();
+            return new Restaurants( $row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['description'], 1  );
+        }
+    }
+
+
+    //fje za prikaz narudžbi
+
+    function getOrdersByUserId( $id_user )
+    {
+        try
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_user=:user');
+            $st->execute(['user'=>$id_user]);
+		}
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount()===0)
+            return null;
+        else{
+            $arr = array();
+            while( $row = $st->fetch() )
+            {
+                $arr[] = new Order( $row['id'], $row['id_user'], $row['id_restaurant'], $row['id_food'], $row['how_many_times'] );
+            }
+            return $arr;
+        }
+    }
+
+    //fje za prikaz hrane
+
+    function getFoodById( $id )
+    {
+        try
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_food WHERE id=:hrana');
+            $st->execute(['hrana'=>$id]);
+		}
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount()!==1)
+            return null;
+        else{
+            $row=$st->fetch();
+            return new Food ( $row['id'], $row['name'], $row['food_type'], $row['description'], $row['waiting_time'], $row['id_restaurant'], $row['price'] );
+        }
+    }
 
 };
 

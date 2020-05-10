@@ -14,7 +14,28 @@ class UserController extends BaseController{
         $this->registry->template->show( 'user_index' );
     }
 
+    public function orders(){
+        $ls = new Service();
+        error404();
+        debug();
 
+        $this->registry->template->title = 'Moje narudžbe';
+        $_SESSION['tab'] = 'User orders';
+        $pomocni = $ls->getOrdersByUserId( $_SESSION['user']->id );
+        #$i=0;
+        foreach ( $pomocni as $pom ){
+            #$rest = $ls->getRestaurantById ( $pom->id_restaurant );
+            #$hrana = $ls->getFoodById ( $pom->id_food );
+            #$pomocni[$i]->id_restaurant = $rest->name;
+            #$pomocni[$i]->id_food = $hrana->name;
+            #$i++;
+            $pom->id_restaurant = ( $ls->getRestaurantById ( $pom->id_restaurant ) )->name;
+            $pom->id_food = ( $ls->getFoodById ( $pom->id_food ) )->name;
+        }
+        $this->registry->template->orderList = $pomocni;
+
+        $this->registry->template->show( 'user_orders' );
+    }
 
 
 };
