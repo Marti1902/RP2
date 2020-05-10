@@ -1,21 +1,16 @@
 <?php 
 
-class Restaurants{
+class Deliverers{
 
-    protected $id, $username, $password, $name, $address, $email, $registration_sequance, $rating, $food_type, $description, $has_registered;
+    protected $id, $username, $password, $email, $registration_sequance, $has_registered;
 
-    public function __construct($id, $username, $password, $name, $address, $email, $registration_sequance, $rating, $food_type, $description, $has_registered)
+    public function __construct($id, $username, $password, $email, $registration_sequance, $has_registered)
     {
         $this->id = $id;
         $this->username = $username;
-        $this->password = $password; 
-        $this->name = $name;
-        $this->address = $address;
+        $this->password = $password;
         $this->email = $email;
         $this->registration_sequance = $registration_sequance;
-        $this->rating = $rating;
-        $this->food_type=$food_type;
-        $this->description = $description;
         $this->has_registerd = $has_registered;
     }
 

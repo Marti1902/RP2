@@ -53,14 +53,14 @@ class Service{
     }
 
     function loginToDatabase( $databaseName )    //  username i password primamo preko $_POST-a
-    {
+    {   
         $db = DB::getConnection();
         $st = $db->prepare( 'SELECT * FROM '.$databaseName.' WHERE username=:user');
         $st->execute(['user'=>$_POST['username']]);
-
+    
         if( $st->rowCount() !== 1)	// korisnik ne postoji ili ih je više -- ispisat grrešku
             return False;
-        
+ 
         $row = $st->fetch();
         $password_hash = $row['password_hash'];
 
@@ -68,8 +68,10 @@ class Service{
         {
             if( $_POST['log_in'] === 'login_user')
                 $_SESSION['user'] = new User($row['id'], $row['username'], ' ',$row['email'], $row['registration_sequence'], $row['has_registered'] );
-            else 
-                $_SESSION['restaurants'] = new Restaurants($row['id'], $row['username'], ' ', $row['name'], $row['address'], $row['email'], $row['registration_sequence'], $row['rating'], $row['description'], $row['has_registered'] );
+            else if($_POST['log_in'] === 'login_restaurants')
+                $_SESSION['restaurants'] = new Restaurants($row['id'], $row['username'], ' ', $row['name'], $row['address'], $row['email'], $row['registration_sequence'], $row['rating'], $row['food_type'], $row['description'], $row['has_registered'] );
+            else
+                $_SESSION['deliverers'] = new Deliverers($row['id'], $row['username'], ' ',$row['email'], $row['registration_sequence'], $row['has_registered'] );
             return True;
         }
         else
@@ -114,7 +116,7 @@ class Service{
         $st->execute( );
 
         while( $row = $st->fetch() )
-            $restaurants[] = new Restaurants($row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['description'], 1 );
+            $restaurants[] = new Restaurants($row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['food_type'], $row['description'], 1 );
         return $restaurants;
     }
 
@@ -131,7 +133,7 @@ class Service{
             return null;
         else{
             $row=$st->fetch();
-            return new Restaurants( $row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['description'], 1  );
+            return new Restaurants( $row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['food_type'], $row['description'], 1  );
         }
     }
 

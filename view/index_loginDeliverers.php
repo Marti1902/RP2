@@ -20,7 +20,7 @@ Username:
 <br>
 Password:
 <input type="password" name="password"> <br><br>
-<button type="submit" name="log_in" value="login_restaurants">Log in</button>
+<button type="submit" name="log_in" value="login_deliverers">Log in</button>
 </form>
 
 

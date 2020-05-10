@@ -17,7 +17,7 @@ class IndexController extends BaseController
 	}
 
 	public function login()
-	{
+	{	
 		$ls = new Service();
 		
 		if( !isset( $_POST['username']) || !isset( $_POST['password'] ) || !isset( $_POST['log_in'] ) 
@@ -30,9 +30,11 @@ class IndexController extends BaseController
 		}
 
 		if( $_POST['log_in'] === 'login_user')
-			$database = 'spiza_users';		//preko posta odlucit na koju se bazu spaja i tj je li restoran ili korisnik
-		else 
-			$database = 'spiza_restaurants';			
+			$database = 'spiza_users';		//preko posta odlucit na koju se bazu spaja i tj je li restoran, korisnik ili dostavljac
+		else if($_POST['log_in'] === 'login_restaurants')
+			$database = 'spiza_restaurants';
+		else
+			$database = 'spiza_deliverers';			
 echo $database;
 		if( !$ls->userExsists( $database, $_POST['username']) )
 		{
@@ -51,8 +53,10 @@ echo $database;
 			if( $ls->loginToDatabase( $database ) ){
 				if( $database === 'spiza_users')
 					header( 'Location: ' . __SITE_URL . '/index.php?rt=user' );
-				else
+				else if($database === 'spiza_restaurants')
 					header( 'Location: ' . __SITE_URL . '/index.php?rt=restaurants' );
+				else
+					header( 'Location: ' . __SITE_URL . '/index.php?rt=deliverers' );
 			}
 			else{
 				$this->registry->template->errorFlag = True;
@@ -100,6 +104,14 @@ echo $database;
 		debug();
 		$this->registry->template->title = 'Log in for restaurants';
 		$this->registry->template->show( 'index_loginRestaurants');
+
+	}
+
+	function loginDeliverers()
+	{
+		debug();
+		$this->registry->template->title = 'Log in for deliverers';
+		$this->registry->template->show( 'index_loginDeliverers');
 
 	}
 }; 

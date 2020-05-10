@@ -31,7 +31,7 @@ else
 	// Sad znamo da je točno jedan takav. Postavi mu has_registered na 1.
 	try
 	{
-		$st = $db->prepare( 'UPDATE dz2_users SET has_registered=1 WHERE registration_sequence=:reg_seq' );
+		$st = $db->prepare( 'UPDATE spiza_users SET has_registered=1 WHERE registration_sequence=:reg_seq' );
 		$st->execute( array( 'reg_seq' => $_GET['niz'] ) );
 	}
 	catch( PDOException $e ) { exit( 'Greška u bazi: ' . $e->getMessage() ); }
