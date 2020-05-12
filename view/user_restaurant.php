@@ -17,7 +17,7 @@ Recenzije:
     <?php 
     foreach( $feedbackList as $feedback ){
         echo '<li>' .
-             $feedback->username . ': ' . $feedback->rating . '<br>' .
+             $feedback->id_user . ': ' . $feedback->rating . '<br>' .
              $feedback->content . '<br>' .
             '</li>';
     }
