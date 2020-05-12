@@ -5,9 +5,10 @@ Popis po ocijenama:
     <?php 
     foreach( $restaurantList as $restaurant ){
         echo '<li>';
-        echo $restaurant->name .'  <small>Rating: '. $restaurant->rating.'</small><br>';
+        echo '<a href="index.php?rt=user/restaurant&id_restaurant=' . $restaurant->id . '">' . $restaurant->name . '</a>' .
+        '  <small>Rating: '. $restaurant->rating.'</small><br>';
         echo $restaurant->description .'<br>';
-        echo '<button name="iChose" type="submit" value="' . $restaurant->id . '">Try this one</button>';   //  Treba dodat jošlinkove za neke akcije
+        #echo '<button name="iChose" type="submit" value="' . $restaurant->id . '">Try this one</button>';   //  Treba dodat jošlinkove za neke akcije
         echo '</li>';
     }
     ?>

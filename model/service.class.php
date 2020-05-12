@@ -180,6 +180,67 @@ class Service{
         }
     }
 
+    function getFoodListByRestaurantId( $id_restaurant )
+    {
+        try
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_food WHERE id_restaurant=:rest');
+            $st->execute(['rest'=>$id_restaurant]);
+		}
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount()===0)
+            return null;
+        else{
+            $arr = array();
+            while( $row = $st->fetch() )
+            {
+                $arr[] = new Food( $row['id'], $row['name'], $row['food_type'], $row['description'], $row['waiting_time'], $row['id_restaurant'], $row['price'] );
+            }
+            return $arr;
+        }
+    }
+
+    //fje za prikaz feedbacka
+    function getFeedbackListByRestaurantId( $id_restaurant )
+    {
+        try
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_feedback WHERE id_restaurant=:rest');
+            $st->execute(['rest'=>$id_restaurant]);
+		}
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount()===0)
+            return null;
+        else{
+            $arr = array();
+            while( $row = $st->fetch() )
+            {
+                $arr[] = new Feedback( $row['id'], $row['id_user'], $row['id_restaurant'], $row['content'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+            }
+            return $arr;
+        }
+    }
+
+    //fje za prikaz korisnika
+    function getUserById( $id )
+    {
+        try
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_users WHERE id=:user');
+            $st->execute(['user'=>$id]);
+		}
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount()!==1)
+            return null;
+        else{
+            $row=$st->fetch();
+            return new User( $row['id'], $row['username'], $row['password_hash'], $row['email'], $row['registration_sequence'], $row['has_registered'] );
+        }
+    }
+
 };
 
 //  -------------------------------------------------------------

@@ -37,6 +37,24 @@ class UserController extends BaseController{
         $this->registry->template->show( 'user_orders' );
     }
 
+    public function restaurant(){
+        $ls = new Service();
+        error404();
+        debug();
+
+        $restaurant = $ls->getRestaurantById ( $_GET['id_restaurant'] );
+        $this->registry->template->title = $restaurant->name;
+        $_SESSION['tab'] = 'User restaurant';
+        $this->registry->template->foodList = $ls->getFoodListByRestaurantId( $restaurant->id );
+        $pomocni = $ls->getFeedbackListByRestaurantId( $restaurant->id );
+        
+        foreach ( $pomocni as $pom )
+            $pom->id_user = ( $ls->getUserById( $pom->id_user ) )->username;
+
+        $this->registry->template->feedbackList = $pomocni;
+
+        $this->registry->template->show( 'user_restaurant' );
+    }
 
 };
 
