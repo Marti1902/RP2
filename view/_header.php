@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Spiza</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 
 <body>
