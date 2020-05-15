@@ -17,3 +17,4 @@ Možda da koristimo branch-eve u gitu?
 * liste restorana po vrsti hrane: pizza, burger, grill
 * baza orders ima već nekoliko narudžbi pa da se pazi da već neke narudžbe postoje
 
+

@@ -110,7 +110,7 @@ function seed_table_feedback()
 	{
 		$st = $db->prepare( 'INSERT INTO spiza_feedback(id_user, id_restaurant, content, rating, thumbs_up, thumbs_down) VALUES (:id_user, :id_restaurant, :content, :rating, :thumbs_up, :thumbs_down)' );
 
-		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'content' => 'Jako sam zadovoljan hranom i uslugom.', 'rating' => 9, 'thumbs_up' => 1, 'thumbs_down' => 0 ) );
+		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'content' => 'Jako sam zadovoljan hranom, a u sluga je bila brza i sve je stiglo na vrijeme i točno je kao i u opisu hrane na web stranici.', 'rating' => 9, 'thumbs_up' => 1, 'thumbs_down' => 0 ) );
 		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 4, 'content' => 'Hrana je u redu, ali moglo je i bolje.', 'rating' => 8, 'thumbs_up' => 0, 'thumbs_down' => 1 ) );
 		$st->execute( array( 'id_user' => 2, 'id_restaurant' => 1, 'content' => 'Hrana je jako fina.', 'rating' => 9, 'thumbs_up' => 3, 'thumbs_down' => 0 ) );
 		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 2, 'content' => 'Fino je.', 'rating' => 8, 'thumbs_up' => 0, 'thumbs_down' => 0 ) );
@@ -131,14 +131,14 @@ function seed_table_orders()
 	// Ubaci neke korisnike unutra
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, id_food, how_many_times) VALUES (:id_user, :id_restaurant, :id_food, :how_many_times)' );
+		$st = $db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, id_food, id_order) VALUES (:id_user, :id_restaurant, :id_food, :id_order)' );
 
-		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'id_food' => 3, 'how_many_times' => 1 ) );
-		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 4, 'id_food' => 2, 'how_many_times' => 2 ) );
-		$st->execute( array( 'id_user' => 2, 'id_restaurant' => 1, 'id_food' => 1, 'how_many_times' => 1 ) );
-		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 2, 'id_food' => 4, 'how_many_times' => 4 ) );
-		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 5, 'id_food' => 4, 'how_many_times' => 3 ) );
-		$st->execute( array( 'id_user' => 4, 'id_restaurant' => 5, 'id_food' => 4, 'how_many_times' => 1 ) );
+		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'id_food' => 3, 'id_order' => 1 ) );
+		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'id_food' => 2, 'id_order' => 1 ) );
+		$st->execute( array( 'id_user' => 2, 'id_restaurant' => 1, 'id_food' => 1, 'id_order' => 2 ) );
+		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 2, 'id_food' => 4, 'id_order' => 3 ) );
+		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 5, 'id_food' => 4, 'id_order' => 4 ) );
+		$st->execute( array( 'id_user' => 4, 'id_restaurant' => 5, 'id_food' => 4, 'id_order' => 5 ) );
 
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_orders]: " . $e->getMessage() ); }

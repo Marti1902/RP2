@@ -2,15 +2,15 @@
 
 class Order{
 
-    protected $id, $id_user, $id_restaurant, $id_food, $how_many_times;
+    protected $id, $id_user, $id_restaurant, $id_food, $id_order;
 
-    public function __construct($id, $id_user, $id_restaurant, $id_food, $how_many_times )
+    public function __construct($id, $id_user, $id_restaurant, $id_food, $id_order )
     {
         $this->id = $id;
         $this->id_user = $id_user;
         $this->id_restaurant = $id_restaurant;
         $this->id_food = $id_food;
-        $this->how_many_times = $how_many_times;
+        $this->id_order = $id_order;
     }
 
     public function __get( $property )

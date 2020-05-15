@@ -162,7 +162,7 @@ function create_table_orders()
 			'id_user int NOT NULL,' .
 			'id_restaurant int NOT NULL,' .
 			'id_food int NOT NULL,' .
-			'how_many_times int NOT NULL)'		
+			'id_order int NOT NULL)'		
 		);
 
 		$st->execute();
