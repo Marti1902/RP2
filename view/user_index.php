@@ -1,6 +1,5 @@
 <?php require_once __DIR__ . '/_header.php'; ?>
 
-Popis po ocijenama:
 <ul>
     <?php 
     foreach( $restaurantList as $restaurant ){

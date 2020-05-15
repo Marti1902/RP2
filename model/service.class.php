@@ -112,11 +112,78 @@ class Service{
         $restaurants =[];
 
         $db = DB::getConnection();
-        $st = $db->prepare( 'SELECT * FROM spiza_restaurants ORDER BY rating');
+        $st = $db->prepare( 'SELECT * FROM spiza_restaurants ORDER BY rating DESC');
         $st->execute( );
 
         while( $row = $st->fetch() )
             $restaurants[] = new Restaurants($row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['food_type'], $row['description'], 1 );
+        return $restaurants;
+    }
+
+    // nedovrseno --> treba odlučiti kako ćemo spremati food_type za restoran pa onda prilagoditi upit
+    function getRestaurantListByFoodType( $food_type )
+    {
+        $restaurants =[];
+
+        $db = DB::getConnection();
+        $st = $db->prepare( 'SELECT * FROM spiza_restaurants WHERE food_type=:food_type ORDER BY rating DESC');
+        $st->execute( [ 'food_type' => $food_type ] );
+
+        while( $row = $st->fetch() )
+            $restaurants[] = new Restaurants($row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['food_type'], $row['description'], 1 );
+        return $restaurants;
+    }
+
+    // funkcija prima id usera i vraća njegove feedbackove poredano silazno po njegovoj ocjeni,
+    // ako taj korisnik nije ocijenio do sada nijedan restoran vraca null 
+    function getMyFeedbackList( $id_user )
+    {
+        try
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_feedback WHERE id_user=:id_user ORDER BY rating DESC');
+            $st->execute( ['id_user'=>$id_user] );
+		}
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount()===0)
+            return null;
+        else{
+            $feedbacks = [];
+            
+            while( $row = $st->fetch() )
+            {
+                $feedbacks[] = new Feedback( $row['id'], $row['id_user'], $row['id_restaurant'], $row['content'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+            }
+            return $feedbacks;
+        }
+    }
+
+    // funkcija prima id usera, poziva fju getMyFeedbackList koja vraca korisnikove recenzije sortirano silazno po ocjeni
+    // te vraca popis restorana koje je korisnik ocijenio (silazno po ocjeni)
+    // možemo još nekako ubaciti da se za svaki restoran koji je korisnik ocijenio gleda koliko puta je naručio iz istog pa se restoran koji ima
+    // najveću ocjenu i iz kojeg je korisnik najvise puta narucio hranu nalazi na vrhu liste, zatim se redaju restorani s istom ocjenom,
+    // ali silazno po broju narudzbi --> za ovo bi trebali ubaciti broj narudzbi u bazu jer bi upit za brojanje narudzbi nekog korisnika iz nekog restorana
+    // i jos poredano silazno po tom broju bio jako kompliciran...
+    function getRestaurantListByMyRating( $id_user ){
+        $ls = new Service();
+        $feedbacks = $ls->getMyFeedbackList( $id_user );
+        if( $feedbacks === null )
+            return null;
+
+        foreach( $feedbacks as $feedback ){
+            $id = $feedback->id_restaurant;
+
+            try{
+                $db = DB::getConnection();
+                $st = $db->prepare( 'SELECT * FROM spiza_restaurants WHERE id=:id' );
+                $st->execute( [ 'id' => $id ] );
+            }
+            catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+            $restaurants = [];
+                    
+             while( $row = $st->fetch() )
+                $restaurants[] = new Restaurants($row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['food_type'], $row['description'], 1 );
+        }
         return $restaurants;
     }
 

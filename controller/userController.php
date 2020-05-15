@@ -3,13 +3,38 @@
 
 class UserController extends BaseController{
 
+    // nakon logina se prikazuje popis omiljenih restorana
     public function index(){
         $ls = new Service();
         error404();
         debug();
 
-        $this->registry->template->title = $_SESSION['tab'] = 'User index';
+        $this->registry->template->title = $_SESSION['tab'] = 'Vaši omiljeni restorani';
+        $this->registry->template->restaurantList = $ls->getRestaurantListByMyRating( $_SESSION['user']->id );
+        
+        $this->registry->template->show( 'user_index' );
+    }
+
+    // popis restorana prema ocjenama korisnika
+    public function restaurantsByRating(){
+        $ls = new Service();
+        error404();
+        debug();
+
+        $this->registry->template->title = $_SESSION['tab'] = 'Svi restorani';
         $this->registry->template->restaurantList = $ls->getRestaurantListByRating();
+        
+        $this->registry->template->show( 'user_index' );
+    }
+
+    // popis restorana prema tipu hrane --> NEDOVRŠENO
+    public function restaurantsByFoodType(){
+        $ls = new Service();
+        error404();
+        debug();
+
+        $this->registry->template->title = $_SESSION['tab'] = 'Restaurants by Food Type';
+        $this->registry->template->restaurantList = $ls->getRestaurantListByFoodType( $food_type );
         
         $this->registry->template->show( 'user_index' );
     }

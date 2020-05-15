@@ -8,13 +8,14 @@
 
 <body>
 
-<h1><?php echo $title; ?></h1>
+<h1>Spiza.hr</h1>
 
 <nav>   
     <ul>
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje Narudžbe</a></li>
-        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user">Svi restorani</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user">Vaši omiljeni restorani</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/restaurantsByRating">Svi restorani</a></li>
     </ul>
 </nav> 
      <?php
@@ -22,3 +23,5 @@
         if( $errorFlag )
             echo $errorMsg . '<br>';
     ?>
+
+<h2><?php echo $title; ?></h2>
