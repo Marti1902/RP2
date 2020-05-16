@@ -44,6 +44,9 @@
 \maketitle
 \tableofcontents
 
+\begin{napomena}
+Javite ako nesto treba mjenjat u dokumentu.
+\end{napomena}
 \section{Modeliranje}
 
 Za potrebe aplikacije uočili smo da nam je potrebno čuvati podatke o korisnicima, restoranima, nerudžbama, hrani koju restorani imaju u ponudi i povratnoj informaciji korisnika o kvaliteti. Koristimo MySQL bazu podataka. Za svakog korisnika imamo sljedeće podatke koje pamtimo: \textsf{id\_user}, \textsf{username}, \textsf{password\_hash}, \textsf{email}, \textsf{registration\_sequence}, \textsf{has\_registered}. Navedeni podaci potrebni su nam za registraciju korisnika te \textit{log in} korisnika, primarni ključ predstavlja \textbf{\textsf{id\_user}}. Svaki restoran ima sljedeće podatke: \textsf{id\_restaurant}, \textsf{password\_hash}, \textsf{email}, \textsf{registration\_sequence}, \textsf{has\_registered}, \textsf{name}, \textsf{address}, \textsf{description}. Navedeni podati potrebni su za registraciju novih restorana, \textit{log in }postojećih restorana te prikaza opisa restorana, primarni ključ je \textbf{\textsf{id\_restaurant}}. Potrebno je pohranit i podatke o jelima: \textsf{id\_food}, \textsf{name}, \textsf{description}, \textsf{waiting\_time}, \textsf{price}. Također pohranjujemo \textit{feedback} korisnika za svaku narudžbu.
@@ -132,6 +135,9 @@ Pomoću sljedećih naredbi kreiramo bazu.
     FOREIGN KEY (id\_foodType) REFERENCES spiza\_food\_type(id\_foodType)\\
     )
 \end{itemize}
+
+\section{To do list}
+Potrebno je još dodat slike restorana i jela u restoranima u bazu te razradit sam sistem čuvanja slika na serveru, dodat za dostavljače i vjv ima još nešto. 
 
 
 \end{document}
