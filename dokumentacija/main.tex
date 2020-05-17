@@ -76,9 +76,9 @@ Slijedi prikaz relacijskog modela:
     \item[] \textsf{FOOD (\textbf{id\_food}, name, description, waiting\_time, price, \underline{id\_restaurant})}
     \item[] \textsf{FOOD\_TYPE (\textbf{id\_foodType}, name)}
     \item[] \textsf{ORDERS (\textbf{id\_order}, \underline{id\_user}, \underline{id\_restaurant}, note, feedback, rating, thumbs\_up,\\ thumbs\_down)}
-    \item[] \textsf{CONTAINS (\textbf{id\_order}, \textbf{id\_food})}
-    \item[] \textsf{HAS\_FOODTYPE (\textbf{id\_foodType}, \textbf{id\_restaurant})}
-    \item[] \textsf{IMAGE (\textbf{id\_image}, name, image \emph{- vjerojatno se neće koristit- za pohranu slike})}
+    \item[] \textsf{CONTAINS (\textbf{\underline{id\_order}}, \textbf{\underline{id\_food}})}
+    \item[] \textsf{HAS\_FOODTYPE (\textbf{\underline{id\_foodType}}, \textbf{\underline{id\_restaurant}})}
+    \item[] \textsf{IMAGE (\textbf{id\_image}, name, \underline{id\_food}, \underline{id\_restaurant}, image \emph{- vjerojatno se neće koristit- za pohranu slike})}
 
 \end{itemize}
 
@@ -96,9 +96,10 @@ Pomoću sljedećih naredbi kreiramo bazu.
     password\_hash varchar(255) NOT NULL,\\
     email varchar(50) NOT NULL,\\
     registration\_sequence varchar(20) NOT NULL,
-    \\has\_registered int)
+    \\has\_registered int\\
+    )
     \item[] CREATE TABLE IF NOT EXISTS spiza\_restaurants (\\
-    id\_restaurant NOT NULL PRIMARY KEY AUTO\_INCREMENT,\\
+    id\_restaurant int NOT NULL PRIMARY KEY AUTO\_INCREMENT,\\
     username varchar(50) NOT NULL, \\
     password\_hash varchar(255) NOT NULL,\\
     email varchar(50) NOT NULL,\\
@@ -111,13 +112,13 @@ Pomoću sljedećih naredbi kreiramo bazu.
     \item[] CREATE TABLE IF NOT EXISTS spiza\_food (\\
     id\_food int NOT NULL PRIMARY KEY AUTO\_INCREMENT,\\
     name varchar(50) NOT NULL,\\
-    description varchar(50) NOT NULL,\\
+    description varchar(200) NOT NULL,\\
     waiting\_time int NOT NULL,\\
     price decimal(6,2) NOT NULL,\\
     id\_restaurant int NOT NULL,\\
     FOREIGN KEY (id\_restaurant) REFERENCES spiza\_restaurants(id\_restaurant)
     )
-    \item[] CREATE TABLE IF NOT EXISTS spiza\_food\_type (
+    \item[] CREATE TABLE IF NOT EXISTS spiza\_food\_type (\\
     id\_foodType int NOT NULL PRIMARY KEY AUTO\_INCREMENT,\\
     name varchar(30) NOT NULL\\
     )
@@ -125,6 +126,9 @@ Pomoću sljedećih naredbi kreiramo bazu.
     id\_order int NOT NULL PRIMARY KEY AUTO\_INCREMENT,\\
     id\_user int NOT NULL,\\
     id\_restaurant int NOT NULL,\\
+    active tinyint NOT NULL,\\
+    order\_time TIMESTAMP NOT NULL,\\
+    delivery\_time TIMESTAMP,\\
     note varchar(50),\\
     feedback varchar(100),\\
     rating float,\\
@@ -133,15 +137,17 @@ Pomoću sljedećih naredbi kreiramo bazu.
     FOREIGN KEY (id\_restaurant) REFERENCES spiza\_restaurants(id\_restaurant),\\
     FOREIGN KEY (id\_user) REFERENCES spiza\textunderscore users(id\_user)\\
     )
-    \item[] CREATE TABLE IF NOT EXISTS spiza\_contains(\\
-    id\_order int NOT NULL PRIMARY KEY,\\
-    id\_food int NOT NULL PRIMARY KEY,\\
+    \item[] CREATE TABLE IF NOT EXISTS spiza\_contains (\\
+    id\_order int NOT NULL,\\
+    id\_food int NOT NULL,\\
+    PRIMARY KEY (id\_order, id\_food),\\
     FOREIGN KEY (id\_order) REFERENCES spiza\_orders(id\_order),\\
     FOREIGN KEY (id\_food) REFERENCES spiza\_food(id\_food)\\
     )
     \item[] CREATE TABLE IF NOT EXISTS spiza\_has\_food\_type (\\
-    id\_foodType int NOT NULL PRIMARY KEY,\\
-    id\_restaurant int NOT NULL PRIMARY KEY,\\
+    id\_foodType int NOT NULL,\\
+    id\_restaurant int NOT NULL,\\
+    PRIMARY KEY (id\_foodType, id\_restaurant),\\
     FOREIGN KEY (id\_restaurant) REFERENCES spiza\_restaurants(id\_restaurant),\\
     FOREIGN KEY (id\_foodType) REFERENCES spiza\_food\_type(id\_foodType)\\
     )
@@ -150,7 +156,7 @@ Pomoću sljedećih naredbi kreiramo bazu.
     name varchar(200) NOT NULL,\\
     image longtext,\\
     id\_food int,\\
-    id\_restaurants int,\\
+    id\_restaurant int,\\
     FOREIGN KEY (id\_restaurant) REFERENCES spiza\_restaurants(id\_restaurant),\\
     FOREIGN KEY (id\_food) REFERENCES spiza\_food(id\_food)\\
     )
