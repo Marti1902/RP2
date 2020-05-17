@@ -328,6 +328,30 @@ class Service{
         }
     }
 
+    //      Dohvaća rating restorana po id-u 
+    function getRestaurantRatingById( $id )
+    {
+        $sum = 0;
+        $count = 0;
+        try
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT rating FROM spiza_orders WHERE id_restaurant=:restaurant');
+            $st->execute(['restaurant'=>$id]);
+		}
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount() === 0 )
+            return 0;
+        else{
+            while( $row = $st->fetch() )
+            {
+                $sum += $row['rating'];
+                $count += 1;
+            }
+            return $sum / $count;
+        }
+    }
+
 };
 
 //  -------------------------------------------------------------

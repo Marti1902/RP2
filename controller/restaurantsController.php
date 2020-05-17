@@ -10,9 +10,9 @@ class RestaurantsController extends BaseController{
 
         $this->registry->template->title = $_SESSION['tab'] = 'Restaurants index';
         $this->registry->template->FoodList = $ls->getFoodListByRestaurantId( $_SESSION['restaurants']->id_restaurant );
-
+        $this->registry->template->restaurantRating = $ls->getRestaurantRatingById( $_SESSION['restaurants']->id_restaurant );
         $this->registry->template->restaurantInfo = $ls->getRestaurantById( $_SESSION['restaurants']->id_restaurant );
-        
+
         $this->registry->template->show( 'restaurants_index' );
     }
 
