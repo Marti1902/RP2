@@ -75,7 +75,7 @@ Slijedi prikaz relacijskog modela:
     \item[] \textsf{RESTAURANTS (\textbf{id\_restaurant}, username, password\_hash, email, \\registration\_sequence, has\_registered, name, address, description)}
     \item[] \textsf{FOOD (\textbf{id\_food}, name, description, waiting\_time, price, \underline{id\_restaurant})}
     \item[] \textsf{FOOD\_TYPE (\textbf{id\_foodType}, name)}
-    \item[] \textsf{ORDERS (\textbf{id\_order}, \underline{id\_user}, \underline{id\_restaurant}, note, feedback, rating, thumbs\_up,\\ thumbs\_down)}
+    \item[] \textsf{ORDERS (\textbf{id\_order}, \underline{id\_user}, \underline{id\_restaurant}, active, order\_time, delivery\_time, price\_total, discount, note, feedback, rating, thumbs\_up, thumbs\_down)}
     \item[] \textsf{CONTAINS (\textbf{\underline{id\_order}}, \textbf{\underline{id\_food}})}
     \item[] \textsf{HAS\_FOODTYPE (\textbf{\underline{id\_foodType}}, \textbf{\underline{id\_restaurant}})}
     \item[] \textsf{IMAGE (\textbf{id\_image}, name, \underline{id\_food}, \underline{id\_restaurant}, image \emph{- vjerojatno se neće koristit- za pohranu slike})}
@@ -127,8 +127,10 @@ Pomoću sljedećih naredbi kreiramo bazu.
     id\_user int NOT NULL,\\
     id\_restaurant int NOT NULL,\\
     active tinyint NOT NULL,\\
-    order\_time TIMESTAMP NOT NULL,\\
-    delivery\_time TIMESTAMP,\\
+    order\_time DATETIME NOT NULL,\\
+    delivery\_time DATETIME,\\
+    price\_total float,\\ 
+    discount float,\\
     note varchar(50),\\
     feedback varchar(100),\\
     rating float,\\

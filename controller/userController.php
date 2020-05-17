@@ -10,7 +10,7 @@ class UserController extends BaseController{
         debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Vaši omiljeni restorani';
-        $this->registry->template->restaurantList = $ls->getRestaurantListByMyRating( $_SESSION['user']->id );
+        $this->registry->template->restaurantList = $ls->getRestaurantListByRating( );
         
         $this->registry->template->show( 'user_index' );
     }
@@ -34,7 +34,7 @@ class UserController extends BaseController{
         debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Restaurants by Food Type';
-        $this->registry->template->restaurantList = $ls->getRestaurantListByFoodType( $food_type );
+        //$this->registry->template->restaurantList = $ls->getRestaurantListByFoodType( $food_type );
         
         $this->registry->template->show( 'user_index' );
     }

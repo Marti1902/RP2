@@ -170,6 +170,11 @@ function create_table_feedback()
 
 	echo "Napravio tablicu spiza_restaurants.<br />";
 }
+    active tinyint NOT NULL,\\
+    order\_time DATETIME NOT NULL,\\
+    delivery\_time DATETIME,\\
+    price\_total float,\\ 
+    discount float,\\
 */
 function create_table_orders()
 {
@@ -188,6 +193,8 @@ function create_table_orders()
 			'active tinyint NOT NULL,' .
 			'order_time DATETIME NOT NULL,' .
 			'delivery_time DATETIME,' .
+			'price_total float,' .
+			'discount float,' .
 			'note varchar(50),' .
 			'feedback varchar(100),' .
 			'rating float,' .
