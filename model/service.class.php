@@ -28,7 +28,7 @@ class Service{
         $st->execute(['val1'=> $_SESSION['user']->id, 'val2'=> $_SESSION['current_channel']->id, 'val3'=>$messege, 'val4'=>0, 'val5'=>date("Y-m-d h:i:s")]);
     }*/
 
-    //                      F-je    za  LOGIN
+    //                      F   -   je          za          LOGIN
     function userExsists($databaseName, $username)
     {
         $db = DB::getConnection();
@@ -67,9 +67,9 @@ class Service{
         if( password_verify( $_POST['password'], $password_hash) )
         {
             if( $_POST['log_in'] === 'login_user')
-                $_SESSION['user'] = new User($row['id'], $row['username'], ' ',$row['email'], $row['registration_sequence'], $row['has_registered'] );
+                $_SESSION['user'] = new User($row['id_user'], $row['username'], ' ',$row['email'], $row['registration_sequence'], $row['has_registered'] );
             else if($_POST['log_in'] === 'login_restaurants')
-                $_SESSION['restaurants'] = new Restaurants($row['id'], $row['username'], ' ', $row['name'], $row['address'], $row['email'], $row['registration_sequence'], $row['rating'], $row['food_type'], $row['description'], $row['has_registered'] );
+                $_SESSION['restaurants'] = new Restaurants($row['id_restaurant'], $row['username'], ' ', $row['name'], $row['address'], $row['email'], $row['registration_sequence'], $row['description'], $row['has_registered'] );
             else
                 $_SESSION['deliverers'] = new Deliverers($row['id'], $row['username'], ' ',$row['email'], $row['registration_sequence'], $row['has_registered'] );
             return True;
@@ -78,7 +78,7 @@ class Service{
             return False;
     }
 
-    //                      F-je    za  REGISTER
+    //                      F   -   je          za          REGISTER
     function registerUser($databaseName)
     {
         $reg_seq = '';
@@ -206,12 +206,13 @@ class Service{
         return $restaurants;
     }
 
+    //  Popravljeno za novu bazu
     function getRestaurantById( $id )
     {
         try
 		{
             $db=DB::getConnection();
-            $st=$db->prepare('SELECT * FROM spiza_restaurants WHERE id=:rest');
+            $st=$db->prepare('SELECT * FROM spiza_restaurants WHERE id_restaurant=:rest');
             $st->execute(['rest'=>$id]);
 		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -219,7 +220,7 @@ class Service{
             return null;
         else{
             $row=$st->fetch();
-            return new Restaurants( $row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['food_type'], $row['description'], 1  );
+            return new Restaurants( $row['id_restaurant'], '', '', $row['name'], $row['address'], $row['email'], '', $row['description'], 1  );
         }
     }
 
@@ -265,7 +266,7 @@ class Service{
             return new Food ( $row['id'], $row['name'], $row['food_type'], $row['description'], $row['waiting_time'], $row['id_restaurant'], $row['price'] );
         }
     }
-
+    //  Popravljeno za novu bazu 
     function getFoodListByRestaurantId( $id_restaurant )
     {
         try
@@ -281,7 +282,7 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = new Food( $row['id'], $row['name'], $row['food_type'], $row['description'], $row['waiting_time'], $row['id_restaurant'], $row['price'] );
+                $arr[] = new Food( $row['id_food'], $row['name'], $row['description'], $row['waiting_time'], $row['id_restaurant'], $row['price'] );
             }
             return $arr;
         }

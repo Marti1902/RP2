@@ -4,7 +4,7 @@ class Food{
 
     protected $id_food, $name, $description, $waiting_time, $price, $id_restaurant ;
 
-    public function __construct($id, $name, $description, $waiting_time, $price, $id_restaurant)
+    public function __construct($id, $name, $description, $waiting_time, $id_restaurant, $price)
     {
         $this->id_food = $id;
         $this->name = $name;
