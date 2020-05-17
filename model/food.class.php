@@ -6,7 +6,7 @@ class Food{
 
     public function __construct($id, $name, $description, $waiting_time, $price, $id_restaurant)
     {
-        $this->id = $id;
+        $this->id_food = $id;
         $this->name = $name;
         $this->description = $description;
         $this->waiting_time = $waiting_time;
