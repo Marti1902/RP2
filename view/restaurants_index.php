@@ -7,6 +7,12 @@
 
 
 <table>
+    <tr>
+        <th>Naziv jela</th>
+        <th>Cijena</th>
+        <th>Opis jela</th>
+        <th>Vrijeme čekanja</th>
+    </tr>
 <?php
     foreach( $FoodList as $food)
     {
@@ -19,9 +25,10 @@
             echo "</tr>\n";
     }
 ?>
+
 </table>
 <h3>Trenutna ocjena restorana je <?php echo $restaurantRating;?></h3>
-Možda to prebacit negdje 
+Možda to prebacit u neki div
 <h3>Informacije o restoranu: </h3>
 Ime restorana: <?php echo $restaurantInfo->name;?>
 <br>
@@ -31,6 +38,8 @@ Adresa: <?php echo $restaurantInfo->address;?>
 <br>
 E-mail: <?php echo $restaurantInfo->email;?>
 <hr>
+
+Promjena cijene 
 
 
 
