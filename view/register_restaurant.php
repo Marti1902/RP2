@@ -17,9 +17,9 @@
             echo $errorMsg . '<br>';
     ?>
 
-<h2>Trenutno samo za korisnike omogućeno, ne i za restorane!</h2>
+<h2>Treba testirat!</h2>
 
-<p>After registration you will receive an e-mail confirmation and link to activate your account!</p>
+<p>After registration you will receive an e-mail confirmation and link to activate your account and complite your sign in form!</p>
 
 <form action="<?php echo __SITE_URL; ?>/index.php?rt=index/register" method='post'>
     Chose username:
@@ -27,9 +27,15 @@
     Chose password:
     <input type="password" name="password"><br>
     Input e-mail:
-    <input type="email" name="email">
+    <input type="email" name="email"><br>
+    Enter your restaurant name:
+    <input type="text" name="name"><br>
+    Enter your restaurant address:
+    <input type="text" name="address"><br>
+    Enter your restaurant description:
+    <input type="text" name="description">
     <br><br>
-    <input type="submit" name="Register user" value="Register user">
+    <input type="submit" name="Register restaurant" value="Register restaurant">
 </form>
 
 

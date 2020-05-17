@@ -31,7 +31,9 @@ Password:
 <form action="<?php echo __SITE_URL; ?>/index.php?rt=index/loginRestaurants" method='post'>
     <input type="submit" value="Login for restaurants" />
 </form>
-
+<form action="<?php echo __SITE_URL; ?>/index.php?rt=index/registerForward_restaurants" method='post'>
+    <input type="submit" value="Register new restaurant" />
+</form>
 <hr>
 <form action="<?php echo __SITE_URL; ?>/index.php?rt=index/loginDeliverers" method='post'>
     <input type="submit" value="Login for deliverers" />

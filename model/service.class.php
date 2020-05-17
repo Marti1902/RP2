@@ -86,14 +86,33 @@ class Service{
             $reg_seq .= chr( rand(0, 25) + ord( 'a' ) );
 
         $db = DB::getConnection();
-        $st = $db->prepare( 'INSERT INTO '.$databaseName.' (username, password_hash, email, registration_sequence, has_registered) VALUES (:val1,:val2,:val3,:val4,:val5)');
-        $st->execute(['val1'=> $_POST['username'],'val2'=> password_hash( $_POST['password'], PASSWORD_DEFAULT ), 
-                    'val3'=> $_POST['email'],'val4'=> $reg_seq,'val5'=> 0]);
+
+        if( $databaseName === 'spiza_users' )
+		{
+            try{
+                $st = $db->prepare( 'INSERT INTO '.$databaseName.' (username, password_hash, email, registration_sequence, has_registered) VALUES (:val1,:val2,:val3,:val4,:val5)');
+                $st->execute(['val1'=> $_POST['username'],'val2'=> password_hash( $_POST['password'], PASSWORD_DEFAULT ), 
+                            'val3'=> $_POST['email'],'val4'=> $reg_seq,'val5'=> 0]);
+            }catch( PDOException $e ) { exit( "PDO error [insert spiza_users]: " . $e->getMessage() ); }
+        }
+        elseif( $databaseName === 'spiza_restaurants' )
+        {
+            try{
+                $st = $db->prepare( 'INSERT INTO '.$databaseName.' (username, password_hash, email, registration_sequence, has_registered, name, address, description) VALUES (:val1,:val2,:val3,:val4,:val5, :val6, :val7, :val8)');
+                $st->execute(['val1'=> $_POST['username'],'val2'=> password_hash( $_POST['password'], PASSWORD_DEFAULT ), 
+                            'val3'=> $_POST['email'],'val4'=> $reg_seq,'val5'=> 0, 'val6'=>$_POST['name'], 'val7'=>$_POST['address'], 'val8'=>$_POST['description'] ]);
+            }catch( PDOException $e ) { exit( "PDO error [insert spiza_restaurants]: " . $e->getMessage() ); }
+        }
+
 
         $to       = $_POST['email'];
         $subject  = 'Registracijski mail';
         $message  = 'Poštovani ' . $_POST['username'] . "!\nZa dovršetak registracije kliknite na sljedeći link: ";
-        $message .= 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/register.php?niz=' . $reg_seq . "\n";
+        $message = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/register.php?niz=' . $reg_seq . "\n";
+
+        if( $databaseName === 'spiza_restaurants' )
+            $message = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/register_restaurant.php?niz=' . $reg_seq . "\n";
+
         $headers  = 'From: rp2@studenti.math.hr' . "\r\n" .
                     'Reply-To: rp2@studenti.math.hr' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();

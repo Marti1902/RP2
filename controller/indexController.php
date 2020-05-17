@@ -74,29 +74,61 @@ echo $database;
 		$this->registry->template->show( 'register');
 	}
 
+	public function registerForward_restaurants()
+	{
+		$this->registry->template->title = 'Register Restaurant';
+		$this->registry->template->show( 'register_restaurant');
+	}
+
 	public function register()			//		Trenutno SAMO za KORISNIKE - NE i za restorane
 	{
 		$ls = new Service();
-		
-		$database = 'spiza_users';
-
+		if( isset( $_POST['Register_user'] ) )
+				$database = 'spiza_users';
+		elseif( isset( $_POST['Register_restaurant'] ) )
+				$database = 'spiza_restaurants';
+		else{
+			$this->registry->template->errorFlag = True;
+			$this->registry->template->errorMsg = 'Greška kod odabira baze!';
+			return;
+		}
+		if( $database === 'spiza_restaurants ')		//	provjera samo za restorane jesu li unjeta ostala polja
+			if( !isset( $_POST['name']) || !isset( $_POST['address'] ) || !isset( $_POST['description'] ) )
+			{
+				$this->registry->template->errorFlag = True;
+				$this->registry->template->errorMsg = 'Form unfilled!';
+				$this->registerForward_restaurants();
+			}
 		if( !isset( $_POST['username']) || !isset( $_POST['password'] ) || !isset( $_POST['email'] )  )	//nisu postavljeni
 		{
 			$this->registry->template->errorFlag = True;
 			$this->registry->template->errorMsg = 'Wrong input!';
-			$this->registerForward();
+			if( $database === 'spiza_users' )
+				$this->registerForward();
+			elseif( $database === 'spiza_restaurants' )
+				$this->registerForward_restaurants();
 		}
 		elseif( $ls->userExsists( $database, $_POST['username']) )
 		{
 			$this->registry->template->errorFlag = True;
 			$this->registry->template->errorMsg = 'Username taken!';
-			$this->registerForward();
+			if( $database === 'spiza_users' )
+				$this->registerForward();
+			elseif( $database === 'spiza_restaurants' )
+				$this->registerForward_restaurants();
 		}
 		else
 		{
-			$ls->registerUser($database);			
-			$this->index();
+			$ls->registerUser($database);		
+
+			$this->registry->template->errorFlag = True;
+			$this->registry->template->errorMsg = 'Account created, please confirm registration e-mail!';
+			if( $database === 'spiza_users' )
+				$this->index();
+			elseif( $database === 'spiza_restaurants' )
+				$this->loginRestaurants();
 		}
+
 	}
 
 	function loginRestaurants()
