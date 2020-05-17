@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/_header.php'; ?>
+<?php require_once __DIR__ . '/header&footer/_header.php'; ?>
 
 Popis narudžbi:
 <ul>
@@ -12,4 +12,4 @@ Popis narudžbi:
     ?>
 </ul>
 
-<?php require_once __DIR__ . '/_footer.php'; ?>
+<?php require_once __DIR__ . '/header&footer/_footer.php'; ?>

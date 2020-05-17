@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/_header.php'; ?>
+<?php require_once __DIR__ . '/header&footer/_header.php'; ?>
 
 Popis dostupnih jela:
 <ul>
@@ -65,4 +65,4 @@ $( document ).ready( function()
 } );
 </script>
 
-<?php require_once __DIR__ . '/_footer.php'; ?>
+<?php require_once __DIR__ . '/header&footer/_footer.php'; ?>

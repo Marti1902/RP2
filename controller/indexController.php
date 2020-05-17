@@ -19,7 +19,7 @@ class IndexController extends BaseController
 	public function login()
 	{	
 		$ls = new Service();
-		
+		debug();
 		if( !isset( $_POST['username']) || !isset( $_POST['password'] ) || !isset( $_POST['log_in'] ) 
 			/*|| preg_match()*/)	//	username ili pasword pogrešno uneseni ++++	dodati pregmatch da izbazi ako je maliciozan unos
 		{	//	ispisat grešku pri login-u
@@ -35,18 +35,27 @@ class IndexController extends BaseController
 			$database = 'spiza_restaurants';
 		else
 			$database = 'spiza_deliverers';			
-echo $database;
 		if( !$ls->userExsists( $database, $_POST['username']) )
 		{
 			$this->registry->template->errorFlag = True;
 			$this->registry->template->errorMsg = 'User does not exsist!';
-			$this->index();
+			if( $database === 'login_restaurants' )
+				$this->index();
+			elseif( $database === 'spiza_restaurants' )
+				$this->loginRestaurants();
+			elseif( $database === 'spiza_deliverers' )
+				$this->loginDeliverers();
 			return;
 		}
 		elseif( !$ls->emailConfirmed( $database, $_POST['username']) ){
 			$this->registry->template->errorFlag = True;
 			$this->registry->template->errorMsg = 'Registration not confirmed!';
-			$this->index();
+			if( $database === 'login_restaurants' )
+				$this->index();
+			elseif( $database === 'spiza_restaurants' )
+				$this->loginRestaurants();
+			elseif( $database === 'spiza_deliverers' )
+				$this->loginDeliverers();
 			return;
 		}
 		else{
@@ -60,8 +69,13 @@ echo $database;
 			}
 			else{
 				$this->registry->template->errorFlag = True;
-				$this->registry->template->errorMsg = 'Username of password incorrect!';
-				$this->index();
+				$this->registry->template->errorMsg = 'Username or password incorrect!';
+				if( $database === 'login_restaurants' )
+					$this->index();
+				elseif( $database === 'spiza_restaurants' )
+					$this->loginRestaurants();
+				elseif( $database === 'spiza_deliverers' )
+					$this->loginDeliverers();	
 				return;
 			}
 		}
