@@ -16,6 +16,8 @@ class RestaurantsController extends BaseController{
         $this->registry->template->show( 'restaurants_index' );
     }
 
+
+    
     
 
 };
@@ -39,6 +41,7 @@ function debug()
     }
 	echo '</pre>';
 }
+
 
 
 
