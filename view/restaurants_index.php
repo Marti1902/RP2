@@ -102,6 +102,8 @@
 <!--                ADD       FOOD               -->
 <button class="addFood" title="Add food">Add food</button>
 
+<img src="<?php echo __SITE_URL;?>/app/images/food/"
+
 <form class="addFood" method="post" enctype="multipart/form-data" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
     <h3>Add new food to offering:</h3>
 
