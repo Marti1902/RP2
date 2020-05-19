@@ -146,29 +146,72 @@ function sakrij_pokazi_submit()
 
 function obradi_addFood()
 {
-    var p = $( '<p>' );
-
+    var fd = new FormData();
+    var p = $( '<p>' ), files = $( 'input[name="imgFood_input"]' )[0].files[0];
+    
     event.preventDefault();
+
+    fd.append('file', files);
+    fd.append('id_food', 6);//  id_food tu ide
+
+    console.log( $( 'input[name="imgFood_input"]' ) );
+    console.log( $( 'input[name="imgFood_input"]' )[0] );
+    console.log( $( 'input[name="imgFood_input"]' )[0].files[0] );
+    console.log( fd );
+
+
+    addFoodImg( fd , p);
 
     $( this ).append( p );
 
-    $.ajax(
+  /*  $.ajax(
         {
             url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/addFood.php',
-            method: 'get',
+            method: 'post',
             data:
             {
                 id_restaurant: $( 'form.addFood' ).attr( 'restaurant' ),
                 name: $( 'input[name="name_input"]' ).val(),
                 price: $( 'input[name="price_input"]' ).val(),
                 description: $( 'input[name="description_input"]' ).val(),
-                waitingTime: $( 'input[name="waitingTime_input"]' ).val()
+                waitingTime: $( 'input[name="waitingTime_input"]' ).val(),
             },
             success: function( data )
             {
                 if( data.hasOwnProperty( 'greska' ) ){
                     console.log( data.greska );
                     p.html( 'ERROR in database' + data.greska);
+                }
+                else if( data.hasOwnProperty( 'rezultat' ) ){
+                    p.html( data.rezultat +' Please refresh page to see changes!');
+                    console.log( data.rezultat );
+                }
+            },
+            error: function()
+            {
+                console.log( 'Greška u Ajax pozivu...');
+                p.html( 'ERROR in Ajax!' );
+            }
+        });
+*/
+}
+
+function addFoodImg( fd , p)
+{
+    console.log( fd );
+
+    $.ajax(
+        {
+            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/addFoodImg.php',
+            method: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function( data )
+            {
+                if( data.hasOwnProperty( 'greska' ) ){
+                    console.log( data.greska );
+                    p.html( 'PICTURE ERROR in database' + data.greska);
                 }
                 else if( data.hasOwnProperty( 'rezultat' ) ){
                     p.html( data.rezultat +' Please refresh page to see changes!');

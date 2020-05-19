@@ -113,6 +113,7 @@ function create_table_food()
 			'price decimal(6,2) NOT NULL,'.
 			'in_offering tinyint NOT NULL,'.
 			'id_restaurant int NOT NULL,'.
+			'image_path varchar(200),'.
 			'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant))'		
 		);
 
@@ -244,10 +245,9 @@ function create_table_image()
 			'id_image int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'name varchar(200) NOT NULL,' .
 			'image longtext,' .
-			'id_food int,' .
 			'id_restaurant int,' .
-			'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant),' .
-			'FOREIGN KEY (id_food) REFERENCES spiza_food(id_food))'		
+			'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant)' .
+			')'		
 		);
 
 		$st->execute();

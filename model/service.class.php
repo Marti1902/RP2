@@ -282,7 +282,7 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = new Food( $row['id_food'], $row['name'], $row['description'], $row['waiting_time'], $row['id_restaurant'], $row['price'], $row['in_offering']);
+                $arr[] = new Food( $row['id_food'], $row['name'], $row['description'], $row['waiting_time'], $row['id_restaurant'], $row['price'], $row['in_offering'], $row['image_path'] );
             }
             return $arr;
         }

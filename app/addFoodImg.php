@@ -10,10 +10,33 @@ function sendJSONandExit($message)
     flush();
     exit(0);
 }
+debug();
+
+$filename = $_FILES['file']['name'];
+$tmp = explode( '.', $filename);
+
+// Ime slike će biti [id_food].jpg/.jpeg/.png
+$location = 'images/food/' . $_POST['id_food']. '.'.end($tmp);
+$uploadOk = 1;
+$imgType = pathinfo( $location, PATHINFO_EXTENSION );
+
+$valid_extesnsions = array( "jpg", "jpeg", "png" );
+if( !in_array( strtolower($imgType) , $valid_extesnsions ) )
+    $uploadOk = 0;
+
+if( $uploadOk === 0)
+    echo 0;
+else{
+    if(move_uploaded_file($_FILES['file']['tmp_name'],$location)){
+        echo $location;
+     }else{
+        echo 0;
+}
+}
 
 
-$message=[];
 
+/*
 if( !isset($_post['name']) || !isset($_post['price']) || !isset($_post['description']) ||
     !isset($_post['waitingTime']) || !isset($_post['id_restaurant']) )
 {
@@ -36,6 +59,28 @@ try
          }
     $message['rezultat'] = 'Added food ' . $_post['name'] . '!';
     sendJSONandExit($message);
+*/
+function debug()
+{
+    echo '<pre>';
+    if( isset( $_POST ) )
+    {
+        echo '$_POST=';
+        print_r( $_POST );
+    }
+    if( isset( $_GET ) )
+    {
+        echo '$_GET=';
+        print_r( $_GET );
+    }
+    if( isset( $_FILES ) )
+    {
+        echo '$_FILES=';
+        print_r( $_FILES );
+    }
+
+    echo '</pre>';
+}
 
 
 

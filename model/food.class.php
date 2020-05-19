@@ -2,9 +2,9 @@
 // usklađeno sa novom bazom
 class Food{
 
-    protected $id_food, $name, $description, $waiting_time, $price, $in_offering, $id_restaurant ;
+    protected $id_food, $name, $description, $waiting_time, $price, $in_offering, $id_restaurant, $image_path ;
 
-    public function __construct($id, $name, $description, $waiting_time, $id_restaurant, $price, $in_offering)
+    public function __construct($id, $name, $description, $waiting_time, $id_restaurant, $price, $in_offering, $image_path)
     {
         $this->id_food = $id;
         $this->name = $name;
@@ -13,6 +13,7 @@ class Food{
         $this->id_restaurant = $id_restaurant;
         $this->price = $price;
         $this->in_offering = $in_offering;
+        $this->image_path = $image_path;
     }
     
 

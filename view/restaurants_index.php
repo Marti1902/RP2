@@ -102,7 +102,7 @@
 <!--                ADD       FOOD               -->
 <button class="addFood" title="Add food">Add food</button>
 
-<form class="addFood" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
+<form class="addFood" method="post" enctype="multipart/form-data" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
     <h3>Add new food to offering:</h3>
 
     <table class="addFood">
@@ -111,11 +111,13 @@
             <th>Price: </th>
             <th>Description: </th>
             <th>Waiting time (in minutes): </th>
+            <th>Food image: </th>
         </tr>
             <td><input type="text" name="name_input" required></td>
             <td><input type="number" name="price_input" required></td>
             <td><input type="text" name="description_input" required></td>
             <td><input type="number" name="waitingTime_input" required></td>
+            <td><input type="file" name="imgFood_input" required></td>
     </table>
     <input type="submit"  value="Add new food to offerings">
 </form>
