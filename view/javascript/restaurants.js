@@ -2,10 +2,12 @@ $( document ).ready( function()
 {
     $( 'button.editFood' ).on('click', show_form );
     $( 'button.removeFood' ).on( 'click', show_form );
+    $( 'button.addFood' ).on( 'click', show_form );
 
     // Obrada formi
     $( 'form.editFood').on( 'submit', obradi_editFood );
     $( 'form.removeFood').on( 'submit', obradi_removeFood );
+    $( 'form.addFood').on( 'submit', obradi_addFood );
 
     
     // za editFood  prati checkboxove i otključava ih
@@ -91,7 +93,7 @@ function show_form()
     $(this).after(div);
 }
 
-function addCorrectForm( box,title, path)
+function addCorrectForm( box,title)
 {
     if( title === 'editFood'){
         var table = $( 'table.food' ).clone();
@@ -101,6 +103,10 @@ function addCorrectForm( box,title, path)
     }
     else if( title === 'removeFood' ){
         var form = $( 'form.removeFood' ).removeAttr( 'hidden' );
+        box.append( form );
+    }
+    else if( title === 'addFood' ){
+        var form = $( 'form.addFood' ).removeAttr( 'hidden' );
         box.append( form );
     }
 }
@@ -138,47 +144,87 @@ function sakrij_pokazi_submit()
         $( 'input[type="submit"][value="Remove selected food"]').removeAttr( 'disabled' );
 }
 
+function obradi_addFood()
+{
+    var p = $( '<p>' );
+
+    event.preventDefault();
+
+    $( this ).append( p );
+
+    $.ajax(
+        {
+            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/addFood.php',
+            method: 'get',
+            data:
+            {
+                id_restaurant: $( 'form.addFood' ).attr( 'restaurant' ),
+                name: $( 'input[name="name_input"]' ).val(),
+                price: $( 'input[name="price_input"]' ).val(),
+                description: $( 'input[name="description_input"]' ).val(),
+                waitingTime: $( 'input[name="waitingTime_input"]' ).val()
+            },
+            success: function( data )
+            {
+                if( data.hasOwnProperty( 'greska' ) ){
+                    console.log( data.greska );
+                    p.html( 'ERROR in database' + data.greska);
+                }
+                else if( data.hasOwnProperty( 'rezultat' ) ){
+                    p.html( data.rezultat +' Please refresh page to see changes!');
+                    console.log( data.rezultat );
+                }
+            },
+            error: function()
+            {
+                console.log( 'Greška u Ajax pozivu...');
+                p.html( 'ERROR in Ajax!' );
+            }
+        });
+}
+
 function obradi_removeFood()
 {
     var p = $( '<p>' ), checkboxes = $( 'input.removeFood:checkbox:checked' );
 
     event.preventDefault();
-    $( this ).after( p );
+    $( this ).append( p );
 
     if( checkboxes.length === 0 )
     {
         p.html( 'No food selected! Please select al least 1 food item from offering.' );
         return;
     }
-    console.log( checkboxes );
 
-    $.ajax(
-        {
-            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/removeFood.php',
-            method: 'get',
-            data:
+    checkboxes.each(function(){
+        //console.log( $(this).val() );
+
+        $.ajax(
             {
-                id: id,
-                name: name,
-                price: price,
-                description: description,
-                waitingTime: time
-            },
-            success: function( data )
-            {
-                if( data.hasOwnProperty( 'greska' ) )
-                    console.log( data.greska );
-                else if( data.hasOwnProperty( 'rezultat' ) ){
-                    p.html( data.rezultat +' Please refresh page to see changes!');
-                    console.log( data.rezultat );
+                url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/removeFood.php',
+                method: 'post',
+                data:
+                {
+                    id: $(this).val(),
+                },
+                success: function( data )
+                {
+                    if( data.hasOwnProperty( 'greska' ) ){
+                        console.log( data.greska );
+                        p.html( 'ERROR in database' + data.greska);
+                    }
+                    else if( data.hasOwnProperty( 'rezultat' ) ){
+                        p.html( data.rezultat +' Please refresh page to see changes!');
+                        console.log( data.rezultat );
+                    }
+                },
+                error: function()
+                {
+                    console.log( 'Greška u Ajax pozivu...');
+                    p.html( 'ERROR in Ajax!' );
                 }
-
-            },
-            error: function()
-            {
-                console.log( 'Greška u Ajax pozivu...');
-            }
-        });
+            });
+    });
 
 
 }
@@ -209,19 +255,23 @@ function obradi_editFood(event)
             },
             success: function( data )
             {
-                if( data.hasOwnProperty( 'greska' ) )
+                if( data.hasOwnProperty( 'greska' ) ){
                     console.log( data.greska );
+                    p.html( 'ERROR in database' + data.greska);
+                }
                 else if( data.hasOwnProperty( 'rezultat' ) ){
                     p.html( data.rezultat +' Please refresh page to see changes!');
                     console.log( data.rezultat );
                 }
-
             },
             error: function()
             {
                 console.log( 'Greška u Ajax pozivu...');
+                p.html( 'ERROR in Ajax!' );
+
             }
         });
+        
 
 }
 

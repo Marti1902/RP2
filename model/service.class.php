@@ -272,7 +272,7 @@ class Service{
         try
 		{
             $db=DB::getConnection();
-            $st=$db->prepare('SELECT * FROM spiza_food WHERE id_restaurant=:rest');
+            $st=$db->prepare('SELECT * FROM spiza_food WHERE id_restaurant=:rest AND in_offering=1' );
             $st->execute(['rest'=>$id_restaurant]);
 		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -282,7 +282,7 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = new Food( $row['id_food'], $row['name'], $row['description'], $row['waiting_time'], $row['id_restaurant'], $row['price'] );
+                $arr[] = new Food( $row['id_food'], $row['name'], $row['description'], $row['waiting_time'], $row['id_restaurant'], $row['price'], $row['in_offering']);
             }
             return $arr;
         }

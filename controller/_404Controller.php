@@ -6,7 +6,7 @@ class _404Controller extends BaseController
 	{
 		// Popuni template potrebnim podacima
 		$this->registry->template->title = 'Stranica nije pronađena.';
-
+		session_destroy();
         $this->registry->template->show( '404_index' );
 	}
 }; 
