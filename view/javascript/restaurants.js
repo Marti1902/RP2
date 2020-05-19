@@ -1,14 +1,23 @@
 $( document ).ready( function()
 {
     $( 'button.editFood' ).on('click', show_form );
-    //$( 'select.editFood' ).on( 'change', change_food);
+    $( 'button.removeFood' ).on( 'click', show_form );
 
+    // Obrada formi
     $( 'form.editFood').on( 'submit', obradi_editFood );
+    $( 'form.removeFood').on( 'submit', obradi_removeFood );
 
+    
+    // za editFood  prati checkboxove i otključava ih
     $( '#che1' ).on('click', sakrij_pokazi);
     $( '#che2' ).on('click', sakrij_pokazi);
     $( '#che3' ).on('click', sakrij_pokazi);
     $( '#che4' ).on('click', sakrij_pokazi);
+    //  Za removeFood otključava submit
+    $( 'input.removeFood:checkbox' ).on('click', sakrij_pokazi_submit );
+
+
+
 
 });
 
@@ -53,7 +62,7 @@ function show_form()
         .append( close )
         .append( title );
 
-    addCorrectForm( box, $(this).attr('class'), $(this).attr('target') );
+    addCorrectForm( box, $(this).attr('class') );
 
     //  vanjski okvir    
     div.css( 'position', 'fixed')
@@ -71,13 +80,15 @@ function show_form()
         
     
     div.append(box);
+
+    //   Zatvara prozor ako se klikne van boxa
     div.on( 'click', function(event){
             if( $(event.target).attr('class') === 'okvir' )
                 destroy( $(event.target) );
         });
 
 
-        $(this).after(div);
+    $(this).after(div);
 }
 
 function addCorrectForm( box,title, path)
@@ -87,6 +98,10 @@ function addCorrectForm( box,title, path)
         //subTitle
         box.append( table );              // Prikaz trenutne hrane u ponudi
         addEditForm(box);
+    }
+    else if( title === 'removeFood' ){
+        var form = $( 'form.removeFood' ).removeAttr( 'hidden' );
+        box.append( form );
     }
 }
 
@@ -115,6 +130,59 @@ function sakrij_pokazi(event)
     }
 }
 
+function sakrij_pokazi_submit()
+{
+    if( $( 'input.removeFood:checkbox:checked' ).length === 0)
+        $( 'input[type="submit"][value="Remove selected food"]').prop( 'disabled', true);
+    else
+        $( 'input[type="submit"][value="Remove selected food"]').removeAttr( 'disabled' );
+}
+
+function obradi_removeFood()
+{
+    var p = $( '<p>' ), checkboxes = $( 'input.removeFood:checkbox:checked' );
+
+    event.preventDefault();
+    $( this ).after( p );
+
+    if( checkboxes.length === 0 )
+    {
+        p.html( 'No food selected! Please select al least 1 food item from offering.' );
+        return;
+    }
+    console.log( checkboxes );
+
+    $.ajax(
+        {
+            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/removeFood.php',
+            method: 'get',
+            data:
+            {
+                id: id,
+                name: name,
+                price: price,
+                description: description,
+                waitingTime: time
+            },
+            success: function( data )
+            {
+                if( data.hasOwnProperty( 'greska' ) )
+                    console.log( data.greska );
+                else if( data.hasOwnProperty( 'rezultat' ) ){
+                    p.html( data.rezultat +' Please refresh page to see changes!');
+                    console.log( data.rezultat );
+                }
+
+            },
+            error: function()
+            {
+                console.log( 'Greška u Ajax pozivu...');
+            }
+        });
+
+
+}
+
 function obradi_editFood(event)
 {
     event.preventDefault();
@@ -124,16 +192,16 @@ function obradi_editFood(event)
         description = $( 'input[type="text"][name="foodDescription"]').val(),
         time =  $( 'input[type="number"][name="foodWaitingTime"]').val(),
         p = $( '<p>' );
-
+    
     $(this).append(p);
 
     $.ajax(
         {
             url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/editFood.php',
-            method: 'get',
+            method: 'post',
             data:
             {
-                id: id,
+                id: $( 'select.editFood option:selected' ).val(),
                 name: name,
                 price: price,
                 description: description,

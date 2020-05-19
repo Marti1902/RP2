@@ -73,7 +73,7 @@ Slijedi prikaz relacijskog modela:
 \begin{itemize}
     \item[] \textsf{USERS (\textbf{id\_user}, username, password\_hash, email, registration\_sequence, \\has\_registered)}
     \item[] \textsf{RESTAURANTS (\textbf{id\_restaurant}, username, password\_hash, email, \\registration\_sequence, has\_registered, name, address, description)}
-    \item[] \textsf{FOOD (\textbf{id\_food}, name, description, waiting\_time, price, \underline{id\_restaurant})}
+    \item[] \textsf{FOOD (\textbf{id\_food}, name, description, waiting\_time, price, in\_offering, \underline{id\_restaurant})}
     \item[] \textsf{FOOD\_TYPE (\textbf{id\_foodType}, name)}
     \item[] \textsf{ORDERS (\textbf{id\_order}, \underline{id\_user}, \underline{id\_restaurant}, active, order\_time, delivery\_time, price\_total, discount, note, feedback, rating, thumbs\_up, thumbs\_down)}
     \item[] \textsf{CONTAINS (\textbf{\underline{id\_order}}, \textbf{\underline{id\_food}})}
@@ -115,6 +115,7 @@ Pomoću sljedećih naredbi kreiramo bazu.
     description varchar(200) NOT NULL,\\
     waiting\_time int NOT NULL,\\
     price decimal(6,2) NOT NULL,\\
+    in\_offering tinyint NOT NULL,\\
     id\_restaurant int NOT NULL,\\
     FOREIGN KEY (id\_restaurant) REFERENCES spiza\_restaurants(id\_restaurant)
     )

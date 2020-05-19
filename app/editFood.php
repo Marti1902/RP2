@@ -16,23 +16,23 @@ $message=[];
 
 $polja = array();
 $vrjednosti = array();
-$id_food = $_GET['id'];
+$id_food = $_POST['id'];
 
-if( $_GET['name'] !== '' ){
+if( $_POST['name'] !== '' ){
     array_push($polja, 'name');
-    array_push($vrjednosti, $_GET['name']);
+    array_push($vrjednosti, $_POST['name']);
 }
-if( $_GET['price'] !== '' ){
+if( $_POST['price'] !== '' ){
     array_push($polja, 'price');
-    array_push($vrjednosti, floatval($_GET['price']) );
+    array_push($vrjednosti, floatval($_POST['price']) );
 }
-if( $_GET['description'] !== '' ){
+if( $_POST['description'] !== '' ){
     array_push($polja, 'description');
-    array_push($vrjednosti, $_GET['description']);
+    array_push($vrjednosti, $_POST['description']);
 }
-if( $_GET['waitingTime'] !== '' ){
+if( $_POST['waitingTime'] !== '' ){
     array_push($polja, 'waiting_time');
-    array_push($vrjednosti, intval($_GET['waitingTime']) );
+    array_push($vrjednosti, intval($_POST['waitingTime']) );
 }
 
 $upit = 'UPDATE spiza_food SET ';
@@ -49,7 +49,7 @@ for( $i = 0; $i < count($polja); ++$i)
 }
 $upit .= ' WHERE id_food=:val10';
 
-$ex['val10'] = intval($_GET['id']);
+$ex['val10'] = intval($_POST['id']);
 
 try
 		{

@@ -111,6 +111,7 @@ function create_table_food()
 			'description varchar(200) NOT NULL,'.
 			'waiting_time int NOT NULL,'.
 			'price decimal(6,2) NOT NULL,'.
+			'in_offering tinyint NOT NULL,'.
 			'id_restaurant int NOT NULL,'.
 			'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant))'		
 		);
@@ -143,39 +144,7 @@ function create_table_food_type()
 
 	echo "Napravio tablicu spiza_food_type.<br />";
 }
-/*
-function create_table_feedback()
-{
-	$db = DB::getConnection();
 
-	if( has_table( 'spiza_feedback' ) )
-		exit( 'Tablica spiza_feedback vec postoji. Obrisite ju pa probajte ponovno.' );
-
-	try
-	{
-		$st = $db->prepare( 
-			'CREATE TABLE IF NOT EXISTS spiza_feedback (' .
-			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
-			'id_user int NOT NULL,' .
-			'id_restaurant int NOT NULL,' .
-			'content varchar(1000) NOT NULL,' .
-			'rating int NOT NULL,' .
-			'thumbs_up int NOT NULL,' .
-			'thumbs_down int NOT NULL)'		
-		);
-
-		$st->execute();
-	}
-	catch( PDOException $e ) { exit( "PDO error [create spiza_feedback]: " . $e->getMessage() ); }
-
-	echo "Napravio tablicu spiza_restaurants.<br />";
-}
-    active tinyint NOT NULL,\\
-    order\_time DATETIME NOT NULL,\\
-    delivery\_time DATETIME,\\
-    price\_total float,\\ 
-    discount float,\\
-*/
 function create_table_orders()
 {
 	$db = DB::getConnection();

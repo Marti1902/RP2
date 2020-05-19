@@ -67,6 +67,38 @@
 </form>
 
 
+<button class="removeFood" title="Remove food">Remove food</button>
+
+<form class="removeFood" hidden>
+<h3>Select food to remove from offering:</h3>
+
+<table class="removeFood">
+    <tr>
+        <th></th>
+        <th>Naziv jela</th>
+        <th>Cijena</th>
+        <th>Opis jela</th>
+        <th>Vrijeme čekanja</th>
+    </tr>
+<?php
+    foreach( $FoodList as $food)
+    {
+
+            echo "<tr>\n";
+            echo '<td><input type="checkbox"  class="removeFood" value="'.$food->id_food.'"></td>';
+            echo "\n<td>". $food->name ."</td>\n";
+            echo "<td>". $food->price ."</td>\n";
+            echo "<td>". $food->description ."</td>\n";
+            echo "<td>". $food->waiting_time ."</td>\n";
+            echo "</tr>\n";
+    }
+?>
+</table>
+
+<input type="submit"  value="Remove selected food" disabled>
+</form>
+
+
 <h3>Trenutna ocjena restorana je <?php echo $restaurantRating;?></h3>
 Možda to prebacit u neki div
 <h3>Informacije o restoranu: </h3>
