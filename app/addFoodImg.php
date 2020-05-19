@@ -25,13 +25,13 @@ if( !in_array( strtolower($imgType) , $valid_extesnsions ) )
     $uploadOk = 0;
 
 if( $uploadOk === 0)
-    echo 0;
+    echo 'ERROR: upload!';
 else{
     if(move_uploaded_file($_FILES['file']['tmp_name'],$location)){
         echo $location;
      }else{
-        echo 0;
-}
+        echo 'ERROR moveing image!';
+    }
 }
 
 
