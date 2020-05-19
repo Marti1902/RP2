@@ -45,7 +45,7 @@ else{
     }
 }
 
-*/
+*/ 
 try{
         $db=DB::getConnection();
         $st=$db->prepare( 'INSERT INTO spiza_food(name, description, waiting_time, id_restaurant, price, in_offering) VALUES (:name, :description, :waiting_time, :id_restaurant, :price, :in_offering); SELECT LAST_INSERT_ID();' );
