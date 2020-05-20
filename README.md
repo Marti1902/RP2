@@ -2,7 +2,12 @@
 
 ### Promjene
 * dodano u bazu in_offering u spiza food - flag 0 ili 1, 1 ako je u ponudi jelo 0 ako je izbrisano iz ponude
+* slike se nalaze u folderu /app/images/food/ (`id_food` -> id_food.jpg/jpeg )
+* `javascript`file-ovi se nalaze u /view/javascript
+* `php` skripte se nalaze u /app/
 * Trenutno radin na indexu za usera - Alen
+* Trenutno radim na indexu restorana i dodajem slike restorana - Fran
+
 #### Za inicijaliziranje baze:
 * Treba u app/database/db.class namjestit podatke za login u bazu
 * Za kreiranje tablica potrebno je pokrenuti na serveru file-ove 
