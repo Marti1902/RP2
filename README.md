@@ -5,8 +5,8 @@
 * slike se nalaze u folderu /app/images/food/ (`id_food` -> id_food.jpg/jpeg )
 * `javascript`file-ovi se nalaze u /view/javascript
 * `php` skripte se nalaze u /app/
-* Trenutno radin na indexu za usera - Alen
 * Trenutno radim na indexu restorana i dodajem slike restorana - Fran
+* Napravljeno da useru po log inu pokazuje popis njemu najdražih restorana (onih kojima je on davao najbolju ocjenu)
 
 #### Za inicijaliziranje baze:
 * Treba u app/database/db.class namjestit podatke za login u bazu
