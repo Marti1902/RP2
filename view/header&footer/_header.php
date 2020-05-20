@@ -15,7 +15,7 @@
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje Narudžbe</a></li>
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user">Vaši omiljeni restorani</a></li>
-        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/restaurantsByRating">Svi restorani</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/restaurants">Svi restorani</a></li>
     </ul>
 </nav> 
      <?php

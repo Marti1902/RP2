@@ -126,16 +126,16 @@ class Service{
 
     //                      F-je za prikaz restorana
     
-    function getRestaurantListByRating()
+    function getRestaurantList()
     {
         $restaurants =[];
 
         $db = DB::getConnection();
-        $st = $db->prepare( 'SELECT * FROM spiza_restaurants ORDER BY rating DESC');
+        $st = $db->prepare( 'SELECT * FROM spiza_restaurants');
         $st->execute( );
 
         while( $row = $st->fetch() )
-            $restaurants[] = new Restaurants($row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['food_type'], $row['description'], 1 );
+            $restaurants[] = new Restaurants($row['id_restaurant'], '', '', $row['name'], $row['address'], $row['email'], '', $row['description'], 1 );
         return $restaurants;
     }
 
@@ -226,8 +226,8 @@ class Service{
 
 
     //fje za prikaz narudžbi
-
-    function getOrdersByUserId( $id_user )
+    // Ova radi za novu bazu
+    function getOrderListByUserId( $id_user )
     {
         try
 		{
@@ -242,7 +242,7 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = new Order( $row['id'], $row['id_user'], $row['id_restaurant'], $row['id_food'], $row['id_order'] );
+                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
             }
             return $arr;
         }

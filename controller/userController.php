@@ -10,21 +10,38 @@ class UserController extends BaseController{
         debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Vaši omiljeni restorani';
-        $this->registry->template->restaurantList = $ls->getRestaurantListByRating( );
+        $narudzbe = $ls->getOrderListByUserId( $_SESSION['user']->id );
+        $restorani = [];
+        foreach ( $narudzbe as $narudzba ){
+            $rest = $ls->getRestaurantById( $narudzba->id_restaurant );
+            if ( !in_array( $rest, array_column( $restorani, 0 ) ) ){
+                $i = 0;
+                $s = 0;
+                foreach( $narudzbe as $nar ){
+                    if( $nar->id_restaurant == $rest->id_restaurant ){
+                        $s = $s + $nar->rating;
+                        $i++;
+                    }
+                }
+                $restorani[] = [$rest, $s/$i];
+                echo max(array_column($restorani, 1));
+            }
+        }
+        $this->registry->template->restaurantList = $restorani;
         
         $this->registry->template->show( 'user_index' );
     }
 
-    // popis restorana prema ocjenama korisnika
-    public function restaurantsByRating(){
+    // popis svih restorana
+    public function restaurants(){
         $ls = new Service();
         error404();
         debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Svi restorani';
-        $this->registry->template->restaurantList = $ls->getRestaurantListByRating();
+        $this->registry->template->restaurantList = $ls->getRestaurantList();
         
-        $this->registry->template->show( 'user_index' );
+        $this->registry->template->show( 'user_restaurants' );
     }
 
     // popis restorana prema tipu hrane --> NEDOVRŠENO
