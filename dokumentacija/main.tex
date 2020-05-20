@@ -17,8 +17,8 @@
 \usepackage[normalem]{ulem}
 \usepackage{soul}
 \usepackage{draftwatermark}
-\SetWatermarkText{Draft}
-\SetWatermarkScale{1}
+%\SetWatermarkText{Draft}
+%\SetWatermarkScale{1}
 
 \declaretheorem{teorem}
 \declaretheorem[sibling=teorem]{primjer}
@@ -43,7 +43,7 @@
 
 
 \title{Dokumentacija za bazu podataka aplikacije "Spiza"}
-\author{Fran Vojković }
+\author{Martina Gaćina, Manuela Pleša, Fran Vojković, Alen Živković}
 \date{U Visu, 16. svibnja 2020.}
 \maketitle
 \tableofcontents
@@ -73,12 +73,12 @@ Slijedi prikaz relacijskog modela:
 \begin{itemize}
     \item[] \textsf{USERS (\textbf{id\_user}, username, password\_hash, email, registration\_sequence, \\has\_registered)}
     \item[] \textsf{RESTAURANTS (\textbf{id\_restaurant}, username, password\_hash, email, \\registration\_sequence, has\_registered, name, address, description)}
-    \item[] \textsf{FOOD (\textbf{id\_food}, name, description, waiting\_time, price, in\_offering, \underline{id\_restaurant})}
+    \item[] \textsf{FOOD (\textbf{id\_food}, name, description, waiting\_time, price, in\_offering, \underline{id\_restaurant}, image\_path)}
     \item[] \textsf{FOOD\_TYPE (\textbf{id\_foodType}, name)}
-    \item[] \textsf{ORDERS (\textbf{id\_order}, \underline{id\_user}, \underline{id\_restaurant}, active, order\_time, delivery\_time, price\_total, discount, note, feedback, rating, thumbs\_up, thumbs\_down)}
+    \item[] \textsf{ORDERS (\textbf{id\_order}, \underline{id\_user}, \underline{id\_restaurant}, active, order\_time, delivery\_time, lastchange\_time, price\_total, discount, note, feedback, rating, thumbs\_up, thumbs\_down)}
     \item[] \textsf{CONTAINS (\textbf{\underline{id\_order}}, \textbf{\underline{id\_food}})}
     \item[] \textsf{HAS\_FOODTYPE (\textbf{\underline{id\_foodType}}, \textbf{\underline{id\_restaurant}})}
-    \item[] \textsf{IMAGE (\textbf{id\_image}, name, \underline{id\_food}, \underline{id\_restaurant}, image \emph{- vjerojatno se neće koristit- za pohranu slike})}
+    \item[] \textsf{IMAGE (\textbf{id\_image}, name, \underline{id\_restaurant}, image \emph{- vjerojatno se neće koristit- za pohranu slike})}
 
 \end{itemize}
 
@@ -117,6 +117,7 @@ Pomoću sljedećih naredbi kreiramo bazu.
     price decimal(6,2) NOT NULL,\\
     in\_offering tinyint NOT NULL,\\
     id\_restaurant int NOT NULL,\\
+    image\_path varchar(200),\\
     FOREIGN KEY (id\_restaurant) REFERENCES spiza\_restaurants(id\_restaurant)
     )
     \item[] CREATE TABLE IF NOT EXISTS spiza\_food\_type (\\
@@ -128,8 +129,9 @@ Pomoću sljedećih naredbi kreiramo bazu.
     id\_user int NOT NULL,\\
     id\_restaurant int NOT NULL,\\
     active tinyint NOT NULL,\\
-    order\_time DATETIME NOT NULL,\\
-    delivery\_time DATETIME,\\
+    order\_time TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,\\
+    delivery\_time TIMESTAMP,\\
+    lastchange\_time TIMESTAMP DEFAULT CURRENT\_TIMESTAMP ON UPDATE CURRENT\_TIMESTAMP,\\
     price\_total float,\\ 
     discount float,\\
     note varchar(50),\\
@@ -158,10 +160,8 @@ Pomoću sljedećih naredbi kreiramo bazu.
     id\_image int(11) NOT NULL PRIMARY KEY AUTO\_INCREMENT,\\
     name varchar(200) NOT NULL,\\
     image longtext,\\
-    id\_food int,\\
     id\_restaurant int,\\
     FOREIGN KEY (id\_restaurant) REFERENCES spiza\_restaurants(id\_restaurant),\\
-    FOREIGN KEY (id\_food) REFERENCES spiza\_food(id\_food)\\
     )
 \end{itemize}
 
