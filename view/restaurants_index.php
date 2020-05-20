@@ -12,7 +12,9 @@
         <th>Cijena</th>
         <th>Opis jela</th>
         <th>Vrijeme čekanja</th>
+        <th></th>
     </tr>
+
 <?php
     foreach( $FoodList as $food)
     {
@@ -22,6 +24,10 @@
             echo "<td>". $food->price ."</td>\n";
             echo "<td>". $food->description ."</td>\n";
             echo "<td>". $food->waiting_time ."</td>\n";
+            echo "<td>";
+                if( $food->image_path !== null )
+                    echo '<img src="'. __SITE_URL . $food->image_path .'"width="100" height="100">';
+            echo "</td>\n";
             echo "</tr>\n";
     }
 ?>
@@ -76,11 +82,11 @@
 
     <table class="removeFood">
         <tr>
-            <th></th>
-            <th>Naziv jela</th>
-            <th>Cijena</th>
-            <th>Opis jela</th>
-            <th>Vrijeme čekanja</th>
+            <th>Food name: </th>
+            <th>Price: </th>
+            <th>Description: </th>
+            <th>Waiting time (in minutes): </th>
+            <th>Food image: </th>
         </tr>
         <?php
             foreach( $FoodList as $food)
@@ -102,7 +108,6 @@
 <!--                ADD       FOOD               -->
 <button class="addFood" title="Add food">Add food</button>
 
-<!--<img src="<?php echo __SITE_URL;?>/app/images/food/6.jpeg">-->
 
 
 <form class="addFood" method="post" enctype="multipart/form-data" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
