@@ -1,19 +1,20 @@
 <?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
 
-<h2>Trenutne naruđbe</h2>
+<h2>Pending orders</h2>
 
 <div class="activeOrders" id_restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>"></div>
 
-<h3>Popis svih jela: </h3>
+<h3>Menu: <small>-- prebacit ću na posebnu stranicu --</small></h3>
 
 
 <table class="food">
     <tr>
-        <th>Naziv jela</th>
-        <th>Cijena</th>
-        <th>Opis jela</th>
-        <th>Vrijeme čekanja</th>
-        <th></th>
+    <th>Food name </th>
+    <th>Price </th>
+    <th>Description </th>
+    <th>Waiting time (in minutes) </th>
+    <th>Food image </th>
+
     </tr>
 
 <?php
@@ -68,6 +69,11 @@
             <th>Food Waiting time: </th>
             <td><input type="number" name="foodWaitingTime" disabled=true></td>
             <td><input type="checkbox"  id="che4" name="foodWaitingTime" value="change"></td>
+        </tr>
+        <tr>
+            <th>Food image: </th>
+            <td><input type="file" name="imgFood_edit" disabled=true></td>
+            <td><input type="checkbox"  id="che5" name="imgFood_edit" value="change"></td>
         </tr>
     </table>
     <input type="submit" value="Change food">
@@ -133,14 +139,14 @@
 
 
 
-<h3>Trenutna ocjena restorana je <?php echo $restaurantRating;?></h3>
+<h3>Your restaurant raiting <?php echo $restaurantRating;?></h3>
 Možda to prebacit u neki div
-<h3>Informacije o restoranu: </h3>
-Ime restorana: <?php echo $restaurantInfo->name;?>
+<h3>Restaurant details: </h3>
+Name: <?php echo $restaurantInfo->name;?>
 <br>
 Description: <?php echo $restaurantInfo->description;?>
 <br>
-Adresa: <?php echo $restaurantInfo->address;?>
+Address: <?php echo $restaurantInfo->address;?>
 <br>
 E-mail: <?php echo $restaurantInfo->email;?>
 <hr>
