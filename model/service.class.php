@@ -248,6 +248,27 @@ class Service{
         }
     }
 
+    function getOrderListByRestaurantId( $id_restaurant )
+    {
+        try
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_restaurant=:res');
+            $st->execute(['res'=>$id_restaurant]);
+		}
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount()===0)
+            return null;
+        else{
+            $arr = array();
+            while( $row = $st->fetch() )
+            {
+                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+            }
+            return $arr;
+        }
+    }
+
     //fje za prikaz hrane
 
     function getFoodById( $id )
@@ -316,7 +337,7 @@ class Service{
         try
 		{
             $db=DB::getConnection();
-            $st=$db->prepare('SELECT * FROM spiza_users WHERE id=:user');
+            $st=$db->prepare('SELECT * FROM spiza_users WHERE id_user=:user');
             $st->execute(['user'=>$id]);
 		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }

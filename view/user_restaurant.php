@@ -6,7 +6,7 @@ Popis dostupnih jela:
     foreach( $foodList as $food ){
         echo '<li>' .
              $food->name . ': ' . $food->price . '<br>' .
-             $food->food_type . ' ' . $food->description . '<br>' .
+             $food->description . '<br>' .
             '</li>';
     }
     ?>
@@ -16,10 +16,10 @@ Recenzije:
 <ul>
     <?php 
     $i=0;
-    foreach( $feedbackList as $feedback ){
+    foreach( $orderList as $order ){
         echo '<li>' .
-             $feedback->id_user . ': ' . $feedback->rating . '<br>' .
-             '<div id="ovaj' . $i . '">' . $feedback->content . '</div><br>' .
+             $order->id_user . ': ' . $order->rating . '<br>' .
+             '<div id="ovaj' . $i . '">' . $order->feedback . '</div><br>' .
             '</li>';
         $i++;
     } ?>
@@ -33,7 +33,7 @@ $( document ).ready( function()
     console.log(n);
     for ( i = 0; i < n;  i++){
         var text = $( '#ovaj' + i ).html();
-        var char_limit = 100;
+        var char_limit = 50;
 
         if(text.length < char_limit)
             $( '#ovaj' + i ).html( text );

@@ -15,7 +15,7 @@ class Order{
         $this->price_total = $price_total;
         $this->discount = $discount;
         $this->note = $note;
-        $this->id_feedback = $feedback;
+        $this->feedback = $feedback;
         $this->rating = $rating;
         $this->thumbs_up = $thumbs_up;
         $this->thumbs_down = $thumbs_down;

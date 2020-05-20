@@ -87,13 +87,13 @@ class UserController extends BaseController{
         $restaurant = $ls->getRestaurantById ( $_GET['id_restaurant'] );
         $this->registry->template->title = $restaurant->name;
         $_SESSION['tab'] = 'User restaurant';
-        $this->registry->template->foodList = $ls->getFoodListByRestaurantId( $restaurant->id );
-        $pomocni = $ls->getFeedbackListByRestaurantId( $restaurant->id );
+        $this->registry->template->foodList = $ls->getFoodListByRestaurantId( $restaurant->id_restaurant );
+        $pomocni = $ls->getOrderListByRestaurantId( $restaurant->id_restaurant );
         
         foreach ( $pomocni as $pom )
             $pom->id_user = ( $ls->getUserById( $pom->id_user ) )->username;
 
-        $this->registry->template->feedbackList = $pomocni;
+        $this->registry->template->orderList = $pomocni;
 
         $this->registry->template->show( 'user_restaurant' );
     }
