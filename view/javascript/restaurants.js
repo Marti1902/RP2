@@ -19,11 +19,9 @@ $( document ).ready( function()
     $( '#che2' ).on('click', sakrij_pokazi);
     $( '#che3' ).on('click', sakrij_pokazi);
     $( '#che4' ).on('click', sakrij_pokazi);
+    $( '#che5' ).on('click', sakrij_pokazi);
     //  Za removeFood otključava submit
     $( 'input.removeFood:checkbox' ).on('click', sakrij_pokazi_submit );
-
-
-
 
 });
 
@@ -131,7 +129,8 @@ function sakrij_pokazi(event)
     var input = $( 'input[type="text"][name="'+ $(event.target).attr('name')+'"]');
     if( input.length === 0)
         input = $( 'input[type="number"][name="'+ $(event.target).attr('name')+'"]');
-
+    if( input.length === 0)
+        input = $( 'input[type="file"][name="'+ $(event.target).attr('name')+'"]');
     
     if( typeof input.attr('disabled') !== typeof undefined && input.attr('disabled') !== false )
         input.removeAttr( 'disabled' );
@@ -272,6 +271,43 @@ function obradi_removeFood()
 
 
 }
+function changeFoodImage(  )
+{
+    var fd = new FormData();
+    var p = $( '<p>' ), files = $( 'input[name="imgFood_edit"]' )[0].files[0];
+    
+    fd.append( 'file', files );
+
+    console.log( $( 'select.editFood option:selected' ).val() );
+    console.log( $( 'input[name="imgFood_edit"]' )[0] );
+    console.log( $( 'input[name="imgFood_edit"]' )[0].files[0] );
+    console.log( fd );
+
+
+    fd.append( 'file', files );
+    fd.append( 'id_food',  $( 'select.editFood option:selected' ).val() );
+
+    $.ajax(
+        {
+            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/changeFoodImg.php',
+            method: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function( str )
+            {
+                console.log( str );
+                p.html( str );
+            },
+            error: function()
+            {
+                console.log( 'Greška u Ajax pozivu...');
+                p.html( 'ERROR in Ajax!' );
+            }
+        });
+    return p;
+}
+
 
 function obradi_editFood(event)
 {
@@ -281,9 +317,11 @@ function obradi_editFood(event)
         price = $( 'input[type="number"][name="foodPrice"]').val(),
         description = $( 'input[type="text"][name="foodDescription"]').val(),
         time =  $( 'input[type="number"][name="foodWaitingTime"]').val(),
+        //image =  $( 'input[type="file"][name="imgFood_edit"]'),
         p = $( '<p>' );
     
-    $(this).append(p);
+    var h = changeFoodImage(  );
+    $(this).append(p).append(h);
 
     $.ajax(
         {
@@ -337,8 +375,12 @@ function getActiveOrders()
                     console.log( data.greska );
                     p.html( 'ERROR in database' + data.greska);
                 }
+                else if( data.hasOwnProperty( 'nema' ) ){
+                    var div = $( 'div.activeOrders' ), p = $( '<p>' ).html( 'Currently you have no pending orders!');
+                    div.append(p);
+                }
                 else{
-
+                    console.log(data);
                     timestamp = data.timestamp;
 
                     var div = $( 'div.activeOrders' ), tbl = $( '<table>' ), tr_head = $( '<tr>' );

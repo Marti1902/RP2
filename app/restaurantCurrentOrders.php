@@ -19,7 +19,7 @@ elseif( !isset( $_GET['id_restaurant'] ) )
     sendJSONandExit( ['error' => 'Nije postavljen id_restaurant!'] );
 
 $clientLastUpdate = (int) $_GET['timestamp'];
-$dbLastUpdate = 0;
+$dbLastUpdate = -1;
 
 $db = DB::getConnection();
 
@@ -33,6 +33,14 @@ while( $dbLastUpdate <= $clientLastUpdate )
 
         $dbLastUpdate = strtotime( $row['maxUpdate'] );
 
+        if( is_null($row['maxUpdate']) )
+        {
+            $dbLastUpdate = 0;
+            sendJSONandExit( [ 'nema' => 1 ] );
+        }
+
+        echo $dbLastUpdate;
+        return;
         usleep( 10000 );    //  10ms
     }
     catch( PDOException $e ) { 
