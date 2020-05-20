@@ -58,7 +58,7 @@ try
             $st->execute( $ex );
 		}
         catch( PDOException $e ) { 
-            $message['greska'] = 'Greška u bazi!';echo $e;
+            $message['greska'] = 'Greška u bazi!';//echo $e;
             sendJSONandExit($e);
          }
     $message['rezultat'] = 'Changes commited!';

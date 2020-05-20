@@ -1,5 +1,9 @@
+var timestamp = 0; 
+
 $( document ).ready( function()
 {
+    getActiveOrders();
+
     $( 'button.editFood' ).on('click', show_form );
     $( 'button.removeFood' ).on( 'click', show_form );
     $( 'button.addFood' ).on( 'click', show_form );
@@ -22,6 +26,7 @@ $( document ).ready( function()
 
 
 });
+
 
 function show_form()
 {
@@ -189,6 +194,8 @@ function obradi_addFood()
 
 
 }
+
+
 /*
 function addFoodImg( fd , p)
 {
@@ -310,6 +317,68 @@ function obradi_editFood(event)
         });
         
 
+}
+
+function getActiveOrders()
+{
+    //console.log( $( 'div.activeOrders' ).attr( 'id_restaurant' ) );
+    $.ajax(
+        {
+            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/restaurantCurrentOrders.php',
+            method: 'get',
+            data: 
+            {
+                timestamp: timestamp, 
+                id_restaurant: $( 'div.activeOrders' ).attr( 'id_restaurant' )
+            },
+            success: function( data )
+            {
+                if( data.hasOwnProperty( 'greska' ) ){
+                    console.log( data.greska );
+                    p.html( 'ERROR in database' + data.greska);
+                }
+                else{
+
+                    timestamp = data.timestamp;
+
+                    var div = $( 'div.activeOrders' ), tbl = $( '<table>' ), tr_head = $( '<tr>' );
+
+                    tr_head.html( '<th>Order Number</th><th>Client ID</th><th>Order time</th><th>Total</th><th>Discount</th><th>Note</th>' );
+                    tbl.append( tr_head);
+
+                    
+                    for( var i = 0; i < data.id_order.length; ++i )
+                    {
+                        var tr = $( '<tr>' );
+                        var td_id_order = $( '<td>' ).html( data.id_order[i] );
+                        var td_id_user = $( '<td>' ).html( data.id_user[i] );
+                        var td_order_time = $( '<td>' ).html( data.order_time[i] );
+                        var td_price_total = $( '<td>' ).html( data.price_total[i] );
+                        var td_discount = $( '<td>' ).html( data.discount[i] );
+                        var td_note = $( '<td>' ).html( data.note[i] );
+
+                        tr.append( td_id_order )
+                            .append( td_id_user )
+                            .append( td_order_time )
+                            .append( td_price_total )
+                            .append( td_discount )
+                            .append( td_note );
+                        tbl.append( tr );
+                    }
+                
+                    div.html( tbl );
+
+                    getActiveOrders();
+                }
+
+            },
+            error: function( xhr, status )
+            {
+                console.log( status );
+                if( status === 'timeout' )
+                    dohvatiCijene(); 
+            }
+        });
 }
 
 

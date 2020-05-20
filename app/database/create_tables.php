@@ -161,8 +161,9 @@ function create_table_orders()
 			'id_user int NOT NULL,' .
 			'id_restaurant int NOT NULL,' .
 			'active tinyint NOT NULL,' .
-			'order_time DATETIME NOT NULL,' .
-			'delivery_time DATETIME,' .
+			'order_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,' .
+			'delivery_time TIMESTAMP NULL,' .
+			'lastchange_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,' .
 			'price_total float,' .
 			'discount float,' .
 			'note varchar(50),' .

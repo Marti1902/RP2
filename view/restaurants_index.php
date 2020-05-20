@@ -1,7 +1,8 @@
 <?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
 
 <h2>Trenutne naruđbe</h2>
-<p>To do ... (preko javascripta vjv)</p>
+
+<div class="activeOrders" id_restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>"></div>
 
 <h3>Popis svih jela: </h3>
 
