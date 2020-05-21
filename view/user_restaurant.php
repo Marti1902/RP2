@@ -6,8 +6,10 @@ Popis dostupnih jela:
     foreach( $foodList as $food ){
         echo '<li>' .
              $food->name . ': ' . $food->price . '<br>' .
-             $food->description . '<br>' .
-            '</li>';
+             $food->description . '<br>';
+        if( $food->image_path !== null )
+            echo '<img src="'. __SITE_URL . $food->image_path .'"width="100" height="100">';
+        echo '</li>';
     }
     ?>
 </ul>
