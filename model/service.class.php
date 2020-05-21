@@ -270,13 +270,13 @@ class Service{
     }
 
     //fje za prikaz hrane
-
+    //popravljena za novu bazu
     function getFoodById( $id )
     {
         try
 		{
             $db=DB::getConnection();
-            $st=$db->prepare('SELECT * FROM spiza_food WHERE id=:hrana');
+            $st=$db->prepare('SELECT * FROM spiza_food WHERE id_food=:hrana');
             $st->execute(['hrana'=>$id]);
 		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -284,7 +284,7 @@ class Service{
             return null;
         else{
             $row=$st->fetch();
-            return new Food ( $row['id'], $row['name'], $row['food_type'], $row['description'], $row['waiting_time'], $row['id_restaurant'], $row['price'] );
+            return new Food ( $row['id_food'], $row['name'], $row['description'], $row['waiting_time'], $row['price'], $row['in_offering'], $row['id_restaurant'], $row['image_path'] );
         }
     }
     //  Popravljeno za novu bazu 
@@ -309,14 +309,13 @@ class Service{
         }
     }
 
-    //fje za prikaz feedbacka
-    function getFeedbackListByRestaurantId( $id_restaurant )
+    function getFoodIdListByOrderId( $id_order )
     {
         try
 		{
             $db=DB::getConnection();
-            $st=$db->prepare('SELECT * FROM spiza_feedback WHERE id_restaurant=:rest');
-            $st->execute(['rest'=>$id_restaurant]);
+            $st=$db->prepare('SELECT * FROM spiza_contains WHERE id_order=:ord' );
+            $st->execute(['ord'=>$id_order]);
 		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
         if ($st->rowCount()===0)
@@ -325,7 +324,7 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = new Feedback( $row['id'], $row['id_user'], $row['id_restaurant'], $row['content'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+                $arr[] = $row['id_food'];
             }
             return $arr;
         }
