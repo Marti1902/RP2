@@ -7,7 +7,7 @@
 * `php` skripte se nalaze u /app/
 * Trenutno radim na indexu restorana i dodajem slike restorana - Fran
 * Napravljeno da useru po log inu pokazuje popis njemu najdražih restorana (onih kojima je on davao najbolju ocjenu)
-* Petljan po useru - Alen
+* Doda popis korisnikovih narudžbi
 
 #### Za inicijaliziranje baze:
 * Treba u app/database/db.class namjestit podatke za login u bazu
