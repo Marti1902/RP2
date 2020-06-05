@@ -1,5 +1,14 @@
 <?php require_once __DIR__ . '/header&footer/_header.php'; ?>
 
+<div id="kosarica">
+    <ul id = 'naruceno'>
+    </ul>
+    Cijena: <div id="cijena">0</div>
+    <button id="odbaci">Isprazni košaricu</button>
+    <button id="naruci">Naruči</button>
+</div>
+<div id="footer" data-position='fixed'>Nesto</div>
+
 Popis dostupnih jela:
 <ul>
     <?php 
@@ -8,8 +17,8 @@ Popis dostupnih jela:
              $food->name . ': ' . $food->price . '<br>' .
              $food->description . '<br>';
         if( $food->image_path !== null )
-            echo '<img src="'. __SITE_URL . $food->image_path .'"width="100" height="100">';
-        echo '</li>';
+            echo '<img src="'. __SITE_URL . $food->image_path .'"width="100" height="100"><br>';
+        echo '<button class="dodaj" id="' . $food->id_food . ', ' . $food->name . ', ' . $food->price . '">Dodaj u košaricu</button></li>';
     }
     ?>
 </ul>
@@ -32,7 +41,6 @@ $( document ).ready( function()
 {
     var i = 0;
     var n = <?php echo $i; ?>;
-    console.log(n);
     for ( i = 0; i < n;  i++){
         var text = $( '#ovaj' + i ).html();
         var char_limit = 50;

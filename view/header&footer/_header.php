@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Spiza</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-
+    <script src="<?php echo __SITE_URL; ?>/view/javascript/user.js"></script>
     <link rel="icon" href="<?php echo __SITE_URL; ?>/css/logo.png" />
 </head>
 
