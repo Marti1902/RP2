@@ -8,6 +8,7 @@
 * Trenutno radim na indexu restorana i dodajem slike restorana - Fran
 * Napravljeno da useru po log inu pokazuje popis njemu najdražih restorana (onih kojima je on davao najbolju ocjenu)
 * Doda popis korisnikovih narudžbi
+* Radin na useru - Alen
 
 #### Za inicijaliziranje baze:
 * Treba u app/database/db.class namjestit podatke za login u bazu
