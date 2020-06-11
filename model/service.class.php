@@ -139,20 +139,6 @@ class Service{
         return $restaurants;
     }
 
-    // nedovrseno --> treba odlučiti kako ćemo spremati food_type za restoran pa onda prilagoditi upit
-    function getRestaurantListByFoodType( $food_type )
-    {
-        $restaurants =[];
-
-        $db = DB::getConnection();
-        $st = $db->prepare( 'SELECT * FROM spiza_restaurants WHERE food_type=:food_type ORDER BY rating DESC');
-        $st->execute( [ 'food_type' => $food_type ] );
-
-        while( $row = $st->fetch() )
-            $restaurants[] = new Restaurants($row['id'], '', '', $row['name'], $row['address'], $row['email'], '', $row['rating'], $row['food_type'], $row['description'], 1 );
-        return $restaurants;
-    }
-
     // funkcija prima id usera i vraća njegove feedbackove poredano silazno po njegovoj ocjeni,
     // ako taj korisnik nije ocijenio do sada nijedan restoran vraca null 
     function getMyFeedbackList( $id_user )
@@ -160,7 +146,7 @@ class Service{
         try
 		{
             $db=DB::getConnection();
-            $st=$db->prepare('SELECT * FROM spiza_feedback WHERE id_user=:id_user ORDER BY rating DESC');
+            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_user=:id_user ORDER BY rating DESC');
             $st->execute( ['id_user'=>$id_user] );
 		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -223,7 +209,6 @@ class Service{
             return new Restaurants( $row['id_restaurant'], '', '', $row['name'], $row['address'], $row['email'], '', $row['description'], 1  );
         }
     }
-
 
     //fje za prikaz narudžbi
     // Ova radi za novu bazu
@@ -370,6 +355,82 @@ class Service{
             }
             return $sum / $count;
         }
+    }
+
+    function getFoodTypeList()
+    {
+        $foodType = [];
+        try
+        {
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT * FROM spiza_food_type');
+            $st->execute( );    
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        
+        while( $row = $st->fetch() )
+            $foodType[] = new FoodType( $row['id_foodType'], $row['name'], $row['image_path'] );
+        return $foodType;
+    }
+
+    // popis restorana prema tipu hrane
+    // primi id tipa hrane i iz has_food_type nađe id restorana pa
+    // pomoću getRestaurantById dobijemo restoran s traženim id
+    function getRestaurantListByFoodType( $id_foodType )
+    {
+        $restaurants = [];
+        $ls = new Service();
+        try{
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT * FROM spiza_has_food_type WHERE id_foodType=:id_foodType');
+            $st->execute( [ 'id_foodType' => $id_foodType ] );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+        while( $row = $st->fetch() ){
+            $id_restaurant = $row['id_restaurant'];
+            $restaurants[]=$ls->getRestaurantById($id_restaurant);
+        }
+        return $restaurants;
+    }
+
+    function getRatingList()
+    {
+        $ratingList = [];
+        try
+        {
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT id_restaurant, rating FROM spiza_orders ORDER BY id_restaurant');
+            $st->execute( );    
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        
+        $row=$st->fetch();
+        $id=$row['id'];
+        $ratingList[$id]=$row['rating'];
+        while( $row = $st->fetch() )
+        {
+            if($row['id']===$id)
+                $ratingList[$id]+=$row['rating'];
+            else
+            {
+                $id=$row['id'];
+                $ratingList[$id]=$row['rating'];
+            }
+
+        }
+        return $ratingList;
+    }
+
+
+    // treba iz dobivenog polja naći 5 najpopularijih
+    function getPopularRestaurantList()
+    {
+        
+        $ratingList = [];
+        $ls = new Service();
+        $ratingList[]=$ls->getRatingList();        
+        
     }
 
 };

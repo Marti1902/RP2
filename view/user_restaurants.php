@@ -12,5 +12,14 @@
     }
     ?>
 </ul>
+Istraži više restorana:
+<nav>   
+    <ul>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/popular">Popularni</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/restaurants">Svi restorani</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/nearest">Najbliži</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/foodType">Prema vrsti hrane</a></li>
+    </ul>
+</nav> 
 
 <?php require_once __DIR__ . '/header&footer/_footer.php'; ?>

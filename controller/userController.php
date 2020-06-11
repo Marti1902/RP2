@@ -50,10 +50,20 @@ class UserController extends BaseController{
         error404();
         debug();
 
-        $this->registry->template->title = $_SESSION['tab'] = 'Restaurants by Food Type';
-        //$this->registry->template->restaurantList = $ls->getRestaurantListByFoodType( $food_type );
+        $this->registry->template->title = $_SESSION['tab'] = 'Restorani prema vrsti hrane';
+        $this->registry->template->restaurantList = $ls->getRestaurantListByFoodType( $_GET['id_foodType']);
         
-        $this->registry->template->show( 'user_index' );
+        $this->registry->template->show( 'user_restaurants' );
+    }
+
+    public function foodType(){
+        $ls = new Service();
+        error404();
+        debug();
+
+        $this->registry->template->title = $_SESSION['tab'] = 'Restorani prema vrsti hrane';
+        $this->registry->template->foodType = $ls->getFoodTypeList();
+        $this->registry->template->show( 'user_foodType' );
     }
 
     public function orders(){
@@ -98,6 +108,18 @@ class UserController extends BaseController{
         $this->registry->template->show( 'user_restaurant' );
     }
 
+    // 5 s najboljim preporukama
+    public function popular()
+    {
+        $ls = new Service();
+        error404();
+        debug();
+
+        $this->registry->template->title = $_SESSION['tab'] = 'Popularni restorani';
+        $this->registry->template->restaurantList = $ls->getPopularRestaurantList();
+        
+        $this->registry->template->show( 'user_restaurants' );
+    }
 };
 
 

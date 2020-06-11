@@ -1,7 +1,6 @@
 # RP2_Projekt
 
 ### Promjene
-* radim na stranici svi restorani i svim popratnim stranicama koje ponudimo u menuu na "svi rastorani" - Manuela
 * dodano u bazu in_offering u spiza food - flag 0 ili 1, 1 ako je u ponudi jelo 0 ako je izbrisano iz ponude
 * slike se nalaze u folderu /app/images/food/ (`id_food` -> id_food.jpg/jpeg )
 * `javascript`file-ovi se nalaze u /view/javascript
@@ -10,6 +9,10 @@
 * Napravljeno da useru po log inu pokazuje popis njemu najdražih restorana (onih kojima je on davao najbolju ocjenu)
 * Doda popis korisnikovih narudžbi
 * Doda košaricu u prikazu restorana
+* u bazi spiza_food_type dodan image_path
+* radim na stranici svi restorani i svim popratnim stranicama koje ponudimo u menuu na "svi rastorani" - Manuela
+* napravljen popis po tipu hrane preko sličice 
+* trebam dovršiti popis najpopularnijih restorana
 
 #### Za inicijaliziranje baze:
 * Treba u app/database/db.class namjestit podatke za login u bazu
@@ -49,8 +52,8 @@
         Kokopeli          - ocjena: 8, br_narudzbi: 5
 * Svi restorani: Prvo prikazuje ispis svih restorana onako kako su upisani u bazu, a onda korisnik može odabrati po kojem kriteriju pretražiti restorane:
 	* najpopularniji (po preporukama ostalih korisnika)
-	* svi restorani
+	* +svi restorani 
 	* najbliži restorani
-	* po tipu hrane (nakon klika na ovo korisnik bira tip hrane preko pripadnih sličica)
+	* +po tipu hrane (nakon klika na ovo korisnik bira tip hrane preko pripadnih sličica)
 * Moje narudžbe: Popis narudžbi sortiran silazno po datumu s time da svaka narudžba ima link na restoran (ispis narudžbe se sastoji od restorana odakle je naručena, popis naručenih jela i datuma narudžbe). Imamo i odvojeni popis aktivnih narudžbi, onih koje još nisu dostavljene.
 

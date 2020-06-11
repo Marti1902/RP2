@@ -113,8 +113,9 @@ function create_table_food()
 			'price decimal(6,2) NOT NULL,'.
 			'in_offering tinyint NOT NULL,'.
 			'id_restaurant int NOT NULL,'.
-			'image_path varchar(200),'.
-			'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant))'		
+			'image_path varchar(200)'.
+			//'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant)'.
+			')'		
 		);
 
 		$st->execute();
@@ -136,7 +137,8 @@ function create_table_food_type()
 		$st = $db->prepare( 
 			'CREATE TABLE IF NOT EXISTS spiza_food_type (' .
 			'id_foodType int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
-			'name varchar(30) NOT NULL)'		
+			'name varchar(30) NOT NULL,'.
+			'image_path varchar(200))'		
 		);
 
 		$st->execute();
@@ -170,9 +172,10 @@ function create_table_orders()
 			'feedback varchar(100),' .
 			'rating float,' .
 			'thumbs_up int,' .
-			'thumbs_down int,' .
-			'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant),' .
-			'FOREIGN KEY (id_user) REFERENCES spiza_users(id_user))'		
+			'thumbs_down int' .
+			//'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant),' .
+			//'FOREIGN KEY (id_user) REFERENCES spiza_users(id_user).
+			')'		
 		);
 
 		$st->execute();
@@ -195,9 +198,10 @@ function create_table_contains()
 			'CREATE TABLE IF NOT EXISTS spiza_contains (' .
 			'id_order int NOT NULL,' .
 			'id_food int NOT NULL,' .
-			'PRIMARY KEY (id_order, id_food),' .
-			'FOREIGN KEY (id_order) REFERENCES spiza_orders(id_order),' .
-			'FOREIGN KEY (id_food) REFERENCES spiza_food(id_food))'		
+			'PRIMARY KEY (id_order, id_food)' .
+			//'FOREIGN KEY (id_order) REFERENCES spiza_orders(id_order),' .
+			//'FOREIGN KEY (id_food) REFERENCES spiza_food(id_food).
+			')'		
 		);
 
 		$st->execute();
@@ -220,9 +224,9 @@ function create_table_has_food_type()
 			'CREATE TABLE IF NOT EXISTS spiza_has_food_type (' .
 			'id_foodType int NOT NULL,' .
 			'id_restaurant int NOT NULL,' .
-			'PRIMARY KEY (id_foodType, id_restaurant),' .
-			'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant),' .
-			'FOREIGN KEY (id_foodType) REFERENCES spiza_food_type(id_foodType)'.
+			'PRIMARY KEY (id_foodType, id_restaurant)'.
+			//'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant),' .
+			//'FOREIGN KEY (id_foodType) REFERENCES spiza_food_type(id_foodType)'.
 			')'		
 		);
 
@@ -246,8 +250,8 @@ function create_table_image()
 			'id_image int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'name varchar(200) NOT NULL,' .
 			'image longtext,' .
-			'id_restaurant int,' .
-			'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant)' .
+			'id_restaurant int'.
+			//'FOREIGN KEY (id_restaurant) REFERENCES spiza_restaurants(id_restaurant)' .
 			')'		
 		);
 

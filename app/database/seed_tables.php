@@ -113,11 +113,11 @@ function seed_table_food_type()
 	// Ubaci neke korisnike unutra
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO spiza_food_type(name) VALUES (:id_name)' );
+		$st = $db->prepare( 'INSERT INTO spiza_food_type(name,image_path) VALUES (:id_name, :image_path)' );
 
-		$st->execute( array( 'id_name' => 'pizza' ) );
-		$st->execute( array( 'id_name' => 'burger' ) );
-		$st->execute( array( 'id_name' => 'grill' ) );
+		$st->execute( array( 'id_name' => 'pizza',  'image_path' => '/app/images/foodType/pizza.jpg') );
+		$st->execute( array( 'id_name' => 'burger', 'image_path' => '/app/images/foodType/burger.jpg') );
+		$st->execute( array( 'id_name' => 'grill', 'image_path' => '/app/images/foodType/grill.jpg' ) );
 
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_food_type]: " . $e->getMessage() ); }
