@@ -1,6 +1,7 @@
 # RP2_Projekt
 
 ### Promjene
+* radim na stranici svi restorani i svim popratnim stranicama koje ponudimo u menuu na "svi rastorani" - Manuela
 * dodano u bazu in_offering u spiza food - flag 0 ili 1, 1 ako je u ponudi jelo 0 ako je izbrisano iz ponude
 * slike se nalaze u folderu /app/images/food/ (`id_food` -> id_food.jpg/jpeg )
 * `javascript`file-ovi se nalaze u /view/javascript
