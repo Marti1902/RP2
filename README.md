@@ -12,7 +12,7 @@
 * u bazi spiza_food_type dodan image_path
 * radim na stranici svi restorani i svim popratnim stranicama koje ponudimo u menuu na "svi rastorani" - Manuela
 * napravljen popis po tipu hrane preko sličice 
-* trebam dovršiti popis najpopularnijih restorana
+* dovršen popis najpopularnijih restorana (trenutno ispisuje sve restorane prema ocjenama drugih korisnika)
 
 #### Za inicijaliziranje baze:
 * Treba u app/database/db.class namjestit podatke za login u bazu
@@ -57,3 +57,6 @@
 	* +po tipu hrane (nakon klika na ovo korisnik bira tip hrane preko pripadnih sličica)
 * Moje narudžbe: Popis narudžbi sortiran silazno po datumu s time da svaka narudžba ima link na restoran (ispis narudžbe se sastoji od restorana odakle je naručena, popis naručenih jela i datuma narudžbe). Imamo i odvojeni popis aktivnih narudžbi, onih koje još nisu dostavljene.
 
+
+#### Napomena
+Mislim da se funkcije `getRestaurantListByMyRating` i `getMyFeedbackList` ne koriste nigdje, pa ili ih treba uključiti negdje ili obrisati, a nisam ih ja radila pa ne znam što je s time. S time da se u njima koristi neka od starih verzija baze gdje je rating u spiza_restaurants

@@ -2,6 +2,7 @@
 
 <ul>
     <?php 
+    echo sizeof($restaurantList);
     foreach( $restaurantList as $restaurant ){
         echo '<li>';
         echo '<a href="index.php?rt=user/restaurant&id_restaurant=' . $restaurant->id_restaurant . '">' . 

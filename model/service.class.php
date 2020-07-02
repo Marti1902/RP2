@@ -396,43 +396,25 @@ class Service{
 
     function getRatingList()
     {
-        $ratingList = [];
         try
-        {
-            $db = DB::getConnection();
-            $st = $db->prepare( 'SELECT id_restaurant, rating FROM spiza_orders ORDER BY id_restaurant');
-            $st->execute( );    
-        }
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_orders ORDER BY rating DESC');
+            $st->execute( );
+		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
-        
-        $row=$st->fetch();
-        $id=$row['id'];
-        $ratingList[$id]=$row['rating'];
-        while( $row = $st->fetch() )
-        {
-            if($row['id']===$id)
-                $ratingList[$id]+=$row['rating'];
-            else
+        if ($st->rowCount()===0)
+            return null;
+        else{
+            $ratingList = [];
+            
+            while( $row = $st->fetch() )
             {
-                $id=$row['id'];
-                $ratingList[$id]=$row['rating'];
+                $ratingList[] = new Feedback( $row['id'], $row['id_user'], $row['id_restaurant'], $row['content'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
             }
-
+            return $ratingList;
         }
-        return $ratingList;
     }
-
-
-    // treba iz dobivenog polja naći 5 najpopularijih
-    function getPopularRestaurantList()
-    {
-        
-        $ratingList = [];
-        $ls = new Service();
-        $ratingList[]=$ls->getRatingList();        
-        
-    }
-
 };
 
 //  -------------------------------------------------------------
