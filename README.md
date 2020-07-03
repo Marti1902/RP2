@@ -1,5 +1,14 @@
 # RP2_Projekt
 
+### [NOVO] Još za napraviti
+* user - u košaricu kod popisa hrane dodati sliku te hrane
+* user - gumb narudžba - ispiše se forma koja traži unos adrese narudžbe, kvarta i napomene za dostavljača tek nakon unosa potrebnog se podaci o narudžbi pošalju bazi
+* user - ispis prema lokaciji - korisnik odabere kvart (dodati kvartove u bazu kod restorana)
+* restoran - prevesti sve na hrvatski, provjeriti gumbe 
+* restoran - dodati mogućnost mijenjanja detalja o restoranu (adresa, opis...)
+* dostavljači - dodati listu slobodniih narudžbi - omogućiti da prihvati narudžbu i doda vrijeme ili da odbije 
+
+
 ### Promjene
 * dodano u bazu in_offering u spiza food - flag 0 ili 1, 1 ako je u ponudi jelo 0 ako je izbrisano iz ponude
 * slike se nalaze u folderu /app/images/food/ (`id_food` -> id_food.jpg/jpeg )
