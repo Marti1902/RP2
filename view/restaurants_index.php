@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
 
-<h2>Pending orders</h2>
+<h2>Trenutne narudžbe</h2>
 
 <div class="activeOrders" id_restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>"></div>
 
@@ -9,11 +9,11 @@
 
 <table class="food">
     <tr>
-    <th>Food name </th>
-    <th>Price </th>
-    <th>Description </th>
-    <th>Waiting time (in minutes) </th>
-    <th>Food image </th>
+    <th>Jelo </th>
+    <th>Cijena </th>
+    <th>Opis </th>
+    <th>Čekanje (u minutama) </th>
+    <th>Slika </th>
 
     </tr>
 
@@ -36,10 +36,10 @@
 </table>
 
 <!--                EDIT       FOOD             -->
-<button class="editFood" title="Edit food" target="<?php echo __SITE_URL;?>/index.php?rt=restaurants/editFood">Edit food</button>
+<button class="editFood" title="Edit food" target="<?php echo __SITE_URL;?>/index.php?rt=restaurants/editFood">Uredi jelo</button>
 
 <form class="editFood" target="<?php echo __SITE_URL;?>/app/editFood.php" hidden>
-    <h3>Select food to change:</h3>
+    <h3>Odaberite hranu koju želite promijeniti:</h3>
     <select class="editFood">
             <?php
                     foreach( $FoodList as $food)
@@ -81,19 +81,19 @@
 
 
 <!--                REMOVE       FOOD               -->
-<button class="removeFood" title="Remove food">Remove food</button>
+<button class="removeFood" title="Remove food">Ukloni jelo</button>
 
 <form class="removeFood" hidden>
-    <h3>Select food to remove from offering:</h3>
+    <h3>Odaberite hranu koju želite maknuti iz ponude:</h3>
 
 
     <table class="removeFood">
         <tr>
-            <th>Food name: </th>
-            <th>Price: </th>
-            <th>Description: </th>
-            <th>Waiting time (in minutes): </th>
-            <th>Food image: </th>
+            <th>Jelo: </th>
+            <th>Cijena: </th>
+            <th>Opis: </th>
+            <th>Čekanje (u minutama): </th>
+            <th>Slika: </th>
         </tr>
         <?php
             foreach( $FoodList as $food)
@@ -113,20 +113,20 @@
 
 
 <!--                ADD       FOOD               -->
-<button class="addFood" title="Add food">Add food</button>
+<button class="addFood" title="Add food">Dodaj jelo</button>
 
 
 
 <form class="addFood" method="post" enctype="multipart/form-data" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
-    <h3>Add new food to offering:</h3>
+    <h3>Dodaj novu hranu u ponudu:</h3>
 
     <table class="addFood">
         <tr>
-            <th>Food name: </th>
-            <th>Price: </th>
-            <th>Description: </th>
-            <th>Waiting time (in minutes): </th>
-            <th>Food image: </th>
+            <th>Jelo: </th>
+            <th>Cijena: </th>
+            <th>Opis: </th>
+            <th>Čekanje (u minutama): </th>
+            <th>Slika: </th>
         </tr>
             <td><input type="text" name="name_input" required></td>
             <td><input type="number" name="price_input" required></td>
@@ -139,14 +139,14 @@
 
 
 
-<h3>Your restaurant raiting <?php echo $restaurantRating;?></h3>
+<h3>Ocjena Vašeg restorana <?php echo $restaurantRating;?></h3>
 Možda to prebacit u neki div
-<h3>Restaurant details: </h3>
-Name: <?php echo $restaurantInfo->name;?>
+<h3>Detalji o restoranu: </h3>
+Ime: <?php echo $restaurantInfo->name;?>
 <br>
-Description: <?php echo $restaurantInfo->description;?>
+Opis: <?php echo $restaurantInfo->description;?>
 <br>
-Address: <?php echo $restaurantInfo->address;?>
+Adresa: <?php echo $restaurantInfo->address;?>
 <br>
 E-mail: <?php echo $restaurantInfo->email;?>
 <hr>
