@@ -3,7 +3,8 @@
 <div id="kosarica">
     <ul id = 'naruceno'>
     </ul>
-    Cijena: <div id="cijena">0</div>
+    
+    <div id="ukupno" style='padding: 5px;'>Ukupno: <span id="cijena">0 kn</span></div>
     <button id="odbaci">Isprazni košaricu</button>
     <button id="naruci">Naruči</button>
 </div>

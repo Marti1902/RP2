@@ -3,8 +3,7 @@ $(document).ready(function(){
         .css( 'bottom', '0' )
         .css( 'width', '100%' )
         .css( 'left', '0' )
-        .css( 'background-color', 'red' )
-        .css( 'color', 'white' )
+        .css( 'background-color', 'white' )
         .css( 'text-align', 'center' )
         .html( '<button id="idiukos">Idi u košaricu</button>' );
     $( '#kosarica' ).css( 'display', 'none' );
@@ -27,35 +26,47 @@ $(document).ready(function(){
         if( p ){
             $( "#naruceno" ).append( '<li id="' + id[0] + '">' );
             $( "#" + id[0] ).append( '' + id[1] + '<br>' );
-            $( "#" + id[0] ).append( '<div id="' + id[0] + 'cijena">' + id[2] + '</div>' );
-            $( '#' + id[0] ).append( 'Količina: <div id="' + id[0] + 'puta">1</div');
+            $( "#" + id[0] ).append( '<div>Cijena: <span id="' + id[0] + 'cijena">' + id[2] + ' kn</span></div>' );
+            $( '#' + id[0] ).append( '<div id="kolicina">Količina: <span id="' + id[0] + 'puta">1</span></div>');
             //var c = $( '#cijena' ).html();
             //$( '#cijena' ).html( parseInt( c ) + parseInt( id[2] ) );
         }
         var c = $( '#cijena' ).html();
-        $( '#cijena' ).html( parseInt( c ) + parseInt( id[2] ) );
+        $( '#cijena' ).html( parseInt( c ) + parseInt( id[2] ) + ' kn' );
     });
 
     $( "#idiukos" ).on( 'click', function() {
         console.log('radi');
         w = $( window ).width();
         h = $( window ).height();
+        $('#naruci')
+            .css('position','absolute')
+            .css('right',160)
+            .css('bottom',5);
+        $('#odbaci')
+            .css('position','absolute')
+            .css('right',5)
+            .css('bottom',5);
         $( '#kosarica' )
             .css( 'display', 'inline' )
             .css( 'position', 'absolute')
             .css( 'left', 0.1 * w )
             .css( 'top', 0.1 * h)
-            .css( 'height', 0.8 * h )
+            .css( 'height', 0.3 * h )
             .css( 'width', 0.8 * w )
-            .css( 'background-color', 'grey');
+            .css( 'background-color', '#BEBEBE')
+            .css('border', '2px solid gray')
+            .css('border-radius','5px');
         if ( !$( "#close" ).length ) {
             var close = $( '<button id = "close">' )
                 .css( 'position', 'absolute' )
-                .css( 'top', 0 )
-                .css( 'right', 0 )
-                .css( 'background-color', 'red')
-                .css( 'height', ((h+w)/50) + 'px' )
-                .css( 'width', ((h+w)/25) + 'px' )
+                .css( 'top', 5 )
+                .css( 'right', 5 )
+                .css( 'background-color', 'gray')
+                .css('border', '2px solid gray')
+                .css('border-radius','5px')
+                .css( 'height', ((h+w)/60) + 'px' )
+                .css( 'width', ((h+w)/60) + 'px' )
                 .css( 'font-size', ((h+w)/100) + 'px' )
                 .html( 'X' );
             $( "#kosarica" ).append( close );
@@ -68,7 +79,12 @@ $(document).ready(function(){
 
     $( "#odbaci" ).on( 'click', function(){
         $( "#naruceno" ).html( '' );
-        $( "#cijena" ).html( '0' );
+        $( "#cijena" ).html( '0 kn' );
+    });
+
+    $("#naruci").on('click',function(){
+        
+
     });
 
 });

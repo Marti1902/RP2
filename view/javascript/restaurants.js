@@ -195,7 +195,7 @@ function obradi_addFood()
 }
 
 
-/*
+
 function addFoodImg( fd , p)
 {
     console.log( fd );
@@ -225,7 +225,7 @@ function addFoodImg( fd , p)
             }
         });
 }
-*/
+
 function obradi_removeFood()
 {
     var p = $( '<p>' ), checkboxes = $( 'input.removeFood:checkbox:checked' );
