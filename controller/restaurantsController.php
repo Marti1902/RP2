@@ -16,7 +16,30 @@ class RestaurantsController extends BaseController{
         $this->registry->template->show( 'restaurants_index' );
     }
 
+    public function pastOrders(){
+        $ls = new Service();
+        error404();
+        debug();
 
+        $this->registry->template->title = 'Prošle narudžbe';
+        $_SESSION['tab'] = 'Prošle narudžbe';
+        
+        ////////////////////////////////
+        $narudzbe = $ls->getOrderListByRestaurantId( $_SESSION['restaurants']->id_restaurant );
+        $pomocni = [];
+        foreach ( $narudzbe as $narudzba ){
+            $narudzba->id_restaurant = ( $ls->getRestaurantById ( $narudzba->id_restaurant ) )->name;
+            $hrana = $ls->getFoodIdListByOrderId( $narudzba->id_order );
+            $spiza = [];
+            for ( $i=0; $i < count( $hrana ); $i++ ){
+                $spiza[] = $ls->getFoodById( $hrana[$i] );
+            }
+            $pomocni[] = [$narudzba, $spiza];
+        }
+        $this->registry->template->orderList = $pomocni;
+
+        $this->registry->template->show( 'restaurants_pastOrders' );
+    }
     
     
 

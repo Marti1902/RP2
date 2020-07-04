@@ -36,7 +36,7 @@
 </table>
 
 <!--                EDIT       FOOD             -->
-<button class="editFood" title="Edit food" target="<?php echo __SITE_URL;?>/index.php?rt=restaurants/editFood">Uredi jelo</button>
+<button class="editFood" title="Uredi jelo iz ponude" target="<?php echo __SITE_URL;?>/index.php?rt=restaurants/editFood">Uredi jelo</button>
 
 <form class="editFood" target="<?php echo __SITE_URL;?>/app/editFood.php" hidden>
     <h3>Odaberite hranu koju želite promijeniti:</h3>
@@ -51,27 +51,27 @@
 
     <table class="editFood" >
         <tr>
-            <th> Food name: </th>
+            <th> Ime jela: </th>
             <td><input type="text" name="foodName" disabled=true></td>
             <td><input type="checkbox" id="che1" name="foodName" value="change"></td>
         </tr>
         <tr>
-            <th>Food price: </th>
+            <th>Cijena: </th>
             <td><input type="number" name="foodPrice" disabled=true></td>
             <td><input type="checkbox" id="che2" name="foodPrice" value="change"></td>
         </tr>
         <tr>
-            <th>Food description: </th>
+            <th>Opis jela: </th>
             <td><input type="text" name="foodDescription" disabled=true></td>
             <td><input type="checkbox"  id="che3" name="foodDescription" value="change"></td>
         </tr>
         <tr>
-            <th>Food Waiting time: </th>
+            <th>Trajanje pripreme: </th>
             <td><input type="number" name="foodWaitingTime" disabled=true></td>
             <td><input type="checkbox"  id="che4" name="foodWaitingTime" value="change"></td>
         </tr>
         <tr>
-            <th>Food image: </th>
+            <th>Slika hrane: </th>
             <td><input type="file" name="imgFood_edit" disabled=true></td>
             <td><input type="checkbox"  id="che5" name="imgFood_edit" value="change"></td>
         </tr>
@@ -81,7 +81,7 @@
 
 
 <!--                REMOVE       FOOD               -->
-<button class="removeFood" title="Remove food">Ukloni jelo</button>
+<button class="removeFood" title="Uredi ponudu">Ukloni jelo</button>
 
 <form class="removeFood" hidden>
     <h3>Odaberite hranu koju želite maknuti iz ponude:</h3>
@@ -89,11 +89,11 @@
 
     <table class="removeFood">
         <tr>
+            <th></th>
             <th>Jelo: </th>
             <th>Cijena: </th>
             <th>Opis: </th>
             <th>Čekanje (u minutama): </th>
-            <th>Slika: </th>
         </tr>
         <?php
             foreach( $FoodList as $food)
@@ -113,7 +113,7 @@
 
 
 <!--                ADD       FOOD               -->
-<button class="addFood" title="Add food">Dodaj jelo</button>
+<button class="addFood" title="Dodaj jelo">Dodaj jelo</button>
 
 
 
@@ -123,18 +123,26 @@
     <table class="addFood">
         <tr>
             <th>Jelo: </th>
-            <th>Cijena: </th>
-            <th>Opis: </th>
-            <th>Čekanje (u minutama): </th>
-            <th>Slika: </th>
-        </tr>
             <td><input type="text" name="name_input" required></td>
+        </tr>
+        <tr>
+            <th>Cijena: </th>
             <td><input type="number" name="price_input" required></td>
+        </tr>
+        <tr>
+            <th>Opis: </th>
             <td><input type="text" name="description_input" required></td>
+        </tr>
+        <tr>
+            <th>Čekanje (u minutama): </th>
             <td><input type="number" name="waitingTime_input" required></td>
+        </tr>
+        <tr>
+            <th>Slika: </th>
             <td><input type="file" name="imgFood_input" required></td>
+        </tr>
     </table>
-    <input type="submit"  value="Add new food to offerings">
+    <input type="submit"  value="Dodaj jelo u meni">
 </form>
 
 
@@ -169,8 +177,8 @@ E-mail: <?php echo $restaurantInfo->email;?>
     <input type="submit"  value="Promijeni">
 </form>
 
+
+
 <hr>
-
-
 
 <?php require_once __DIR__ . '/header&footer/_footer.php'; ?>

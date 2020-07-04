@@ -2,7 +2,8 @@ var timestamp = 0;
 
 $( document ).ready( function()
 {
-    getActiveOrders();
+    if($( 'h2').first().html() !== 'Prošle narudžbe' )
+        getActiveOrders();
 
     $( 'button.editFood' ).on('click', show_form );
     $( 'button.removeFood' ).on( 'click', show_form );
@@ -24,6 +25,9 @@ $( document ).ready( function()
     $( '#che5' ).on('click', sakrij_pokazi);
     //  Za removeFood otključava submit
     $( 'input.removeFood:checkbox' ).on('click', sakrij_pokazi_submit );
+
+    //  samo za prošle narudđbe na pastOrders.php
+    $( 'td.orderDetails').on( 'click', show_details); 
 
 });
 
@@ -423,7 +427,7 @@ function getActiveOrders()
                     p.html( 'ERROR in database' + data.greska);
                 }
                 else if( data.hasOwnProperty( 'nema' ) ){
-                    var div = $( 'div.activeOrders' ), p = $( '<p>' ).html( 'Currently you have no pending orders!');
+                    var div = $( 'div.activeOrders' ), p = $( '<p>' ).html( 'Trenutno nemate novih narudžbi!');
                     div.append(p);
                 }
                 else{
@@ -483,4 +487,22 @@ function destroy( vari = null)
         parent.parent().remove();
     location.reload();
     
+}
+
+/////////////////////////////       Fje za pastOrders.php
+
+function show_details(event)
+{
+    var target = $(event.target);
+    var details = $( 'tr[ordernumber="'+target.attr('ordernumber')+'"]')
+
+    if( target.html().substr(0,6) !== 'Sakrij'){ //  otrij detalje
+        details.show();
+        target.html('Sakrij detalje &#8595;');
+    }
+    else{   //  sakrij detalje
+        details.hide();
+        target.html('Prikaži detalje  &#8592;');
+    }
+
 }
