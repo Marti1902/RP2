@@ -5,7 +5,6 @@
 * user - gumb narudžba - ispiše se forma koja traži unos adrese narudžbe, kvarta i napomene za dostavljača tek nakon unosa potrebnog se podaci o narudžbi pošalju bazi
 * +user - ispis prema lokaciji - korisnik odabere kvart....napravljeno (dodana nova tablica u bazi spiza_neighborhood, dodano u dokumentaciji svugdje osim u grafu)
 * restoran - prevesti sve na hrvatski, provjeriti gumbe 
-* restoran - dodati mogućnost mijenjanja detalja o restoranu (adresa, opis...)
 * dostavljači - dodati listu slobodniih narudžbi - omogućiti da prihvati narudžbu i doda vrijeme ili da odbije 
 
 
@@ -22,6 +21,7 @@
 * radim na stranici svi restorani i svim popratnim stranicama koje ponudimo u menuu na "svi rastorani" - Manuela
 * napravljen popis po tipu hrane preko sličice 
 * dovršen popis najpopularnijih restorana (trenutno ispisuje sve restorane prema ocjenama drugih korisnika)
+* Dodana mogućnost mijenjanja detalja o restoranu
 
 #### Za inicijaliziranje baze:
 * Treba u app/database/db.class namjestit podatke za login u bazu
