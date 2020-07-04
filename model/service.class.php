@@ -309,7 +309,7 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = $row['id_food'];
+                $arr[] = [$row['id_food'], $row['quantity']];
             }
             return $arr;
         }
