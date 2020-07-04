@@ -435,6 +435,25 @@ class Service{
         return $restaurants;
     }
 
+    // nije dovršeno....večeras cu!!!
+    function getAvailableOrders()
+    {
+        $slobodne = [];
+        $ls = new Service();
+        try{
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT * FROM spiza_orders WHERE active=:active');
+            $st->execute( [ 'active' => 2 ] );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+        while( $row = $st->fetch() ){
+            $id_restaurant = $row['id_restaurant'];
+            $slobodne=[];
+        }
+        return $slobodne;
+    }
+
 };
 
 //  -------------------------------------------------------------

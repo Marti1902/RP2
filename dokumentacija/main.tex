@@ -76,7 +76,7 @@ Slijedi prikaz relacijskog modela:
     \item[] \textsf{FOOD (\textbf{id\_food}, name, description, waiting\_time, price, in\_offering, \underline{id\_restaurant}, image\_path)}
     \item[] \textsf{FOOD\_TYPE (\textbf{id\_foodType}, name, image\_path)}
     \item[] \textsf{ORDERS (\textbf{id\_order}, \underline{id\_user}, \underline{id\_restaurant}, active, order\_time, delivery\_time, lastchange\_time, price\_total, discount, note, feedback, rating, thumbs\_up, thumbs\_down)}
-    \item[] \textsf{CONTAINS (\textbf{\underline{id\_order}}, \textbf{\underline{id\_food}})}
+    \item[] \textsf{CONTAINS (\textbf{\underline{id\_order}}, \textbf{\underline{id\_food}}, quantity)}
     \item[] \textsf{HAS\_FOODTYPE (\textbf{\underline{id\_foodType}}, \textbf{\underline{id\_restaurant}})}
     \item[] \textsf{IMAGE (\textbf{id\_image}, name, \underline{id\_restaurant}, image \emph{- vjerojatno se neće koristit- za pohranu slike})}
     \item[] \textsf{NEIGHBORHOOD (\textbf{id\_neighborhood}, id\_restaurant)}
@@ -147,6 +147,7 @@ Pomoću sljedećih naredbi kreiramo bazu.
     \item[] CREATE TABLE IF NOT EXISTS spiza\_contains (\\
     id\_order int NOT NULL,\\
     id\_food int NOT NULL,\\
+    quantity int NOT NULL,\\
     PRIMARY KEY (id\_order, id\_food),\\
     FOREIGN KEY (id\_order) REFERENCES spiza\_orders(id\_order),\\
     FOREIGN KEY (id\_food) REFERENCES spiza\_food(id\_food)\\

@@ -4,12 +4,15 @@
 class DeliverersController extends BaseController{
 
     public function index(){
-        //$ls = new Service();
+        $ls = new Service();
         error404();
         debug();
 
-        $this->registry->template->title = $_SESSION['tab'] = 'Deliverers index';
-        //$this->registry->template->channelList = $ls->getMyChannels();
+        $this->registry->template->title = $_SESSION['tab'] = 'Dostavljači';
+
+        $slobodne = $ls->getAvailableOrders();
+
+        $this->registry->template->availableOrders=$slobodne;
         $this->registry->template->show( 'deliverers_index' );
     }
 
