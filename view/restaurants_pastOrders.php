@@ -1,16 +1,6 @@
 <?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
 
 
-
-
-<?php
-echo "<pre>";
-//print_r($orderList);
-echo "</pre>";
-?>
-
-
-
 <table>
     <tr>
         <th>Broj narudžbe</th>
@@ -59,15 +49,9 @@ echo "</pre>";
                 echo "</ul>\n";
                 echo "</td>\n";
             echo "</tr>\n";
-
-            //for( $i = 0; $i < sizeof($order); ++$i)
         }
-
     }
-    
-
     ?>
-    <tr><td>lksan</td></tr>
 </table>
 
 

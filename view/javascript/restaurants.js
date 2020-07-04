@@ -56,10 +56,13 @@ function show_form()
                     .css( 'text-decoration', 'none' )
                     .css( 'cursor', 'pointer' );
         })
-        .hover(function(){
-            $(this).css( 'color', 'black' )
-                    .css( 'text-decoration', 'none' )
-                    .css( 'cursor', 'pointer' );
+        .on({
+            mouseenter: function () {
+                $(this).css('color', 'red')
+            },
+            mouseleave: function () {
+                $(this).css( 'color', '#aaaaaa' );
+            }
         });
 
     
