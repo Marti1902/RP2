@@ -67,7 +67,7 @@ $(document).ready(function(){
 
 
 function show_form(){
-    var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>' ), close = $( '<span>' ), ul = $( '<ul>' );
+    var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>' ), close = $( '<span>' ), ul = $( '<ul id="jela">' );
     var naruci = $( '<button class="naruci"> Naruči! </button>' );
     var odbaci = $( '<button class="odbaci"> Odbaci narudžbu! </button>' );
 
@@ -163,7 +163,9 @@ function fja_naruci(){
 
 function fja_odbaci(){
     localStorage.clear();
-    show_form();
+    localStorage.setItem( 'ukupno', 0 );
+    $( '#jela' ).remove();
+    $( '#ukupno' ).html( localStorage.getItem( 'ukupno' ) + ' kn' );
 }
 
 function fja_plus(){
