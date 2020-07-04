@@ -7,11 +7,13 @@ $( document ).ready( function()
     $( 'button.editFood' ).on('click', show_form );
     $( 'button.removeFood' ).on( 'click', show_form );
     $( 'button.addFood' ).on( 'click', show_form );
+    $( 'button.changeDetails' ).on( 'click', show_form );
 
     // Obrada formi
     $( 'form.editFood').on( 'submit', obradi_editFood );
     $( 'form.removeFood').on( 'submit', obradi_removeFood );
     $( 'form.addFood').on( 'submit', obradi_addFood );
+    $( 'form.changeDetails' ).on( 'submit', obradi_changeDetails );
 
     
     // za editFood  prati checkboxove i otključava ih
@@ -110,6 +112,10 @@ function addCorrectForm( box,title)
     }
     else if( title === 'addFood' ){
         var form = $( 'form.addFood' ).removeAttr( 'hidden' );
+        box.append( form );
+    }
+    else if( title === 'changeDetails'){
+        var form = $( 'form.changeDetails' ).removeAttr( 'hidden' );
         box.append( form );
     }
 }
@@ -355,6 +361,46 @@ function obradi_editFood(event)
         });
         
 
+}
+
+function obradi_changeDetails()
+{
+    event.preventDefault();
+
+    var name = $( 'input[type="text"][name="name_change"]').val(),
+        desc = $( 'input[type="text"][name="desc_change"]').val(),
+        address = $( 'input[type="text"][name="address_change"]').val(),
+        p = $( '<p>' );
+    $( this ).append( p );
+    $.ajax(
+        {
+            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/changeDetails.php',
+            method: 'post',
+            data:
+            {
+                id: $( 'form.changeDetails' ).attr( 'restaurant' ),
+                name: name,
+                description: desc,
+                address: address
+            },
+            success: function( data )
+            {
+                if( data.hasOwnProperty( 'greska' ) ){
+                    console.log( data.greska );
+                    p.html( 'ERROR in database' + data.greska);
+                }
+                else if( data.hasOwnProperty( 'rezultat' ) ){
+                    p.html( data.rezultat +' Please refresh page to see changes!');
+                    console.log( data.rezultat );
+                }
+            },
+            error: function()
+            {
+                console.log( 'Greška u Ajax pozivu...');
+                p.html( 'ERROR in Ajax!' );
+
+            }
+        });
 }
 
 function getActiveOrders()

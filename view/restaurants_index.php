@@ -149,6 +149,26 @@ Opis: <?php echo $restaurantInfo->description;?>
 Adresa: <?php echo $restaurantInfo->address;?>
 <br>
 E-mail: <?php echo $restaurantInfo->email;?>
+<br>
+
+<!--                PROMIN DETALJE              -->
+<button class="changeDetails" title="changeDetails">Promijeni detalje</button>
+<form class="changeDetails" method="post" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
+    <h3>Promijeni detalje svog restorana:</h3>
+
+    <table class="changeDetails">
+        <tr>
+            <th>Ime: </th>
+            <th>Opis: </th>
+            <th>Adresa: </th>
+        </tr>
+            <td><input type="text" name="name_change"></td>
+            <td><input type="text" name="desc_change"></td>
+            <td><input type="text" name="address_change"></td>
+    </table>
+    <input type="submit"  value="Promijeni">
+</form>
+
 <hr>
 
 
