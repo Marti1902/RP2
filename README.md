@@ -1,5 +1,6 @@
 # RP2_Projekt
 
+<mark>Dokumentacija za bazu: https://www.overleaf.com/6726364111xqzgvmphxsbf</mark>
 ### [NOVO] Još za napraviti
 * user - u košaricu kod popisa hrane dodati sliku te hrane
 * user - gumb narudžba - ispiše se forma koja traži unos adrese narudžbe, kvarta i napomene za dostavljača tek nakon unosa potrebnog se podaci o narudžbi pošalju bazi
