@@ -198,6 +198,7 @@ function create_table_contains()
 			'CREATE TABLE IF NOT EXISTS spiza_contains (' .
 			'id_order int NOT NULL,' .
 			'id_food int NOT NULL,' .
+			'quantity int NOT NULL,' .
 			'PRIMARY KEY (id_order, id_food)' .
 			//'FOREIGN KEY (id_order) REFERENCES spiza_orders(id_order),' .
 			//'FOREIGN KEY (id_food) REFERENCES spiza_food(id_food).

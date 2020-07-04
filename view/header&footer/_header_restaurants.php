@@ -16,6 +16,8 @@
 <nav>   
     <ul>
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=restaurants/index">Naslovnica</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=restaurants/pastOrders">Prošle narudžbe</a></li>
     </ul>
 </nav> 
      <?php

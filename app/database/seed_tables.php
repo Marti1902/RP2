@@ -154,14 +154,14 @@ function seed_table_contains()
 	// Ubaci neke korisnike unutra
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO spiza_contains(id_order, id_food) VALUES (:id_order, :id_food)' );
+		$st = $db->prepare( 'INSERT INTO spiza_contains(id_order, id_food, quantity) VALUES (:id_order, :id_food, :quantity)' );
 
-		$st->execute( array( 'id_order'=> 1, 'id_food'=> 10) );
-		$st->execute( array( 'id_order'=> 2, 'id_food'=> 10) );
-		$st->execute( array( 'id_order'=> 3, 'id_food'=> 1) );
-		$st->execute( array( 'id_order'=> 4, 'id_food'=> 8) );
-		$st->execute( array( 'id_order'=> 5, 'id_food'=> 20) );
-		$st->execute( array( 'id_order'=> 6, 'id_food'=> 21) );
+		$st->execute( array( 'id_order'=> 1, 'id_food'=> 10, 'quantity' => 2) );
+		$st->execute( array( 'id_order'=> 2, 'id_food'=> 10, 'quantity' => 1) );
+		$st->execute( array( 'id_order'=> 3, 'id_food'=> 1, 'quantity' => 2) );
+		$st->execute( array( 'id_order'=> 4, 'id_food'=> 8, 'quantity' => 3) );
+		$st->execute( array( 'id_order'=> 5, 'id_food'=> 20, 'quantity' => 1) );
+		$st->execute( array( 'id_order'=> 6, 'id_food'=> 21, 'quantity' => 1) );
 
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_contains]: " . $e->getMessage() ); }

@@ -1,5 +1,6 @@
 # RP2_Projekt
 
+<mark>Dokumentacija za bazu: https://www.overleaf.com/6726364111xqzgvmphxsbf</mark>
 ### [NOVO] Još za napraviti
 * user - u košaricu kod popisa hrane dodati sliku te hrane
 * user - gumb narudžba - ispiše se forma koja traži unos adrese narudžbe, kvarta i napomene za dostavljača tek nakon unosa potrebnog se podaci o narudžbi pošalju bazi
@@ -22,6 +23,7 @@
 * napravljen popis po tipu hrane preko sličice 
 * dovršen popis najpopularnijih restorana (trenutno ispisuje sve restorane prema ocjenama drugih korisnika)
 * Dodana mogućnost mijenjanja detalja o restoranu
+* Namistija ispis narudžbi za novi column quantity i doda ocjenjivanje u moje narudžbe
 
 #### Za inicijaliziranje baze:
 * Treba u app/database/db.class namjestit podatke za login u bazu
