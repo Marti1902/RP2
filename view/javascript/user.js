@@ -16,7 +16,7 @@ $(document).ready(function(){
         var id = info.split( ", " );
         //console.log( id );
         for( var j = 0; j < i; ++j ){
-            var temp = localStorage.getItem( 'jelo' + j ).split( ", " );
+            var temp = localStorage.getItem( 'jelo' + j ).split( "," );
             console.log( temp );
             console.log( id );
             if( temp[0] === id[0] ){
