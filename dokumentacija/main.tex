@@ -16,7 +16,7 @@
 \usepackage{textcomp}
 \usepackage[normalem]{ulem}
 \usepackage{soul}
-\usepackage{draftwatermark}
+%\usepackage{draftwatermark}
 %\SetWatermarkText{Draft}
 %\SetWatermarkScale{1}
 
@@ -74,11 +74,12 @@ Slijedi prikaz relacijskog modela:
     \item[] \textsf{USERS (\textbf{id\_user}, username, password\_hash, email, registration\_sequence, \\has\_registered)}
     \item[] \textsf{RESTAURANTS (\textbf{id\_restaurant}, username, password\_hash, email, \\registration\_sequence, has\_registered, name, address, description)}
     \item[] \textsf{FOOD (\textbf{id\_food}, name, description, waiting\_time, price, in\_offering, \underline{id\_restaurant}, image\_path)}
-    \item[] \textsf{FOOD\_TYPE (\textbf{id\_foodType}, name)}
+    \item[] \textsf{FOOD\_TYPE (\textbf{id\_foodType}, name, image\_path)}
     \item[] \textsf{ORDERS (\textbf{id\_order}, \underline{id\_user}, \underline{id\_restaurant}, active, order\_time, delivery\_time, lastchange\_time, price\_total, discount, note, feedback, rating, thumbs\_up, thumbs\_down)}
     \item[] \textsf{CONTAINS (\textbf{\underline{id\_order}}, \textbf{\underline{id\_food}})}
     \item[] \textsf{HAS\_FOODTYPE (\textbf{\underline{id\_foodType}}, \textbf{\underline{id\_restaurant}})}
     \item[] \textsf{IMAGE (\textbf{id\_image}, name, \underline{id\_restaurant}, image \emph{- vjerojatno se neće koristit- za pohranu slike})}
+    \item[] \textsf{NEIGHBORHOOD (\textbf{id\_neighborhood}, id\_restaurant)}
 
 \end{itemize}
 
@@ -122,7 +123,8 @@ Pomoću sljedećih naredbi kreiramo bazu.
     )
     \item[] CREATE TABLE IF NOT EXISTS spiza\_food\_type (\\
     id\_foodType int NOT NULL PRIMARY KEY AUTO\_INCREMENT,\\
-    name varchar(30) NOT NULL\\
+    name varchar(30) NOT NULL,\\
+    image\_path varchar(200)
     )
     \item[] CREATE TABLE IF NOT EXISTS spiza\_orders  (\\
     id\_order int NOT NULL PRIMARY KEY AUTO\_INCREMENT,\\
@@ -163,6 +165,10 @@ Pomoću sljedećih naredbi kreiramo bazu.
     id\_restaurant int,\\
     FOREIGN KEY (id\_restaurant) REFERENCES spiza\_restaurants(id\_restaurant),\\
     )
+    \item[] CREATE TABLE IF NOT EXISTS spiza\_neighborhood (\\
+    id\_neighborhood int NOT NULL PRIMARY KEY AUTO\_INCREMENT,\\
+    id\_restaurant int NOT NULL\\
+    )
 \end{itemize}
 
 \section{To do list}
@@ -170,3 +176,4 @@ Potrebno je još dodat \st{slike restorana i jela u restoranima u bazu} te razra
 
 
 \end{document}
+

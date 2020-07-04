@@ -2,7 +2,7 @@
 
 <ul>
     <?php 
-    echo sizeof($restaurantList);
+    //echo sizeof($restaurantList);
     foreach( $restaurantList as $restaurant ){
         echo '<li>';
         echo '<a href="index.php?rt=user/restaurant&id_restaurant=' . $restaurant->id_restaurant . '">' . 
@@ -18,7 +18,7 @@ Istraži više restorana:
     <ul>
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/popular">Popularni</a></li>
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/restaurants">Svi restorani</a></li>
-        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/nearest">Najbliži</a></li>
+        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/neighborhood">U kvartu</a></li>
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/foodType">Prema vrsti hrane</a></li>
     </ul>
 </nav> 

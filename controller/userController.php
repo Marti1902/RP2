@@ -142,6 +142,27 @@ class UserController extends BaseController{
         $this->registry->template->restaurantList = $restorani;
         $this->registry->template->show( 'user_popular' );
     }
+
+    public function neighborhood()
+    {
+        $this->registry->template->title = $_SESSION['tab'] = 'Kvartovi';
+        $this->registry->template->show( 'user_neighborhood' );
+    }
+
+    public function searchNeighborhood()
+    {
+        if(isset($_POST['kvart']))
+        {
+            $ls = new Service();
+            error404();
+            debug();
+    
+            $this->registry->template->title = $_SESSION['tab'] = 'Restorani u kvartu ' . $_POST['kvart'];
+            $this->registry->template->restaurantList = $ls->getRestaurantListByNeighborhood( $_POST['kvart']);
+           
+            $this->registry->template->show( 'user_restaurants' ); 
+        }
+    }
 };
 
 

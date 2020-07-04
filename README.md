@@ -3,7 +3,7 @@
 ### [NOVO] Još za napraviti
 * user - u košaricu kod popisa hrane dodati sliku te hrane
 * user - gumb narudžba - ispiše se forma koja traži unos adrese narudžbe, kvarta i napomene za dostavljača tek nakon unosa potrebnog se podaci o narudžbi pošalju bazi
-* user - ispis prema lokaciji - korisnik odabere kvart (dodati kvartove u bazu kod restorana)
+* +user - ispis prema lokaciji - korisnik odabere kvart....napravljeno (dodana nova tablica u bazi spiza_neighborhood, dodano u dokumentaciji svugdje osim u grafu)
 * restoran - prevesti sve na hrvatski, provjeriti gumbe 
 * restoran - dodati mogućnost mijenjanja detalja o restoranu (adresa, opis...)
 * dostavljači - dodati listu slobodniih narudžbi - omogućiti da prihvati narudžbu i doda vrijeme ili da odbije 

@@ -6,12 +6,12 @@ require_once __DIR__ . '/db.class.php';
 seed_table_users();
 seed_table_restaurants();
 seed_table_food();
-//seed_table_feedback();
 seed_table_food_type();
 seed_table_orders();
 seed_table_contains();
 seed_table_has_food_type();
 seed_table_deliverers();
+seed_table_neighborhood();
 
 exit( 0 );
 
@@ -47,7 +47,7 @@ function seed_table_restaurants()
 	{
 		$st = $db->prepare( 'INSERT INTO spiza_restaurants(username, password_hash, name, address, email, registration_sequence, description, has_registered) VALUES (:username, :password, :name, :address, \'a@b.com\', \'abc\', \'blabla\', \'1\')' );
 
-		$st->execute( array( 'username' => 'pizzeria6', 'password' => password_hash( 'pizzeria6sifra', PASSWORD_DEFAULT ), 'name' => 'Pizzeria 6',  'address' => 'Medulićeva 6'   ) );
+		$st->execute( array( 'username' => 'pizzeria6', 'password' => password_hash( 'pizzeria6sifra', PASSWORD_DEFAULT ), 'name' => 'Pizzeria 6',  'address' => 'Medulićeva 6' ) );
 		$st->execute( array( 'username' => 'bros', 'password' => password_hash( 'brossifra', PASSWORD_DEFAULT ), 'name' => 'Pizzeria Bros',  'address' => 'Trakošćanska 28' ) );
 		$st->execute( array( 'username' => 'rocket', 'password' => password_hash( 'rocketsifra', PASSWORD_DEFAULT ), 'name' => 'Rocket Burger',  'address' => 'Tkalčićeva 50') );
 		$st->execute( array( 'username' => 'submarine', 'password' => password_hash( 'submarinesifra', PASSWORD_DEFAULT ), 'name' => 'Submarine',  'address' => 'Frankopanska 9') );
@@ -209,6 +209,34 @@ function seed_table_deliverers()
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_deliverers]: " . $e->getMessage() ); }
 
 	echo "Ubacio u tablicu spiza_deliverers.<br />";
+}
+
+
+function seed_table_neighborhood()
+{
+	$db = DB::getConnection();
+
+	// Ubaci neke korisnike unutra
+	try
+	{
+		$st = $db->prepare( 'INSERT INTO spiza_neighborhood(id_restaurant, neighborhood) VALUES (:id_restaurant, :neighborhood)' );
+
+		$st->execute( array( 'id_restaurant' => '1', 'neighborhood' => 'Centar' ) );
+		$st->execute( array( 'id_restaurant' => '2', 'neighborhood' => 'Trešnjevka' ) );
+		$st->execute( array( 'id_restaurant' => '3', 'neighborhood' => 'Centar' ) );
+		$st->execute( array( 'id_restaurant' => '4', 'neighborhood' => 'Centar'  ) );
+		$st->execute( array( 'id_restaurant' => '5', 'neighborhood' => 'Pešćenica'  ) );
+		$st->execute( array( 'id_restaurant' => '6', 'neighborhood' => 'Kruge'  ) );
+		$st->execute( array( 'id_restaurant' => '7', 'neighborhood' => 'Ljubljanica'  ) );
+		$st->execute( array( 'id_restaurant' => '8', 'neighborhood' => 'Centar'  ) );
+		$st->execute( array( 'id_restaurant' => '9', 'neighborhood' => 'Centar'  ) );
+		$st->execute( array( 'id_restaurant' => '10', 'neighborhood' => 'Centar'  ) );
+
+		
+	}
+	catch( PDOException $e ) { exit( "PDO error [insert spiza_neighborhood]: " . $e->getMessage() ); }
+
+	echo "Ubacio u tablicu spiza_neighborhood.<br />";
 }
 ?> 
  

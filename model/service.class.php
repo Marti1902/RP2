@@ -415,6 +415,26 @@ class Service{
             return $ratingList;
         }
     }
+
+
+    function getRestaurantListByNeighborhood( $neighborhood )
+    {
+        $restaurants = [];
+        $ls = new Service();
+        try{
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT * FROM spiza_neighborhood WHERE neighborhood=:neighborhood');
+            $st->execute( [ 'neighborhood' => $neighborhood ] );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+        while( $row = $st->fetch() ){
+            $id_restaurant = $row['id_restaurant'];
+            $restaurants[]=$ls->getRestaurantById($id_restaurant);
+        }
+        return $restaurants;
+    }
+
 };
 
 //  -------------------------------------------------------------

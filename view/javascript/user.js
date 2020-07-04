@@ -108,6 +108,36 @@ $(document).ready(function(){
 
     });
 
+
+    var txt = $( "#txt_kvart" );
+    // Kad netko nešto tipka u text-box:
+    txt.on( "input", function(e)
+    {
+        var unos = $( this ).val(); // this = HTML element input, $(this) = jQuery objekt
+    
+        // Napravi Ajax poziv sa GET i dobij sva imena koja sadrže s kao podstring
+        $.ajax(
+        {
+            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/restaurantsByNeighborhood.php',
+
+            data:
+            {
+                q: unos
+            },
+            success: function( data )
+            {
+                console.log("tu");
+                // Jednostavno sve što dobiješ od servera stavi u dataset.
+                $( "#datalist_kvartova" ).html( data );
+            },
+            error: function( xhr, status )
+            {
+                if( status !== null )
+                    console.log( "Greška prilikom Ajax poziva: " + status );
+            }
+        } );
+    } );
+
 });
 
 function show_form()

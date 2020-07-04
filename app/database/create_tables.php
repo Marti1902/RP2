@@ -6,13 +6,13 @@ require_once __DIR__ . '/db.class.php';
 create_table_users();
 create_table_restaurants();
 create_table_food();
-//create_table_feedback();
 create_table_food_type();
 create_table_orders();
 create_table_contains();
 create_table_has_food_type();
 create_table_image();
 create_table_deliverers();
+create_table_neighborhood();
 
 exit( 0 );
 
@@ -286,6 +286,30 @@ function create_table_deliverers()
 	catch( PDOException $e ) { exit( "PDO error [create spiza_deliverers]: " . $e->getMessage() ); }
 
 	echo "Napravio tablicu spiza_deliverers.<br />";
+}
+
+
+function create_table_neighborhood()
+{
+	$db = DB::getConnection();
+
+	if( has_table( 'spiza_neighborhood' ) )
+		exit( 'Tablica spiza_neighborhood vec postoji. Obrisite ju pa probajte ponovno.' );
+
+	try
+	{
+		$st = $db->prepare( 
+			'CREATE TABLE IF NOT EXISTS spiza_neighborhood (' .
+			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
+			'id_restaurant int,'.
+			'neighborhood varchar(50) NOT NULL)'
+		);
+
+		$st->execute();
+	}
+	catch( PDOException $e ) { exit( "PDO error [create spiza_neighborhood]: " . $e->getMessage() ); }
+
+	echo "Napravio tablicu spiza_neighborhood.<br />";
 }
 
 
