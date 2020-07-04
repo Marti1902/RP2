@@ -23,9 +23,9 @@
 
             echo "<tr id=".$food->id_food.">\n";
             echo "<td>". $food->name ."</td>\n";
-            echo "<td>". $food->price ."</td>\n";
+            echo "<td>". $food->price . ' kn ' . "</td>\n";
             echo "<td>". $food->description ."</td>\n";
-            echo "<td>". $food->waiting_time ."</td>\n";
+            echo "<td>". $food->waiting_time . "'" . "</td>\n";
             echo "<td>";
                 if( $food->image_path !== null )
                     echo '<img src="'. __SITE_URL . $food->image_path .'"width="100" height="100">';

@@ -1,5 +1,5 @@
 <?php require_once __DIR__ . '/header&footer/_header.php'; ?>
-
+<!--
 <div id="kosarica">
     <ul id = 'naruceno'>
     </ul>
@@ -8,6 +8,8 @@
     <button id="odbaci">Isprazni košaricu</button>
     <button id="naruci">Naruči</button>
 </div>
+-->
+
 <div id="footer" data-position='fixed'>Nesto</div>
 
 Popis dostupnih jela:
