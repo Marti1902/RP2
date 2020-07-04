@@ -8,9 +8,9 @@
     <button id="odbaci">Isprazni košaricu</button>
     <button id="naruci">Naruči</button>
 </div>
--->
 
 <div id="footer" data-position='fixed'>Nesto</div>
+-->
 
 Popis dostupnih jela:
 <ul>

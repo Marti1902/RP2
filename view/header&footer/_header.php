@@ -6,6 +6,7 @@
     <link rel="stylesheet"  href="<?php echo __SITE_URL; ?>/css/style.css" type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="<?php echo __SITE_URL; ?>/view/javascript/user.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <link rel="icon" href="<?php echo __SITE_URL; ?>/css/logo.png" />
 </head>
 
@@ -14,7 +15,7 @@
 <h1>Spiza.hr</h1>
 
 <nav>   
-    <ul>
+    <ul class="meni">
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje Narudžbe</a></li>
         <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user">Vaši omiljeni restorani</a></li>
