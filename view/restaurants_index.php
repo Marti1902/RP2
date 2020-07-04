@@ -28,7 +28,7 @@
             echo "<td>". $food->waiting_time . "'" . "</td>\n";
             echo "<td>";
                 if( $food->image_path !== null )
-                    echo '<img src="'. __SITE_URL . $food->image_path .'"width="100" height="100">';
+                    echo '<img src="'. __SITE_URL . $food->image_path .'" width="100" height="100" name="' .$food->name. '">';
             echo "</td>\n";
             echo "</tr>\n";
     }

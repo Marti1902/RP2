@@ -11,7 +11,7 @@ function show_galery(event)
     var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>'), close = $( '<span>' );
     var img = $(event.target);
 
-    title.html( 'Galerija' )
+    title.html( img.attr('name') )
         .css( 'color', 'black' );
 
     // link za zatvaranje boxa i okvira
@@ -86,6 +86,7 @@ function show_galery(event)
         .css( 'margin', 'auto')
         .css( 'margin-left', 'auto' )
         .css( 'top', '5%' )
+        .attr('okvir', '1')
         //.css( 'object-fit', 'cover')
         .css( 'margin-bottom', '10%');
     box.append(okvirSlike);
@@ -95,7 +96,7 @@ function show_galery(event)
         //.css( 'display', 'block')
         //.css( 'margin', 'auto')
         .show();
-    console.log(okvirSlike.height(), okvirSlike.width());        
+    //console.log(okvirSlike.height(), okvirSlike.width());        
     if( okvirSlike.height() / duplicate_4show.prop('naturalHeight') < okvirSlike.width() / duplicate_4show.prop('naturalWidth') )
         koef = okvirSlike.height() / duplicate_4show.prop('naturalHeight');
     else
@@ -103,12 +104,24 @@ function show_galery(event)
         duplicate_4show
             .css( 'height', duplicate_4show.prop('naturalHeight') * koef )
             .css( 'width', duplicate_4show.prop('naturalWidth') * koef );
-    console.log(duplicate_4show.height(), duplicate_4show.width());        
-        
-
+    //console.log(duplicate_4show.height(), duplicate_4show.width());        
+    
+    duplicate_4show.attr('postavljena', '1');
 
     okvirSlike.append(duplicate_4show);
 
+    $(window).on('resize', function(){
+        var duplicate_4show = $('img[postavljena="1"]'), 
+            okvirSlike = $('div[okvir="1"]');
+
+            if( okvirSlike.height() / duplicate_4show.prop('naturalHeight') < okvirSlike.width() / duplicate_4show.prop('naturalWidth') )
+        koef = okvirSlike.height() / duplicate_4show.prop('naturalHeight');
+    else
+        koef = okvirSlike.width() / duplicate_4show.prop('naturalWidth');
+        duplicate_4show
+            .css( 'height', duplicate_4show.prop('naturalHeight') * koef )
+            .css( 'width', duplicate_4show.prop('naturalWidth') * koef );
+  });
 
 
 }
