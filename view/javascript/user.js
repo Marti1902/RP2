@@ -63,6 +63,39 @@ $(document).ready(function(){
         } );
     } );
 
+    $( ".thumbs" ).on( 'click', function(){
+        var ord = $( this ).attr( 'id' );
+        var novi = parseInt( $( this ).html() ) + 1;
+        if( $( this ).attr( 'palac' ) == 'gori' ) tip = 'gori';
+        else if( $( this ).attr( 'palac' ) == 'doli' ) tip = 'doli';
+        $( this ).html( novi );
+        console.log( ord, novi, tip );
+        $.ajax(
+            {
+                url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/changeThumbs.php',
+                method: 'post',
+                data:
+                {
+                    id: ord,
+                    thumbs: novi,
+                    vrsta: tip
+                },
+                success: function( data )
+                {
+                    if( data.hasOwnProperty( 'greska' ) ){
+                        console.log( data.greska );
+                    }
+                    else if( data.hasOwnProperty( 'rezultat' ) ){
+                        console.log( data.rezultat );
+                    }
+                },
+                error: function()
+                {
+                    console.log( 'Greška u Ajax pozivu...');
+                }
+            });
+    } );
+
 });
 
 

@@ -24,6 +24,7 @@
 * dovršen popis najpopularnijih restorana (trenutno ispisuje sve restorane prema ocjenama drugih korisnika)
 * Dodana mogućnost mijenjanja detalja o restoranu
 * Namistija ispis narudžbi za novi column quantity i doda ocjenjivanje u moje narudžbe
+* Doda thumbs up i down za recenzije
 
 #### Za inicijaliziranje baze:
 * Treba u app/database/db.class namjestit podatke za login u bazu

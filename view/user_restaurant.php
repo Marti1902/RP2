@@ -34,6 +34,8 @@ Recenzije:
         echo '<li>' .
              $order->id_user . ': ' . $order->rating . '<br>' .
              '<div id="ovaj' . $i . '">' . $order->feedback . '</div><br>' .
+             '<button class="thumbs" id="' . $order->id_order . '" palac="gori">' . $order->thumbs_up . '</button>' . 
+             '<button class="thumbs" id="' . $order->id_order . '" palac="doli">' . $order->thumbs_down . '</button>' . 
             '</li>';
         $i++;
     } ?>
