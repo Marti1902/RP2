@@ -294,6 +294,23 @@ class Service{
         }
     }
 
+    function getOrderById( $id )
+    {
+        try
+		{
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_order=:order');
+            $st->execute(['order'=>$id]);
+		}
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount()!==1)
+            return null;
+        else{
+            $row=$st->fetch();
+            return new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+        }
+    }
+
     function getFoodIdListByOrderId( $id_order )
     {
         try
@@ -435,7 +452,7 @@ class Service{
         return $restaurants;
     }
 
-    // nije dovršeno....večeras cu!!!
+    
     function getAvailableOrders()
     {
         $slobodne = [];
@@ -448,10 +465,80 @@ class Service{
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 
         while( $row = $st->fetch() ){
-            $id_restaurant = $row['id_restaurant'];
-            $slobodne=[];
+            $hrana=[];
+    
+            $user=$ls->getUserById($row['id_user']);
+            $restaurant=$ls->getRestaurantById($row['id_restaurant']);
+            $o=new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+            
+            try{
+                $db = DB::getConnection();
+                $st2 = $db->prepare( 'SELECT * FROM spiza_contains WHERE id_order=:id_order');
+                $st2->execute( [ 'id_order' => $row['id_order'] ] );
+            }
+            catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+            while($row2=$st2->fetch()){
+                $h=$ls->getFoodById($row2['id_food']);
+                $hrana[]=$h->name;
+            }
+
+            $slobodne[]=[$o,$user->username,$restaurant->name,$hrana];
+
         }
         return $slobodne;
+    }
+
+    function acceptOrder($id_narudzbe)
+    {
+        try{
+            $db = DB::getConnection();
+            $st2 = $db->prepare( 'UPDATE spiza_orders SET active=3 WHERE id_order=:id_order');
+            $st2->execute( [ 'id_order' => $id_narudzbe ] );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+    }
+
+    function finish($id_narudzbe)
+    {
+        $date = date("Y-m-d H:i:s");
+        try{
+            $db = DB::getConnection();
+            $st2 = $db->prepare( 'UPDATE spiza_orders SET active=0 WHERE id_order=:id_order');
+            $st2->execute( [ 'id_order' => $id_narudzbe] );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+        try{
+            $db = DB::getConnection();
+            $st2 = $db->prepare( 'UPDATE spiza_orders SET delivery_time=now() WHERE id_order=:id_order');
+            $st2->execute( [ 'id_order' => $id_narudzbe] );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+    }
+
+    function getCurrentOrder($id)
+    {
+        $ls = new Service();
+
+        $hrana=[];
+    
+        
+        $o=$ls->getOrderById($id);
+        $user=$ls->getUserById($o->id_user);
+        $restaurant=$ls->getRestaurantById($o->id_restaurant);
+            
+        try{
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT * FROM spiza_contains WHERE id_order=:id_order');
+            $st->execute( [ 'id_order' => $id ] );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        while($row=$st->fetch()){
+            $h=$ls->getFoodById($row['id_food']);
+            $hrana[]=$h->name;
+        }
+
+        return [$o,$user->username,$restaurant->name,$hrana];
     }
 
 };

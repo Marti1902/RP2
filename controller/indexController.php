@@ -38,7 +38,7 @@ class IndexController extends BaseController
 		if( !$ls->userExsists( $database, $_POST['username']) )
 		{
 			$this->registry->template->errorFlag = True;
-			$this->registry->template->errorMsg = 'User does not exsist!';
+			$this->registry->template->errorMsg = 'Korisnik ne postoji!';
 			if( $database === 'login_restaurants' )
 				$this->index();
 			elseif( $database === 'spiza_restaurants' )
@@ -49,7 +49,7 @@ class IndexController extends BaseController
 		}
 		elseif( !$ls->emailConfirmed( $database, $_POST['username']) ){
 			$this->registry->template->errorFlag = True;
-			$this->registry->template->errorMsg = 'Registration not confirmed!';
+			$this->registry->template->errorMsg = 'Registracija nije odobrena!';
 			if( $database === 'login_restaurants' )
 				$this->index();
 			elseif( $database === 'spiza_restaurants' )
@@ -69,7 +69,7 @@ class IndexController extends BaseController
 			}
 			else{
 				$this->registry->template->errorFlag = True;
-				$this->registry->template->errorMsg = 'Username or password incorrect!';
+				$this->registry->template->errorMsg = 'Krivi username ili password!';
 				if( $database === 'login_restaurants' )
 					$this->index();
 				elseif( $database === 'spiza_restaurants' )
@@ -90,7 +90,7 @@ class IndexController extends BaseController
 
 	public function registerForward_restaurants()
 	{
-		$this->registry->template->title = 'Register Restaurant';
+		$this->registry->template->title = 'Registracija restorani';
 		$this->registry->template->show( 'register_restaurant');
 	}
 
@@ -110,13 +110,13 @@ class IndexController extends BaseController
 			if( !isset( $_POST['name']) || !isset( $_POST['address'] ) || !isset( $_POST['description'] ) )
 			{
 				$this->registry->template->errorFlag = True;
-				$this->registry->template->errorMsg = 'Form unfilled!';
+				$this->registry->template->errorMsg = 'Forma nije popunjena!';
 				$this->registerForward_restaurants();
 			}
 		if( !isset( $_POST['username']) || !isset( $_POST['password'] ) || !isset( $_POST['email'] )  )	//nisu postavljeni
 		{
 			$this->registry->template->errorFlag = True;
-			$this->registry->template->errorMsg = 'Wrong input!';
+			$this->registry->template->errorMsg = 'Krivi unos!';
 			if( $database === 'spiza_users' )
 				$this->registerForward();
 			elseif( $database === 'spiza_restaurants' )
@@ -125,7 +125,7 @@ class IndexController extends BaseController
 		elseif( $ls->userExsists( $database, $_POST['username']) )
 		{
 			$this->registry->template->errorFlag = True;
-			$this->registry->template->errorMsg = 'Username taken!';
+			$this->registry->template->errorMsg = 'Username se već koristi!';
 			if( $database === 'spiza_users' )
 				$this->registerForward();
 			elseif( $database === 'spiza_restaurants' )
@@ -136,7 +136,7 @@ class IndexController extends BaseController
 			$ls->registerUser($database);		
 
 			$this->registry->template->errorFlag = True;
-			$this->registry->template->errorMsg = 'Account created, please confirm registration e-mail!';
+			$this->registry->template->errorMsg = 'Kreiran račun, potvrdite registracijski e-mail!';
 			if( $database === 'spiza_users' )
 				$this->index();
 			elseif( $database === 'spiza_restaurants' )
@@ -148,7 +148,7 @@ class IndexController extends BaseController
 	function loginRestaurants()
 	{
 		debug();
-		$this->registry->template->title = 'Log in for restaurants';
+		$this->registry->template->title = 'Restorani';
 		$this->registry->template->show( 'index_loginRestaurants');
 
 	}
@@ -156,7 +156,7 @@ class IndexController extends BaseController
 	function loginDeliverers()
 	{
 		debug();
-		$this->registry->template->title = 'Log in for deliverers';
+		$this->registry->template->title = 'Dostavljači';
 		$this->registry->template->show( 'index_loginDeliverers');
 
 	}

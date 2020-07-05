@@ -23,7 +23,7 @@ Password:
 <button type="submit" name="log_in" value="login_restaurants">Log in</button>
 </form>
 
-<p>or</p> 
+<p>ili</p> 
 
 <form action="<?php echo __SITE_URL; ?>/index.php?rt=index/registerForward_restaurants" method='post'>
     <input type="submit" value="Register" />

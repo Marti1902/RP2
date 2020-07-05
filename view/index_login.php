@@ -22,7 +22,7 @@ Password:
 <input type="password" name="password"> <br><br>
 <button type="submit" name="log_in" value="login_user">Log in</button>
 </form>
-<p>or</p> 
+<p>ili</p> 
 <form action="<?php echo __SITE_URL; ?>/index.php?rt=index/registerForward" method='post'>
     <input type="submit" value="Register" />
 </form>
