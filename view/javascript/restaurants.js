@@ -5,10 +5,10 @@ $( document ).ready( function()
     if($( 'h2').first().html() !== 'Prošle narudžbe' )
         getActiveOrders();
 
-    $( 'button.editFood' ).on('click', show_form );
-    $( 'button.removeFood' ).on( 'click', show_form );
-    $( 'button.addFood' ).on( 'click', show_form );
-    $( 'button.changeDetails' ).on( 'click', show_form );
+    $( 'button[name="editFood"]' ).on('click', show_form );
+    $( 'button[name="removeFood"]' ).on( 'click', show_form );
+    $( 'button[name="addFood"]' ).on( 'click', show_form );
+    $( 'button[name="changeDetails"]' ).on( 'click', show_form );
 
     // Obrada formi
     $( 'form.editFood').on( 'submit', obradi_editFood );
@@ -28,6 +28,7 @@ $( document ).ready( function()
 
     //  samo za prošle narudđbe na pastOrders.php
     $( 'td.orderDetails').on( 'click', show_details);
+    //[name="orderDetails"]
     
     // za zatvaranje okvira
     /*$('body').on('click', 'div.okvir', function(event){
@@ -89,7 +90,7 @@ function show_form()
         .append( close )
         .append( title );
 
-    addCorrectForm( box, $(this).attr('class') );
+    addCorrectForm( box, $(this).attr('name') );
 
     //  vanjski okvir    
     div.css( 'position', 'fixed')
@@ -107,7 +108,7 @@ function show_form()
         
     
     div.append(box);
-    $(this).after(div);
+    $( "table[name='food']").after(div);
 
     //   Zatvara prozor ako se klikne van boxa
     div.on( 'click', function(event){
@@ -122,7 +123,7 @@ function show_form()
 function addCorrectForm( box,title)
 {
     if( title === 'editFood'){
-        var table = $( 'table.food' ).clone();
+        var table = $( 'table[name="food"]' ).clone();
         //subTitle
         box.append( table );              // Prikaz trenutne hrane u ponudi
         addEditForm(box);
@@ -447,10 +448,11 @@ function getActiveOrders()
                 else{
                     timestamp = data.timestamp;
 
-                    var div = $( 'div.activeOrders' ), tbl = $( '<table>' ), tr_head = $( '<tr>' );
+                    var div = $( 'div.activeOrders' ), tbl = $( '<table>' ), tr_head = $( '<thead>' ), tbody= $('<tbody>');
 
-                    tr_head.html( '<th>Order Number</th><th>Client ID</th><th>Order time</th><th>Total</th><th>Discount</th><th>Note</th>' );
-                    tbl.append( tr_head);
+                    tr_head.html( '<tr><th>Status</th><th>Btoj narudžbe</th><th>Broj klijenta</th><th>Vrijeme narudžbe</th><th>Ukupno</th><th>Popust</th><th>Napomena</th></tr>' );
+                    tbl.append( tr_head)
+                        .prop('class', 'table table-hover');
                     
                     
                     for( var i = 0; i < data.id_order.length; ++i )
@@ -462,21 +464,24 @@ function getActiveOrders()
                         var td_price_total = $( '<td>' ).html( data.price_total[i] );
                         var td_discount = $( '<td>' ).html( data.discount[i] );
                         var td_note = $( '<td>' ).html( data.note[i] );
+                        var td_active = $( '<td>' ).append( orderStatus( data.active[i] ) );
 
-                        tr.append( td_id_order )
+
+                        tr.append( td_active )
+                            .append( td_id_order )
                             .append( td_id_user )
                             .append( td_order_time )
                             .append( td_price_total )
                             .append( td_discount )
                             .append( td_note );
-                        tbl.append( tr );
+                        tbody.append( tr );
                     }
-                
+                    tbl.append( tbody );
+
                     div.html( tbl );
 
                     getActiveOrders();
                 }
-
             },
             error: function( xhr, status )
             {
@@ -487,7 +492,32 @@ function getActiveOrders()
         });
 }
 
-
+function orderStatus( code)       // za status stavljam oznaku
+{
+    var oznaka= $( '<span>')
+    if( code = 1)
+    {
+        oznaka.prop('class', 'badge badge-primary')
+            .html('Novo');
+    }
+    else if( code = 2){
+        oznaka.prop('class', 'badge badge-success')
+        .html('Prihvaćena');
+    }
+    else if( code = 0){
+        oznaka.prop('class', 'badge badge-secondary')
+        .html('Dostavljena');
+    }
+    else if( code = -1){
+        oznaka.prop('class', 'badge badge-danger')
+        .html('Odbijeno');
+    }
+    else if( code = -2){
+        oznaka.prop('class', 'badge badge-dark')
+        .html('Nema dostavljača');
+    }
+    return oznaka;
+}
 
 function destroy( vari = null)
 {

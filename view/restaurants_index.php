@@ -8,15 +8,17 @@
 <h3>Menu: <small>-- prebacit ću na posebnu stranicu --</small></h3>
 
 
-<table class="food">
+<table class="table table" name="food" >
+    <thead>
     <tr>
-    <th>Jelo </th>
-    <th>Cijena </th>
-    <th>Opis </th>
-    <th>Čekanje (u minutama) </th>
-    <th>Slika </th>
-
+        <th>Jelo </th>
+        <th>Cijena </th>
+        <th>Opis </th>
+        <th>Čekanje (u minutama) </th>
+        <th>Slika </th>
     </tr>
+    </thead>
+    <tbody>
 
 <?php
     foreach( $FoodList as $food)
@@ -34,11 +36,24 @@
             echo "</tr>\n";
     }
 ?>
+    </tbody>
 </table>
 
-<!--                EDIT       FOOD             -->
-<button class="editFood" title="Uredi jelo iz ponude" target="<?php echo __SITE_URL;?>/index.php?rt=restaurants/editFood">Uredi jelo</button>
+<div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Uredi jelovnik
+    </button>
+    <div class="dropdown-menu">
+        <button class="dropdown-item" name="editFood" title="Uredi jelo iz ponude" target="<?php echo __SITE_URL;?>/index.php?rt=restaurants/editFood">Uredi jelo</button>
+        <button class="dropdown-item" name="addFood" title="Dodaj jelo">Dodaj jelo</button>
+        <button class="dropdown-item" name="removeFood" title="Uredi ponudu">Ukloni jelo</button>
+    </div>
+</div>
 
+
+
+
+<!--                EDIT       FOOD             -->
 <form class="editFood" target="<?php echo __SITE_URL;?>/app/editFood.php" hidden>
     <h3>Odaberite hranu koju želite promijeniti:</h3>
     <select class="editFood">
@@ -82,8 +97,6 @@
 
 
 <!--                REMOVE       FOOD               -->
-<button class="removeFood" title="Uredi ponudu">Ukloni jelo</button>
-
 <form class="removeFood" hidden>
     <h3>Odaberite hranu koju želite maknuti iz ponude:</h3>
 
@@ -114,9 +127,6 @@
 
 
 <!--                ADD       FOOD               -->
-<button class="addFood" title="Dodaj jelo">Dodaj jelo</button>
-
-
 
 <form class="addFood" method="post" enctype="multipart/form-data" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
     <h3>Dodaj novu hranu u ponudu:</h3>
@@ -161,7 +171,7 @@ E-mail: <?php echo $restaurantInfo->email;?>
 <br>
 
 <!--                PROMIN DETALJE              -->
-<button class="changeDetails" title="changeDetails">Promijeni detalje</button>
+<button class="btn btn-primary" name="changeDetails" title="changeDetails">Promijeni detalje</button>
 <form class="changeDetails" method="post" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
     <h3>Promijeni detalje svog restorana:</h3>
 

@@ -3,16 +3,19 @@
 
 <div class="col-12">
 
-<table>
-    <tr>
-        <th>Broj narudžbe</th>
-        <th>Broj klijenta</th>
-        <th>Vrijeme narudžbe</th>
-        <th>Vrijeme dostave</th>
-        <th>Ukupna cijena</th>
-        <th>Ocijena</th>
-        <th></th>
-    </tr>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Broj narudžbe</th>
+            <th>Broj klijenta</th>
+            <th>Vrijeme narudžbe</th>
+            <th>Vrijeme dostave</th>
+            <th>Ukupna cijena</th>
+            <th>Ocijena</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
     <?php
     foreach( $orderList as $order)
     {
@@ -26,7 +29,7 @@
                 echo "<td>".$order[0]->rating."</td>\n";
                 echo "<td class='orderDetails' ordernumber='".$order[0]->id_order."'>Prikaži detalje  &#8592;</td>\n";
             echo "</tr>\n";
-            echo "<tr class='orderDetails' ordernumber='".$order[0]->id_order."' hidden>\n";
+            echo "<tr class='orderDetails' ordernumber='".$order[0]->id_order."' style='display: none;'>\n";
                 echo "<td colspan='7'>\n";
                 echo "<ul>\n";
                     if( $order[0]->note !== '')
@@ -54,6 +57,7 @@
         }
     }
     ?>
+    </tbody>
 </table>
 
 </div>
