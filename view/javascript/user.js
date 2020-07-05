@@ -1,15 +1,35 @@
 $(document).ready(function(){
-    var i = 0;
-    localStorage.setItem( 'i', i );
-    localStorage.setItem( 'ukupno', 0 );
+    if( localStorage.getItem( 'i' ) === null )
+        localStorage.setItem( 'i', 0 );
 
-    var kosarica = $( '<li id="idiukos" style="cursor: pointer;">Košarica <i class="fas fa-shopping-basket"></i></li>' );
-    $( '.meni' ).append( kosarica );
+    if( localStorage.getItem( 'ukupno' ) === null )
+        localStorage.setItem( 'ukupno', 0 );
+
+    var nas = $( '#naslov' ).html();
+    console.log( nas );
+
+    if( nas !== 'Moje narudžbe' && nas !== 'Vaši omiljeni restorani' && nas !== 'Svi restorani' ){
+        var kosarica = $( '<li id="idiukos" style="cursor: pointer;">Košarica <i class="fas fa-shopping-basket"></i></li>' );
+        $( '.meni' ).append( kosarica );
+        if( localStorage.getItem( 'restoran' ) === null )
+            localStorage.setItem( 'restoran', nas );
+        else if( localStorage.getItem( 'restoran' ) !== nas ){
+            localStorage.clear();
+            localStorage.setItem( 'ukupno', 0 );
+            $( '#jela' ).remove();
+            $( '#ukupno' ).html( localStorage.getItem( 'ukupno' ) + ' kn' );
+            localStorage.setItem( 'restoran', nas );
+        }
+    }
+    else{
+        localStorage.clear();
+    }
 
     $( ".dodaj" ).on( 'click', function(){
         var info = $( this ).attr( 'id' );
         //console.log( info );
         var id = info.split( ", " );
+        var i = Number( localStorage.getItem( 'i' ) );
         
         for( var j = 0; j < i; ++j ){
             var temp = localStorage.getItem( 'jelo' + j ).split( "," );
@@ -214,10 +234,12 @@ function fja_plus(){
 function fja_minus(){
     var i = $(this).attr( 'id' );
     var temp = localStorage.getItem( 'jelo' + i ).split( ',' );
-    temp[3]--;
-    localStorage.setItem( 'jelo' + i, temp );
-    $( '#' + temp[0] + 'puta' ).html( temp[3] + ' ' );
-    localStorage.setItem( 'ukupno', Number( localStorage.getItem( 'ukupno' ) ) - Number(temp[2]));
-    $( '#ukupno' ).html( localStorage.getItem( 'ukupno' ) + ' kn' );
+    if( Number( temp[3] ) !== 0 ){
+        temp[3]--;
+        localStorage.setItem( 'jelo' + i, temp );
+        $( '#' + temp[0] + 'puta' ).html( temp[3] + ' ' );
+        localStorage.setItem( 'ukupno', Number( localStorage.getItem( 'ukupno' ) ) - Number(temp[2]));
+        $( '#ukupno' ).html( localStorage.getItem( 'ukupno' ) + ' kn' );
+    }
 }
 
