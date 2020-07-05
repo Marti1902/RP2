@@ -434,14 +434,14 @@ function getActiveOrders()
                     div.append(p);
                 }
                 else{
-                    console.log(data);
+                    console.log( data);
                     timestamp = data.timestamp;
 
                     var div = $( 'div.activeOrders' ), tbl = $( '<table>' ), tr_head = $( '<tr>' );
 
                     tr_head.html( '<th>Order Number</th><th>Client ID</th><th>Order time</th><th>Total</th><th>Discount</th><th>Note</th>' );
                     tbl.append( tr_head);
-
+                    
                     
                     for( var i = 0; i < data.id_order.length; ++i )
                     {

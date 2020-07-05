@@ -30,7 +30,6 @@ while( $dbLastUpdate <= $clientLastUpdate )
         $st->execute( [ 'val' => $_GET['id_restaurant'] ] );
 
         $row = $st->fetch();
-
         $dbLastUpdate = strtotime( $row['maxUpdate'] );
 
         if( is_null($row['maxUpdate']) )
@@ -39,8 +38,6 @@ while( $dbLastUpdate <= $clientLastUpdate )
             sendJSONandExit( [ 'nema' => 1 ] );
         }
 
-        echo $dbLastUpdate;
-        return;
         usleep( 10000 );    //  10ms
     }
     catch( PDOException $e ) { 
@@ -78,6 +75,7 @@ while( $row = $st->fetch() )
 
 
 sendJSONandExit( $msg );
+
 
 function debug()
 {
