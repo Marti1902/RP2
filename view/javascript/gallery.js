@@ -77,8 +77,6 @@ function show_galery(event)
 
     $(this).after(div);
 
-        
-    console.log(img);
     //dodajemo sliku
     var duplicate_4show = img.clone(), koef, okvirSlike = $('<div>');
     okvirSlike.css('position', 'relative')

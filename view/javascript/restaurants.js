@@ -182,10 +182,10 @@ function obradi_addFood()
     
     event.preventDefault();
 
-    console.log( $( 'input[name="imgFood_input"]' ) );
-    console.log( $( 'input[name="imgFood_input"]' )[0] );
-    console.log( $( 'input[name="imgFood_input"]' )[0].files[0] );
-    console.log( fd );
+    //console.log( $( 'input[name="imgFood_input"]' ) );
+    //console.log( $( 'input[name="imgFood_input"]' )[0] );
+    //console.log( $( 'input[name="imgFood_input"]' )[0].files[0] );
+    //console.log( fd );
 
 
     fd.append('file', files);
@@ -207,7 +207,7 @@ function obradi_addFood()
             processData: false,
             success: function( str )
             {
-                console.log( str );
+                //console.log( str );
                 p.html( str );
             },
             error: function()
@@ -216,16 +216,13 @@ function obradi_addFood()
                 p.html( 'ERROR in Ajax!' );
             }
         });
-
-
-
 }
 
 
 
 function addFoodImg( fd , p)
 {
-    console.log( fd );
+    //console.log( fd );
 
     $.ajax(
         {
@@ -242,7 +239,7 @@ function addFoodImg( fd , p)
                 }
                 else if( data.hasOwnProperty( 'rezultat' ) ){
                     p.html( data.rezultat +' Please refresh page to see changes!');
-                    console.log( data.rezultat );
+                    //console.log( data.rezultat );
                 }
             },
             error: function()
@@ -285,7 +282,7 @@ function obradi_removeFood()
                     }
                     else if( data.hasOwnProperty( 'rezultat' ) ){
                         p.html( data.rezultat +' Please refresh page to see changes!');
-                        console.log( data.rezultat );
+                        //console.log( data.rezultat );
                     }
                 },
                 error: function()
@@ -305,10 +302,10 @@ function changeFoodImage(  )
     
     fd.append( 'file', files );
 
-    console.log( $( 'select.editFood option:selected' ).val() );
-    console.log( $( 'input[name="imgFood_edit"]' )[0] );
-    console.log( $( 'input[name="imgFood_edit"]' )[0].files[0] );
-    console.log( fd );
+    //console.log( $( 'select.editFood option:selected' ).val() );
+    //console.log( $( 'input[name="imgFood_edit"]' )[0] );
+    //console.log( $( 'input[name="imgFood_edit"]' )[0].files[0] );
+    //console.log( fd );
 
 
     fd.append( 'file', files );
@@ -323,7 +320,7 @@ function changeFoodImage(  )
             processData: false,
             success: function( str )
             {
-                console.log( str );
+                //console.log( str );
                 p.html( str );
             },
             error: function()
@@ -370,7 +367,7 @@ function obradi_editFood(event)
                 }
                 else if( data.hasOwnProperty( 'rezultat' ) ){
                     p.html( data.rezultat +' Please refresh page to see changes!');
-                    console.log( data.rezultat );
+                    //console.log( data.rezultat );
                 }
             },
             error: function()
@@ -412,7 +409,7 @@ function obradi_changeDetails()
                 }
                 else if( data.hasOwnProperty( 'rezultat' ) ){
                     p.html( data.rezultat +' Please refresh page to see changes!');
-                    console.log( data.rezultat );
+                    //console.log( data.rezultat );
                 }
             },
             error: function()
@@ -426,7 +423,7 @@ function obradi_changeDetails()
 
 function getActiveOrders()
 {
-    console.log(timestamp);
+    //console.log(timestamp);
     //console.log( $( 'div.activeOrders' ).attr( 'id_restaurant' ) );
     $.ajax(
         {
@@ -448,7 +445,6 @@ function getActiveOrders()
                     div.append(p);
                 }
                 else{
-                    console.log( data.timestamp);
                     timestamp = data.timestamp;
 
                     var div = $( 'div.activeOrders' ), tbl = $( '<table>' ), tr_head = $( '<tr>' );
@@ -484,7 +480,7 @@ function getActiveOrders()
             },
             error: function( xhr, status )
             {
-                console.log( status );
+                //console.log( status );
                 if( status === 'timeout' )
                     dohvatiCijene(); 
             }
