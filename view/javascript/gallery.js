@@ -25,9 +25,9 @@ function show_galery(event)
         .css( 'float', 'right' )
         .css( 'font-size', '35')
         .css( 'font-weight', 'bold')
-        .on( 'click', function(event){
-            destroy($(event.target));
-        })         //izbrise sve kreirane elemente u divu kada se klikne
+        .attr( 'x', '1')
+        .css( 'cursor', 'pointer' )
+        .on( 'click', destroy_ )         //izbrise sve kreirane elemente u divu kada se klikne
         .focus(function(){          // ne , drugačije riješit
             $(this).css( 'color', 'black' )
                     .css( 'text-decoration', 'none' )
@@ -51,6 +51,7 @@ function show_galery(event)
         .css('height', '80%')
         .css( 'width', '80%' )
         .css( 'background-color', 'gray' )
+        .css('class', 'galerija_box')
         .append( close )
         .append( title );
 
@@ -66,16 +67,13 @@ function show_galery(event)
         .css( 'z-index', '1')
         .css( 'background-color', 'rgba(0,0,0,0.4)' )
         .css( 'overflow', 'auto' )
-        .prop( 'class', 'okvir');
+        .prop( 'class', 'galerija_okvir');
         
     
     div.append(box);
 
     //   Zatvara prozor ako se klikne van boxa
-    div.on( 'click', function(event){
-            if( $(event.target).attr('class') === 'okvir' )
-                destroy( $(event.target) );
-        });
+    div.on( 'click', destroy_);
 
     $(this).after(div);
 
@@ -130,5 +128,10 @@ function show_galery(event)
   });
 
 }
-
+function destroy_(event)
+{
+    if( $(event.target).attr('class') === 'galerija_okvir' ||
+        $(event.target).attr('x') === '1' )
+        $('div.galerija_okvir').remove();
+}
 

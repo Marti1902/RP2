@@ -14,7 +14,7 @@ function sendJSONandExit($message)
 //debug();
 
 if( !isset( $_GET['timestamp'] ) )
-    sendJSONandExit( ['error' => 'Nije postavljen timestamp!'] );
+    sendJSONandExit( $_GET);//['error' => 'Nije postavljen timestamp!'] );
 elseif( !isset( $_GET['id_restaurant'] ) )
     sendJSONandExit( ['error' => 'Nije postavljen id_restaurant!'] );
 
@@ -56,6 +56,7 @@ catch( PDOException $e ) {
 }
 
 $msg = [];
+$msg['timestamp'] = $dbLastUpdate;
 $msg['id_order'] = [];
 $msg['id_user'] = [];
 $msg['order_time '] = [];

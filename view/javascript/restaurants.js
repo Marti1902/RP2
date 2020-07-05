@@ -27,14 +27,24 @@ $( document ).ready( function()
     $( 'input.removeFood:checkbox' ).on('click', sakrij_pokazi_submit );
 
     //  samo za prošle narudđbe na pastOrders.php
-    $( 'td.orderDetails').on( 'click', show_details); 
+    $( 'td.orderDetails').on( 'click', show_details);
+    
+    // za zatvaranje okvira
+    /*$('body').on('click', 'div.okvir', function(event){
+        if( $(event.target).attr('class') === 'okvir' )
+            //destroy( $(event.target) );
+        console.log($('div.okvir'));
+        //destroy($('div.okvir'));
+    });
+*/
 
 });
 
 
 function show_form()
 {
-    var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>'), close = $( '<span>' );
+    var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>'),
+     close = $( '<span>' );
 
     //ostale buttone zaključamo - nemožemo imat više otvorenih prozora
     //$( 'button' ).prop( 'disabled', 'true');
@@ -48,8 +58,10 @@ function show_form()
         .css( 'float', 'right' )
         .css( 'font-size', '35')
         .css( 'font-weight', 'bold')
+        .css( 'class', 'forma')
+        .css( 'cursor', 'pointer' )
         .on( 'click', function(event){
-            destroy($(event.target));
+            destroy($('div.okvir'));
         })         //izbrise sve kreirane elemente u divu kada se klikne
         .focus(function(){          // ne , drugačije riješit
             $(this).css( 'color', 'black' )
@@ -95,15 +107,16 @@ function show_form()
         
     
     div.append(box);
+    $(this).after(div);
 
     //   Zatvara prozor ako se klikne van boxa
     div.on( 'click', function(event){
             if( $(event.target).attr('class') === 'okvir' )
-                destroy( $(event.target) );
+                destroy($(event.target));
         });
 
 
-    $(this).after(div);
+    
 }
 
 function addCorrectForm( box,title)
@@ -413,6 +426,7 @@ function obradi_changeDetails()
 
 function getActiveOrders()
 {
+    console.log(timestamp);
     //console.log( $( 'div.activeOrders' ).attr( 'id_restaurant' ) );
     $.ajax(
         {
@@ -434,7 +448,7 @@ function getActiveOrders()
                     div.append(p);
                 }
                 else{
-                    console.log( data);
+                    console.log( data.timestamp);
                     timestamp = data.timestamp;
 
                     var div = $( 'div.activeOrders' ), tbl = $( '<table>' ), tr_head = $( '<tr>' );
