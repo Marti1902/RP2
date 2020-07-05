@@ -1,16 +1,6 @@
 <?php require_once __DIR__ . '/header&footer/_header.php'; ?>
-<!--
-<div id="kosarica">
-    <ul id = 'naruceno'>
-    </ul>
-    
-    <div id="ukupno" style='padding: 5px;'>Ukupno: <span id="cijena">0 kn</span></div>
-    <button id="odbaci">Isprazni košaricu</button>
-    <button id="naruci">Naruči</button>
-</div>
 
-<div id="footer" data-position='fixed'>Nesto</div>
--->
+<?php echo '<span id="idjevi" id_restaurant="' . $foodList[0]->id_restaurant . '" id_user="' . $_SESSION['user']->id . '" hidden></span>'; ?>
 
 Popis dostupnih jela:
 <ul>

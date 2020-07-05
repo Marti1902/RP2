@@ -127,8 +127,6 @@ function show_form(){
     $( 'body' ).on( 'click', 'button.naruci', fja_naruci );
     $( 'body' ).on( 'click', 'button.odbaci', fja_odbaci );
 
-    //ostale buttone zaključamo - nemožemo imat više otvorenih prozora
-    //$( 'button' ).prop( 'disabled', 'true');
     var i = localStorage.getItem( 'i' );
 
     for( var j = 0; j < i; ++j ){
@@ -161,18 +159,17 @@ function show_form(){
         .css( 'float', 'right' )
         .css( 'font-size', '35')
         .css( 'font-weight', 'bold')
+        .css( 'cursor', 'pointer' )
         .on( 'click', function(event){
-            div.css('display', 'none' );
-        })         
-        .focus(function(){          // ne , drugačije riješit
-            $(this).css( 'color', 'black' )
-                    .css( 'text-decoration', 'none' )
-                    .css( 'cursor', 'pointer' );
+            destroy($(event.target));
         })
-        .hover(function(){
-            $(this).css( 'color', 'black' )
-                    .css( 'text-decoration', 'none' )
-                    .css( 'cursor', 'pointer' );
+        .on({
+            mouseenter: function () {
+                $(this).css('color', 'black')
+            },
+            mouseleave: function () {
+                $(this).css( 'color', '#aaaaaa' );
+            }
         });
 
     
@@ -211,7 +208,51 @@ function show_form(){
 }
 
 function fja_naruci(){
+    var id_restaurant = $( '#idjevi' ).attr( 'id_restaurant' );
+    var id_user = $( '#idjevi' ).attr( 'id_user' );
+    var price_total = localStorage.getItem( 'ukupno');
+    var note = 'napomena';
+    var id_food = [];
+    var quantity = [];
 
+    var i = localStorage.getItem( 'i' );
+
+    for( var j = 0; j < i; ++j ){
+        if( localStorage.getItem( 'jelo' + j ) ){
+            var temp = localStorage.getItem( 'jelo' + j ).split( "," );
+            id_food[j] = temp[0];
+            quantity[j] = temp[3];
+        }     
+    }
+
+    $.ajax( {
+            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/userOrder.php',
+            method: 'get',
+            data: {
+                id_user: id_user,
+                id_restaurant: id_restaurant,
+                active: 1,
+                price_total: price_total,
+                discount: 0,
+                note: note,
+                id_food: id_food,
+                quantity: quantity
+            },
+            success: function( data )
+            {
+                if( data.hasOwnProperty( 'greska' ) ){
+                    $( '.box' ).append( '<span>Greška pri slanju narudžbe! Molim Vas pokušajte ponovno za nekoliko sekundi.</span>' );
+                    console.log( data.greska );
+                }
+                else if( data.hasOwnProperty( 'rezultat' ) ){
+                    console.log( data.rezultat );
+                }
+            },
+            error: function()
+            {
+                console.log( 'Greška u Ajax pozivu...');
+            }
+        });
 }
 
 function fja_odbaci(){
@@ -243,3 +284,15 @@ function fja_minus(){
     }
 }
 
+function destroy( vari = null)
+{
+    var parent = vari;
+    if( parent.attr('class') === 'okvir' )
+        parent.remove();
+    if( (parent = parent.parent() ).attr('class') === 'okvir' )
+        parent.remove();
+    else
+        parent.parent().remove();
+    location.reload();
+    
+}
