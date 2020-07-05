@@ -53,6 +53,7 @@ function create_table_users()
 			'username varchar(50) NOT NULL,'.
 			'password_hash varchar(255) NOT NULL,'.
 			'email varchar(50) NOT NULL,'.
+			'address varchar(80) NOT NULL,'.
 			'registration_sequence varchar(20) NOT NULL,'.
 			'has_registered int)'
 		);
@@ -169,6 +170,7 @@ function create_table_orders()
 			'price_total float,' .
 			'discount float,' .
 			'note varchar(50),' .
+			'address varchar(80) NOT NULL,'.
 			'feedback varchar(100),' .
 			'rating float,' .
 			'thumbs_up int,' .

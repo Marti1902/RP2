@@ -23,7 +23,7 @@ function seed_table_users()
 	// Ubaci neke korisnike unutra
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO spiza_users(username, password_hash, email, registration_sequence, has_registered) VALUES (:username, :password, \'a@b.com\', \'abc\', \'1\')' );
+		$st = $db->prepare( 'INSERT INTO spiza_users(username, password_hash, email, address,  registration_sequence, has_registered) VALUES (:username, :password, \'a@b.com\', \'glavna adresa\', \'abc\', \'1\')' );
 
 		$st->execute( array( 'username' => 'mirko', 'password' => password_hash( 'mirkovasifra', PASSWORD_DEFAULT ) ) );
 		$st->execute( array( 'username' => 'slavko', 'password' => password_hash( 'slavkovasifra', PASSWORD_DEFAULT ) ) );
@@ -132,7 +132,7 @@ function seed_table_orders()
 	// Ubaci neke korisnike unutra
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, active, delivery_time, note, feedback, rating, thumbs_up, thumbs_down) VALUES (:id_user, :id_restaurant, :active, :delivery_time, :note, :feedback, :rating, :thumbs_up, :thumbs_down)' );
+		$st = $db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, active, delivery_time, note, address, feedback, rating, thumbs_up, thumbs_down) VALUES (:id_user, :id_restaurant, :active, :delivery_time, :note, \'nova adresa\', :feedback, :rating, :thumbs_up, :thumbs_down)' );
 
 		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'active' => 1, 'delivery_time' => NULL, 'note' => '', 'feedback' => 'srtgjh', 'rating' => 5, 'thumbs_up' => 5, 'thumbs_down' =>  0) );
 		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'active' => 0, 'delivery_time' => date('Y-m-d H:i:s'), 'note' => '','feedback' => 'sdh', 'rating' => 4, 'thumbs_up' => 1, 'thumbs_down' =>  0) );

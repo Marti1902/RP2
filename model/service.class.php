@@ -67,7 +67,7 @@ class Service{
         if( password_verify( $_POST['password'], $password_hash) )
         {
             if( $_POST['log_in'] === 'login_user')
-                $_SESSION['user'] = new User($row['id_user'], $row['username'], ' ',$row['email'], $row['registration_sequence'], $row['has_registered'] );
+                $_SESSION['user'] = new User($row['id_user'], $row['username'], ' ',$row['email'], $row['address'], $row['registration_sequence'], $row['has_registered'] );
             else if($_POST['log_in'] === 'login_restaurants')
                 $_SESSION['restaurants'] = new Restaurants($row['id_restaurant'], $row['username'], ' ', $row['name'], $row['address'], $row['email'], $row['registration_sequence'], $row['description'], $row['has_registered'] );
             else
@@ -227,7 +227,7 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
             }
             return $arr;
         }
@@ -248,7 +248,7 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
             }
             return $arr;
         }
@@ -307,7 +307,7 @@ class Service{
             return null;
         else{
             $row=$st->fetch();
-            return new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+            return new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
         }
     }
 
@@ -346,7 +346,7 @@ class Service{
             return null;
         else{
             $row=$st->fetch();
-            return new User( $row['id'], $row['username'], $row['password_hash'], $row['email'], $row['registration_sequence'], $row['has_registered'] );
+            return new User( $row['id'], $row['username'], $row['password_hash'], $row['email'], $row['address'], $row['registration_sequence'], $row['has_registered'] );
         }
     }
 
@@ -469,7 +469,7 @@ class Service{
     
             $user=$ls->getUserById($row['id_user']);
             $restaurant=$ls->getRestaurantById($row['id_restaurant']);
-            $o=new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+            $o=new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
             
             try{
                 $db = DB::getConnection();
