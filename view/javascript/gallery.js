@@ -1,8 +1,13 @@
 
 $( document ).ready( function()
 {
-    $( 'img' ).on('click', show_galery );
-     console.log()
+    //$( 'img' ).on('click', show_galery );
+    $('img').attr('galerija', '1');
+    //$( 'body' ).on( 'click', 'img', show_galery );
+    $( 'body' ).on( 'click', 'img[galerija="1"]', show_galery );
+
+  //$( 'img[galerija="1"]').off('click', show_galery);
+
 });
 
 
@@ -95,6 +100,7 @@ function show_galery(event)
         .css( 'object-fit', 'contain')
         //.css( 'display', 'block')
         //.css( 'margin', 'auto')
+        .attr('galerija', '0')
         .show();
     //console.log(okvirSlike.height(), okvirSlike.width());        
     if( okvirSlike.height() / duplicate_4show.prop('naturalHeight') < okvirSlike.width() / duplicate_4show.prop('naturalWidth') )
@@ -122,7 +128,6 @@ function show_galery(event)
             .css( 'height', duplicate_4show.prop('naturalHeight') * koef )
             .css( 'width', duplicate_4show.prop('naturalWidth') * koef );
   });
-
 
 }
 
