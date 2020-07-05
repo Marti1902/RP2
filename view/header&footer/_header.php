@@ -28,4 +28,4 @@
             echo $errorMsg . '<br>';
     ?>
 
-<h2><?php echo $title; ?></h2>
+<h2 id="naslov"><?php echo $title; ?></h2>
