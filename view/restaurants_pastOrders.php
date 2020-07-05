@@ -1,6 +1,8 @@
 <?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
 
 
+<div class="col-12">
+
 <table>
     <tr>
         <th>Broj narudžbe</th>
@@ -54,7 +56,9 @@
     ?>
 </table>
 
-
+</div>
+</div>
+</div>
 
 
 

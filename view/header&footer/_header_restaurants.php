@@ -9,23 +9,39 @@
 
     <link rel="icon" href="<?php echo __SITE_URL; ?>/css/logo.png" />
 
+    <!--        BOOTSTRAP           -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
-<h1>Spiza.hr</h1>
+<div class="jumbotron text-center">
+    <h1>Spiza.hr</h1>
+    <h2><?php echo $title; ?></h2>
+</div>
 
-<nav>   
-    <ul>
-        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
-        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=restaurants/index">Naslovnica</a></li>
-        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=restaurants/pastOrders">Prošle narudžbe</a></li>
+
+
+
+<nav class="navbar navbar-expand-sm bg-light">   
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=restaurants/index">Naslovnica</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=restaurants/pastOrders">Prošle narudžbe</a></li>
     </ul>
-</nav> 
+</nav>
+
+ 
      <?php
     if( isset($errorFlag))
         if( $errorFlag )
             echo $errorMsg . '<br>';
     ?>
 
-<h2><?php echo $title; ?></h2>
+<div class="container">
+  <div class="row">
+
+

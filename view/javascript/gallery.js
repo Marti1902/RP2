@@ -17,7 +17,7 @@ function show_galery(event)
     var img = $(event.target);
 
     title.html( img.attr('name') )
-        .css( 'color', 'black' );
+        .css( 'color', 'white' );
 
     // link za zatvaranje boxa i okvira
     close.html('&times')
@@ -62,7 +62,7 @@ function show_galery(event)
         .css('top', '0%')
         .css('left', '0%')
         .css( 'padding-top', '100px')
-        .css('height', '90%')
+        .css('height', '100%')
         .css( 'width', '100%' )
         .css( 'z-index', '1')
         .css( 'background-color', 'rgba(0,0,0,0.4)' )

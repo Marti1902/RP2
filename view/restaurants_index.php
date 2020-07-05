@@ -1,5 +1,6 @@
 <?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
 
+<div class="col-12">
 <h2>Trenutne narudžbe</h2>
 
 <div class="activeOrders" id_restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>"></div>
@@ -178,6 +179,9 @@ E-mail: <?php echo $restaurantInfo->email;?>
 </form>
 
 
+</div>
+</div>
+</div>
 
 <hr>
 
