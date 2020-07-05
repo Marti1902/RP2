@@ -32,7 +32,7 @@ class RestaurantsController extends BaseController{
             $hrana = $ls->getFoodIdListByOrderId( $narudzba->id_order );
             $spiza = [];
             for ( $i=0; $i < count( $hrana ); $i++ ){
-                $spiza[] = $ls->getFoodById( $hrana[$i] );
+                $spiza[] = $ls->getFoodById( $hrana[$i][0] );
             }
             $pomocni[] = [$narudzba, $spiza];
         }
