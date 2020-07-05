@@ -346,7 +346,7 @@ class Service{
             return null;
         else{
             $row=$st->fetch();
-            return new User( $row['id'], $row['username'], $row['password_hash'], $row['email'], $row['address'], $row['registration_sequence'], $row['has_registered'] );
+            return new User( $row['id_user'], $row['username'], $row['password_hash'], $row['email'], $row['address'], $row['registration_sequence'], $row['has_registered'] );
         }
     }
 
