@@ -1,6 +1,16 @@
 # RP2_Projekt
 
 <mark>Dokumentacija za bazu: https://www.overleaf.com/6726364111xqzgvmphxsbf</mark>
+## Kodovi za narudžbe: (novo! 6.7.)
+U bazi stupac active može poprimati:
+* -2 -> odbijeno od dostavljača (ni jedan nije prihavtio narudžbu ili nema slobodnih)
+* -1 -> odbijeno od restorana
+* 0 -> narudžba je dostavljena
+* 1 -> user je poslao narudžbu restoranu
+* 2 -> restoran je prihvatio narudžbu
+* 3 -> dostavljač je prihvatio narudžbu
+
+
 ### [NOVO] Još za napraviti
 * user - u košaricu kod popisa hrane dodati sliku te hrane
 * user - gumb narudžba - ispiše se forma koja traži unos adrese narudžbe, kvarta i napomene za dostavljača tek nakon unosa potrebnog se podaci o narudžbi pošalju bazi
