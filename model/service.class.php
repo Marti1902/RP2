@@ -238,7 +238,7 @@ class Service{
         try
 		{
             $db=DB::getConnection();
-            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_restaurant=:res');
+            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_restaurant=:res AND feedback IS NOT NULL');
             $st->execute(['res'=>$id_restaurant]);
 		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }

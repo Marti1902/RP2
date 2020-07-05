@@ -44,6 +44,7 @@ $(document).ready(function(){
     
         if( j === i ){
             id[3] = 1;
+            id[4] = $( this ).attr( 'img' );
             localStorage.setItem( 'jelo' + i, id );
             i++;
             localStorage.setItem( 'i', i );
@@ -133,6 +134,9 @@ function show_form(){
         if( localStorage.getItem( 'jelo' + j ) ){
             var temp = localStorage.getItem( 'jelo' + j ).split( "," );
             var li = $( '<li id="' + temp[0] + '">' );
+            var img = $( '<img src="' + location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + temp[4] + '"width="100" height="100"><br>' );
+            img.css( 'margin-left', '0' );
+            li.append( img );
             li.append( '' + temp[1] + '<br>' );
             li.append( '<div> Cijena: <span id="' + temp[0] + 'cijena">' + temp[2] + ' kn</span></div>');
             var kolicina = $( '<div id="kolicina"> Količina: <span id="' + temp[0] + 'puta">' + temp[3] + ' </span></div>' );
@@ -207,11 +211,39 @@ function show_form(){
     $(this).after(div);
 }
 
-function fja_naruci(){
+function fja_naruci() {
+    var posalji = $( '<button class="posalji"> Pošalji narudžbu! </button>' );
+    var span = $( '<span name="adresa"> <br> Adresa: </span>' );
+    var napomena = $( '<div name="napomena">' );
+    var komentar = $( '<textarea name="note">' );
+    napomena.html( 'Napomena restoranu i/ili dostavljaču: ' );
+    napomena.append( komentar );
+    $( 'body' ).on( 'click', 'button.posalji', fja_posalji_narudzbu );
+    $( '.naruci' ).hide();
+    $( '.plus' ).hide();
+    $( '.minus' ).hide();
+
+    var adresa = $( '#gl_adresa' ).attr( 'gl_adresa' );
+    var input = $( '<input name="adresa">' );
+    input
+        .prop( 'type', 'text' )
+        .attr( 'value', adresa );
+
+    span.append( input );
+    $( '.box' ).append( span );
+    $( '.box' ).append( '<br>' );
+    $( '.box' ).append( napomena );
+    $( '.box' ).append( '<br>' );
+    $( '.box' ).append( posalji );
+    $( '.box' ).append( $( '.odbaci' ) );
+}
+
+function fja_posalji_narudzbu(){
     var id_restaurant = $( '#idjevi' ).attr( 'id_restaurant' );
     var id_user = $( '#idjevi' ).attr( 'id_user' );
     var price_total = localStorage.getItem( 'ukupno');
-    var note = 'napomena';
+    var note = $( 'textarea[name="note"]' ).val();
+    var address = $( 'input[name="adresa"]' ).val();
     var id_food = [];
     var quantity = [];
 
@@ -235,6 +267,7 @@ function fja_naruci(){
                 price_total: price_total,
                 discount: 0,
                 note: note,
+                address: address,
                 id_food: id_food,
                 quantity: quantity
             },
@@ -259,6 +292,8 @@ function fja_odbaci(){
     localStorage.clear();
     localStorage.setItem( 'ukupno', 0 );
     $( '#jela' ).remove();
+    $( 'div[name="napomena"]' ).remove();
+    $( 'span[name="adresa"]' ).remove();
     $( '#ukupno' ).html( localStorage.getItem( 'ukupno' ) + ' kn' );
 }
 

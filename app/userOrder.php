@@ -21,6 +21,7 @@ $active = $_GET['active'];
 $price_total = $_GET['price_total'];
 $discount = $_GET['discount'];
 $note = $_GET['note'];
+$address = $_GET['address'];
 $id_food = $_GET['id_food'];
 $quantity = $_GET['quantity'];
 
@@ -31,8 +32,8 @@ try {
 
     $db->beginTransaction();
 
-    $st=$db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, active, price_total, discount, note) VALUES (:id_user, :id_restaurant, :active, :price_total, :discount, :note)' );
-    $st->execute( array( 'id_user' => intval( $id_user ),  'id_restaurant' => intval( $id_restaurant ), 'active' => intval( $active ), 'price_total' => floatval( $price_total ), 'discount' => floatval( $discount ), 'note' => $note ) );
+    $st=$db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, active, price_total, discount, note, address) VALUES (:id_user, :id_restaurant, :active, :price_total, :discount, :note, :address)' );
+    $st->execute( array( 'id_user' => intval( $id_user ),  'id_restaurant' => intval( $id_restaurant ), 'active' => intval( $active ), 'price_total' => floatval( $price_total ), 'discount' => floatval( $discount ), 'note' => $note, 'address' => $address ) );
     
         
     $lastInsertedID = $db->lastInsertId();

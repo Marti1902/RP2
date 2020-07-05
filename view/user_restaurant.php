@@ -1,6 +1,7 @@
 <?php require_once __DIR__ . '/header&footer/_header.php'; ?>
 
 <?php echo '<span id="idjevi" id_restaurant="' . $foodList[0]->id_restaurant . '" id_user="' . $_SESSION['user']->id . '" hidden></span>'; ?>
+<?php echo '<span id="gl_adresa" gl_adresa="' . $_SESSION['user']->address . '" hidden></span>'; ?>
 
 Popis dostupnih jela:
 <ul>
@@ -11,7 +12,7 @@ Popis dostupnih jela:
              $food->description . '<br>';
         if( $food->image_path !== null )
             echo '<img src="'. __SITE_URL . $food->image_path .'"width="100" height="100"><br>';
-        echo '<button class="dodaj" id="' . $food->id_food . ', ' . $food->name . ', ' . $food->price . '">Dodaj u košaricu</button></li>';
+        echo '<button img="' . $food->image_path . '" class="dodaj" id="' . $food->id_food . ', ' . $food->name . ', ' . $food->price . '">Dodaj u košaricu</button></li>';
     }
     ?>
 </ul>
