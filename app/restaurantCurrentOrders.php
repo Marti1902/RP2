@@ -26,7 +26,7 @@ $db = DB::getConnection();
 while( $dbLastUpdate <= $clientLastUpdate ) 
 {
     try{
-        $st = $db->prepare( 'SELECT MAX(lastchange_time) as maxUpdate FROM spiza_orders WHERE id_restaurant=:val AND active <> 0' );
+        $st = $db->prepare( 'SELECT MAX(lastchange_time) as maxUpdate FROM spiza_orders WHERE id_restaurant=:val AND active <> 0 AND active <> -1 AND active <> -2' );
         $st->execute( [ 'val' => $_GET['id_restaurant'] ] );
 
         $row = $st->fetch();
@@ -47,7 +47,7 @@ while( $dbLastUpdate <= $clientLastUpdate )
 }
 
 try{
-    $st = $db->prepare( 'SELECT * FROM spiza_orders WHERE id_restaurant=:val AND active <> 0' );
+    $st = $db->prepare( 'SELECT * FROM spiza_orders WHERE id_restaurant=:val AND active <> 0 AND active <> -1 AND active <> -2' );
     $st->execute( [ 'val' => $_GET['id_restaurant'] ] );
 }
 catch( PDOException $e ) { 

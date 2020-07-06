@@ -31,26 +31,25 @@
             echo "</tr>\n";
             echo "<tr class='orderDetails' ordernumber='".$order[0]->id_order."' style='display: none;'>\n";
                 echo "<td colspan='7'>\n";
-                echo "<ul>\n";
+                echo "<ul class='list-group'>\n";
                     if( $order[0]->note !== '')
-                        echo "<li>Napomena uz narudžbu: ".$order[0]->note."</li>\n";
-                    echo "<li>Jela iz narudžbe: ";
+                        echo "<li class='list-group-item'>Napomena uz narudžbu: ".$order[0]->note."</li>\n";
+                    echo "<li class='list-group-item'>Jela iz narudžbe: ";
                     for( $i = 1; $i < sizeof($order); ++$i){                    
                         echo ' '.$order[$i][0]->name;
                         if( $i !== sizeof($order)-1)
                             echo ',';
                     }
                     echo "</li>\n";
-                    echo "<li>Popust: ";
+                    echo "<li class='list-group-item'>Popust: ";
                     if( !is_numeric($order[0]->discount) )
                         echo '0.0';
                     else 
                         echo $order[0]->discount;
                     echo "% </li>\n";
-                    echo "<li>Recenzija: ".$order[0]->feedback."</li>\n";
-                    echo "<li>Palac gore: ".$order[0]->thumbs_up."</li>\n";
-                    echo "<li>Palac dole: ".$order[0]->thumbs_down."</li>\n";
-
+                    echo "<li class='list-group-item'>Recenzija: ".$order[0]->feedback."</li>\n";
+                    echo "<li class='list-group-item'>Palac gore: ".$order[0]->thumbs_up."</li>\n";
+                    echo "<li class='list-group-item'>Palac dole: ".$order[0]->thumbs_down."</li>\n";
                 echo "</ul>\n";
                 echo "</td>\n";
             echo "</tr>\n";

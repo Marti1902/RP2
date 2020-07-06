@@ -100,6 +100,7 @@ class UserController extends BaseController{
 
         $restaurant = $ls->getRestaurantById ( $_GET['id_restaurant'] );
         $this->registry->template->title = $restaurant->name;
+        $this->registry->template->rating = $ls->getRestaurantRatingById( $_GET['id_restaurant'] );
         $_SESSION['tab'] = 'User restaurant';
         $this->registry->template->foodList = $ls->getFoodListByRestaurantId( $restaurant->id_restaurant );
         $pomocni = $ls->getOrderListByRestaurantId( $restaurant->id_restaurant );
@@ -128,18 +129,20 @@ class UserController extends BaseController{
 
         $restorani = [];
         foreach ( $ratingList as $rating ){
-            $rest = $ls->getRestaurantById( $rating->id_restaurant );
-            if ( !in_array( $rest, array_column( $restorani, 0 ) ) ){
-                $i = 0;
-                $s = 0;
-                foreach( $ratingList as $nar ){
-                    if( $nar->id_restaurant == $rest->id_restaurant ){
-                        $s = $s + $nar->rating;
-                        $i++;
+            if( $rating->rating != 0 ){
+                $rest = $ls->getRestaurantById( $rating->id_restaurant );
+                if ( !in_array( $rest, array_column( $restorani, 0 ) ) ){
+                    $i = 0;
+                    $s = 0;
+                    foreach( $ratingList as $nar ){
+                        if( $nar->id_restaurant == $rest->id_restaurant && $nar->rating != 0 ){
+                            $s = $s + $nar->rating;
+                            $i++;
+                        }
                     }
+                    $restorani[] = [$rest, $s/$i];
+                    //echo max(array_column($restorani, 1));
                 }
-                $restorani[] = [$rest, $s/$i];
-                //echo max(array_column($restorani, 1));
             }
         }
         

@@ -176,6 +176,77 @@ function show_form(){
             }
         });
 
+    var u, d = 1, trenutno = $( this );
+    var usr = $( '#idjevi' ).attr( 'id_user' ), d = 1;
+    console.log( usr );
+    $.ajax(
+        {
+            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/checkDiscount.php',
+            method: 'post',
+            data:
+            {
+                id_user: usr
+            },
+            success: function( data )
+            {
+                if( data.hasOwnProperty( 'greska' ) ){
+                    console.log( data.greska );
+                    p.html( 'ERROR in database' + data.greska);
+                }
+                else if( data.hasOwnProperty( 'rezultat' ) ){
+                    console.log( 'kolko ' + data.rezultat );
+                    if( parseInt( data.rezultat ) % 10 == 0 && parseInt( data.rezultat ) != 0 ) d = 0.9;
+                    else d = 1;
+                    console.log( d );
+                    u = parseFloat(localStorage.getItem( 'ukupno' ) ) * d;
+                    localStorage.setItem( 'spopustom', u );
+                    var pop = $( '<div id="pop">' );
+                    if( d == 0.9 && localStorage.getItem( 'ukupno' ) != 0 ) pop.html( 'Ostvarili ste popust!' );
+                    
+                     //  box za text i ostalo unutra okvira
+                     box.css( 'background-color', '#fefefe')
+                        .css( 'margin', 'auto')
+                        .css( 'padding', '20px')
+                        .css( 'border', '1px solid, /888')
+                        .css( 'width', '80%' )
+                        .prop( 'class', 'box')
+                        .append( close )
+                        .append( title )
+                        .append( ul )
+                        .append( pop )
+                        .append( '<div> Ukupno: <span id="ukupno">' + u + ' kn</span></div>' )
+                        .append( naruci )
+                        .append( odbaci );
+                
+                    //  vanjski okvir    
+                    div.css( 'position', 'fixed')
+                        .css('display', 'block')
+                        .css( 'text-align', 'center')
+                        .css('top', '0%')
+                        .css('left', '0%')
+                        .css( 'padding-top', '100px')
+                        .css('height', '100%')
+                        .css( 'width', '100%' )
+                        .css( 'z-index', '1')
+                        .css( 'background-color', 'rgba(0,0,0,0.4)' )
+                        .css( 'overflow', 'auto' )
+                        .prop( 'class', 'okvir');
+                        
+                    
+                    div.append(box);
+                
+                    trenutno.after(div);
+                }
+            },
+            error: function()
+            {
+                console.log( 'Greška u Ajax pozivu...');
+            }
+        });
+    /*console.log( d );
+    u = parseFloat(localStorage.getItem( 'ukupno' ) ) * d;
+    var pop = $( '<div>' );
+    if( d == 0.9 ) pop.html( 'Ostvarili ste popust!' );
     
      //  box za text i ostalo unutra okvira
      box.css( 'background-color', '#fefefe')
@@ -187,7 +258,8 @@ function show_form(){
         .append( close )
         .append( title )
         .append( ul )
-        .append( '<div> Ukupno: <span id="ukupno">' + localStorage.getItem( 'ukupno' ) + ' kn</span></div>' )
+        .append( pop )
+        .append( '<div> Ukupno: <span id="ukupno">' + u  + ' kn</span></div>' )
         .append( naruci )
         .append( odbaci );
 
@@ -208,7 +280,7 @@ function show_form(){
     
     div.append(box);
 
-    $(this).after(div);
+    $(this).after(div);*/
 }
 
 function fja_naruci() {
@@ -241,11 +313,15 @@ function fja_naruci() {
 function fja_posalji_narudzbu(){
     var id_restaurant = $( '#idjevi' ).attr( 'id_restaurant' );
     var id_user = $( '#idjevi' ).attr( 'id_user' );
-    var price_total = localStorage.getItem( 'ukupno');
+    var price_total = localStorage.getItem( 'spopustom' );
     var note = $( 'textarea[name="note"]' ).val();
     var address = $( 'input[name="adresa"]' ).val();
     var id_food = [];
     var quantity = [];
+    var disc = 0;
+    if( $( "#pop" ).html() == "Ostvarili ste popust!" ) disc = 10.00;
+    else disc = 0.00;
+    console.log( price_total, id_restaurant, id_user, disc );
 
     var i = localStorage.getItem( 'i' );
 
@@ -265,7 +341,7 @@ function fja_posalji_narudzbu(){
                 id_restaurant: id_restaurant,
                 active: 1,
                 price_total: price_total,
-                discount: 0,
+                discount: disc,
                 note: note,
                 address: address,
                 id_food: id_food,
@@ -291,6 +367,7 @@ function fja_posalji_narudzbu(){
 function fja_odbaci(){
     localStorage.clear();
     localStorage.setItem( 'ukupno', 0 );
+    $( "#pop" ).html( '' );
     $( '#jela' ).remove();
     $( 'div[name="napomena"]' ).remove();
     $( 'span[name="adresa"]' ).remove();

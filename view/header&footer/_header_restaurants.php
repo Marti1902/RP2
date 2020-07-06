@@ -18,15 +18,11 @@
 
 <body>
 
-<div class="jumbotron text-center">
+<div class="jumbotron text-center" style="margin-bottom: 0px;">
     <h1>Spiza.hr</h1>
     <h2><?php echo $title; ?></h2>
 </div>
-
-
-
-
-<nav class="navbar navbar-expand-sm bg-light">   
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;">   
     <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=restaurants/index">Naslovnica</a></li>
