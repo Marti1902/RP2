@@ -68,9 +68,10 @@
 
 
 <!--                EDIT       FOOD             -->
-<form class="editFood" target="<?php echo __SITE_URL;?>/app/editFood.php" hidden>
+<form klasa="editFood" target="<?php echo __SITE_URL;?>/app/editFood.php" hidden>
     <h3>Odaberite hranu koju želite promijeniti:</h3>
-    <select class="editFood">
+    
+    <select class="custom-select" style="width:auto;">name="editFood">
             <?php
                     foreach( $FoodList as $food)
                     {
@@ -78,44 +79,49 @@
                     }
             ?>
     </select>
-
-    <table class="editFood" >
+    
+    <table class="editFood" style="margin-left: auto; margin-right: auto;">
         <tr>
             <th> Ime jela: </th>
-            <td><input type="text" name="foodName" disabled=true></td>
+            <td><input class="form-control" type="text" name="foodName" disabled=true></td>
             <td><input type="checkbox" id="che1" name="foodName" value="change"></td>
         </tr>
         <tr>
             <th>Cijena: </th>
-            <td><input type="number" name="foodPrice" disabled=true></td>
+            <td><input class="form-control" type="number" name="foodPrice" disabled=true></td>
             <td><input type="checkbox" id="che2" name="foodPrice" value="change"></td>
         </tr>
         <tr>
             <th>Opis jela: </th>
-            <td><input type="text" name="foodDescription" disabled=true></td>
+            <td><input class="form-control" type="text" name="foodDescription" disabled=true></td>
             <td><input type="checkbox"  id="che3" name="foodDescription" value="change"></td>
         </tr>
         <tr>
             <th>Trajanje pripreme: </th>
-            <td><input type="number" name="foodWaitingTime" disabled=true></td>
+            <td><input class="form-control" type="number" name="foodWaitingTime" disabled=true></td>
             <td><input type="checkbox"  id="che4" name="foodWaitingTime" value="change"></td>
         </tr>
         <tr>
             <th>Slika hrane: </th>
-            <td><input type="file" name="imgFood_edit" disabled=true></td>
+            <td>
+                <div class="custom-file">
+                    <input class="custom-file-input" type="file" name="imgFood_edit" disabled=true>
+                    <label class="custom-file-label" for="customFile">Izaberi sliku</label>
+                </div>
+            </td>
             <td><input type="checkbox"  id="che5" name="imgFood_edit" value="change"></td>
         </tr>
     </table>
-    <input type="submit" value="Change food">
+    <input type="submit" class="btn btn-primary btn-block" value="Change food">
 </form>
 
 
 <!--                REMOVE       FOOD               -->
-<form class="removeFood" hidden>
+<form klasa="removeFood" hidden>
     <h3>Odaberite hranu koju želite maknuti iz ponude:</h3>
 
 
-    <table class="removeFood">
+    <table class="removeFood" style="margin-left: auto; margin-right: auto;">
         <tr>
             <th></th>
             <th>Jelo: </th>
@@ -136,38 +142,43 @@
             }
         ?>
     </table>
-    <input type="submit"  value="Remove selected food" disabled>
+    <input type="submit" class="btn btn-primary btn-block" value="Remove selected food" disabled>
 </form>
 
 
 <!--                ADD       FOOD               -->
 
-<form class="addFood" method="post" enctype="multipart/form-data" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
+<form klasa="addFood" method="post" enctype="multipart/form-data" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
     <h3>Dodaj novu hranu u ponudu:</h3>
 
-    <table class="addFood">
+    <table class="addFood" style="margin-left: auto; margin-right: auto;">
         <tr>
             <th>Jelo: </th>
-            <td><input type="text" name="name_input" required></td>
+            <td><input type="text" class="form-control"  name="name_input" required></td>
         </tr>
         <tr>
             <th>Cijena: </th>
-            <td><input type="number" name="price_input" required></td>
+            <td><input type="number" class="form-control" name="price_input" required></td>
         </tr>
         <tr>
             <th>Opis: </th>
-            <td><input type="text" name="description_input" required></td>
+            <td><input type="text" class="form-control" name="description_input" required></td>
         </tr>
         <tr>
             <th>Čekanje (u minutama): </th>
-            <td><input type="number" name="waitingTime_input" required></td>
+            <td><input type="number" class="form-control" name="waitingTime_input" required></td>
         </tr>
         <tr>
             <th>Slika: </th>
-            <td><input type="file" name="imgFood_input" required></td>
+            <td>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" name="imgFood_input" required>
+                    <label class="custom-file-label" for="customFile">Izaberi sliku</label>
+                </div>
+            </td>
         </tr>
     </table>
-    <input type="submit"  value="Dodaj jelo u meni">
+    <input type="submit" class="btn btn-primary btn-block" value="Dodaj jelo u meni">
 </form>
 
 
@@ -187,26 +198,41 @@ E-mail: <?php echo $restaurantInfo->email;?>
 
 <!--                PROMIN DETALJE              -->
 <button class="btn btn-primary btn-block" name="changeDetails" title="changeDetails">Promijeni detalje</button>
-<form class="changeDetails" method="post" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
+<form klasa="changeDetails" method="post" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
     <h3>Promijeni detalje svog restorana:</h3>
 
-    <table class="changeDetails">
+    <table class="changeDetails" style="margin-left: auto; margin-right: auto;">
         <tr>
             <th>Ime: </th>
             <th>Opis: </th>
             <th>Adresa: </th>
         </tr>
-            <td><input type="text" name="name_change"></td>
-            <td><input type="text" name="desc_change"></td>
-            <td><input type="text" name="address_change"></td>
+            <td><input type="text" class="form-control" name="name_change"></td>
+            <td><input type="text" class="form-control" name="desc_change"></td>
+            <td><input type="text" class="form-control" name="address_change"></td>
     </table>
-    <input type="submit"  value="Promijeni">
+    <input type="submit" class="btn btn-primary btn-block" value="Promijeni">
 </form>
 
 
 </div>
 </div>
 </div>
+
+<div class="modal" id="modalForma">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalFormaNaslov"></h4>
+        <button type="button" class="close" data-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="modalFormaTijelo" style="text-align: center; overflow: auto;"></div>
+      <div class="modal-footer" id="modalFormaFoot">
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <hr>
 

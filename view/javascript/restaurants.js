@@ -11,10 +11,10 @@ $( document ).ready( function()
     $( 'button[name="changeDetails"]' ).on( 'click', show_form );
 
     // Obrada formi
-    $( 'form.editFood').on( 'submit', obradi_editFood );
-    $( 'form.removeFood').on( 'submit', obradi_removeFood );
-    $( 'form.addFood').on( 'submit', obradi_addFood );
-    $( 'form.changeDetails' ).on( 'submit', obradi_changeDetails );
+    $( 'form[klasa="editFood"]').on( 'submit', obradi_editFood );
+    $( 'form[klasa="removeFood"]').on( 'submit', obradi_removeFood );
+    $( 'form[klasa="addFood"]').on( 'submit', obradi_addFood );
+    $( 'form[klasa="changeDetails"]' ).on( 'submit', obradi_changeDetails );
 
     
     // za editFood  prati checkboxove i otključava ih
@@ -28,20 +28,10 @@ $( document ).ready( function()
 
     //  samo za prošle narudđbe na pastOrders.php
     $( 'td.orderDetails').on( 'click', show_details);
-    //[name="orderDetails"]
-    
-    // za zatvaranje okvira
-    /*$('body').on('click', 'div.okvir', function(event){
-        if( $(event.target).attr('class') === 'okvir' )
-            //destroy( $(event.target) );
-        console.log($('div.okvir'));
-        //destroy($('div.okvir'));
-    });
-*/
 
 });
 
-
+/*
 function show_form()
 {
     var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>'),
@@ -114,41 +104,61 @@ function show_form()
     div.on( 'click', function(event){
             if( $(event.target).attr('class') === 'okvir' )
                 destroy($(event.target));
-        });
+        });    
+}*/
+
+function show_form()
+{
+
+    var modalNaslov=$( '#modalFormaNaslov'), modal=$( '#modalForma'), modalBody=$( '#modalFormaTijelo'), modalFoot=$( '#modalFormaFoot');
 
 
-    
+    modalNaslov.html( $(this).attr('title'));
+
+    addCorrectForm( modalBody, $(this).attr('name') , modalFoot);
+
+    modal.modal('show');
+
+    //   Zatvara prozor ako se klikne van boxa
+    modal.on('hidden.bs.modal', function () {
+        location.reload();
+       })
 }
 
-function addCorrectForm( box,title)
+function addCorrectForm( box,title, foot)
 {
     if( title === 'editFood'){
         var table = $( 'table[name="food"]' ).clone();
         //subTitle
         box.append( table );              // Prikaz trenutne hrane u ponudi
-        addEditForm(box);
+        addEditForm(box, foot);
     }
     else if( title === 'removeFood' ){
-        var form = $( 'form.removeFood' ).removeAttr( 'hidden' );
+        var form = $( 'form[klasa="removeFood"]' ).removeAttr( 'hidden' );
+        foot.append( form.children( 'input[type="submit"]') );
         box.append( form );
     }
     else if( title === 'addFood' ){
-        var form = $( 'form.addFood' ).removeAttr( 'hidden' );
+        var form = $( 'form[klasa="addFood"]' ).removeAttr( 'hidden' );
+        foot.append( form.children( 'input[type="submit"]') );
         box.append( form );
     }
     else if( title === 'changeDetails'){
-        var form = $( 'form.changeDetails' ).removeAttr( 'hidden' );
+        var form = $( 'form[klasa="changeDetails"]' ).removeAttr( 'hidden' );
+        foot.append( form.children( 'input[type="submit"]') );
         box.append( form );
     }
 }
 
 
 
-function addEditForm(box)
+function addEditForm(box, foot)
 {
-    var form = $( 'form.editFood' ), select = $( 'select.editFood' );
+    var form = $( 'form[klasa="editFood"]' ), select = $( 'select[name="editFood"]' );
 
     form.removeAttr('hidden');
+    var inputi = form.children( 'input[type="submit"]');
+    foot.append(inputi);
     box.append(form);
 }
 
@@ -190,7 +200,7 @@ function obradi_addFood()
 
 
     fd.append('file', files);
-    fd.append( 'id_restaurant',  $( 'form.addFood' ).attr( 'restaurant' ));
+    fd.append( 'id_restaurant',  $( 'form[klasa="addFood"]' ).attr( 'restaurant' ));
     fd.append( 'name',  $( 'input[name="name_input"]' ).val() );
     fd.append( 'price', $( 'input[name="price_input"]' ).val() );
     fd.append( 'description', $( 'input[name="description_input"]' ).val() );
@@ -310,7 +320,7 @@ function changeFoodImage(  )
 
 
     fd.append( 'file', files );
-    fd.append( 'id_food',  $( 'select.editFood option:selected' ).val() );
+    fd.append( 'id_food',  $( 'select[name="editFood"] option:selected' ).val() );
 
     $.ajax(
         {
@@ -354,7 +364,7 @@ function obradi_editFood(event)
             method: 'post',
             data:
             {
-                id: $( 'select.editFood option:selected' ).val(),
+                id: $( 'select[name="editFood"] option:selected' ).val(),
                 name: name,
                 price: price,
                 description: description,
@@ -397,7 +407,7 @@ function obradi_changeDetails()
             method: 'post',
             data:
             {
-                id: $( 'form.changeDetails' ).attr( 'restaurant' ),
+                id: $( 'form[klasa="changeDetails"]' ).attr( 'restaurant' ),
                 name: name,
                 description: desc,
                 address: address
