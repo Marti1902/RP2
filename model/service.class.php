@@ -427,6 +427,7 @@ class Service{
         return $restaurants;
     }
     
+    /*
     function getAvailableOrders()
     {
         $slobodne = [];
@@ -467,7 +468,7 @@ class Service{
 
         }
         return $slobodne;
-    }
+    }*/
 
     function acceptOrder($id_narudzbe)
     {
@@ -491,7 +492,7 @@ class Service{
 
         try{
             $db = DB::getConnection();
-            $st2 = $db->prepare( 'UPDATE spiza_orders SET delivery_time=date("Y-m-d H:i:s") WHERE id_order=:id_order');
+            $st2 = $db->prepare( 'UPDATE spiza_orders SET delivery_time=now() WHERE id_order=:id_order');
             $st2->execute( [ 'id_order' => $id_narudzbe] );
         }
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }

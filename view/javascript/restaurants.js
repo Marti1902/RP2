@@ -450,7 +450,7 @@ function getActiveOrders()
 
                     var div = $( 'div.activeOrders' ), tbl = $( '<table>' ), tr_head = $( '<thead>' ), tbody= $('<tbody>');
 
-                    tr_head.html( '<tr><th>Status</th><th>Btoj narudžbe</th><th>Broj klijenta</th><th>Vrijeme narudžbe</th><th>Ukupno</th><th>Popust</th><th>Napomena</th></tr>' );
+                    tr_head.html( '<tr><th>Status</th><th>Broj narudžbe</th><th>Broj klijenta</th><th>Vrijeme narudžbe</th><th>Ukupno</th><th>Popust</th><th>Napomena</th></tr>' );
                     tbl.append( tr_head)
                         .prop('class', 'table table-hover');
                     
