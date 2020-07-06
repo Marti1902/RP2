@@ -6,7 +6,8 @@ Popis aktivnih narudžbi:
     foreach( $orderList as $order ){
         if ( $order[0]->active != 0 ){
             echo '<li>' .
-                'Iz ' . $order[0]->id_restaurant . ':<br>';
+                'Iz ' . $order[0]->id_restaurant . ':<br>' .
+                'Status narudžbe: ' . $order[0]->active . '<br>';
             foreach ( $order[1] as $food )
                 echo $food[0]->name . ', količina: ' . $food[1] . '<br>';
             echo '</li>';

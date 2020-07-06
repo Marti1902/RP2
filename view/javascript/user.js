@@ -200,7 +200,7 @@ function show_form(){
                     u = parseFloat(localStorage.getItem( 'ukupno' ) ) * d;
                     localStorage.setItem( 'spopustom', u );
                     var pop = $( '<div id="pop">' );
-                    if( d == 0.9 ) pop.html( 'Ostvarili ste popust!' );
+                    if( d == 0.9 && localStorage.getItem( 'ukupno' ) != 0 ) pop.html( 'Ostvarili ste popust!' );
                     
                      //  box za text i ostalo unutra okvira
                      box.css( 'background-color', '#fefefe')

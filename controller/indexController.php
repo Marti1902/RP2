@@ -39,7 +39,7 @@ class IndexController extends BaseController
 		{
 			$this->registry->template->errorFlag = True;
 			$this->registry->template->errorMsg = 'Korisnik ne postoji!';
-			if( $database === 'login_restaurants' )
+			if( $database === 'spiza_users' )
 				$this->index();
 			elseif( $database === 'spiza_restaurants' )
 				$this->loginRestaurants();
