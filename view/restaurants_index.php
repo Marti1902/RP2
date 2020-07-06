@@ -68,10 +68,10 @@
 
 
 <!--                EDIT       FOOD             -->
-<form klasa="editFood" target="<?php echo __SITE_URL;?>/app/editFood.php" hidden>
+<form klasa="editFood" id="editFood" target="<?php echo __SITE_URL;?>/app/editFood.php" hidden>
     <h3>Odaberite hranu koju želite promijeniti:</h3>
     
-    <select class="custom-select" style="width:auto;">name="editFood">
+    <select class="custom-select" style="width:auto;" name="editFood">
             <?php
                     foreach( $FoodList as $food)
                     {
@@ -82,14 +82,16 @@
     
     <table class="editFood" style="margin-left: auto; margin-right: auto;">
         <tr>
-            <th> Ime jela: </th>
+            <th> Ime jela: </th>    <div class="form-group">
+
             <td><input class="form-control" type="text" name="foodName" disabled=true></td>
-            <td><input type="checkbox" id="che1" name="foodName" value="change"></td>
+            <td><input type="checkbox" id="che1" name="foodName" value="change"></td>   </div>
         </tr>
         <tr>
-            <th>Cijena: </th>
+            <th>Cijena: </th>       <div class="form-group">
+
             <td><input class="form-control" type="number" name="foodPrice" disabled=true></td>
-            <td><input type="checkbox" id="che2" name="foodPrice" value="change"></td>
+            <td><input type="checkbox" id="che2" name="foodPrice" value="change"></td></div>
         </tr>
         <tr>
             <th>Opis jela: </th>
@@ -112,12 +114,12 @@
             <td><input type="checkbox"  id="che5" name="imgFood_edit" value="change"></td>
         </tr>
     </table>
-    <input type="submit" class="btn btn-primary btn-block" value="Change food">
+    <input type="submit" class="btn btn-primary btn-block" form="editFood" value="Change food">
 </form>
 
 
 <!--                REMOVE       FOOD               -->
-<form klasa="removeFood" hidden>
+<form klasa="removeFood" id="removeFood" hidden>
     <h3>Odaberite hranu koju želite maknuti iz ponude:</h3>
 
 
@@ -142,13 +144,13 @@
             }
         ?>
     </table>
-    <input type="submit" class="btn btn-primary btn-block" value="Remove selected food" disabled>
+    <input type="submit" class="btn btn-primary btn-block" form="removeFood" value="Remove selected food" disabled>
 </form>
 
 
 <!--                ADD       FOOD               -->
 
-<form klasa="addFood" method="post" enctype="multipart/form-data" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
+<form klasa="addFood" method="post"  id="addFood" enctype="multipart/form-data" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
     <h3>Dodaj novu hranu u ponudu:</h3>
 
     <table class="addFood" style="margin-left: auto; margin-right: auto;">
@@ -178,7 +180,7 @@
             </td>
         </tr>
     </table>
-    <input type="submit" class="btn btn-primary btn-block" value="Dodaj jelo u meni">
+    <input type="submit" class="btn btn-primary btn-block" form="addFood" value="Dodaj jelo u meni">
 </form>
 
 
@@ -198,7 +200,7 @@ E-mail: <?php echo $restaurantInfo->email;?>
 
 <!--                PROMIN DETALJE              -->
 <button class="btn btn-primary btn-block" name="changeDetails" title="changeDetails">Promijeni detalje</button>
-<form klasa="changeDetails" method="post" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
+<form klasa="changeDetails" method="post" id="changeDetails" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
     <h3>Promijeni detalje svog restorana:</h3>
 
     <table class="changeDetails" style="margin-left: auto; margin-right: auto;">
@@ -211,7 +213,7 @@ E-mail: <?php echo $restaurantInfo->email;?>
             <td><input type="text" class="form-control" name="desc_change"></td>
             <td><input type="text" class="form-control" name="address_change"></td>
     </table>
-    <input type="submit" class="btn btn-primary btn-block" value="Promijeni">
+    <input type="submit"  class="btn btn-primary btn-block" form="changeDetails" value="Promijeni" >
 </form>
 
 

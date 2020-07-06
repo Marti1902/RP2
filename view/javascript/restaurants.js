@@ -187,7 +187,7 @@ function sakrij_pokazi_submit()
 }
 
 function obradi_addFood()
-{
+{console.log('a');
     var fd = new FormData();
     var p = $( '<p>' ), files = $( 'input[name="imgFood_input"]' )[0].files[0];
     
@@ -310,7 +310,10 @@ function changeFoodImage(  )
 {
     var fd = new FormData();
     var p = $( '<p>' ), files = $( 'input[name="imgFood_edit"]' )[0].files[0];
-    
+
+    if(!$( 'input[id="che5"]:checked' ).length ) // ako nije postavljen checkbox onda ništa
+        return;
+
     fd.append( 'file', files );
 
     //console.log( $( 'select.editFood option:selected' ).val() );
@@ -354,6 +357,7 @@ function obradi_editFood(event)
         time =  $( 'input[type="number"][name="foodWaitingTime"]').val(),
         //image =  $( 'input[type="file"][name="imgFood_edit"]'),
         p = $( '<p>' );
+        console.log(name==='', price, description, time);
     
     var h = changeFoodImage(  );
     $(this).append(p).append(h);
@@ -378,7 +382,7 @@ function obradi_editFood(event)
                 }
                 else if( data.hasOwnProperty( 'rezultat' ) ){
                     p.html( data.rezultat +' Please refresh page to see changes!');
-                    //console.log( data.rezultat );
+                    console.log( data.rezultat );
                 }
             },
             error: function()
@@ -461,7 +465,7 @@ function getActiveOrders()
                 else{
                     timestamp = data.timestamp;
 
-                    console.log(data);
+                    //console.log(data);
 
                     var tbl = $( '<table>' ), tr_head = $( '<thead>' ), tbody= $('<tbody>');
 
@@ -511,7 +515,7 @@ function getActiveOrders()
                             var odbij = $( '<button type="button" class="btn btn-danger btn-block" name="odbij" orderid="'+data.id_order[i]+'">').html('Odbij narudžbu');
                             var inputVrijeme = $( '<div class="input-group mb-3" divVrijeme="'+data.id_order[i]+'">' ).html('<div class="input-group-prepend"><span class="input-group-text">Upiši vrijeme čekanja:</span></div>');
                             
-                            inputVrijeme.append( $('<input type="number" inputVrijeme="'+data.id_order[i]+'" min="0" step="1" class="form-control" placeholder="npr. 50">') );
+                            inputVrijeme.append( $('<input type="number" inputVrijeme="'+data.id_order[i]+'" min="0" step="1" class="form-control" placeholder="npr. 50" required>') );
 
                             odbij.on('click', refuseOrder );
                             prihvati.on('click', acceptOrder );
