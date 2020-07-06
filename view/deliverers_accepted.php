@@ -18,7 +18,7 @@
     ?>
     <form action="<?php echo __SITE_URL;?>/index.php?rt=deliverers/delivered" method="post">
     <input type="checkbox" name="dostavljeno" id="dostavljeno"  value="dostavljeno" /> Dostavljeno<br> 
-    <button type="submit" name="btn_dostavljeno" value=" <?php echo $currentOrder[0]->id_order;  ?>">Dostavljeno</button><br>
+    <button type="submit" name="btn_dostavljeno" value=" <?php echo $currentOrder[0]->id_order;  ?>" >Dostavljeno</button><br>
     </form>
  
 </ul>

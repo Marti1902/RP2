@@ -42,6 +42,11 @@ class DeliverersController extends BaseController{
 
         if(isset($_POST['dostavljeno']))
             $ls->finish($_POST['btn_dostavljeno']);
+        else
+        {
+            $redirect='Location: index.php?rt=deliverers/order&id_order=' . $_POST['btn_dostavljeno'];
+            header($redirect);
+        }
 
         $this->registry->template->title = $_SESSION['tab'] = 'Dostavljači';
 
