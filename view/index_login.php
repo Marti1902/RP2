@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8"> 
     <title>Spiza</title>
-   
+    <link rel="icon" href="<?php echo __SITE_URL; ?>/css/logo.png" />
+
+        <!--        BOOTSTRAP           -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-    <h1><?php echo $title; ?></h1>
+
+<div class="jumbotron text-center" style="margin-bottom: 0px;">
+    <h1>Spiza.hr</h1>
+    <h2><?php echo $title; ?></h2>
+</div>
+
 
      <?php
     if( isset($errorFlag))
@@ -14,6 +26,7 @@
             echo $errorMsg . '<br>';
     ?>
      
+
 <form action="<?php echo __SITE_URL;?>/index.php?rt=index/login" method='post'>
 Username:
 <input type="text" name="username">
@@ -43,4 +56,11 @@ Password:
 
 
 </body>
+<footer>
+<div class="jumbotron text-center" style="margin-bottom:0">
+
+&copy; <?php echo date("Y");?>
+
+</div>
+</footer>
 </html>
