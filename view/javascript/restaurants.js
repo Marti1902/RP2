@@ -437,18 +437,23 @@ function getActiveOrders()
             },
             success: function( data )
             {
+                var div = $( 'div.activeOrders' );
+                div.html('');
+                
                 if( data.hasOwnProperty( 'greska' ) ){
                     console.log( data.greska );
                     p.html( 'ERROR in database' + data.greska);
                 }
                 else if( data.hasOwnProperty( 'nema' ) ){
-                    var div = $( 'div.activeOrders' ), p = $( '<p>' ).html( 'Trenutno nemate novih narudžbi!');
+                    var p = $( '<p>' ).html( 'Trenutno nemate novih narudžbi!');
                     div.append(p);
                 }
                 else{
                     timestamp = data.timestamp;
 
-                    var div = $( 'div.activeOrders' ), tbl = $( '<table>' ), tr_head = $( '<thead>' ), tbody= $('<tbody>');
+                    console.log(data);
+
+                    var tbl = $( '<table>' ), tr_head = $( '<thead>' ), tbody= $('<tbody>');
 
                     tr_head.html( '<tr><th>Status</th><th>Btoj narudžbe</th><th>Broj klijenta</th><th>Vrijeme narudžbe</th><th>Ukupno</th><th>Popust</th><th>Napomena</th></tr>' );
                     tbl.append( tr_head)
@@ -477,17 +482,19 @@ function getActiveOrders()
 
                         tbody.append( tr );
 
-                        //  red ispod za detalje koji će sadržavat listu
+                        //  red ispod za listu  koja će sadržavat detalje
                         var tr_detalji = $( '<tr prikazid="'+data.id_order[i]+'" style="display: none;">');
                         var td_detalji = $( '<td colspan="7">' );
                         var lista_za_narudbu = $( '<ul class="list-group-item">' );
-                        
 
+                        // dohvatimo detalje
+                        for( var j = 0; j < data.contains[i].name.length; ++j )
+                        {
+                            var li = $('<li class="list-group-item">').html( data.contains[i].quantity[j] +' &times '+ data.contains[i].name[j]);
+                            lista_za_narudbu.append(li);
+                        }
 
-                        
-
-
-                        //  dodat gumb za prihvat ili otkaz
+                        //  dodat gumb za prihvat ili otkaz novo pristigle narudžbe
                         if( parseInt(data.active[i]) === 1 )
                         {
                             var prihvati = $( '<button type="button" class="btn btn-primary btn-block" name="prihvati" orderid="'+data.id_order[i]+'">').html('Prihvati narudžbu');
@@ -504,12 +511,10 @@ function getActiveOrders()
                         tr_detalji.append( td_detalji );
                         tbody.append( tr_detalji );
 
-
                     }
+
                     tbl.append( tbody );
-
                     div.html( tbl );
-
                     getActiveOrders();
                 }
             },

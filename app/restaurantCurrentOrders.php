@@ -64,6 +64,8 @@ $msg['order_time '] = [];
 $msg['price_total'] = [];
 $msg['discount'] = [];
 $msg['note'] = [];
+$msg['contains'] = [];
+
 
 while( $row = $st->fetch() )
 {
@@ -74,6 +76,27 @@ while( $row = $st->fetch() )
     $msg['price_total'][] = $row['price_total'];
     $msg['discount'][] = $row['discount'];
     $msg['note'][] = $row['note'];
+
+    try{
+        $st2 = $db->prepare( 'SELECT name, quantity  FROM spiza_food, spiza_contains WHERE spiza_contains.id_order=:val AND spiza_food.id_food=spiza_contains.id_food' );
+        $st2->execute( [ 'val' => $row['id_order'] ] );
+    }
+    catch( PDOException $e ) { 
+        $message['greska'] = ' Getting contents list in database!';
+        sendJSONandExit($e);
+    }
+
+    $temp['name']=[];
+    $temp['quantity']=[];
+    while( $row2 = $st2->fetch() )
+    {
+        $temp['name'][] = $row2['name'];
+        $temp['quantity'][] = $row2['quantity'];
+    }
+    $msg['contains'][] = $temp;
+    
+
+
 }
 
 

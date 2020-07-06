@@ -1,7 +1,9 @@
 <?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
 
 
-<div class="col-12">
+<div class="container">
+  <div class="row">
+    <div class="col-12">
 
 <table class="table table-hover">
     <thead>
