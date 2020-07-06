@@ -227,7 +227,7 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'],$row['address'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
             }
             return $arr;
         }
@@ -469,7 +469,14 @@ class Service{
     
             $user=$ls->getUserById($row['id_user']);
             $restaurant=$ls->getRestaurantById($row['id_restaurant']);
-            $o=new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+            if($row['address']=='nova adresa')
+            {
+                $korisnik=$ls->getUserById($row['id_user']);
+                $adresa=$korisnik->address;
+            }
+            else
+                $adresa=$row['address'];
+            $o=new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $adresa, $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
             
             try{
                 $db = DB::getConnection();
@@ -479,7 +486,7 @@ class Service{
             catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
             while($row2=$st2->fetch()){
                 $h=$ls->getFoodById($row2['id_food']);
-                $hrana[]=$h->name;
+                $hrana[]=[$h->name,$row2['quantity']];
             }
 
             $slobodne[]=[$o,$user->username,$restaurant->name,$hrana];
@@ -535,7 +542,7 @@ class Service{
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
         while($row=$st->fetch()){
             $h=$ls->getFoodById($row['id_food']);
-            $hrana[]=$h->name;
+            $hrana[]=[$h->name,$row['quantity']];
         }
 
         return [$o,$user->username,$restaurant->name,$hrana];
