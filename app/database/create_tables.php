@@ -84,7 +84,7 @@ function create_table_restaurants()
 			'registration_sequence varchar(20) NOT NULL,'.
 			'has_registered int,'.
 			'name varchar(50) NOT NULL,'.
-			'address varchar(80) NOT NULL,'.
+			'address varchar(150) NOT NULL,'.
 			'description varchar(50) NOT NULL)'
 		);
 

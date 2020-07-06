@@ -307,6 +307,7 @@ class Service{
             return null;
         else{
             $row=$st->fetch();
+            echo $row['id_order'];
             return new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
         }
     }
@@ -433,7 +434,6 @@ class Service{
         }
     }
 
-
     function getRestaurantListByNeighborhood( $neighborhood )
     {
         $restaurants = [];
@@ -451,7 +451,6 @@ class Service{
         }
         return $restaurants;
     }
-
     
     function getAvailableOrders()
     {
@@ -476,8 +475,8 @@ class Service{
             }
             else
                 $adresa=$row['address'];
-            $o=new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $adresa, $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
-            
+           $o=$ls->getOrderById($row['id_order']);
+
             try{
                 $db = DB::getConnection();
                 $st2 = $db->prepare( 'SELECT * FROM spiza_contains WHERE id_order=:id_order');
@@ -517,7 +516,7 @@ class Service{
 
         try{
             $db = DB::getConnection();
-            $st2 = $db->prepare( 'UPDATE spiza_orders SET delivery_time=now() WHERE id_order=:id_order');
+            $st2 = $db->prepare( 'UPDATE spiza_orders SET delivery_time=date("Y-m-d H:i:s") WHERE id_order=:id_order');
             $st2->execute( [ 'id_order' => $id_narudzbe] );
         }
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -529,8 +528,8 @@ class Service{
 
         $hrana=[];
     
-        
         $o=$ls->getOrderById($id);
+        echo $o->address;
         $user=$ls->getUserById($o->id_user);
         $restaurant=$ls->getRestaurantById($o->id_restaurant);
             
