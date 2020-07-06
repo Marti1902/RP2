@@ -10,7 +10,7 @@ Popis aktivnih narudžbi:
             else if( $order[0]->active == 2 )
                 $status = 'Restoran je prihvatio Vašu narudžbu.';
             else if( $order[0]->active == 3 )
-                $status = 'Restoran je prihvatio Vašu narudžbu. Procijenjeno vrijeme čekanja je ' . strtotime( $order[0]->delivery_time ) . '.';
+                $status = 'Restoran je prihvatio Vašu narudžbu. Procijenjeno vrijeme čekanja je ' . strtotime( $order[0]->delivery_time ) . 'minuta.';
         
             echo '<li>' .
                 'Iz ' . $order[0]->id_restaurant . ':<br>' .
@@ -47,7 +47,7 @@ Popis dostavljenih narudžbi:
 </ul>
 
 <form class="oc" hidden>
-    Daj svoju recenziju: <input type="text" name="recenzija">
+    Unesite recenziju: <input type="text" name="recenzija">
     Ocijeni: <input type='number' name='ocjena' required>
     <input type="submit"  value="Ocijeni"></input>`
 </form>

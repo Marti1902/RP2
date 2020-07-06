@@ -9,8 +9,9 @@ $(document).ready(function(){
     console.log( nas );
 
     if( nas !== 'Moje narudžbe' && nas !== 'Vaši omiljeni restorani' && nas !== 'Svi restorani' ){
-        var kosarica = $( '<li id="idiukos" style="cursor: pointer;">Košarica <i class="fas fa-shopping-basket"></i></li>' );
-        $( '.meni' ).append( kosarica );
+        var kosarica = $( '<li class="nav-item" id="idiukos" style="cursor: pointer;"><a class="nav-link">Košarica <i class="fas fa-shopping-basket"></i></a></li>' );
+        kosarica.css( 'float', 'right' );
+        $( '.navbar-nav' ).append( kosarica );
         if( localStorage.getItem( 'restoran' ) === null )
             localStorage.setItem( 'restoran', nas );
         else if( localStorage.getItem( 'restoran' ) !== nas ){

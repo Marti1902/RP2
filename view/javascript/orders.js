@@ -7,9 +7,6 @@ function show_form()
 {
     var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>'), close = $( '<span>' );
 
-    //ostale buttone zaključamo - nemožemo imat više otvorenih prozora
-    //$( 'button' ).prop( 'disabled', 'true');
-
     title.html( 'Ocijeni ovu narudžbu' )
         .css( 'color', 'black' );
 
@@ -19,18 +16,17 @@ function show_form()
         .css( 'float', 'right' )
         .css( 'font-size', '35')
         .css( 'font-weight', 'bold')
+        .css( 'cursor', 'pointer' )
         .on( 'click', function(event){
-            div.css('display', 'none' );
-        })         
-        .focus(function(){          // ne , drugačije riješit
-            $(this).css( 'color', 'black' )
-                    .css( 'text-decoration', 'none' )
-                    .css( 'cursor', 'pointer' );
+            destroy($(event.target));
         })
-        .hover(function(){
-            $(this).css( 'color', 'black' )
-                    .css( 'text-decoration', 'none' )
-                    .css( 'cursor', 'pointer' );
+        .on({
+            mouseenter: function () {
+                $(this).css('color', 'black')
+            },
+            mouseleave: function () {
+                $(this).css( 'color', '#aaaaaa' );
+            }
         });
 
     console.log( $( this ).attr( 'id' ) );
@@ -117,4 +113,17 @@ function obradi_formu(){
 
             }
         });
+}
+
+function destroy( vari = null)
+{
+    var parent = vari;
+    if( parent.attr('class') === 'okvir' )
+        parent.remove();
+    if( (parent = parent.parent() ).attr('class') === 'okvir' )
+        parent.remove();
+    else
+        parent.parent().remove();
+    location.reload();
+    
 }

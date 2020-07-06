@@ -7,21 +7,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="<?php echo __SITE_URL; ?>/view/javascript/user.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="icon" href="<?php echo __SITE_URL; ?>/css/logo.png" />
 </head>
 
 <body>
 
-<h1>Spiza.hr</h1>
+<div class="jumbotron text-center" style="margin-bottom: 0px;">
+    <h1>Spiza.hr</h1>
+</div>
 
-<nav>   
-    <ul class="meni">
-        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
-        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a></li>
-        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user">Vaši omiljeni restorani</a></li>
-        <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=user/restaurants">Svi restorani</a></li>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;">  
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user">Vaši omiljeni restorani</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user/restaurants">Svi restorani</a></li>
     </ul>
 </nav> 
+
      <?php
     if( isset($errorFlag))
         if( $errorFlag )
