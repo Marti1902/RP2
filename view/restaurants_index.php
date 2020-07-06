@@ -1,5 +1,15 @@
 <?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
 
+<div style="position: relative;" >
+<div class="toast" data-autohide="true"  style="  background-color: #DCDCDC; position: absolute; top: 0; right: 10px;">
+    <div class="toast-header">
+      Nova narudžba
+    </div>
+    <div class="toast-body">
+      Pristigla je nova narudžba! Pogledajte trenutne narudžbe.
+    </div>
+</div>
+</div>
 
 <div class="container">
   <div class="row">
@@ -42,11 +52,12 @@
     </tbody>
 </table>
 
-<div class="btn-group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+<!--                BUTTONI     ZA      EDIT       FOOD             -->
+<div class="btn-group btn-block">
+    <button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown">
       Uredi jelovnik
     </button>
-    <div class="dropdown-menu">
+    <div class="dropdown-menu btn-block">
         <button class="dropdown-item" name="editFood" title="Uredi jelo iz ponude" target="<?php echo __SITE_URL;?>/index.php?rt=restaurants/editFood">Uredi jelo</button>
         <button class="dropdown-item" name="addFood" title="Dodaj jelo">Dodaj jelo</button>
         <button class="dropdown-item" name="removeFood" title="Uredi ponudu">Ukloni jelo</button>
@@ -160,9 +171,9 @@
 </form>
 
 
-
+<br><br>
 <h3>Ocjena Vašeg restorana <?php echo $restaurantRating;?></h3>
-Možda to prebacit u neki div
+<br>
 <h3>Detalji o restoranu: </h3>
 Ime: <?php echo $restaurantInfo->name;?>
 <br>
@@ -172,9 +183,10 @@ Adresa: <?php echo $restaurantInfo->address;?>
 <br>
 E-mail: <?php echo $restaurantInfo->email;?>
 <br>
+<br>
 
 <!--                PROMIN DETALJE              -->
-<button class="btn btn-primary" name="changeDetails" title="changeDetails">Promijeni detalje</button>
+<button class="btn btn-primary btn-block" name="changeDetails" title="changeDetails">Promijeni detalje</button>
 <form class="changeDetails" method="post" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
     <h3>Promijeni detalje svog restorana:</h3>
 

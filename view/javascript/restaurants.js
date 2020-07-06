@@ -483,7 +483,7 @@ function getActiveOrders()
                         tbody.append( tr );
 
                         //  red ispod za listu  koja će sadržavat detalje
-                        var tr_detalji = $( '<tr prikazid="'+data.id_order[i]+'" style="display: none;">');
+                        var tr_detalji = $( '<tr prikazid="'+data.id_order[i]+'" style="display: none;">'); 
                         var td_detalji = $( '<td colspan="7">' );
                         var lista_za_narudbu = $( '<ul class="list-group-item">' );
 
@@ -499,12 +499,19 @@ function getActiveOrders()
                         {
                             var prihvati = $( '<button type="button" class="btn btn-primary btn-block" name="prihvati" orderid="'+data.id_order[i]+'">').html('Prihvati narudžbu');
                             var odbij = $( '<button type="button" class="btn btn-danger btn-block" name="odbij" orderid="'+data.id_order[i]+'">').html('Odbij narudžbu');
+                            var inputVrijeme = $( '<div class="input-group mb-3" divVrijeme="'+data.id_order[i]+'">' ).html('<div class="input-group-prepend"><span class="input-group-text">Upiši vrijeme čekanja:</span></div>');
                             
+                            inputVrijeme.append( $('<input type="number" inputVrijeme="'+data.id_order[i]+'" min="0" step="1" class="form-control" placeholder="npr. 50">') );
+
                             odbij.on('click', refuseOrder );
                             prihvati.on('click', acceptOrder );
 
-                            lista_za_narudbu.append( prihvati )
+                            lista_za_narudbu.append(inputVrijeme )
+                                .append( prihvati )
                                 .append( odbij );
+                            
+                                //  prikaz notifokacije
+                            $('.toast').toast('show');
                         }
 
                         td_detalji.append( lista_za_narudbu );
@@ -526,19 +533,24 @@ function getActiveOrders()
             }
         });
 }
+
+
 function acceptOrder(event)
 {
     $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
-    changeOrderStatus(2, $(event.target).attr('orderid'));
+    var vrijeme = $( 'input[inputVrijeme="'+$(event.target).attr('orderid')+'"]' );
+    changeOrderStatus(2, $(event.target).attr('orderid'), vrijeme.val());
+
 }
 
 function refuseOrder(event)
 {
     $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
+    $( 'div[divVrijeme="'+$(event.target).attr('orderid')+'"]' ).remove();
     changeOrderStatus(-1, $(event.target).attr('orderid'));
 }
 
-function changeOrderStatus(newStatus, orderID)
+function changeOrderStatus(newStatus, orderID, vrijeme=-1)
 {
     $.ajax(
         {
@@ -547,7 +559,8 @@ function changeOrderStatus(newStatus, orderID)
             data:
             {
                 order_id: orderID,
-                status: newStatus
+                status: newStatus,
+                vrijeme: vrijeme
             },
             success: function( data )
             {
