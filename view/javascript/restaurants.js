@@ -457,15 +457,14 @@ function getActiveOrders()
                     
                     for( var i = 0; i < data.id_order.length; ++i )
                     {
-                        var tr = $( '<tr>' );
+                        var tr = $( '<tr orderid="'+data.id_order[i]+'">' );
                         var td_id_order = $( '<td>' ).html( data.id_order[i] );
                         var td_id_user = $( '<td>' ).html( data.id_user[i] );
                         var td_order_time = $( '<td>' ).html( data.order_time[i] );
                         var td_price_total = $( '<td>' ).html( data.price_total[i] );
                         var td_discount = $( '<td>' ).html( data.discount[i] );
                         var td_note = $( '<td>' ).html( data.note[i] );
-                        var td_active = $( '<td>' ).append( orderStatus( data.active[i] ) );
-
+                        var td_active = $( '<td>' ).append( orderStatus( parseInt(data.active[i]) ) );
 
                         tr.append( td_active )
                             .append( td_id_order )
@@ -473,8 +472,39 @@ function getActiveOrders()
                             .append( td_order_time )
                             .append( td_price_total )
                             .append( td_discount )
-                            .append( td_note );
+                            .append( td_note )
+                            .on( 'click', prikazi );
+
                         tbody.append( tr );
+
+                        //  red ispod za detalje koji će sadržavat listu
+                        var tr_detalji = $( '<tr prikazid="'+data.id_order[i]+'" style="display: none;">');
+                        var td_detalji = $( '<td colspan="7">' );
+                        var lista_za_narudbu = $( '<ul class="list-group-item">' );
+                        
+
+
+                        
+
+
+                        //  dodat gumb za prihvat ili otkaz
+                        if( parseInt(data.active[i]) === 1 )
+                        {
+                            var prihvati = $( '<button type="button" class="btn btn-primary btn-block" name="prihvati" orderid="'+data.id_order[i]+'">').html('Prihvati narudžbu');
+                            var odbij = $( '<button type="button" class="btn btn-danger btn-block" name="odbij" orderid="'+data.id_order[i]+'">').html('Odbij narudžbu');
+                            
+                            odbij.on('click', refuseOrder );
+                            prihvati.on('click', acceptOrder );
+
+                            lista_za_narudbu.append( prihvati )
+                                .append( odbij );
+                        }
+
+                        td_detalji.append( lista_za_narudbu );
+                        tr_detalji.append( td_detalji );
+                        tbody.append( tr_detalji );
+
+
                     }
                     tbl.append( tbody );
 
@@ -491,28 +521,75 @@ function getActiveOrders()
             }
         });
 }
+function acceptOrder(event)
+{
+    $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
+    changeOrderStatus(2, $(event.target).attr('orderid'));
+}
+
+function refuseOrder(event)
+{
+    $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
+    changeOrderStatus(-1, $(event.target).attr('orderid'));
+}
+
+function changeOrderStatus(newStatus, orderID)
+{
+    $.ajax(
+        {
+            url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/changeOrderStatus.php',
+            method: 'get',
+            data:
+            {
+                order_id: orderID,
+                status: newStatus
+            },
+            success: function( data )
+            {
+                if( data.hasOwnProperty( 'greska' ) ){
+                    console.log( data.greska );
+                }
+//                else if( data.hasOwnProperty( 'rezultat' ) ){}
+            },
+            error: function()
+            {
+                console.log( 'Greška u Ajax pozivu... changeOrderStatus');
+            }
+        });
+}
+
+function prikazi(event)
+{
+    var tr_select = $(event.target).parent();
+    var skriven = $( 'tr[prikazid="'+tr_select.attr('orderid')+'"]' );
+    
+    if( skriven.is(":visible"))
+        skriven.hide();
+    else 
+        skriven.show();
+}
 
 function orderStatus( code)       // za status stavljam oznaku
 {
     var oznaka= $( '<span>')
-    if( code = 1)
+    if( code === 1)
     {
         oznaka.prop('class', 'badge badge-primary')
             .html('Novo');
     }
-    else if( code = 2){
+    else if( code === 2){
         oznaka.prop('class', 'badge badge-success')
         .html('Prihvaćena');
     }
-    else if( code = 0){
+    else if( code === 0){
         oznaka.prop('class', 'badge badge-secondary')
         .html('Dostavljena');
     }
-    else if( code = -1){
+    else if( code === -1){
         oznaka.prop('class', 'badge badge-danger')
         .html('Odbijeno');
     }
-    else if( code = -2){
+    else if( code === -2){
         oznaka.prop('class', 'badge badge-dark')
         .html('Nema dostavljača');
     }
