@@ -10,21 +10,23 @@ class UserController extends BaseController{
         debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Vaši omiljeni restorani';
-        $narudzbe = $ls->getOrderListByUserId( $_SESSION['user']->id );
+        $narudzbe = $ls->getOrderListByUserId( $_SESSION['user']->id ); // dohvaćamo sve userove narudzbe
         $restorani = [];
         foreach ( $narudzbe as $narudzba ){
-            $rest = $ls->getRestaurantById( $narudzba->id_restaurant );
-            if ( !in_array( $rest, array_column( $restorani, 0 ) ) ){
-                $i = 0;
-                $s = 0;
-                foreach( $narudzbe as $nar ){
-                    if( $nar->id_restaurant == $rest->id_restaurant ){
-                        $s = $s + $nar->rating;
-                        $i++;
+            if( $narudzba->active == 0 && $narudzba->rating != 0 ){ //Pobrinemo se da promatramo samo dostavljene narudzbe
+                echo $narudzba->rating;
+                $rest = $ls->getRestaurantById( $narudzba->id_restaurant );
+                if ( !in_array( $rest, array_column( $restorani, 0 ) ) ){ // ako već nije u $restorani, stavljamo ga
+                    $i = 0;
+                    $s = 0;
+                    foreach( $narudzbe as $nar ){ // pregledavamo sve narudzbe istog restorana da bi došli do svih ocijena
+                        if( $nar->id_restaurant == $rest->id_restaurant && $nar->active == 0 && $nar->rating != 0 ){
+                            $s = $s + $nar->rating;
+                            $i++;
+                        }
                     }
+                    $restorani[] = [$rest, $s/$i]; // za svaki restoran koji je korisnik ocijenio, računamo prosječnu ocijenu
                 }
-                $restorani[] = [$rest, $s/$i];
-                echo max(array_column($restorani, 1));
             }
         }
         $this->registry->template->restaurantList = $restorani;
@@ -66,6 +68,7 @@ class UserController extends BaseController{
         $this->registry->template->show( 'user_foodType' );
     }
 
+    // Ispisuje sve korisnikove narudžbe i daje mogućnost ocjenjivanja dovršenih
     public function orders(){
         $ls = new Service();
         error404();
@@ -89,6 +92,7 @@ class UserController extends BaseController{
         $this->registry->template->show( 'user_orders' );
     }
 
+    // Za ispis stranice restorana s menijem i recenzijama i košaricom
     public function restaurant(){
         $ls = new Service();
         error404();

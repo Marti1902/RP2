@@ -32,8 +32,8 @@ try {
 
     $db->beginTransaction();
 
-    $st=$db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, active, price_total, discount, note, address) VALUES (:id_user, :id_restaurant, :active, :price_total, :discount, :note, :address)' );
-    $st->execute( array( 'id_user' => intval( $id_user ),  'id_restaurant' => intval( $id_restaurant ), 'active' => intval( $active ), 'price_total' => floatval( $price_total ), 'discount' => floatval( $discount ), 'note' => $note, 'address' => $address ) );
+    $st=$db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, active, price_total, discount, note, address, rating, thumbs_up, thumbs_down) VALUES (:id_user, :id_restaurant, :active, :price_total, :discount, :note, :address, :rating, :up, :down)' );
+    $st->execute( array( 'id_user' => intval( $id_user ),  'id_restaurant' => intval( $id_restaurant ), 'active' => intval( $active ), 'price_total' => floatval( $price_total ), 'discount' => floatval( $discount ), 'note' => $note, 'address' => $address, 'rating' => 0, 'up' => 0, 'down' => 0 ) );
     
         
     $lastInsertedID = $db->lastInsertId();

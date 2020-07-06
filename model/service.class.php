@@ -3,31 +3,6 @@
 require_once __DIR__ . '/../app/database/db.class.php';
 
 class Service{
-    /*          P   R   I   M   J   E   R   I       F   U   N   K   C   I   J   A
-    public function getMyChannels(){
-        
-        $channels =[];
-
-        $db = DB::getConnection();
-        $st = $db->prepare( 'SELECT * FROM dz2_channels WHERE id_user=:user');
-        $st->execute( ['user'=>$_SESSION['user']->id] );
-
-        while( $row = $st->fetch() )
-            $channels[] = new Channel($row['id'], $row['id_user'], $row['name']);
-        return $channels;
-    }
-
-
-    public function sendMessege()
-    {
-        $messege = $_POST['poruka'];
-        date_default_timezone_set("Europe/Zagreb");
-        
-        $db = DB::getConnection();
-        $st = $db->prepare( 'INSERT INTO dz2_messages (id_user, id_channel, content, thumbs_up, date) VALUES (:val1,:val2,:val3,:val4,:val5)');
-        $st->execute(['val1'=> $_SESSION['user']->id, 'val2'=> $_SESSION['current_channel']->id, 'val3'=>$messege, 'val4'=>0, 'val5'=>date("Y-m-d h:i:s")]);
-    }*/
-
     //                      F   -   je          za          LOGIN
     function userExsists($databaseName, $username)
     {
@@ -124,8 +99,7 @@ class Service{
         
     }
 
-    //                      F-je za prikaz restorana
-    
+    // funkcija jednostavno vraća sve restorane prisutne u bazi
     function getRestaurantList()
     {
         $restaurants =[];
@@ -211,7 +185,7 @@ class Service{
     }
 
     //fje za prikaz narudžbi
-    // Ova radi za novu bazu
+    // Vraća listu svih narudžbi koje je podnio korisnik s $id_user
     function getOrderListByUserId( $id_user )
     {
         try
@@ -227,19 +201,20 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'],$row['address'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
             }
             return $arr;
         }
     }
 
+    // vraća listu svih narudžbi restorana
     function getOrderListByRestaurantId( $id_restaurant )
     {
         try
 		{
             $db=DB::getConnection();
-            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_restaurant=:res AND feedback IS NOT NULL');
-            $st->execute(['res'=>$id_restaurant]);
+            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_restaurant=:res AND rating > :rat');
+            $st->execute(['res'=>$id_restaurant, 'rat'=>'0']);
 		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
         if ($st->rowCount()===0)
