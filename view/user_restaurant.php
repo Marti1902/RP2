@@ -3,6 +3,8 @@
 <?php echo '<span id="idjevi" id_restaurant="' . $foodList[0]->id_restaurant . '" id_user="' . $_SESSION['user']->id . '" hidden></span>'; ?>
 <?php echo '<span id="gl_adresa" gl_adresa="' . $_SESSION['user']->address . '" hidden></span>'; ?>
 
+<span>Ocjena: <?php echo $rating; ?></span><br><br>
+
 Popis dostupnih jela:
 <ul>
     <?php 

@@ -100,6 +100,7 @@ class UserController extends BaseController{
 
         $restaurant = $ls->getRestaurantById ( $_GET['id_restaurant'] );
         $this->registry->template->title = $restaurant->name;
+        $this->registry->template->rating = $ls->getRestaurantRatingById( $_GET['id_restaurant'] );
         $_SESSION['tab'] = 'User restaurant';
         $this->registry->template->foodList = $ls->getFoodListByRestaurantId( $restaurant->id_restaurant );
         $pomocni = $ls->getOrderListByRestaurantId( $restaurant->id_restaurant );
