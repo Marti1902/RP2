@@ -10,9 +10,9 @@ class DeliverersController extends BaseController{
 
         $this->registry->template->title = $_SESSION['tab'] = 'Dostavljači';
 
-        $slobodne = $ls->getAvailableOrders();
+        //$slobodne = $ls->getAvailableOrders();
 
-        $this->registry->template->availableOrders=$slobodne;
+        //$this->registry->template->availableOrders=$slobodne;
         $this->registry->template->show( 'deliverers_index' );
     }
 
@@ -42,12 +42,17 @@ class DeliverersController extends BaseController{
 
         if(isset($_POST['dostavljeno']))
             $ls->finish($_POST['btn_dostavljeno']);
+        else
+        {
+            $redirect='Location: index.php?rt=deliverers/order&id_order=' . $_POST['btn_dostavljeno'];
+            header($redirect);
+        }
 
         $this->registry->template->title = $_SESSION['tab'] = 'Dostavljači';
 
-        $slobodne = $ls->getAvailableOrders();
+        //$slobodne = $ls->getAvailableOrders();
     
-        $this->registry->template->availableOrders=$slobodne;
+        //$this->registry->template->availableOrders=$slobodne;
         $this->registry->template->show( 'deliverers_index' );
     }
 

@@ -1,10 +1,19 @@
 <?php require_once __DIR__ . '/header&footer/_header_deliverers.php'; ?>
 
-<ul>
+
+<div class="col-12">
+<h4>Slobodne narudžbe</h4>
+
+<div class="avalableOrders" id="slobodne"></div>
+
+</div>
+
+
     <?php 
     //echo sizeof($availableOrders);
-    echo '<h4>Slobodne narudžbe</h4>';
-    foreach( $availableOrders as $order ){
+    //echo '<h4>Slobodne narudžbe</h4>';
+    
+    /*foreach( $availableOrders as $order ){
         echo '<li>';
         echo '<a href="index.php?rt=deliverers/order&id_order=' . $order[0]->id_order . '">' . 
             'Broj narudžbe: ' . $order[0]->id_order . '</a><br>';
@@ -21,8 +30,8 @@
         
         //echo '<button name="narudzba" type="submit" value="' . $order[0]->id_order . '">Prihvaćam narudžbu</button>';   //  Treba dodat jošlinkove za neke akcije
         echo '</li>';
-    }
+    }*/
     ?>
-</ul>
+
 
 <?php require_once __DIR__ . '/header&footer/_footer.php'; ?>

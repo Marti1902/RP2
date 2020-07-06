@@ -431,6 +431,7 @@ class Service{
     }
 
     
+    /*
     function getAvailableOrders()
     {
         $slobodne = [];
@@ -471,7 +472,7 @@ class Service{
 
         }
         return $slobodne;
-    }
+    }*/
 
     function acceptOrder($id_narudzbe)
     {
