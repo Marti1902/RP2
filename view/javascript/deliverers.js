@@ -41,12 +41,12 @@ function getActiveOrders()
                     for( var i = 0; i < data.id_order.length; ++i )
                     {
                         var tr = $( '<tr>' );
-                        var td_id_order = $( '<td>' ).html( '<a href="index.php?rt=deliverers/order&id_order=' + data.id_order[i] + '">' + 'Broj narudžbe: ' + data.id_order[i] + '</a>' );
+                        var td_id_order = $( '<td>' ).html( '<a href="index.php?rt=deliverers/order&id_order=' + data.id_order[i] + '">' + data.id_order[i] + '</a>' );
                         var td_restaurant = $( '<td>' ).html( data.restaurant[i] );
                         var td_user = $( '<td>' ).html( data.user[i] );
                         var td_address = $( '<td>' ).html( data.address[i] );
                         var td_food = $( '<td>' ).html( data.food[i] );
-                        var td_price_total = $( '<td>' ).html( data.price_total[i] );
+                        var td_price_total = $( '<td>' ).html( data.price_total[i] + ' kn');
                         var td_discount = $( '<td>' ).html( data.discount[i] );
                         var td_note = $( '<td>' ).html( data.note[i] );
 

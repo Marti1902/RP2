@@ -2,7 +2,7 @@
 
 <ul>
     <?php 
-    echo '<h4>Dostava u tijeku</h4><div>';        
+    echo '<h4>Dostava u tijeku. <br>Nemojte izlaziti sa stranice dok dostava nije obavljena!</h4><div>';        
     
     echo 'Broj narudžbe: ' . $currentOrder[0]->id_order . '<br>';
     echo 'Korisnik: ' . $currentOrder[1] . '<br>';
@@ -13,7 +13,7 @@
     echo 'Restoran: ' . $currentOrder[2] .'<br>';
     echo 'Sadržaj narudžbe: ';
     foreach($currentOrder[3] as $hrana)
-        echo '<ul>' . $hrana[0] . ' (količina: ' . $hrana[1] .  ')</ul></div>';
+        echo '<ul>' . $hrana[0] . ' (' . $hrana[1] .  ')</ul></div>';
 
     ?>
     <form action="<?php echo __SITE_URL;?>/index.php?rt=deliverers/delivered" method="post">

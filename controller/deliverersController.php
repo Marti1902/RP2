@@ -10,9 +10,7 @@ class DeliverersController extends BaseController{
 
         $this->registry->template->title = $_SESSION['tab'] = 'Dostavljači';
 
-        //$slobodne = $ls->getAvailableOrders();
-
-        //$this->registry->template->availableOrders=$slobodne;
+        
         $this->registry->template->show( 'deliverers_index' );
     }
 
@@ -50,9 +48,6 @@ class DeliverersController extends BaseController{
 
         $this->registry->template->title = $_SESSION['tab'] = 'Dostavljači';
 
-        //$slobodne = $ls->getAvailableOrders();
-    
-        //$this->registry->template->availableOrders=$slobodne;
         $this->registry->template->show( 'deliverers_index' );
     }
 

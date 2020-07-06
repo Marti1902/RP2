@@ -84,8 +84,8 @@ function create_table_restaurants()
 			'registration_sequence varchar(20) NOT NULL,'.
 			'has_registered int,'.
 			'name varchar(50) NOT NULL,'.
-			'address varchar(150) NOT NULL,'.
-			'description varchar(50) NOT NULL)'
+			'address varchar(100) NOT NULL,'.
+			'description varchar(200) NOT NULL)'
 		);
 
 		$st->execute();
@@ -169,9 +169,9 @@ function create_table_orders()
 			'lastchange_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,' .
 			'price_total float,' .
 			'discount float,' .
-			'note varchar(50),' .
+			'note varchar(100),' .
 			'address varchar(80) NOT NULL,'.
-			'feedback varchar(100),' .
+			'feedback varchar(500),' .
 			'rating float,' .
 			'thumbs_up int,' .
 			'thumbs_down int' .

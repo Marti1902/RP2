@@ -22,13 +22,13 @@ function seed_table_users()
 
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO spiza_users(username, password_hash, email, address,  registration_sequence, has_registered) VALUES (:username, :password, \'a@b.com\', :address, \'abc\', \'1\')' );
+		$st = $db->prepare( 'INSERT INTO spiza_users(username, password_hash, email, address,  registration_sequence, has_registered) VALUES (:username, :password, :email, :address, \'abc\', \'1\')' );
 
-		$st->execute( array( 'username' => 'mirko', 'password' => password_hash( 'mirkovasifra', PASSWORD_DEFAULT ), 'address' => 'Tratinska 10') );
-		$st->execute( array( 'username' => 'slavko', 'password' => password_hash( 'slavkovasifra', PASSWORD_DEFAULT ), 'address' => 'Ulica Nike Grškovića 23' ) );
-		$st->execute( array( 'username' => 'ana', 'password' => password_hash( 'aninasifra', PASSWORD_DEFAULT ), 'address' => 'Ulica kralja Zvonimira 57' ) );
-		$st->execute( array( 'username' => 'maja', 'password' => password_hash( 'majinasifra', PASSWORD_DEFAULT ), 'address' => 'Veslačka ulice 6' ) );
-		$st->execute( array( 'username' => 'pero', 'password' => password_hash( 'perinasifra', PASSWORD_DEFAULT ), 'address' => 'Ulica Radoslava Cimermana 14' ) );
+		$st->execute( array( 'username' => 'mirko', 'password' => password_hash( 'mirkovasifra', PASSWORD_DEFAULT ), 'email' => 'mirko.mm@gmail.com', 'address' => 'Tratinska 10') );
+		$st->execute( array( 'username' => 'slavko', 'password' => password_hash( 'slavkovasifra', PASSWORD_DEFAULT ), 'email' => 'slavko.mirak@yahoo.com' , 'address' => 'Ulica Nike Grškovića 23' ) );
+		$st->execute( array( 'username' => 'ana', 'password' => password_hash( 'aninasifra', PASSWORD_DEFAULT ), 'email' => 'ana.anicic2@gmail.com', 'address' => 'Ulica kralja Zvonimira 57' ) );
+		$st->execute( array( 'username' => 'maja', 'password' => password_hash( 'majinasifra', PASSWORD_DEFAULT ), 'email' => 'maja.majicanin@gmail.com', 'address' => 'Veslačka ulice 6' ) );
+		$st->execute( array( 'username' => 'pero', 'password' => password_hash( 'perinasifra', PASSWORD_DEFAULT ), 'email' => 'petra.glovocicc@yahoo.com', 'address' => 'Ulica Radoslava Cimermana 14' ) );
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_users]: " . $e->getMessage() ); }
 
@@ -43,18 +43,18 @@ function seed_table_restaurants()
 
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO spiza_restaurants(username, password_hash, name, address, email, registration_sequence, description, has_registered) VALUES (:username, :password, :name, :address, \'a@b.com\', \'abc\', :description, \'1\')' );
+		$st = $db->prepare( 'INSERT INTO spiza_restaurants(username, password_hash, name, address, email, registration_sequence, description, has_registered) VALUES (:username, :password, :name, :address, :email, \'abc\', :description, \'1\')' );
 
-		$st->execute( array( 'username' => 'pizzeria6', 'password' => password_hash( 'pizzeria6sifra', PASSWORD_DEFAULT ), 'name' => 'Pizzeria 6',  'address' => 'Medulićeva 6', 'description' => 'U ugodnom ambijentu Pizzeria 6 u samom centru Zagreba. Kušajte najbolje pizze iz krušne peći, te ostale delicije.' ) );
-		$st->execute( array( 'username' => 'bros', 'password' => password_hash( 'brossifra', PASSWORD_DEFAULT ), 'name' => 'Pizzeria Bros',  'address' => 'Trakošćanska 28', 'description' => 'Provedite večer kod nas uz tradicionalnu kuhinju i sve njezine specijalitete.' ) );
-		$st->execute( array( 'username' => 'rocket', 'password' => password_hash( 'rocketsifra', PASSWORD_DEFAULT ), 'name' => 'Rocket Burger',  'address' => 'Tkalčićeva 50', 'description' => ' Rocket Burger poznati je zagrebački burger bar u Tkalčićevoj ulici, koji je uvijek pazio na kvalitetu svojih sendviča.') );
-		$st->execute( array( 'username' => 'submarine', 'password' => password_hash( 'submarinesifra', PASSWORD_DEFAULT ), 'name' => 'Submarine',  'address' => 'Frankopanska 9', 'description' => 'Submarine su gurmanski burgeri vrhunske kvalitete.') );
-		$st->execute( array( 'username' => 'batak', 'password' => password_hash( 'bataksifra', PASSWORD_DEFAULT ), 'name' => 'Batak Grill',  'address' => 'Radnička cesta 37b', 'description' => 'BATAK GRILL odavno je poznata destinacija svim gurmanima koji uživaju u hrani!') );
-		$st->execute( array( 'username' => 'kokopeli', 'password' => password_hash( 'kokopelisifra', PASSWORD_DEFAULT ), 'name' => 'Kokopeli',  'address' => 'Ukrinska 5', 'description' => 'Osim stalne ponude jela od mesa, roštilja, salata, palačinki, tjestenina i rižota, tu je i svakodnevna raznolika ponuda dnevnih gableca po povoljnim cijenama.' ) );
-		$st->execute( array( 'username' => 'ribs', 'password' => password_hash( 'ribssifra', PASSWORD_DEFAULT ), 'name' => 'R&B Food House Of Ribs',  'address' => 'Puljska 9', 'description' => 'R&B Food restoran se bazira na viziji zdrave hrane s naglaskom na kvalitetu i jednostavnost.') );
-		$st->execute( array( 'username' => 'koykan', 'password' => password_hash( 'pekingsifra', PASSWORD_DEFAULT ), 'name' => 'Kineski restoran Peking',  'address' => 'Ilica 114', 'description' => 'Riječ je o jednom od prvih zagrebačkih azijskih restorana koji nudi vrhunska jela iz bogate kineske gastronomske tradicije.' ) );
-		$st->execute( array( 'username' => 'peking', 'password' => password_hash( 'koykansifra', PASSWORD_DEFAULT ), 'name' => 'Koykan World Food - Tkalčićeva',  'address' => 'Ul. Ivana Tkalčića 13', 'description' => 'Koykan World Food vam nudi mnoštvo okusa iz raznih dijelova svijeta. Mjesto je koje svojom ponudom osvježava i donosi novo iskustvo.') );
-		$st->execute( array( 'username' => 'zagabria', 'password' => password_hash( 'zagabriasifra', PASSWORD_DEFAULT ), 'name' => 'Pizzeria Zagabria',  'address' => 'Ilica 202', 'description' => 'Kod nas mozete naci vrhunske pizze naseg pizzaiola sa 25 godina iskustva,lasagne,pohana jela te jela sa rostilja,sve radimo u skladu sa haccap-om.') );
+		$st->execute( array( 'username' => 'pizzeria6', 'password' => password_hash( 'pizzeria6sifra', PASSWORD_DEFAULT ), 'name' => 'Pizzeria 6',  'address' => 'Medulićeva 6', 'email' => 'pizzeria6@gmail.com' , 'description' => 'U ugodnom ambijentu Pizzeria 6 u samom centru Zagreba. Kušajte najbolje pizze iz krušne peći, te ostale delicije.' ) );
+		$st->execute( array( 'username' => 'bros', 'password' => password_hash( 'brossifra', PASSWORD_DEFAULT ), 'name' => 'Pizzeria Bros',  'address' => 'Trakošćanska 28', 'email' => 'pizzeriabros@gmail.com' , 'description' => 'Provedite večer kod nas uz tradicionalnu kuhinju i sve njezine specijalitete.' ) );
+		$st->execute( array( 'username' => 'rocket', 'password' => password_hash( 'rocketsifra', PASSWORD_DEFAULT ), 'name' => 'Rocket Burger',  'address' => 'Tkalčićeva 50', 'email' => 'rocket.burger@rocket.com' , 'description' => ' Rocket Burger poznati je zagrebački burger bar u Tkalčićevoj ulici, koji je uvijek pazio na kvalitetu svojih sendviča.') );
+		$st->execute( array( 'username' => 'submarine', 'password' => password_hash( 'submarinesifra', PASSWORD_DEFAULT ), 'name' => 'Submarine',  'address' => 'Frankopanska 9', 'email' => 'submarine2@submarine.com' , 'description' => 'Submarine su gurmanski burgeri vrhunske kvalitete.') );
+		$st->execute( array( 'username' => 'batak', 'password' => password_hash( 'bataksifra', PASSWORD_DEFAULT ), 'name' => 'Batak Grill',  'address' => 'Radnička cesta 37b', 'email' => 'barak.grill@batak-grill.com' , 'description' => 'BATAK GRILL odavno je poznata destinacija svim gurmanima koji uživaju u hrani!') );
+		$st->execute( array( 'username' => 'kokopeli', 'password' => password_hash( 'kokopelisifra', PASSWORD_DEFAULT ), 'name' => 'Kokopeli',  'address' => 'Ukrinska 5', 'email' => 'kokopeli@gmail.com' , 'description' => 'Osim stalne ponude jela od mesa, roštilja, salata, palačinki, tjestenina i rižota, tu je i svakodnevna raznolika ponuda dnevnih gableca po povoljnim cijenama.' ) );
+		$st->execute( array( 'username' => 'ribs', 'password' => password_hash( 'ribssifra', PASSWORD_DEFAULT ), 'name' => 'R&B Food House Of Ribs',  'address' => 'Puljska 9', 'email' => 'randb.ribs@food-house.com' , 'description' => 'R&B Food restoran se bazira na viziji zdrave hrane s naglaskom na kvalitetu i jednostavnost.') );
+		$st->execute( array( 'username' => 'koykan', 'password' => password_hash( 'pekingsifra', PASSWORD_DEFAULT ), 'name' => 'Kineski restoran Peking',  'address' => 'Ilica 114', 'email' => 'restoran.peking2@yahoo.com' , 'description' => 'Riječ je o jednom od prvih zagrebačkih azijskih restorana koji nudi vrhunska jela iz bogate kineske gastronomske tradicije.' ) );
+		$st->execute( array( 'username' => 'peking', 'password' => password_hash( 'koykansifra', PASSWORD_DEFAULT ), 'name' => 'Koykan World Food - Tkalčićeva',  'address' => 'Ul. Ivana Tkalčića 13', 'email' => 'koykanworld@koykan.com' , 'description' => 'Koykan World Food vam nudi mnoštvo okusa iz raznih dijelova svijeta. Mjesto je koje svojom ponudom osvježava i donosi novo iskustvo.') );
+		$st->execute( array( 'username' => 'zagabria', 'password' => password_hash( 'zagabriasifra', PASSWORD_DEFAULT ), 'name' => 'Pizzeria Zagabria',  'address' => 'Ilica 202', 'email' => 'zagabria.pizzeria@zagabria.com' , 'description' => 'Kod nas mozete naci vrhunske pizze naseg pizzaiola sa 25 godina iskustva,lasagne,pohana jela te jela sa rostilja,sve radimo u skladu sa haccap-om.') );
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_restaurants]: " . $e->getMessage() ); }
 
@@ -127,14 +127,14 @@ function seed_table_orders()
 
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, active, delivery_time, note, address, feedback, rating, thumbs_up, thumbs_down) VALUES (:id_user, :id_restaurant, :active, :delivery_time, :note, :address, :feedback, :rating, :thumbs_up, :thumbs_down)' );
+		$st = $db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, active, price_total, delivery_time, note, address, feedback, rating, thumbs_up, thumbs_down) VALUES (:id_user, :id_restaurant, :active, :price_total, :delivery_time, :note, :address, :feedback, :rating, :thumbs_up, :thumbs_down)' );
 
-		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'active' => 2, 'delivery_time' => NULL, 'note' => '', 'address' => 'Tratinska 10', 'feedback' => '', 'rating' => 5, 'thumbs_up' => 5, 'thumbs_down' =>  0) );
-		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'active' => 0, 'delivery_time' => date('Y-m-d H:i:s'), 'note' => '', 'address' => 'Tratinska 10', 'feedback' => 'sdh', 'rating' => 4, 'thumbs_up' => 1, 'thumbs_down' =>  0) );
-		$st->execute( array( 'id_user' => 2, 'id_restaurant' => 1, 'active' => 0, 'delivery_time' => date('Y-m-d H:i:s'), 'note' => '', 'address' => 'Savska 50', 'feedback' => 'dfhs', 'rating' => 2, 'thumbs_up' => 0, 'thumbs_down' =>  2) );
-		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 2, 'active' => 0, 'delivery_time' => date('Y-m-d H:i:s'), 'note' => '', 'address' => 'Ulica kralja Zvonimira 57', 'feedback' => 'ghn', 'rating' => 5, 'thumbs_up' => 2, 'thumbs_down' =>  1) );
-		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 5, 'active' => 2, 'delivery_time' => NULL, 'note' => '', 'address' => 'Radnička 80', 'feedback' => '', 'rating' => 6, 'thumbs_up' => 0, 'thumbs_down' =>  2) );
-		$st->execute( array( 'id_user' => 4, 'id_restaurant' => 5, 'active' => 2, 'delivery_time' => NULL, 'note' => '', 'address' => 'Ulica Radoslava Cimermana 14', 'feedback' => '', 'rating' => 8, 'thumbs_up' => 3, 'thumbs_down' =>  5) );
+		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'active' => 2, 'price_total' => 120, 'delivery_time' => NULL, 'note' => '5.kat, prezime Jurišić.', 'address' => 'Tratinska 10', 'feedback' => '', 'rating' => 0, 'thumbs_up' => 0, 'thumbs_down' =>  0) );
+		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'active' => 0, 'price_total' => 60,'delivery_time' => date('Y-m-d H:i:s'), 'note' => '', 'address' => 'Tratinska 10', 'feedback' => 'Dostavi je dugo trebalo da stigne pa se jelo pri tome pomalo i ohladilo, ali je ipak bilo fino.', 'rating' => 4, 'thumbs_up' => 1, 'thumbs_down' =>  0) );
+		$st->execute( array( 'id_user' => 2, 'id_restaurant' => 1, 'active' => 0, 'price_total' => 124,'delivery_time' => date('Y-m-d H:i:s'), 'note' => '', 'address' => 'Savska 50', 'feedback' => 'Dostavljač je bio neugodan, kasnio je i nismo dobili točno što smo naručili.', 'rating' => 2, 'thumbs_up' => 0, 'thumbs_down' =>  2) );
+		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 2, 'active' => 0, 'price_total' => 216,'delivery_time' => date('Y-m-d H:i:s'), 'note' => 'Ne zvonite.', 'address' => 'Ulica kralja Zvonimira 57', 'feedback' => 'Zadovoljni smo uslugom, da je brža dostava bila bi i veća ocijena.', 'rating' => 8, 'thumbs_up' => 2, 'thumbs_down' =>  1) );
+		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 5, 'active' => 1, 'price_total' => 71,'delivery_time' => NULL, 'note' => '', 'address' => 'Radnička 80', 'feedback' => '', 'rating' => 0, 'thumbs_up' => 0, 'thumbs_down' =>  0) );
+		$st->execute( array( 'id_user' => 4, 'id_restaurant' => 5, 'active' => 2, 'price_total' => 45,'delivery_time' => NULL, 'note' => 'Zvonite na prezime Marić.', 'address' => 'Ulica Radoslava Cimermana 14', 'feedback' => '', 'rating' => 0, 'thumbs_up' => 0, 'thumbs_down' =>  0) );
 
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_orders]: " . $e->getMessage() ); }
@@ -191,12 +191,12 @@ function seed_table_deliverers()
 
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO spiza_deliverers(username, password_hash, email, registration_sequence, has_registered) VALUES (:username, :password, \'a@b.com\', \'abc\', \'1\')' );
+		$st = $db->prepare( 'INSERT INTO spiza_deliverers(username, password_hash, email, registration_sequence, has_registered) VALUES (:username, :password, :email, \'abc\', \'1\')' );
 
-		$st->execute( array( 'username' => 'petar', 'password' => password_hash( 'petrovasifra', PASSWORD_DEFAULT ) ) );
-		$st->execute( array( 'username' => 'ivan', 'password' => password_hash( 'ivanovasifra', PASSWORD_DEFAULT ) ) );
-		$st->execute( array( 'username' => 'matej', 'password' => password_hash( 'matejevasifra', PASSWORD_DEFAULT ) ) );
-		$st->execute( array( 'username' => 'iva', 'password' => password_hash( 'ivinasifra', PASSWORD_DEFAULT ) ) );
+		$st->execute( array( 'username' => 'petar', 'password' => password_hash( 'petrovasifra', PASSWORD_DEFAULT ), 'email' => 'petar.peric@gmail.com' ) );
+		$st->execute( array( 'username' => 'ivan', 'password' => password_hash( 'ivanovasifra', PASSWORD_DEFAULT ), 'email' => 'ivan,ivanic@gmail.com' ) );
+		$st->execute( array( 'username' => 'matej', 'password' => password_hash( 'matejevasifra', PASSWORD_DEFAULT ), 'email' => 'matej.matejevic1@yahoo.com' ) );
+		$st->execute( array( 'username' => 'iva', 'password' => password_hash( 'ivinasifra', PASSWORD_DEFAULT ), 'email' => 'iva.anakovic@gmail.com' ) );
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_deliverers]: " . $e->getMessage() ); }
 

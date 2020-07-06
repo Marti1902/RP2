@@ -431,49 +431,6 @@ class Service{
     }
 
     
-    /*
-    function getAvailableOrders()
-    {
-        $slobodne = [];
-        $ls = new Service();
-        try{
-            $db = DB::getConnection();
-            $st = $db->prepare( 'SELECT * FROM spiza_orders WHERE active=:active');
-            $st->execute( [ 'active' => 2 ] );
-        }
-        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
-
-        while( $row = $st->fetch() ){
-            $hrana=[];
-    
-            $user=$ls->getUserById($row['id_user']);
-            $restaurant=$ls->getRestaurantById($row['id_restaurant']);
-            if($row['address']=='nova adresa')
-            {
-                $korisnik=$ls->getUserById($row['id_user']);
-                $adresa=$korisnik->address;
-            }
-            else
-                $adresa=$row['address'];
-            $o=new Order($row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $adresa, $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
-            
-            try{
-                $db = DB::getConnection();
-                $st2 = $db->prepare( 'SELECT * FROM spiza_contains WHERE id_order=:id_order');
-                $st2->execute( [ 'id_order' => $row['id_order'] ] );
-            }
-            catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
-            while($row2=$st2->fetch()){
-                $h=$ls->getFoodById($row2['id_food']);
-                $hrana[]=[$h->name,$row2['quantity']];
-            }
-
-            $slobodne[]=[$o,$user->username,$restaurant->name,$hrana];
-
-        }
-        return $slobodne;
-    }*/
-
     function acceptOrder($id_narudzbe)
     {
         try{
