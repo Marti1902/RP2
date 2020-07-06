@@ -22,13 +22,15 @@ Recenzije:
     <?php 
     $i=0;
     foreach( $orderList as $order ){
-        echo '<li>' .
-             $order->id_user . ': ' . $order->rating . '<br>' .
-             '<div id="ovaj' . $i . '">' . $order->feedback . '</div><br>' .
-             '<button class="thumbs" id="' . $order->id_order . '" palac="gori">' . $order->thumbs_up . '</button>' . 
-             '<button class="thumbs" id="' . $order->id_order . '" palac="doli">' . $order->thumbs_down . '</button>' . 
-            '</li>';
-        $i++;
+        if( $order->active == 0 ){
+            echo '<li>' .
+                $order->id_user . ': ' . $order->rating . '<br>' .
+                '<div id="ovaj' . $i . '">' . $order->feedback . '</div><br>' .
+                '<button class="thumbs" id="' . $order->id_order . '" palac="gori">' . $order->thumbs_up . '</button>' . 
+                '<button class="thumbs" id="' . $order->id_order . '" palac="doli">' . $order->thumbs_down . '</button>' . 
+                '</li>';
+            $i++;
+        }
     } ?>
 </ul>
 
