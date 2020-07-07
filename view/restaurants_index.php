@@ -221,6 +221,7 @@ E-mail: <?php echo $restaurantInfo->email;?>
 </div>
 </div>
 
+<!----          OKVIR       ZA      FORME           ----->
 <div class="modal" id="modalForma">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
