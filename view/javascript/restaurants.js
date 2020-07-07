@@ -481,7 +481,7 @@ function getActiveOrders()
                         var td_id_user = $( '<td>' ).html( data.id_user[i] );
                         var td_order_time = $( '<td>' ).html( data.order_time[i] );
                         var td_price_total = $( '<td>' ).html( data.price_total[i] );
-                        var td_discount = $( '<td>' ).html( data.discount[i] );
+                        var td_discount = $( '<td>' ).html( data.discount[i] + '%' );
                         var td_note = $( '<td>' ).html( data.note[i] );
                         var td_active = $( '<td>' ).append( orderStatus( parseInt(data.active[i]) ) );
 
@@ -669,3 +669,5 @@ function show_details(event)
     }
 
 }
+
+

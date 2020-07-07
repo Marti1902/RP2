@@ -229,6 +229,27 @@ class Service{
             return $arr;
         }
     }
+    // vraća listu svih narudžbi restorana - za završene 
+    function getOrderListByRestaurantId2( $id_restaurant )
+    {
+        try
+        {
+            $db=DB::getConnection();
+            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_restaurant=:res AND active <= :rat');
+            $st->execute(['res'=>$id_restaurant, 'rat'=> 1]);
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        if ($st->rowCount()===0)
+            return null;
+        else{
+            $arr = array();
+            while( $row = $st->fetch() )
+            {
+                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+            }
+            return $arr;
+        }
+    }
 
     //fje za prikaz hrane
     //popravljena za novu bazu

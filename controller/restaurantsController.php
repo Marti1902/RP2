@@ -25,7 +25,7 @@ class RestaurantsController extends BaseController{
         $_SESSION['tab'] = 'Prošle narudžbe';
         
         ////////////////////////////////
-        $narudzbe = $ls->getOrderListByRestaurantId( $_SESSION['restaurants']->id_restaurant );
+        $narudzbe = $ls->getOrderListByRestaurantId2( $_SESSION['restaurants']->id_restaurant );
         $pomocni = [];
         foreach ( $narudzbe as $narudzba ){
             $narudzba->id_restaurant = ( $ls->getRestaurantById ( $narudzba->id_restaurant ) )->name;
@@ -37,7 +37,6 @@ class RestaurantsController extends BaseController{
             $pomocni[] = [$narudzba, $spiza];
         }
         $this->registry->template->orderList = $pomocni;
-
         $this->registry->template->show( 'restaurants_pastOrders' );
     }
     

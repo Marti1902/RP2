@@ -10,6 +10,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
+            <th>Status narudžbe</th>
             <th>Broj narudžbe</th>
             <th>Broj klijenta</th>
             <th>Vrijeme narudžbe</th>
@@ -23,8 +24,18 @@
     <?php
     foreach( $orderList as $order)
     {
-        if( intval($order[0]->active) ===0){
+        if( intval($order[0]->active) <= 0){
             echo "<tr>\n";
+            if( intval( $order[0]->active ) === 0)
+                echo "<td><span class='badge badge-secondary'>Dostavljena</span></td>\n";
+            elseif( intval( $order[0]->active ) === -1)
+                echo "<td><span class='badge badge-danger'>Odbijena</span></td>\n";
+            elseif( intval( $order[0]->active ) === -2)
+                echo "<td><span class='badge badge-dark'>Odbijena od dostavljaća</span></td>\n";
+
+
+                //echo "<td>".$order[0]->active."</td>\n";
+            
                 echo "<td>".$order[0]->id_order."</td>\n";
                 echo "<td>".$order[0]->id_user."</td>\n";
                 echo "<td>".$order[0]->order_time."</td>\n";
