@@ -46,7 +46,7 @@ function getActiveOrders()
                         var td_address = $( '<td>' ).html( data.address[i] );
                         var td_food = $( '<td>' ).html( data.food[i] );
                         var td_price_total = $( '<td>' ).html( data.price_total[i] + ' kn');
-                        var td_discount = $( '<td>' ).html( data.discount[i] );
+                        var td_discount = $( '<td>' ).html( data.discount[i]+'%' );
                         var td_note = $( '<td>' ).html( data.note[i] );
                         var td_active = $( '<td>' ).append( orderStatus( parseInt(2) ) );
 

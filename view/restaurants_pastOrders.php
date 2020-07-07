@@ -40,7 +40,7 @@
                 echo "<td>".$order[0]->id_user."</td>\n";
                 echo "<td>".$order[0]->order_time."</td>\n";
                 echo "<td>".$order[0]->delivery_time."</td>\n";
-                echo "<td>".$order[0]->price_total."</td>\n";
+                echo "<td>".$order[0]->price_total."kn</td>\n";
                 echo "<td>".$order[0]->rating."</td>\n";
                 echo "<td class='orderDetails' ordernumber='".$order[0]->id_order."'>Prikaži detalje  &#8592;</td>\n";
             echo "</tr>\n";
