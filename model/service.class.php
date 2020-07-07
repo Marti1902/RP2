@@ -192,7 +192,7 @@ class Service{
         try
 		{
             $db=DB::getConnection();
-            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_user=:user');
+            $st=$db->prepare('SELECT * FROM spiza_orders WHERE id_user=:user ORDER BY id_order DESC');
             $st->execute(['user'=>$id_user]);
 		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }

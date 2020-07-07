@@ -5,7 +5,7 @@ $( document ).ready( function(){
 
 function show_form()
 {
-    var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>'), close = $( '<span>' );
+    var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div id="boks">' ), close = $( '<span>' );
 
     title.html( 'Ocijeni ovu narudžbu' )
         .css( 'color', 'black' );
@@ -82,7 +82,7 @@ function obradi_formu(){
     var feedback = $( 'input[name="recenzija"]').val(),
         rating = $( 'input[name="ocjena"]').val(),
         p = $( '<p>' );
-    $( this ).append( p );
+    $( "#boks" ).append( p );
 
     console.log( feedback, rating );
     $.ajax(
@@ -102,8 +102,9 @@ function obradi_formu(){
                     p.html( 'ERROR in database' + data.greska);
                 }
                 else if( data.hasOwnProperty( 'rezultat' ) ){
-                    p.html( data.rezultat +' Please refresh page to see changes!');
+                    p.html( 'Recenzija uspješno poslana!' );
                     console.log( data.rezultat );
+                    $( "form.oc" ).attr( "hidden", true );
                 }
             },
             error: function()
