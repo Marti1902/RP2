@@ -66,9 +66,9 @@ class Service{
         if( $databaseName === 'spiza_users' )
 		{
             try{
-                $st = $db->prepare( 'INSERT INTO '.$databaseName.' (username, password_hash, email, registration_sequence, has_registered) VALUES (:val1,:val2,:val3,:val4,:val5)');
+                $st = $db->prepare( 'INSERT INTO '.$databaseName.' (username, password_hash, email, registration_sequence, has_registered, address) VALUES (:val1,:val2,:val3,:val4,:val5, :val6)');
                 $st->execute(['val1'=> $_POST['username'],'val2'=> password_hash( $_POST['password'], PASSWORD_DEFAULT ), 
-                            'val3'=> $_POST['email'],'val4'=> $reg_seq,'val5'=> 0]);
+                            'val3'=> $_POST['email'],'val4'=> $reg_seq,'val5'=> 0, 'val6' => $_POST['address'] ]);
             }catch( PDOException $e ) { exit( "PDO error [insert spiza_users]: " . $e->getMessage() ); }
         }
         elseif( $databaseName === 'spiza_restaurants' )
