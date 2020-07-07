@@ -1,4 +1,4 @@
-Dostavi je dugo trebalo da stigne pa se jelo pri t...Read More<?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
+<?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
 
 <!--            NOTIFIKACIJA            -->
 <div style="position: relative;" >
