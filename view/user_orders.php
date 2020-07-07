@@ -1,7 +1,9 @@
 <?php require_once __DIR__ . '/header&footer/_header.php'; ?>
 
-Popis aktivnih narudžbi:
-<ul>
+<div class="row">
+<div class="col-sm-6 left">
+<h4>Popis aktivnih narudžbi:</h4>
+<ul class="list-group">
     <?php 
     foreach( $orderList as $order ){
         if ( $order[0]->active != 0 ){
@@ -12,7 +14,7 @@ Popis aktivnih narudžbi:
             else if( $order[0]->active == 3 )
                 $status = 'Restoran je prihvatio Vašu narudžbu. Procijenjeno vrijeme čekanja je ' . strtotime( $order[0]->delivery_time ) . 'minuta.';
         
-            echo '<li>' .
+            echo '<li class="list-group-item">' .
                 'Iz ' . $order[0]->id_restaurant . ':<br>' .
                 'Status narudžbe: ' . $status . '<br>';
             foreach ( $order[1] as $food )
@@ -27,13 +29,15 @@ Popis aktivnih narudžbi:
     }
     ?>
 </ul>
+</div>
 
-Popis dostavljenih narudžbi:
-<ul>
+<div class="col-sm-6 left">
+<h4>Popis dostavljenih narudžbi:</h4>
+<ul class="list-group">
     <?php 
     foreach( $orderList as $order ){
         if ( $order[0]->active == 0 ){
-            echo '<li>' .
+            echo '<li class="list-group-item">' .
                 'Iz ' . $order[0]->id_restaurant . ':<br>';
             foreach ( $order[1] as $food )
                 echo $food[0]->name . ' (' . $food[1] . ')<br>';
@@ -49,6 +53,8 @@ Popis dostavljenih narudžbi:
     }
     ?>
 </ul>
+</div>
+</div>
 
 <form class="oc" hidden>
     Unesite recenziju: <input type="text" name="recenzija">

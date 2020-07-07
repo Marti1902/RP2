@@ -5,9 +5,42 @@
 
 <span>Ocjena: <?php echo $rating; ?></span><br><br>
 
-Popis dostupnih jela:
+<h3> Meni: </h3>
+
+<table class="table table" name="food" >
+    <thead>
+    <tr>
+        <th>Jelo </th>
+        <th>Cijena </th>
+        <th>Opis </th>
+        <th>Slika </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <?php
+    foreach( $foodList as $food)
+    {
+
+            echo "<tr id=".$food->id_food.">\n";
+            echo "<td>". $food->name ."</td>\n";
+            echo "<td>". $food->price . ' kn ' . "</td>\n";
+            echo "<td>". $food->description ."</td>\n";
+            echo "<td>";
+                if( $food->image_path !== null )
+                    echo '<img src="'. __SITE_URL . $food->image_path .'" width="100" height="100" name="' .$food->name. '">';
+            echo "</td>\n";
+            echo '<td><button img="' . $food->image_path . '" class="dodaj" id="' . $food->id_food . ', ' . $food->name . ', ' . $food->price . '">Dodaj u košaricu</button></li></td>';
+            echo "</tr>\n";
+    }
+?>
+    </tbody>
+</table>
+
+<!--
 <ul>
-    <?php 
+    <?php /*
     foreach( $foodList as $food ){
         echo '<li>' .
              $food->name . ': ' . $food->price . '<br>' .
@@ -15,17 +48,17 @@ Popis dostupnih jela:
         if( $food->image_path !== null )
             echo '<img src="'. __SITE_URL . $food->image_path .'"width="100" height="100"><br>';
         echo '<button img="' . $food->image_path . '" class="dodaj" id="' . $food->id_food . ', ' . $food->name . ', ' . $food->price . '">Dodaj u košaricu</button></li>';
-    }
+    }*/
     ?>
-</ul>
+</ul> -->
 
-Recenzije:
-<ul>
+<h3>Recenzije: </h3>
+<ul class="list-group">
     <?php 
     $i=0;
     foreach( $orderList as $order ){
         if( $order->active == 0 ){
-            echo '<li>' .
+            echo '<li class="list-group-item">' .
                 $order->id_user . ': ' . $order->rating . '<br>' .
                 '<div id="ovaj' . $i . '">' . $order->feedback . '</div><br>' .
                 '<button class="thumbs" id="' . $order->id_order . '" palac="gori">' . $order->thumbs_up . '</button>' . 
