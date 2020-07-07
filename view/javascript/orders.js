@@ -1,6 +1,6 @@
 $( document ).ready( function(){
     var ord;
-    $( "#ocijeni" ).on( 'click', show_form);
+    $( ".btn-primary" ).on( 'click', show_form);
 })
 
 function show_form()
@@ -99,7 +99,7 @@ function obradi_formu(){
             {
                 if( data.hasOwnProperty( 'greska' ) ){
                     console.log( data.greska );
-                    p.html( 'ERROR in database' + data.greska);
+                    p.html( data.greska);
                 }
                 else if( data.hasOwnProperty( 'rezultat' ) ){
                     p.html( 'Recenzija uspješno poslana!' );

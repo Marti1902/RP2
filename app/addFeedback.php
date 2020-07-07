@@ -41,18 +41,25 @@ $upit .= ' WHERE id_order=:val10';
 
 $ex['val10'] = intval($_POST['id']);
 
-try
-		{
-            $db=DB::getConnection();
-            $st=$db->prepare( $upit );
-            $st->execute( $ex );
-		}
-        catch( PDOException $e ) { 
-            $message['greska'] = 'Greška u bazi!';
-            sendJSONandExit($e);
-         }
+if( intval( $_POST['rating'] ) > 0 && intval( $_POST['rating'] ) < 11 ){
+    try
+    {
+        $db=DB::getConnection();
+        $st=$db->prepare( $upit );
+        $st->execute( $ex );
+    }
+    catch( PDOException $e ) { 
+        $message['greska'] = 'Greška u bazi!';
+        sendJSONandExit($e);
+    }
     $message['rezultat'] = 'Changes commited!';
     sendJSONandExit($message);
+}
+
+else{
+    $message['greska'] = 'Nije uspjelo! Ocjena mora biti između 1 i 10!';
+    sendJSONandExit($message);
+}
 
 
 
