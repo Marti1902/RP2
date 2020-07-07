@@ -122,27 +122,27 @@ $(document).ready(function(){
 
 
 function show_form(){
-    var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>' ), close = $( '<span>' ), ul = $( '<ul id="jela">' );
-    var naruci = $( '<button class="naruci"> Naruči! </button>' );
-    var odbaci = $( '<button class="odbaci"> Odbaci narudžbu! </button>' );
+    var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>' ), close = $( '<span>' ), ul = $( '<ul class="list-group" id="jela">' );
+    var naruci = $( '<button class="btn btn-primary" klasa="naruci"> Naruči! </button>' );
+    var odbaci = $( '<button class="btn btn-primary" klasa="odbaci"> Odbaci narudžbu! </button>' );
 
-    $( 'body' ).on( 'click', 'button.naruci', fja_naruci );
-    $( 'body' ).on( 'click', 'button.odbaci', fja_odbaci );
+    $( 'body' ).on( 'click', 'button[klasa="naruci"]', fja_naruci );
+    $( 'body' ).on( 'click', 'button[klasa="odbaci"]', fja_odbaci );
 
     var i = localStorage.getItem( 'i' );
 
     for( var j = 0; j < i; ++j ){
         if( localStorage.getItem( 'jelo' + j ) ){
             var temp = localStorage.getItem( 'jelo' + j ).split( "," );
-            var li = $( '<li id="' + temp[0] + '">' );
+            var li = $( '<li class="list-group-item" id="' + temp[0] + '">' );
             var img = $( '<img src="' + location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + temp[4] + '"width="100" height="100"><br>' );
             img.css( 'margin-left', '0' );
             li.append( img );
             li.append( '' + temp[1] + '<br>' );
             li.append( '<div> Cijena: <span id="' + temp[0] + 'cijena">' + temp[2] + ' kn</span></div>');
             var kolicina = $( '<div id="kolicina"> Količina: <span id="' + temp[0] + 'puta">' + temp[3] + ' </span></div>' );
-            var plus = $( '<button class="plus" id="' + j + '">' );
-            var minus = $( '<button class="minus" id="' + j + '">' );
+            var plus = $( '<button class="btn btn-primary" klasa="plus" id="' + j + '">' );
+            var minus = $( '<button class="btn btn-primary" klasa="minus" id="' + j + '">' );
             plus.html( '+' );
             minus.html( '-' );
             kolicina.append( plus );
@@ -152,8 +152,8 @@ function show_form(){
         }     
     }
 
-    $( 'body' ).on( 'click', 'button.plus', fja_plus );
-    $( 'body' ).on( 'click', 'button.minus', fja_minus );
+    $( 'body' ).on( 'click', 'button[klasa="plus"]', fja_plus );
+    $( 'body' ).on( 'click', 'button[klasa="minus"]', fja_minus );
 
     title.html( 'Košarica' )
         .css( 'color', 'black' );
@@ -248,16 +248,16 @@ function show_form(){
 
 function fja_naruci() {
     if( localStorage.getItem( 'ukupno' ) !== '0' ){
-        var posalji = $( '<button class="posalji"> Pošalji narudžbu! </button>' );
+        var posalji = $( '<button class="btn btn-primary" klasa="posalji"> Pošalji narudžbu! </button>' );
         var span = $( '<span name="adresa"> <br> Adresa: </span>' );
         var napomena = $( '<div name="napomena">' );
         var komentar = $( '<textarea name="note">' );
         napomena.html( 'Napomena restoranu i/ili dostavljaču: ' );
         napomena.append( komentar );
-        $( 'body' ).on( 'click', 'button.posalji', fja_posalji_narudzbu );
-        $( '.naruci' ).hide();
-        $( '.plus' ).hide();
-        $( '.minus' ).hide();
+        $( 'body' ).on( 'click', 'button[klasa="posalji"]', fja_posalji_narudzbu );
+        $( 'button[klasa="naruci"]' ).hide();
+        $( 'button[klasa="plus"]' ).hide();
+        $( 'button[klasa="minus"]' ).hide();
 
         var adresa = $( '#gl_adresa' ).attr( 'gl_adresa' );
         var input = $( '<input name="adresa">' );
@@ -271,12 +271,12 @@ function fja_naruci() {
         $( '.box' ).append( napomena );
         $( '.box' ).append( '<br>' );
         $( '.box' ).append( posalji );
-        $( '.box' ).append( $( '.odbaci' ) );
+        $( '.box' ).append( $( 'button[klasa="odbaci"]' ) );
     }
     else{
         $( '.box' ).append( $( '<br><span>Morate dodati jelo u košaricu kako biste mogli naručiti.</span>') );
-        $( '.naruci' ).hide();
-        $( '.odbaci' ).hide();
+        $( 'button[klasa="naruci"]' ).hide();
+        $( 'button[klasa="odbaci"]' ).hide();
         $( 'div[name="uk"]').hide();
     }
 }
@@ -336,8 +336,8 @@ function fja_posalji_narudzbu(){
                     //$( 'div[name="uk"]').html( 'Narudžba poslana restoranu. Za više detalja pogledajte <a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a>.' )
                     $( 'div[name="uk"]' ).append( $("#povratna") );
                     $( "#povratna" ).removeAttr( 'hidden' );
-                    $( '.posalji' ).hide();
-                    $( '.odbaci' ).hide();
+                    $( 'button[klasa="posalji"]' ).hide();
+                    $( 'button[klasa="odbaci"]' ).hide();
                 }
             },
             error: function()
@@ -356,9 +356,9 @@ function fja_odbaci(){
     $( 'span[name="adresa"]' ).remove();
     $( '#ukupno' ).remove();
     $( 'div[name="uk"]').html( 'Odbacili ste narudžbu.' );
-    $( '.posalji' ).remove();
-    $( '.naruci' ).remove();
-    $( '.odbaci' ).remove();
+    $( 'button[klasa="posalji"]' ).remove();
+    $( 'button[klasa="naruci"]' ).remove();
+    $( 'button[klasa="odbaci"]' ).remove();
 }
 
 function fja_plus(){
