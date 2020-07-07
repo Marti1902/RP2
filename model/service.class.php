@@ -245,7 +245,8 @@ class Service{
             $arr = array();
             while( $row = $st->fetch() )
             {
-                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['active'], $row['order_time'], $row['delivery_time'], $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+                $arr[] = new Order( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['id_deliverer'], $row['active'], $row['order_time'], $row['delivery_time'], 
+                $row['price_total'], $row['discount'], $row['note'], $row['address'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
             }
             return $arr;
         }
