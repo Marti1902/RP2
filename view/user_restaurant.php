@@ -3,7 +3,7 @@
 <?php echo '<span id="idjevi" id_restaurant="' . $foodList[0]->id_restaurant . '" id_user="' . $_SESSION['user']->id . '" hidden></span>'; ?>
 <?php echo '<span id="gl_adresa" gl_adresa="' . $_SESSION['user']->address . '" hidden></span>'; ?>
 
-<span>Ocjena: <?php echo $rating; ?></span><br><br>
+<h5>Ocjena: <?php echo $rating; ?></h5><br><br>
 
 <h3> Meni: </h3>
 
@@ -68,6 +68,8 @@
         }
     } ?>
 </ul>
+
+<div style="height: 250px;"> </div>
 
 <script>
 $( document ).ready( function() 

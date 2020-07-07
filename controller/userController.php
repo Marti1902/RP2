@@ -79,13 +79,14 @@ class UserController extends BaseController{
         $narudzbe = $ls->getOrderListByUserId( $_SESSION['user']->id );
         $pomocni = [];
         foreach ( $narudzbe as $narudzba ){
+            $id_restaurant = $narudzba->id_restaurant;
             $narudzba->id_restaurant = ( $ls->getRestaurantById ( $narudzba->id_restaurant ) )->name;
             $hrana = $ls->getFoodIdListByOrderId( $narudzba->id_order );
             $spiza = [];
             for ( $i=0; $i < count( $hrana ); $i++ ){
                 $spiza[] = [$ls->getFoodById( $hrana[$i][0] ), $hrana[$i][1]];
             }
-            $pomocni[] = [$narudzba, $spiza];
+            $pomocni[] = [$narudzba, $spiza, $id_restaurant];
         }
         $this->registry->template->orderList = $pomocni;
 

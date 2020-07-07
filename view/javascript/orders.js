@@ -1,6 +1,6 @@
 $( document ).ready( function(){
     var ord;
-    $( ".ocijeni" ).on( 'click', show_form);
+    $( "#ocijeni" ).on( 'click', show_form);
 })
 
 function show_form()
@@ -30,7 +30,7 @@ function show_form()
         });
 
     console.log( $( this ).attr( 'id' ) );
-    ord = $( this ).attr( 'id' );
+    ord = $( this ).attr( 'ord' );
 
     var form = $( 'form.oc' ).removeAttr( 'hidden' );
 
