@@ -229,7 +229,7 @@ E-mail: <?php echo $restaurantInfo->email;?>
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="modalFormaNaslov"></h4>
-        <button type="button" class="close" data-dismiss="modal"></button>
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 35px;">&times;</button>
       </div>
       <div class="modal-body" id="modalFormaTijelo" style="text-align: center; overflow: auto;"></div>
       <div class="modal-footer" id="modalFormaFoot">
