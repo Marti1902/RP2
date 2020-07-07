@@ -141,26 +141,28 @@ function show_form(){
         if( localStorage.getItem( 'jelo' + j ) ){
             ul.append( '<tr>' );
             var temp = localStorage.getItem( 'jelo' + j ).split( "," );
-            var li = $( '<td id="' + temp[0] + '">' + temp[1] + '</td>' );
-            var img = $( '<td><img src="' + location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + temp[4] + '"width="100" height="100">' );
-            img.css( 'margin-left', '0' );
-            console.log( temp[0], temp[1], temp[2], temp[3] );
-            //li.append( img );
-            //li.append( '' + temp[1] + '<br>' );
-            //li.append( '<td> Cijena: <span id="' + temp[0] + 'cijena">' + temp[2] + ' kn</span></td>');
-            var kolicina = $( '<td id="kolicina"> Količina: <span id="' + temp[0] + 'puta">' + temp[3] + ' </span></td>' );
-            var plus = $( '<button class="btn btn-primary" klasa="plus" id="' + j + '" style="margin:5px;">' );
-            var minus = $( '<button class="btn btn-primary" klasa="minus" id="' + j + '">' );
-            plus.html( '+' );
-            minus.html( '-' );
-            kolicina.append( plus );
-            kolicina.append( minus );
-            //li.append( kolicina );
-            ul.append( li );
-            ul.append( img );
-            ul.append( '<td> Cijena: <span id="' + temp[0] + 'cijena">' + temp[2] + ' kn</span></td>' );
-            ul.append( kolicina );
-            ul.append( '</tr>' );           
+            if( temp[3] != 0 ){
+                var li = $( '<td id="' + temp[0] + '">' + temp[1] + '</td>' );
+                var img = $( '<td><img src="' + location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + temp[4] + '"width="100" height="100">' );
+                img.css( 'margin-left', '0' );
+                console.log( temp[0], temp[1], temp[2], temp[3] );
+                //li.append( img );
+                //li.append( '' + temp[1] + '<br>' );
+                //li.append( '<td> Cijena: <span id="' + temp[0] + 'cijena">' + temp[2] + ' kn</span></td>');
+                var kolicina = $( '<td id="kolicina"> Količina: <span id="' + temp[0] + 'puta">' + temp[3] + ' </span></td>' );
+                var plus = $( '<button class="btn btn-primary" klasa="plus" id="' + j + '" style="margin:5px;">' );
+                var minus = $( '<button class="btn btn-primary" klasa="minus" id="' + j + '">' );
+                plus.html( '+' );
+                minus.html( '-' );
+                kolicina.append( plus );
+                kolicina.append( minus );
+                //li.append( kolicina );
+                ul.append( li );
+                ul.append( img );
+                ul.append( '<td> Cijena: <span id="' + temp[0] + 'cijena">' + temp[2] + ' kn</span></td>' );
+                ul.append( kolicina );
+                ul.append( '</tr>' );     
+            }
         }     
     }
 
@@ -290,6 +292,7 @@ function fja_naruci() {
         $( 'button[klasa="naruci"]' ).hide();
         $( 'button[klasa="odbaci"]' ).hide();
         $( 'div[name="uk"]').hide();
+        $( '#jela' ).hide();
     }
 }
 
@@ -309,10 +312,14 @@ function fja_posalji_narudzbu(){
     var i = localStorage.getItem( 'i' );
 
     for( var j = 0; j < i; ++j ){
+        var k = 0;
         if( localStorage.getItem( 'jelo' + j ) ){
             var temp = localStorage.getItem( 'jelo' + j ).split( "," );
-            id_food[j] = temp[0];
-            quantity[j] = temp[3];
+            if( temp[3] != 0 ){
+                id_food[k] = temp[0];
+                quantity[k] = temp[3];
+                k++;
+            }
         }     
     }
 

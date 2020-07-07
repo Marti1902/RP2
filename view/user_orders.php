@@ -6,13 +6,13 @@
 <ul class="list-group">
     <?php 
     foreach( $orderList as $order ){
-        if ( $order[0]->active != 0 ){
+        if ( $order[0]->active != 0 && $order[0]->active != -1 && $order[0]->active != -2 ){
             if( $order[0]->active == 1 )
                 $status = 'Narudžba poslana. Čeka se odgovor restorana.';
             else if( $order[0]->active == 2 )
                 $status = 'Restoran je prihvatio Vašu narudžbu.';
             else if( $order[0]->active == 3 )
-                $status = 'Restoran je prihvatio Vašu narudžbu. Procijenjeno vrijeme čekanja je ' . strtotime( $order[0]->delivery_time ) . 'minuta.';
+                $status = 'Restoran je prihvatio Vašu narudžbu. Procijenjeno vrijeme čekanja je ' . strtotime( $order[0]->delivery_time ) . ' minuta.';
         
             echo '<li class="list-group-item">' .
                 'Iz ' . '<a href="index.php?rt=user/restaurant&id_restaurant=' . $order[2] . '">' . $order[0]->id_restaurant . '</a>:<br>' .
@@ -32,7 +32,7 @@
 </div>
 
 <div class="col-sm-6 left">
-<h4>Popis dostavljenih narudžbi:</h4>
+<h4>Popis prethodnih narudžbi:</h4>
 <ul class="list-group">
     <?php 
     foreach( $orderList as $order ){
@@ -46,8 +46,22 @@
                 $spopustom = $order[0]->price_total * 0.9;
                 echo 'Cijena s popustom: ' . $spopustom . '<br>';
             }
+            echo 'Narudžba dostavljena.<br>';
             if( $order[0]->rating != 1 && $order[0]->rating != 2 && $order[0]->rating != 3 && $order[0]->rating != 4 && $order[0]->rating != 5 && $order[0]->rating != 6 && $order[0]->rating != 7 && $order[0]->rating != 8 && $order[0]->rating != 9 && $order[0]->rating != 10)
                 echo "<button class='btn btn-primary'klasa='ocijeni' ord='" . $order[0]->id_order . "'>Ocijeni</button>";
+            echo '</li>';
+        }
+        else if( $order[0]->active == -1 || $order[0]->active == -2 ){
+            echo '<li class="list-group-item">' .
+                'Iz ' . '<a href="index.php?rt=user/restaurant&id_restaurant=' . $order[2] . '">' . $order[0]->id_restaurant . '</a>:<br>';
+            foreach ( $order[1] as $food )
+                echo $food[0]->name . ' (' . $food[1] . ')<br>';
+            echo 'Ukupna cijena: ' . $order[0]->price_total . '<br>';
+            if( $order[0]->discount != 0 ){
+                $spopustom = $order[0]->price_total * 0.9;
+                echo 'Cijena s popustom: ' . $spopustom . '<br>';
+            }
+            echo 'Narudžba odbijena.<br>';
             echo '</li>';
         }
     }

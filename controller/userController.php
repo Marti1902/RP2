@@ -102,7 +102,10 @@ class UserController extends BaseController{
 
         $restaurant = $ls->getRestaurantById ( $_GET['id_restaurant'] );
         $this->registry->template->title = $restaurant->name;
-        $this->registry->template->rating = number_format((float)$ls->getRestaurantRatingById( $_GET['id_restaurant'] ), 2, '.', '');
+        $ocjena = number_format((float)$ls->getRestaurantRatingById( $_GET['id_restaurant'] ), 2, '.', '');
+        if( $ocjena == 'nan' )
+            $ocjena = (float)0.00;
+        $this->registry->template->rating = $ocjena;
         $_SESSION['tab'] = 'User restaurant';
         $this->registry->template->foodList = $ls->getFoodListByRestaurantId( $restaurant->id_restaurant );
         $pomocni = $ls->getOrderListByRestaurantId( $restaurant->id_restaurant );
