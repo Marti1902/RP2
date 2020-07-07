@@ -87,10 +87,16 @@ $(document).ready(function(){
 
     $( "button[klasa='thumbs']" ).on( 'click', function(){
         var ord = $( this ).attr( 'id' );
-        var novi = parseInt( $( this ).html() ) + 1;
-        if( $( this ).attr( 'palac' ) == 'gori' ) tip = 'gori';
-        else if( $( this ).attr( 'palac' ) == 'doli' ) tip = 'doli';
-        $( this ).html( novi );
+        var novi = parseInt( $( this ).attr( 'broj' ) ) + 1;
+        if( $( this ).attr( 'palac' ) == 'gori' ){
+            tip = 'gori';
+            $( this ).html( '&#x1F44D;' + novi );
+        }
+        else if( $( this ).attr( 'palac' ) == 'doli' ){
+            tip = 'doli';
+            $( this ).html( '&#x1F44E;' + novi );
+        }
+        $( this ).attr( 'broj', novi );
         console.log( ord, novi, tip );
         $.ajax(
             {
@@ -122,8 +128,8 @@ $(document).ready(function(){
 
 
 function show_form(){
-    var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>' ), close = $( '<span>' ), ul = $( '<ul class="list-group" id="jela">' );
-    var naruci = $( '<button class="btn btn-primary" klasa="naruci"> Naruči! </button>' );
+    var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>' ), close = $( '<span>' ), ul = $( '<table class="table table" id="jela">' );
+    var naruci = $( '<button class="btn btn-primary" klasa="naruci" style="margin:5px;"> Naruči! </button>' );
     var odbaci = $( '<button class="btn btn-primary" klasa="odbaci"> Odbaci narudžbu! </button>' );
 
     $( 'body' ).on( 'click', 'button[klasa="naruci"]', fja_naruci );
@@ -133,22 +139,28 @@ function show_form(){
 
     for( var j = 0; j < i; ++j ){
         if( localStorage.getItem( 'jelo' + j ) ){
+            ul.append( '<tr>' );
             var temp = localStorage.getItem( 'jelo' + j ).split( "," );
-            var li = $( '<li class="list-group-item" id="' + temp[0] + '">' );
-            var img = $( '<img src="' + location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + temp[4] + '"width="100" height="100"><br>' );
+            var li = $( '<td id="' + temp[0] + '">' + temp[1] + '</td>' );
+            var img = $( '<td><img src="' + location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + temp[4] + '"width="100" height="100">' );
             img.css( 'margin-left', '0' );
-            li.append( img );
-            li.append( '' + temp[1] + '<br>' );
-            li.append( '<div> Cijena: <span id="' + temp[0] + 'cijena">' + temp[2] + ' kn</span></div>');
-            var kolicina = $( '<div id="kolicina"> Količina: <span id="' + temp[0] + 'puta">' + temp[3] + ' </span></div>' );
-            var plus = $( '<button class="btn btn-primary" klasa="plus" id="' + j + '">' );
+            console.log( temp[0], temp[1], temp[2], temp[3] );
+            //li.append( img );
+            //li.append( '' + temp[1] + '<br>' );
+            //li.append( '<td> Cijena: <span id="' + temp[0] + 'cijena">' + temp[2] + ' kn</span></td>');
+            var kolicina = $( '<td id="kolicina"> Količina: <span id="' + temp[0] + 'puta">' + temp[3] + ' </span></td>' );
+            var plus = $( '<button class="btn btn-primary" klasa="plus" id="' + j + '" style="margin:5px;">' );
             var minus = $( '<button class="btn btn-primary" klasa="minus" id="' + j + '">' );
             plus.html( '+' );
             minus.html( '-' );
             kolicina.append( plus );
             kolicina.append( minus );
-            li.append( kolicina );
-            ul.append( li );            
+            //li.append( kolicina );
+            ul.append( li );
+            ul.append( img );
+            ul.append( '<td> Cijena: <span id="' + temp[0] + 'cijena">' + temp[2] + ' kn</span></td>' );
+            ul.append( kolicina );
+            ul.append( '</tr>' );           
         }     
     }
 
@@ -248,7 +260,7 @@ function show_form(){
 
 function fja_naruci() {
     if( localStorage.getItem( 'ukupno' ) !== '0' ){
-        var posalji = $( '<button class="btn btn-primary" klasa="posalji"> Pošalji narudžbu! </button>' );
+        var posalji = $( '<button class="btn btn-primary" klasa="posalji" style="margin:5px;"> Pošalji narudžbu! </button>' );
         var span = $( '<span name="adresa"> <br> Adresa: </span>' );
         var napomena = $( '<div name="napomena">' );
         var komentar = $( '<textarea name="note">' );
