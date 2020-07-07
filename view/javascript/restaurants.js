@@ -613,6 +613,10 @@ function orderStatus( code)       // za status stavljam oznaku
         oznaka.prop('class', 'badge badge-success')
         .html('Prihvaćena');
     }
+    else if( code === 3){
+        oznaka.prop('class', 'badge badge-info')
+        .html('Dostaljač prihvatio');
+    }
     else if( code === 0){
         oznaka.prop('class', 'badge badge-secondary')
         .html('Dostavljena');
