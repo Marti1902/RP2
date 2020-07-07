@@ -284,7 +284,7 @@ function fja_naruci() {
 function fja_posalji_narudzbu(){
     var id_restaurant = $( '#idjevi' ).attr( 'id_restaurant' );
     var id_user = $( '#idjevi' ).attr( 'id_user' );
-    var price_total = localStorage.getItem( 'spopustom' );
+    var price_total = localStorage.getItem( 'ukupno' );
     var note = $( 'textarea[name="note"]' ).val();
     var address = $( 'input[name="adresa"]' ).val();
     var id_food = [];

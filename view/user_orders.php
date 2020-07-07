@@ -16,10 +16,12 @@ Popis aktivnih narudžbi:
                 'Iz ' . $order[0]->id_restaurant . ':<br>' .
                 'Status narudžbe: ' . $status . '<br>';
             foreach ( $order[1] as $food )
-                echo $food[0]->name . ', količina: ' . $food[1] . '<br>';
+                echo $food[0]->name . ' (' . $food[1] . ')<br>';
             echo 'Ukupna cijena: ' . $order[0]->price_total . '<br>';
-            $spopustom = $order[0]->price_total - $order[0]->discount;
-            echo 'Cijena s popustom: ' . $spopustom . '<br>';
+            if( $order->discount != 0 ){
+                $spopustom = $order[0]->price_total * 0.9;
+                echo 'Cijena s popustom: ' . $spopustom . '<br>';
+            }
             echo '</li>';
         }
     }
@@ -34,7 +36,7 @@ Popis dostavljenih narudžbi:
             echo '<li>' .
                 'Iz ' . $order[0]->id_restaurant . ':<br>';
             foreach ( $order[1] as $food )
-                echo $food[0]->name . ', količina: ' . $food[1] . '<br>';
+                echo $food[0]->name . ' (' . $food[1] . ')<br>';
             echo 'Ukupna cijena: ' . $order[0]->price_total . '<br>';
             $spopustom = $order[0]->price_total - $order[0]->discount;
             echo 'Cijena s popustom: ' . $spopustom . '<br>';
