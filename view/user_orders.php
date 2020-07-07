@@ -19,10 +19,10 @@
                 'Status narudžbe: ' . $status . '<br>';
             foreach ( $order[1] as $food )
                 echo $food[0]->name . ' (' . $food[1] . ')<br>';
-            echo 'Ukupna cijena: ' . $order[0]->price_total . '<br>';
+            echo 'Ukupna cijena: ' . $order[0]->price_total . ' kn<br>';
             if( $order[0]->discount != 0 ){
                 $spopustom = $order[0]->price_total * 0.9;
-                echo 'Cijena s popustom: ' . $spopustom . '<br>';
+                echo 'Cijena s popustom: ' . $spopustom . ' kn<br>';
             }
             echo '</li>';
         }
@@ -41,12 +41,12 @@
                 'Iz ' . '<a href="index.php?rt=user/restaurant&id_restaurant=' . $order[2] . '">' . $order[0]->id_restaurant . '</a>:<br>';
             foreach ( $order[1] as $food )
                 echo $food[0]->name . ' (' . $food[1] . ')<br>';
-            echo 'Ukupna cijena: ' . $order[0]->price_total . '<br>';
+            echo 'Ukupna cijena: ' . $order[0]->price_total . ' kn<br>';
             if( $order[0]->discount != 0 ){
                 $spopustom = $order[0]->price_total * 0.9;
-                echo 'Cijena s popustom: ' . $spopustom . '<br>';
+                echo 'Cijena s popustom: ' . $spopustom . ' kn<br>';
             }
-            echo 'Narudžba dostavljena.<br>';
+            echo '<span class="badge badge-success">Dostavljeno</span';
             if( $order[0]->rating != 1 && $order[0]->rating != 2 && $order[0]->rating != 3 && $order[0]->rating != 4 && $order[0]->rating != 5 && $order[0]->rating != 6 && $order[0]->rating != 7 && $order[0]->rating != 8 && $order[0]->rating != 9 && $order[0]->rating != 10)
                 echo "<button class='btn btn-primary'klasa='ocijeni' ord='" . $order[0]->id_order . "'>Ocijeni</button>";
             echo '</li>';
@@ -56,12 +56,12 @@
                 'Iz ' . '<a href="index.php?rt=user/restaurant&id_restaurant=' . $order[2] . '">' . $order[0]->id_restaurant . '</a>:<br>';
             foreach ( $order[1] as $food )
                 echo $food[0]->name . ' (' . $food[1] . ')<br>';
-            echo 'Ukupna cijena: ' . $order[0]->price_total . '<br>';
+            echo 'Ukupna cijena: ' . $order[0]->price_total . ' kn<br>';
             if( $order[0]->discount != 0 ){
                 $spopustom = $order[0]->price_total * 0.9;
-                echo 'Cijena s popustom: ' . $spopustom . '<br>';
+                echo 'Cijena s popustom: ' . $spopustom . ' kn<br>';
             }
-            echo 'Narudžba odbijena.<br>';
+            echo '<span class="badge badge-danger">Odbijeno</span>';
             echo '</li>';
         }
     }

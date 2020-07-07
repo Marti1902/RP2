@@ -8,8 +8,8 @@
             if ( $restaurantList[$i][1] == $rat ){
                 echo //'<li class="list-group-item">' . 
                     '<a href="index.php?rt=user/restaurant&id_restaurant=' . $restaurantList[$i][0]->id_restaurant . '" class="list-group-item list-group-item-action">' . 
-                    $restaurantList[$i][0]->name . '  <br><small>Vaša ocjena: '. 
-                    $restaurantList[$i][1] .'</small></a>';
+                    $restaurantList[$i][0]->name . '  <br><small>Vaša ocjena: </small>'. 
+                    '<span class="badge badge-info">' . $restaurantList[$i][1] . '</span>' . '</a>';
                 $restaurantList[$i][1] = 0;
                 break;
             }
