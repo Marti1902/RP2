@@ -24,11 +24,24 @@ class DeliverersController extends BaseController{
 
 
         $narudzba=$_GET['id_order'];
-        echo $narudzba;
 
         $ls->acceptOrder($narudzba);
+        $ls->addDeliverer($narudzba,$_SESSION['deliverers']->id);
         $aktulna_narudzba=$ls->getCurrentOrder($narudzba);
         $this->registry->template->currentOrder=$aktulna_narudzba;
+        $this->registry->template->show( 'deliverers_accepted' );
+    }
+
+    public function active()
+    {
+        $ls = new Service();
+        error404();
+        debug();
+
+        $this->registry->template->title = $_SESSION['tab'] = 'Aktivna narudžba';
+        $aktivna=$ls->activeOrder($_SESSION['deliverers']->id);
+       
+        $this->registry->template->currentOrder=$aktivna;
         $this->registry->template->show( 'deliverers_accepted' );
     }
 

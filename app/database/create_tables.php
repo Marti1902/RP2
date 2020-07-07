@@ -163,6 +163,7 @@ function create_table_orders()
 			'id_order int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'id_user int NOT NULL,' .
 			'id_restaurant int NOT NULL,' .
+			'id_deliverer int,' .
 			'active tinyint NOT NULL,' .
 			'order_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,' .
 			'delivery_time TIMESTAMP NULL,' .

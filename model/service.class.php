@@ -441,6 +441,16 @@ class Service{
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
     }
 
+    function addDeliverer($id_narudzbe,$id_deliverer)
+    {
+        try{
+            $db = DB::getConnection();
+            $st2 = $db->prepare( "UPDATE spiza_orders SET id_deliverer='$id_deliverer' WHERE id_order=:id_order");
+            $st2->execute( [ 'id_order' => $id_narudzbe ] );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+    }
+
     function finish($id_narudzbe)
     {
         $date = date("Y-m-d H:i:s");
@@ -459,12 +469,34 @@ class Service{
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
     }
 
+    function activeOrder($id_deliverer)
+    {
+        $ls = new Service();
+
+        try{
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT * FROM spiza_orders WHERE id_deliverer=:id_deliverer');
+            $st->execute( [ 'id_deliverer' => $id_deliverer ] );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        $row=$st->fetch();
+
+        if($row['active']==='3')
+        {   
+            echo "tu";
+            $id_order=$row['id_order'];
+            $aktivna=$ls->getCurrentOrder($id_order);
+            return $aktivna;
+        }
+        else
+            return null;
+    }
+
     function getCurrentOrder($id)
     {
         $ls = new Service();
 
         $hrana=[];
-    
         
         $o=$ls->getOrderById($id);
         $user=$ls->getUserById($o->id_user);

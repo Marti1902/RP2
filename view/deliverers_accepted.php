@@ -2,7 +2,8 @@
 
 <ul>
     <?php 
-    echo '<h4>Dostava u tijeku. <br>Nemojte izlaziti sa stranice dok dostava nije obavljena!</h4><div>';        
+    if(sizeof($currentOrder)!==0)
+        echo '<h4>Dostava u tijeku</h4><div>';        
     
     echo 'Broj narudžbe: ' . $currentOrder[0]->id_order . '<br>';
     echo 'Korisnik: ' . $currentOrder[1] . '<br>';
