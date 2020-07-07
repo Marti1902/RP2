@@ -2,7 +2,7 @@
 
 <!--            NOTIFIKACIJA            -->
 <div style="position: relative;" >
-<div class="toast" data-autohide="true"  style="  background-color: #DCDCDC; position: absolute; top: 0; right: 10px;">
+<div class="toast" data-autohide="true"  data-delay="4000" style="  background-color: #DCDCDC; position: absolute; top: 0; right: 10px;">
     <div class="toast-header">
       Nova narudžba
     </div>

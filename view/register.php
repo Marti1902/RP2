@@ -26,8 +26,9 @@
   <!-- Linkovi -->
   <ul class="navbar-nav">
     <li class="nav-item">
+    <a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index">Login </a>
     </li>
-    </li>
+    
 
     <!-- Dropdown meni -->
     <li class="nav-item dropdown">
