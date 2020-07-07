@@ -475,15 +475,14 @@ class Service{
 
         try{
             $db = DB::getConnection();
-            $st = $db->prepare( 'SELECT * FROM spiza_orders WHERE id_deliverer=:id_deliverer');
-            $st->execute( [ 'id_deliverer' => $id_deliverer ] );
+            $st = $db->prepare( 'SELECT * FROM spiza_orders WHERE id_deliverer=:id_deliverer AND active=:val');
+            $st->execute( [ 'id_deliverer' => $id_deliverer, 'val' => 3] );
         }
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
         $row=$st->fetch();
 
         if($row['active']==='3')
         {   
-            echo "tu";
             $id_order=$row['id_order'];
             $aktivna=$ls->getCurrentOrder($id_order);
             return $aktivna;
@@ -512,7 +511,6 @@ class Service{
             $h=$ls->getFoodById($row['id_food']);
             $hrana[]=[$h->name,$row['quantity']];
         }
-
         return [$o,$user->username,$restaurant->name,$hrana];
     }
 

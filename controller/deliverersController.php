@@ -40,7 +40,7 @@ class DeliverersController extends BaseController{
 
         $this->registry->template->title = $_SESSION['tab'] = 'Aktivna narudžba';
         $aktivna=$ls->activeOrder($_SESSION['deliverers']->id);
-       
+        
         $this->registry->template->currentOrder=$aktivna;
         $this->registry->template->show( 'deliverers_accepted' );
     }

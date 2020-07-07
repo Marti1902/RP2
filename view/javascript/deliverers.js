@@ -66,7 +66,7 @@ function getActiveOrders()
 
                         //  red ispod za listu  koja će sadržavat detalje
                         var tr_detalji = $( '<tr prikazid="'+data.id_order[i]+'" style="display: none;">'); 
-                        var td_detalji = $( '<td colspan="7">' );
+                        var td_detalji = $( '<td colspan="9">' );
                         var lista_za_narudbu = $( '<ul class="list-group-item">' );
 
 
@@ -145,7 +145,6 @@ function changeOrderStatus(newStatus, orderID, vrijeme=-1, id)
                     console.log( data.greska );
                 }
                 //else if( data.hasOwnProperty( 'rezultat' ) ){console.log(data.rezultat);}
-                $('.toast').toast('show');
                 checkDeliveryAvalible(id);
                 
             },
@@ -208,8 +207,10 @@ function checkDeliveryAvalible( id)
             {
                 //console.log('dostav', data['rezultat']);
                 //console.log( $( 'tr[orderid]'));
-                if( parseInt(data['rezultat']) ===0 )
+                if( parseInt(data['rezultat']) === 0 ){
                     $( 'tr[orderid]').off('click', prikazi);
+                    $('.toast').toast('show');
+                }
                 
             },
             error: function()
