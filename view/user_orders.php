@@ -38,8 +38,10 @@ Popis dostavljenih narudžbi:
             foreach ( $order[1] as $food )
                 echo $food[0]->name . ' (' . $food[1] . ')<br>';
             echo 'Ukupna cijena: ' . $order[0]->price_total . '<br>';
-            $spopustom = $order[0]->price_total - $order[0]->discount;
-            echo 'Cijena s popustom: ' . $spopustom . '<br>';
+            if( $order->discount != 0 ){
+                $spopustom = $order[0]->price_total * 0.9;
+                echo 'Cijena s popustom: ' . $spopustom . '<br>';
+            }
             if( $order[0]->rating != 1 && $order[0]->rating != 2 && $order[0]->rating != 3 && $order[0]->rating != 4 && $order[0]->rating != 5 && $order[0]->rating != 6 && $order[0]->rating != 7 && $order[0]->rating != 8 && $order[0]->rating != 9 && $order[0]->rating != 10)
                 echo "<button class='ocijeni' id='" . $order[0]->id_order . "'>Ocijeni</button>";
             echo '</li>';
