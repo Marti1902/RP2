@@ -333,7 +333,9 @@ function fja_posalji_narudzbu(){
                     $( 'div[name="napomena"]' ).remove();
                     $( 'span[name="adresa"]' ).remove();
                     $( '#ukupno' ).remove();
-                    $( 'div[name="uk"]').html( 'Narudžba poslana restoranu. Za više detalja pogledajte <a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a>.' )
+                    //$( 'div[name="uk"]').html( 'Narudžba poslana restoranu. Za više detalja pogledajte <a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a>.' )
+                    $( 'div[name="uk"]' ).append( $("#povratna") );
+                    $( "#povratna" ).removeAttr( 'hidden' );
                     $( '.posalji' ).hide();
                     $( '.odbaci' ).hide();
                 }

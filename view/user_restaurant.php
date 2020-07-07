@@ -69,6 +69,8 @@
     } ?>
 </ul>
 
+<span id="povratna" hidden>Narudžba poslana restoranu. Za više detalja pogledajte <a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a>.</span>
+
 <div style="height: 250px;"> </div>
 
 <script>
