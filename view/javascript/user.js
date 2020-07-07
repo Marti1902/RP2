@@ -8,7 +8,7 @@ $(document).ready(function(){
     var nas = $( '#naslov' ).html();
     console.log( nas );
 
-    if( nas !== 'Moje narudžbe' && nas !== 'Vaši omiljeni restorani' && nas !== 'Svi restorani' ){
+    if( nas !== 'Moje narudžbe' && nas !== 'Vaši omiljeni restorani' && nas !== 'Svi restorani' && nas != 'Kvartovi' && nas != 'Restorani prema vrsti hrane' && nas != 'Popularni restorani' && !nas.includes( "Restorani u kvartu" ) ){
         var kosarica = $( '<li class="nav-item" id="idiukos" style="cursor: pointer;"><a class="nav-link">Košarica <i class="fas fa-shopping-basket"></i></a></li>' );
         kosarica.css( 'float', 'right' );
         $( '.navbar-nav' ).append( kosarica );

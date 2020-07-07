@@ -1,15 +1,17 @@
 <?php require_once __DIR__ . '/header&footer/_header.php'; ?>
 
-<ul>
+<div class="list-group">
     <?php 
         foreach( $foodType as $food ){ //u css-u maknuti točkice kod liste
-            echo '<div>';
+            echo '<a class="list-group-item list-group-item-action" href="index.php?rt=user/restaurantsByFoodType&id_foodType=' . $food->id_foodType . '">';
+            echo ucfirst( $food->name );
             if( $food->image_path !== null )
-                echo '<a href="index.php?rt=user/restaurantsByFoodType&id_foodType=' . $food->id_foodType . '"><img src="'. __SITE_URL . $food->image_path .'"width="100", height="100"></a><br>';
-            echo $food->name . '<br>';
-            echo '</div>';
+                echo '<img src="'. __SITE_URL . $food->image_path .'"width="100", height="100"><br>';
+            //echo ucfirst( $food->name );
         }
     ?>
-</ul>
+</div>
+
+<div style="height: 250px;"> </div>
 
 <?php require_once __DIR__ . '/header&footer/_footer.php'; ?>

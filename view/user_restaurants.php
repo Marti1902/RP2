@@ -14,7 +14,7 @@
     ?>
 </div>
 
-<div style="height: 250px;"> </div>
+<div style="height: 50px;"> </div>
 
 <!-- <h4>Istraži više restorana:</h4> -->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">   
@@ -25,5 +25,7 @@
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user/foodType">Prema vrsti hrane</a></li>
     </ul>
 </nav> 
+
+<!-- <div style="height: 250px;"> </div> -->
 
 <?php require_once __DIR__ . '/header&footer/_footer.php'; ?>

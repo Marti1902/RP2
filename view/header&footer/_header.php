@@ -20,7 +20,10 @@
     <h1>Spiza.hr</h1>
 </div>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;">  
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;">
+    <a class="navbar-brand" href="#">
+        <img src="<?php echo __SITE_URL; ?>/css/logo.png" alt="Spiza.hr" style="width:40px;">
+    </a>
     <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a></li>
