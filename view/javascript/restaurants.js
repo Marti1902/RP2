@@ -511,11 +511,10 @@ function getActiveOrders()
                         //  dodat gumb za prihvat ili otkaz novo pristigle narudžbe
                         if( parseInt(data.active[i]) === 1 )
                         {
-                            var prihvati = $( '<button type="button" class="btn btn-primary btn-block" name="prihvati" orderid="'+data.id_order[i]+'">').html('Prihvati narudžbu');
-                            var odbij = $( '<button type="button" class="btn btn-danger btn-block" name="odbij" orderid="'+data.id_order[i]+'">').html('Odbij narudžbu');
+                            var prihvati = $( '<button type="submit" class="btn btn-primary btn-block" name="prihvati" orderid="'+data.id_order[i]+'">').html('Prihvati narudžbu');
+                            var odbij = $( '<button type="submit" class="btn btn-danger btn-block" name="odbij" orderid="'+data.id_order[i]+'">').html('Odbij narudžbu');
                             var inputVrijeme = $( '<div class="input-group mb-3" divVrijeme="'+data.id_order[i]+'">' ).html('<div class="input-group-prepend"><span class="input-group-text">Upiši vrijeme čekanja:</span></div>');
-                            
-                            inputVrijeme.append( $('<input type="number" inputVrijeme="'+data.id_order[i]+'" min="0" step="1" class="form-control" placeholder="npr. 50" required>') );
+                            inputVrijeme.append( $('<input type="number" inputVrijeme="'+data.id_order[i]+'" min="1" step="1" class="form-control" placeholder="npr. 50" required>') );
 
                             odbij.on('click', refuseOrder );
                             prihvati.on('click', acceptOrder );
@@ -551,14 +550,16 @@ function getActiveOrders()
 
 function acceptOrder(event)
 {
-    $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
     var vrijeme = $( 'input[inputVrijeme="'+$(event.target).attr('orderid')+'"]' );
+    if(vrijeme.val()==='')
+        return;
+    $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
     changeOrderStatus(2, $(event.target).attr('orderid'), vrijeme.val());
 
 }
 
 function refuseOrder(event)
-{
+{   
     $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
     $( 'div[divVrijeme="'+$(event.target).attr('orderid')+'"]' ).remove();
     changeOrderStatus(-1, $(event.target).attr('orderid'));
@@ -582,6 +583,7 @@ function changeOrderStatus(newStatus, orderID, vrijeme=-1)
                     console.log( data.greska );
                 }
 //                else if( data.hasOwnProperty( 'rezultat' ) ){}
+
             },
             error: function()
             {

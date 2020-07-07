@@ -18,12 +18,15 @@ $message=[];
 if( !isset($_GET['order_id'])||!isset($_GET['status']) )
     exit(1);
 
-if( intval($_GET['status']) === 2 )//restoran postavlja i vrijeme dostave, vrijeme potrebno za pripremu hrane se postavlja u delivery_time, koristimo date("Y-m-d H:i:s", 1388516401); za pretvaranje pa će dotavljač obrnuto
+if( intval($_GET['status']) === 2 || intval($_GET['status']) === -1)//restoran postavlja i vrijeme dostave, vrijeme potrebno za pripremu hrane se postavlja u delivery_time, koristimo date("Y-m-d H:i:s", 1388516401); za pretvaranje pa će dotavljač obrnuto
 {// inverzna funkcija za to je strtotime()
+    $vrijeme = $_GET['vrijeme'];
+    if(intval($_GET['vrijeme']) === -1)
+        $vrijeme = 1;
     try{
         $db=DB::getConnection();
         $st=$db->prepare( 'UPDATE spiza_orders SET active=:val, delivery_time=:val1  WHERE id_order=:val2 ' );
-        $st->execute( [ 'val' => intval($_GET['status']), 'val1'=> date("Y-m-d H:i:s", $_GET['vrijeme']), 'val2' => $_GET['order_id']] );
+        $st->execute( [ 'val' => intval($_GET['status']), 'val1'=> date("Y-m-d H:i:s", $vrijeme), 'val2' => $_GET['order_id']] );
     }catch( PDOException $e ) { 
         $message['greska'] = 'Greška u bazi!';echo $e;
         sendJSONandExit($e);

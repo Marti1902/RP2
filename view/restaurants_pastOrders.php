@@ -4,6 +4,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
+<h3>Prošle narudžbe</h3>
+<p>Kako bi vidjeli detalje narudžbe te recenzije kliknite na prikaži detalje.</p>
 
 <table class="table table-hover">
     <thead>
@@ -61,8 +63,11 @@
     </tbody>
 </table>
 
-</div>
-</div>
+
+<div style="height: 250px;"> </div>
+
+        </div>
+    </div>
 </div>
 
 

@@ -17,11 +17,13 @@ Dostavi je dugo trebalo da stigne pa se jelo pri t...Read More<?php require_once
   <div class="row">
     <div class="col-12">
 <h2>Trenutne narudžbe</h2>
-
+<p>Kako bi vijeli detalje naruđbi klinkite na njih. Također potrebno je novopristigle narudžbe prihvatiti ili odbiti, u slučaju da prihvatite narudžbu
+    neophono je upisati vrijeme koje vam je potrebno za pripremu hrane
+</p>
 <div class="activeOrders" id_restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>"></div>
 
-<h3>Menu: <small>-- prebacit ću na posebnu stranicu --</small></h3>
-
+<h3>Menu:</h3>
+<p>Kako bi vijeli slike detaljnije kliknita na njih te će vam se prikazati uvećane.</p>
 
 <table class="table table" name="food" >
     <thead>
