@@ -2,13 +2,14 @@
 // usklađeno sa novom bazom
 class Order{
 
-    protected $id_order, $id_user, $id_restaurant, $active, $order_time, $delivery_time, $price_total, $discount, $note, $address, $feedback, $rating, $thumbs_up, $thumbs_down;
+    protected $id_order, $id_user, $id_restaurant, $id_deliverer, $active, $order_time, $delivery_time, $price_total, $discount, $note, $address, $feedback, $rating, $thumbs_up, $thumbs_down;
 
-    public function __construct($id_order, $id_user, $id_restaurant, $active, $order_time, $delivery_time, $price_total, $discount, $note, $address, $feedback, $rating, $thumbs_up, $thumbs_down )
+    public function __construct($id_order, $id_user, $id_restaurant, $id_deliverer, $active, $order_time, $delivery_time, $price_total, $discount, $note, $address, $feedback, $rating, $thumbs_up, $thumbs_down )
     {
         $this->id_order = $id_order;
         $this->id_user = $id_user;
         $this->id_restaurant = $id_restaurant;
+        $this->id_deliverer = $id_deliverer;
         $this->active = $active;
         $this->order_time = $order_time;
         $this->delivery_time = $delivery_time;
