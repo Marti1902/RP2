@@ -2,13 +2,10 @@
 
 <div class="list-group">
     <?php 
-    //echo sizeof($restaurantList);
     foreach( $restaurantList as $restaurant ){
-        //echo '<li class="list-group-item">';
         echo '<a class="list-group-item list-group-item-action" href="index.php?rt=user/restaurant&id_restaurant=' . $restaurant->id_restaurant . '">' . 
             $restaurant->name . '<br>';
         echo $restaurant->description .'<br>';
-        #echo '<button name="iChose" type="submit" value="' . $restaurant->id . '">Try this one</button>';   //  Treba dodat jošlinkove za neke akcije
         echo '</li></a>';
     }
     ?>

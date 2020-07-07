@@ -7,7 +7,6 @@
             echo ucfirst( $food->name );
             if( $food->image_path !== null )
                 echo '<img src="'. __SITE_URL . $food->image_path .'"width="100", height="100"><br>';
-            //echo ucfirst( $food->name );
         }
     ?>
 </div>
