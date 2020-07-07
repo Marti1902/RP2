@@ -97,6 +97,25 @@ function seed_table_food()
 		$st->execute( array( 'name' => 'Punjeni lungić', 'description' => '(svinjski lungić punjen sirom)', 'waiting_time' => 30, 'id_restaurant' => 5, 'price' => 71, 'in_offering' => 1, 'image_path' => '/app/images/food/20.jpg'  ) );
 		$st->execute( array( 'name' => 'Ćevapi', 'description' => '(juneći ćevapi, 10 kom)', 'waiting_time' => 20, 'id_restaurant' => 5, 'price' => 45, 'in_offering' => 1, 'image_path' => '/app/images/food/21.jpg'  ) );
 		$st->execute( array( 'name' => 'BBQ krilca', 'description' => '(pileća krilca u BBQ umaku)', 'waiting_time' => 35, 'id_restaurant' => 5, 'price' => 42, 'in_offering' => 1, 'image_path' => '/app/images/food/2.jpg'  ) );		
+	
+		$st->execute( array( 'name' => 'Gyros', 'description' => '(piletina, salata, prilog po izboru)', 'waiting_time' => 30, 'id_restaurant' => 6, 'price' => 40, 'in_offering' => 1, 'image_path' => '/app/images/food/24.jpg'  ) );
+		$st->execute( array( 'name' => 'Falafel', 'description' => '(sa grill povrćem)', 'waiting_time' => 30, 'id_restaurant' => 6, 'price' => 30, 'in_offering' => 1, 'image_path' => '/app/images/food/25.jpg'  ) );
+
+		$st->execute( array( 'name' => 'Smokehouse', 'description' => '(govedina, salata, pršut, sir, BBQ umak)', 'waiting_time' => 30, 'id_restaurant' => 7, 'price' => 48, 'in_offering' => 1, 'image_path' => '/app/images/food/14.jpg'  ) );
+		$st->execute( array( 'name' => 'Monster', 'description' => '(govedina, Submarine umak, topljeni sir, pršut, BBQ umak)', 'waiting_time' => 20, 'id_restaurant' => 7, 'price' => 68, 'in_offering' => 1, 'image_path' => '/app/images/food/15.jpg'  ) );
+		
+		$st->execute( array( 'name' => 'Patka', 'description' => '(hrskava patka sa kiselo - slatkim umaku)', 'waiting_time' => 30, 'id_restaurant' => 8, 'price' => 91, 'in_offering' => 1, 'image_path' => '/app/images/food/26.jpg'  ) );
+		$st->execute( array( 'name' => 'Piletina', 'description' => '(piletina s bambusom i kineskim gljivama)', 'waiting_time' => 30, 'id_restaurant' => 8, 'price' => 57, 'in_offering' => 1, 'image_path' => '/app/images/food/27.jpg'  ) );
+		$st->execute( array( 'name' => 'Tie Pan', 'description' => '(tie-pan junetina u umaku od školjki)', 'waiting_time' => 30, 'id_restaurant' => 8, 'price' => 62, 'in_offering' => 1, 'image_path' => '/app/images/food/28.jpg'  ) );
+
+		$st->execute( array( 'name' => 'Gyros', 'description' => '(piletina, salata, prilog po izboru)', 'waiting_time' => 30, 'id_restaurant' => 9, 'price' => 40, 'in_offering' => 1, 'image_path' => '/app/images/food/24.jpg'  ) );
+		$st->execute( array( 'name' => 'Burger', 'description' => '(govedina, topljeni sir, pršut, BBQ umak)', 'waiting_time' => 30, 'id_restaurant' => 9, 'price' => 48, 'in_offering' => 1, 'image_path' => '/app/images/food/15.jpg'  ) );
+		$st->execute( array( 'name' => 'Falafel', 'description' => '(sa grill povrćem)', 'waiting_time' => 30, 'id_restaurant' => 9, 'price' => 30, 'in_offering' => 1, 'image_path' => '/app/images/food/25.jpg'  ) );
+
+		$st->execute( array( 'name' => 'Pizza Piccante', 'description' => '(pelat, sir, šunka, špek, feferoni, maslina)', 'waiting_time' => 30, 'id_restaurant' => 10, 'price' => 54, 'in_offering' => 1, 'image_path' => '/app/images/food/4.jpg'  ) );
+		$st->execute( array( 'name' => 'Pizza Capriccosia', 'description' => '(pelat, šunka, sir, šampinjoni, maslina)', 'waiting_time' => 20, 'id_restaurant' => 10, 'price' => 52, 'in_offering' => 1, 'image_path' => '/app/images/food/5.jpg'  ) );		
+	
+	
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_food]: " . $e->getMessage() ); }
 
@@ -114,7 +133,8 @@ function seed_table_food_type()
 		$st->execute( array( 'id_name' => 'pizza',  'image_path' => '/app/images/foodType/pizza.jpg') );
 		$st->execute( array( 'id_name' => 'burger', 'image_path' => '/app/images/foodType/burger.jpg') );
 		$st->execute( array( 'id_name' => 'grill', 'image_path' => '/app/images/foodType/grill.jpg' ) );
-
+		$st->execute( array( 'id_name' => 'kineska', 'image_path' => '/app/images/foodType/kineska.jpg' ) );
+		$st->execute( array( 'id_name' => 'internacionalna', 'image_path' => '/app/images/foodType/internacionalna.jpg' ) );
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_food_type]: " . $e->getMessage() ); }
 
@@ -127,14 +147,14 @@ function seed_table_orders()
 
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, active, price_total, delivery_time, note, address, feedback, rating, thumbs_up, thumbs_down) VALUES (:id_user, :id_restaurant, :active, :price_total, :delivery_time, :note, :address, :feedback, :rating, :thumbs_up, :thumbs_down)' );
+		$st = $db->prepare( 'INSERT INTO spiza_orders(id_user, id_restaurant, active, price_total, discount, delivery_time, note, address, feedback, rating, thumbs_up, thumbs_down) VALUES (:id_user, :id_restaurant, :active, :price_total, :discount, :delivery_time, :note, :address, :feedback, :rating, :thumbs_up, :thumbs_down)' );
 
-		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'active' => 2, 'price_total' => 120, 'delivery_time' => NULL, 'note' => '5.kat, prezime Jurišić.', 'address' => 'Tratinska 10', 'feedback' => '', 'rating' => 0, 'thumbs_up' => 0, 'thumbs_down' =>  0) );
-		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'active' => 0, 'price_total' => 60,'delivery_time' => date('Y-m-d H:i:s'), 'note' => '', 'address' => 'Tratinska 10', 'feedback' => 'Dostavi je dugo trebalo da stigne pa se jelo pri tome pomalo i ohladilo, ali je ipak bilo fino.', 'rating' => 4, 'thumbs_up' => 1, 'thumbs_down' =>  0) );
-		$st->execute( array( 'id_user' => 2, 'id_restaurant' => 1, 'active' => 0, 'price_total' => 124,'delivery_time' => date('Y-m-d H:i:s'), 'note' => '', 'address' => 'Savska 50', 'feedback' => 'Dostavljač je bio neugodan, kasnio je i nismo dobili točno što smo naručili.', 'rating' => 2, 'thumbs_up' => 0, 'thumbs_down' =>  2) );
-		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 2, 'active' => 0, 'price_total' => 216,'delivery_time' => date('Y-m-d H:i:s'), 'note' => 'Ne zvonite.', 'address' => 'Ulica kralja Zvonimira 57', 'feedback' => 'Zadovoljni smo uslugom, da je brža dostava bila bi i veća ocijena.', 'rating' => 8, 'thumbs_up' => 2, 'thumbs_down' =>  1) );
-		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 5, 'active' => 1, 'price_total' => 71,'delivery_time' => NULL, 'note' => '', 'address' => 'Radnička 80', 'feedback' => '', 'rating' => 0, 'thumbs_up' => 0, 'thumbs_down' =>  0) );
-		$st->execute( array( 'id_user' => 4, 'id_restaurant' => 5, 'active' => 2, 'price_total' => 45,'delivery_time' => NULL, 'note' => 'Zvonite na prezime Marić.', 'address' => 'Ulica Radoslava Cimermana 14', 'feedback' => '', 'rating' => 0, 'thumbs_up' => 0, 'thumbs_down' =>  0) );
+		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'active' => 2, 'price_total' => 120, 'discount' => 0, 'delivery_time' => NULL, 'note' => '5.kat, prezime Jurišić.', 'address' => 'Tratinska 10', 'feedback' => '', 'rating' => 0, 'thumbs_up' => 0, 'thumbs_down' =>  0) );
+		$st->execute( array( 'id_user' => 1, 'id_restaurant' => 3, 'active' => 0, 'price_total' => 60, 'discount' => 0, 'delivery_time' => date('Y-m-d H:i:s'), 'note' => '', 'address' => 'Tratinska 10', 'feedback' => 'Dostavi je dugo trebalo da stigne pa se jelo pri tome pomalo i ohladilo, ali je ipak bilo fino.', 'rating' => 4, 'thumbs_up' => 1, 'thumbs_down' =>  0) );
+		$st->execute( array( 'id_user' => 2, 'id_restaurant' => 1, 'active' => 0, 'price_total' => 124, 'discount' => 0, 'delivery_time' => date('Y-m-d H:i:s'), 'note' => '', 'address' => 'Savska 50', 'feedback' => 'Dostavljač je bio neugodan, kasnio je i nismo dobili točno što smo naručili.', 'rating' => 2, 'thumbs_up' => 0, 'thumbs_down' =>  2) );
+		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 2, 'active' => 0, 'price_total' => 216, 'discount' => 0, 'delivery_time' => date('Y-m-d H:i:s'), 'note' => 'Ne zvonite.', 'address' => 'Ulica kralja Zvonimira 57', 'feedback' => 'Zadovoljni smo uslugom, da je brža dostava bila bi i veća ocijena.', 'rating' => 8, 'thumbs_up' => 2, 'thumbs_down' =>  1) );
+		$st->execute( array( 'id_user' => 3, 'id_restaurant' => 5, 'active' => 1, 'price_total' => 71, 'discount' => 0, 'delivery_time' => NULL, 'note' => '', 'address' => 'Radnička 80', 'feedback' => '', 'rating' => 0, 'thumbs_up' => 0, 'thumbs_down' =>  0) );
+		$st->execute( array( 'id_user' => 4, 'id_restaurant' => 5, 'active' => 2, 'price_total' => 45, 'discount' => 0, 'delivery_time' => NULL, 'note' => 'Zvonite na prezime Marić.', 'address' => 'Ulica Radoslava Cimermana 14', 'feedback' => '', 'rating' => 0, 'thumbs_up' => 0, 'thumbs_down' =>  0) );
 
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_orders]: " . $e->getMessage() ); }
@@ -177,6 +197,12 @@ function seed_table_has_food_type()
 		$st->execute( array( 'id_foodType'=> 2, 'id_restaurant'=> 3) );
 		$st->execute( array( 'id_foodType'=> 2, 'id_restaurant'=> 4) );
 		$st->execute( array( 'id_foodType'=> 3, 'id_restaurant'=> 5) );
+		$st->execute( array( 'id_foodType'=> 5, 'id_restaurant'=> 6) );
+		$st->execute( array( 'id_foodType'=> 3, 'id_restaurant'=> 7) );
+		$st->execute( array( 'id_foodType'=> 4, 'id_restaurant'=> 8) );
+		$st->execute( array( 'id_foodType'=> 5, 'id_restaurant'=> 9) );
+		$st->execute( array( 'id_foodType'=> 1, 'id_restaurant'=> 10) );
+
 
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert spiza_has_food_type]: " . $e->getMessage() ); }
