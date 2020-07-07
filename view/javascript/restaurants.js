@@ -560,9 +560,14 @@ function acceptOrder(event)
 
 function refuseOrder(event)
 {   
+    
+
     $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
     $( 'div[divVrijeme="'+$(event.target).attr('orderid')+'"]' ).remove();
     changeOrderStatus(-1, $(event.target).attr('orderid'));
+    //$( 'tr[orderid="7"]').remove();
+    //$( 'tr[prikazid="7"]').remove();
+
 }
 
 function changeOrderStatus(newStatus, orderID, vrijeme=-1)
