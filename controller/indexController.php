@@ -47,10 +47,10 @@ class IndexController extends BaseController
 				$this->loginDeliverers();
 			return;
 		}
-		elseif( !$ls->emailConfirmed( $database, $_POST['username']) ){
+		if( !$ls->emailConfirmed( $database, $_POST['username']) ){
 			$this->registry->template->errorFlag = True;
-			$this->registry->template->errorMsg = 'Registracija nije odobrena!';
-			if( $database === 'login_restaurants' )
+			$this->registry->template->errorMsg = 'Registracija nije dovršena! E-mail nije potvrđen.';
+			if( $database === 'spiza_users' )
 				$this->index();
 			elseif( $database === 'spiza_restaurants' )
 				$this->loginRestaurants();
@@ -70,7 +70,7 @@ class IndexController extends BaseController
 			else{
 				$this->registry->template->errorFlag = True;
 				$this->registry->template->errorMsg = 'Krivi username ili password!';
-				if( $database === 'login_restaurants' )
+				if( $database === 'spiza_users' )
 					$this->index();
 				elseif( $database === 'spiza_restaurants' )
 					$this->loginRestaurants();
