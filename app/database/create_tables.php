@@ -305,7 +305,7 @@ function create_table_neighborhood()
 		$st = $db->prepare( 
 			'CREATE TABLE IF NOT EXISTS spiza_neighborhood (' .
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
-			'id_restaurant int,'.
+			'id_restaurant int NOT NULL,'.
 			'neighborhood varchar(50) NOT NULL)'
 		);
 
