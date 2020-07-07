@@ -1,5 +1,5 @@
 $( document ).ready( function(){
-    var ord;
+    var ord, p;
     $( "button[klasa='ocijeni']" ).on( 'click', show_form);
 })
 
@@ -80,8 +80,8 @@ function obradi_formu(){
     event.preventDefault();
 
     var feedback = $( 'input[name="recenzija"]').val(),
-        rating = $( 'input[name="ocjena"]').val(),
-        p = $( '<p>' );
+        rating = $( 'input[name="ocjena"]').val();
+    p = $( '<p id="poruka">' );
     $( "#boks" ).append( p );
 
     console.log( feedback, rating );
@@ -99,10 +99,12 @@ function obradi_formu(){
             {
                 if( data.hasOwnProperty( 'greska' ) ){
                     console.log( data.greska );
-                    p.html( data.greska);
+                    $( "#poruka" ).html( data.greska);
+                    //$( "#boks" ).append( "<p>" + data.greska + "</p>")
                 }
                 else if( data.hasOwnProperty( 'rezultat' ) ){
-                    p.html( 'Recenzija uspješno poslana!' );
+                    $( "#poruka" ).html( 'Recenzija uspješno poslana!' );
+                    //$( "#boks" ).append( "<p>Recenzija uspješno poslana!</p>" );
                     console.log( data.rezultat );
                     $( "form.oc" ).attr( "hidden", true );
                 }
