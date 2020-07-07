@@ -61,8 +61,8 @@
             echo '<li class="list-group-item">' .
                 $order->id_user . ': ' . $order->rating . '<br>' .
                 '<div id="ovaj' . $i . '">' . $order->feedback . '</div><br>' .
-                '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="gori">' . $order->thumbs_up . '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>' . 
-                '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="doli">' . $order->thumbs_down . '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></button>' . 
+                '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="gori"> &#x1F44D;' . $order->thumbs_up . '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>' . 
+                '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="doli">  &#x1F44E;' . $order->thumbs_down . '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></button>' . 
                 '</li>';
             $i++;
         }
