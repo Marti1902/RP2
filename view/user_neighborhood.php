@@ -9,4 +9,8 @@
 
 <div style="height: 250px;"> </div>
 
+</div>
+</div>
+</div>
+
 <?php require_once __DIR__ . '/header&footer/_footer.php'; ?>

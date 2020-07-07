@@ -1,6 +1,6 @@
 $( document ).ready( function(){
     var ord;
-    $( ".btn-primary" ).on( 'click', show_form);
+    $( "button[klasa='ocijeni']" ).on( 'click', show_form);
 })
 
 function show_form()

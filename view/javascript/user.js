@@ -26,7 +26,7 @@ $(document).ready(function(){
         localStorage.clear();
     }
 
-    $( ".dodaj" ).on( 'click', function(){
+    $( "button[klasa='dodaj']" ).on( 'click', function(){
         var info = $( this ).attr( 'id' );
         //console.log( info );
         var id = info.split( ", " );
@@ -85,7 +85,7 @@ $(document).ready(function(){
         } );
     } );
 
-    $( ".thumbs" ).on( 'click', function(){
+    $( "button[klasa='thumbs']" ).on( 'click', function(){
         var ord = $( this ).attr( 'id' );
         var novi = parseInt( $( this ).html() ) + 1;
         if( $( this ).attr( 'palac' ) == 'gori' ) tip = 'gori';

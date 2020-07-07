@@ -17,6 +17,10 @@
     ?>
 </div>
 
+</div>
+</div>
+</div>
+
 <div style="height: 50px;"> </div>
 <!-- Istraži više restorana: -->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">   

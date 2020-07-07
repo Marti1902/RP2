@@ -47,7 +47,7 @@
                 echo 'Cijena s popustom: ' . $spopustom . '<br>';
             }
             if( $order[0]->rating != 1 && $order[0]->rating != 2 && $order[0]->rating != 3 && $order[0]->rating != 4 && $order[0]->rating != 5 && $order[0]->rating != 6 && $order[0]->rating != 7 && $order[0]->rating != 8 && $order[0]->rating != 9 && $order[0]->rating != 10)
-                echo "<button class='btn btn-primary 'id='ocijeni' ord='" . $order[0]->id_order . "'>Ocijeni</button>";
+                echo "<button class='btn btn-primary'klasa='ocijeni' ord='" . $order[0]->id_order . "'>Ocijeni</button>";
             echo '</li>';
         }
     }
@@ -57,6 +57,10 @@
 </div>
 
 <div style="height: 250px;"> </div>
+
+</div>
+</div>
+</div>
 
 <form class="oc" hidden>
     Unesite recenziju: <input type="text" name="recenzija">

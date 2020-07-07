@@ -16,6 +16,10 @@
 
 <div style="height: 50px;"> </div>
 
+</div>
+</div>
+</div>
+
 <!-- <h4>Istraži više restorana:</h4> -->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">   
     <ul class="nav navbar-nav">

@@ -31,7 +31,7 @@
                 if( $food->image_path !== null )
                     echo '<img src="'. __SITE_URL . $food->image_path .'" width="100" height="100" name="' .$food->name. '">';
             echo "</td>\n";
-            echo '<td><button img="' . $food->image_path . '" class="dodaj" id="' . $food->id_food . ', ' . $food->name . ', ' . $food->price . '">Dodaj u košaricu</button></li></td>';
+            echo '<td><button class="btn btn-primary" img="' . $food->image_path . '" klasa="dodaj" id="' . $food->id_food . ', ' . $food->name . ', ' . $food->price . '">Dodaj u košaricu</button></li></td>';
             echo "</tr>\n";
     }
 ?>
@@ -61,8 +61,8 @@
             echo '<li class="list-group-item">' .
                 $order->id_user . ': ' . $order->rating . '<br>' .
                 '<div id="ovaj' . $i . '">' . $order->feedback . '</div><br>' .
-                '<button class="thumbs" id="' . $order->id_order . '" palac="gori">' . $order->thumbs_up . '</button>' . 
-                '<button class="thumbs" id="' . $order->id_order . '" palac="doli">' . $order->thumbs_down . '</button>' . 
+                '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="gori">' . $order->thumbs_up . '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>' . 
+                '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="doli">' . $order->thumbs_down . '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></button>' . 
                 '</li>';
             $i++;
         }
@@ -72,6 +72,10 @@
 <span id="povratna" hidden>Narudžba poslana restoranu. Za više detalja pogledajte <a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a>.</span>
 
 <div style="height: 250px;"> </div>
+
+</div>
+</div>
+</div>
 
 <script>
 $( document ).ready( function() 
