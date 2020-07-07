@@ -29,7 +29,7 @@
   <!-- Linkovi -->
   <ul class="navbar-nav">
     <li class="nav-item">
-    <a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index">Login </a>
+    <a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index">Prijava korisnika</a>
     </li>
     
 

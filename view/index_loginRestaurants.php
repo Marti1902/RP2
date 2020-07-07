@@ -36,9 +36,9 @@
             Restorani/dostavljači
         </a>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="<?php echo __SITE_URL; ?>/index.php?rt=index/loginRestaurants">Login restaurants</a>
-            <a class="dropdown-item" href="<?php echo __SITE_URL; ?>/index.php?rt=index/registerForward_restaurants">Register new restaurant</a>
-            <a class="dropdown-item" href="<?php echo __SITE_URL; ?>//index.php?rt=index/loginDeliverers">Login dostavljač</a>
+            <a class="dropdown-item" href="<?php echo __SITE_URL; ?>/index.php?rt=index/loginRestaurants">Prijava restorana</a>
+            <a class="dropdown-item" href="<?php echo __SITE_URL; ?>/index.php?rt=index/registerForward_restaurants">Registriraj novi restoran</a>
+            <a class="dropdown-item" href="<?php echo __SITE_URL; ?>//index.php?rt=index/loginDeliverers">Prijava dostavljača</a>
         </div>
         </li>
     </ul>
