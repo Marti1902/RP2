@@ -103,8 +103,10 @@ function getActiveOrders()
 
 function acceptOrder(event)
 {
-    $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
     var vrijeme = $( 'input[inputVrijeme="'+$(event.target).attr('orderid')+'"]' );
+    if(vrijeme.val()==='')
+        return;
+    $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
     changeOrderStatus(3, $(event.target).attr('orderid'), vrijeme.val(), $('#slobodne').attr('id_deliverer'));
     var orderno= $(event.target).attr('orderid');
     $( 'tr[orderid="'+orderno+'"]').remove();
