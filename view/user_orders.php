@@ -18,7 +18,7 @@ Popis aktivnih narudžbi:
             foreach ( $order[1] as $food )
                 echo $food[0]->name . ' (' . $food[1] . ')<br>';
             echo 'Ukupna cijena: ' . $order[0]->price_total . '<br>';
-            if( $order->discount != 0 ){
+            if( $order[0]->discount != 0 ){
                 $spopustom = $order[0]->price_total * 0.9;
                 echo 'Cijena s popustom: ' . $spopustom . '<br>';
             }
@@ -38,7 +38,7 @@ Popis dostavljenih narudžbi:
             foreach ( $order[1] as $food )
                 echo $food[0]->name . ' (' . $food[1] . ')<br>';
             echo 'Ukupna cijena: ' . $order[0]->price_total . '<br>';
-            if( $order->discount != 0 ){
+            if( $order[0]->discount != 0 ){
                 $spopustom = $order[0]->price_total * 0.9;
                 echo 'Cijena s popustom: ' . $spopustom . '<br>';
             }
