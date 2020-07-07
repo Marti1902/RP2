@@ -652,7 +652,8 @@ function destroy( vari = null)
     
 }
 
-/////////////////////////////       Fje za pastOrders.php
+///////////////////////////  <link rel="stylesheet"  href="<?php echo __SITE_URL; ?>/css/preIgnore.css">
+//       Fje za pastOrders.php
 
 function show_details(event)
 {

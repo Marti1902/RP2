@@ -5,7 +5,7 @@
     <title>Spiza</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="<?php echo __SITE_URL; ?>/view/javascript/restaurants.js"></script>
-    <script src="<?php echo __SITE_URL; ?>/view/javascript/gallery.js"></script>
+    <script src="<?php echo __SITE_URL; ?>/view/javascript/gallery2.js"></script>
 
     <link rel="icon" href="<?php echo __SITE_URL; ?>/css/logo.png" />
 
@@ -14,6 +14,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet"  href="<?php echo __SITE_URL; ?>/css/preIgnore.css">
+
 
 </head>
 
