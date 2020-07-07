@@ -6,7 +6,7 @@ class DeliverersController extends BaseController{
     public function index(){
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Dostavljači';
 
@@ -18,7 +18,7 @@ class DeliverersController extends BaseController{
     {
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Prihvatili ste narudžbu';
 
@@ -36,7 +36,7 @@ class DeliverersController extends BaseController{
     {
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Aktivna narudžba';
         $aktivna=$ls->activeOrder($_SESSION['deliverers']->id);
@@ -49,7 +49,7 @@ class DeliverersController extends BaseController{
     {
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         if(isset($_POST['dostavljeno']))
             $ls->finish($_POST['btn_dostavljeno']);

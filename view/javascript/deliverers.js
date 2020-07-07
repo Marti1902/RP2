@@ -2,14 +2,13 @@ var timestamp = 0;
 
 $(document).ready(function()
 {
-    //if($( 'h4').first().html() !== 'Slobodne narudžbe' )
     getActiveOrders();
 });
 
+
+// dohvaćanje aktivnih i slobodnih narudžbi 
 function getActiveOrders()
 {
-    //console.log(timestamp);
-    //console.log( $( 'div.activeOrders' ).attr( 'id_restaurant' ) );
     $.ajax(
         {
             url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/deliverersActiveOrders.php',
@@ -41,7 +40,7 @@ function getActiveOrders()
                     for( var i = 0; i < data.id_order.length; ++i )
                     {
                         var tr = $( '<tr orderid="'+data.id_order[i]+'">' );
-                        var td_id_order = $( '<td>' ).html( /*'<a href="index=de.php?rtliverers/order&id_order=' + data.id_order[i] + '">' +*/ data.id_order[i] /*+ '</a>'*/ );
+                        var td_id_order = $( '<td>' ).html( data.id_order[i] );
                         var td_restaurant = $( '<td>' ).html( data.restaurant[i] );
                         var td_user = $( '<td>' ).html( data.user[i] );
                         var td_address = $( '<td>' ).html( data.address[i] );
@@ -72,28 +71,18 @@ function getActiveOrders()
 
                         //  GUMB ZA PRIHVATI 
                         var prihvati = $( '<button type="button" class="btn btn-primary btn-block" name="prihvati" orderid="'+data.id_order[i]+'">').html('Prihvati narudžbu');
-                        //var odbij = $( '<button type="button" class="btn btn-danger btn-block" name="odbij" orderid="'+data.id_order[i]+'">').html('Odbij narudžbu');
                         var inputVrijeme = $( '<div class="input-group mb-3" divVrijeme="'+data.id_order[i]+'">' ).html('<div class="input-group-prepend"><span class="input-group-text">Upiši vrijeme čekanja:</span></div>');
                         
                         inputVrijeme.append( $('<input type="number" inputVrijeme="'+data.id_order[i]+'" min="0" step="1" class="form-control" placeholder="npr. 50" required>') );
 
-                        //odbij.on('click', refuseOrder );
                         prihvati.on('click', acceptOrder );
 
                         lista_za_narudbu.append(inputVrijeme )
                             .append( prihvati );
-                            //.append( odbij );
                         
-                        //  prikaz notifokacije za nove narudžbe
-                        //$('.toast').toast('show');
-
-
                         td_detalji.append( lista_za_narudbu );
                         tr_detalji.append( td_detalji );
                         tbody.append( tr_detalji );
-
-
-
                     }
                     tbl.append( tbody );
 
@@ -105,7 +94,6 @@ function getActiveOrders()
             },
             error: function( xhr, status )
             {
-                //console.log( status );
                 if( status === 'timeout' )
                     dohvatiCijene(); 
             }
@@ -121,7 +109,6 @@ function acceptOrder(event)
     var orderno= $(event.target).attr('orderid');
     $( 'tr[orderid="'+orderno+'"]').remove();
     $( 'tr[prikazid="'+orderno+'"]').remove();
-
 }
 
 
@@ -144,9 +131,7 @@ function changeOrderStatus(newStatus, orderID, vrijeme=-1, id)
                 if( data.hasOwnProperty( 'greska' ) ){
                     console.log( data.greska );
                 }
-                //else if( data.hasOwnProperty( 'rezultat' ) ){console.log(data.rezultat);}
                 checkDeliveryAvalible(id);
-                
             },
             error: function()
             {
@@ -218,14 +203,4 @@ function checkDeliveryAvalible( id)
                 console.log( 'Greška u Ajax pozivu... changeOrderStatus');
             }
         });
-}
-
-
-////////////////////////////////    ne treba zasad
-
-function refuseOrder(event)
-{return;
-    $( 'button[orderid="'+$(event.target).attr('orderid')+'"]' ).remove();
-    $( 'div[divVrijeme="'+$(event.target).attr('orderid')+'"]' ).remove();
-    changeOrderStatus(-1, $(event.target).attr('orderid'));
 }

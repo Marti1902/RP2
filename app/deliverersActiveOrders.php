@@ -11,8 +11,6 @@ function sendJSONandExit($message)
     exit(0);
 }
 
-//debug();
-
 if( !isset( $_GET['timestamp'] ) )
     sendJSONandExit( $_GET);//['error' => 'Nije postavljen timestamp!'] );
 

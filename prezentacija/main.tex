@@ -177,7 +177,11 @@ Tablice koje koistimo u bazi podataka:
     \item\emph{log in} već postojećih restorana ili registriranje novih restorana
     \item\emph{Naslovnica}
     \begin{itemize}
-        \item Popis trenutnih aktivnih narudžbi tog restorana
+        \item Popis trenutnih aktivnih narudžbi tog restorana te gumbi
+        \begin{enumerate}
+            \item\emph{Prihvati narudžbu} - prije toga je potrebno unijeti vrijeme pripreme te narudžbe
+            \item\emph{Odbij narudžbu}
+        \end{enumerate}
         \item Menu koji nudi
         \item\emph{Uredi jelo} - mogućnost mijenjanja podataka o nekom jelu
         \item Podaci o restoranu
@@ -192,9 +196,22 @@ Tablice koje koistimo u bazi podataka:
 
 \begin{frame}[fragile,allowframebreaks]{Dostavljači}
 \begin{itemize}
-    \item Prikazan im je jedino popis trenutno slobodnih nedostavljenih narudžbi
-    \item Nakon prihvaćanja narudžbe otvori im se stranica gdje trebaju označiti kada je dostava obavljena
-    \item\emph{Aktivna} - prikaže narudžbu koju dostavljač u tom trenutku dostavlja ako ona postoji
+    \item\emph{Naslovnica} - popis trenutno slobodnih nedostavljenih narudžbi
+    \item Prihvaćanje narudžbe
+    \begin{enumerate}
+        \item Odabere narudžbu
+        \item Unese koliko vremena treba za dostavu
+        \item Klikne \emph{Prihvati narudžbu}
+    \end{enumerate}
+    \item\emph{Aktivne narudžbe}
+    \begin{itemize}
+        \item Prikaže narudžbu koju dostavljač u tom trenutku dostavlja ako ona postoji
+        \item Kada završi s dostavom
+        \begin{enumerate}
+            \item Označi da je dostava gotova
+            \item klik na \emph{Dostavljeno}
+        \end{enumerate}
+    \end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -203,3 +220,4 @@ Tablice koje koistimo u bazi podataka:
 \end{frame}
 
 \end{document}
+
