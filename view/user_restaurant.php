@@ -86,7 +86,7 @@ $( document ).ready( function()
     var n = <?php echo $i; ?>;
     for ( i = 0; i < n;  i++){
         var text = $( '#ovaj' + i ).html();
-        var char_limit = 50;
+        var char_limit = 200;
 
         if(text.length < char_limit)
             $( '#ovaj' + i ).html( text );

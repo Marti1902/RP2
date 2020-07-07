@@ -7,14 +7,14 @@ class UserController extends BaseController{
     public function index(){
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Vaši omiljeni restorani';
         $narudzbe = $ls->getOrderListByUserId( $_SESSION['user']->id ); // dohvaćamo sve userove narudzbe
         $restorani = [];
         foreach ( $narudzbe as $narudzba ){
             if( $narudzba->active == 0 && $narudzba->rating != 0 ){ //Pobrinemo se da promatramo samo dostavljene narudzbe
-                echo $narudzba->rating;
+                //echo $narudzba->rating;
                 $rest = $ls->getRestaurantById( $narudzba->id_restaurant );
                 if ( !in_array( $rest, array_column( $restorani, 0 ) ) ){ // ako već nije u $restorani, stavljamo ga
                     $i = 0;
@@ -39,7 +39,7 @@ class UserController extends BaseController{
     public function restaurants(){
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Svi restorani';
         $this->registry->template->restaurantList = $ls->getRestaurantList();
@@ -51,7 +51,7 @@ class UserController extends BaseController{
     public function restaurantsByFoodType(){
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Restorani prema vrsti hrane';
         $this->registry->template->restaurantList = $ls->getRestaurantListByFoodType( $_GET['id_foodType']);
@@ -62,7 +62,7 @@ class UserController extends BaseController{
     public function foodType(){
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Restorani prema vrsti hrane';
         $this->registry->template->foodType = $ls->getFoodTypeList();
@@ -73,7 +73,7 @@ class UserController extends BaseController{
     public function orders(){
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         $this->registry->template->title = 'Moje narudžbe';
         $_SESSION['tab'] = 'User orders';
@@ -98,7 +98,7 @@ class UserController extends BaseController{
     public function restaurant(){
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         $restaurant = $ls->getRestaurantById ( $_GET['id_restaurant'] );
         $this->registry->template->title = $restaurant->name;
@@ -123,13 +123,13 @@ class UserController extends BaseController{
     {
         $ls = new Service();
         error404();
-        debug();
+        //debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Popularni restorani';
         $ratingList = $ls->getRatingList();
         
-        foreach($ratingList as $rat)
-            echo $rat->rating . " ";
+        /*foreach($ratingList as $rat)
+            echo $rat->rating . " ";*/
         
 
         $restorani = [];
@@ -145,7 +145,8 @@ class UserController extends BaseController{
                             $i++;
                         }
                     }
-                    $restorani[] = [$rest, $s/$i];
+                    $ocjena = $s/$i;
+                    $restorani[] = [$rest, number_format((float)$ocjena, 2, '.', '')];
                     //echo max(array_column($restorani, 1));
                 }
             }
@@ -167,7 +168,7 @@ class UserController extends BaseController{
         {
             $ls = new Service();
             error404();
-            debug();
+            //debug();
     
             $this->registry->template->title = $_SESSION['tab'] = 'Restorani u kvartu ' . $_POST['kvart'];
             $this->registry->template->restaurantList = $ls->getRestaurantListByNeighborhood( $_POST['kvart']);
@@ -185,7 +186,7 @@ function error404(){        //  provjerava ako se korisnik odlogirao pa ga preus
     }
 }
 
-function debug()
+/*function debug()
 {
 	echo '<pre>$_POST=';
 	print_r( $_POST );
@@ -195,7 +196,7 @@ function debug()
 	print_r( $_SESSION );
     }
 	echo '</pre>';
-}
+}*/
 
 
 
