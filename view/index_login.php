@@ -51,13 +51,11 @@
       <div class="toast-header">
         Greška!
       </div>
-      <div class="toast-body">
-      <?php
+      <div class="toast-body"><?php
       if( isset($errorFlag))
           if( $errorFlag )
               echo $errorMsg . '<br>';
-      ?>
-      </div>
+      ?></div>
   </div>
 </div>
 

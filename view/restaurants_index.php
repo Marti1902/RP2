@@ -1,5 +1,6 @@
 <?php require_once __DIR__ . '/header&footer/_header_restaurants.php'; ?>
 
+<!--            NOTIFIKACIJA            -->
 <div style="position: relative;" >
 <div class="toast" data-autohide="true"  style="  background-color: #DCDCDC; position: absolute; top: 0; right: 10px;">
     <div class="toast-header">
