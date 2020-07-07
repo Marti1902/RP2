@@ -43,7 +43,7 @@
 <div style="position: relative;" >
   <div class="toast" data-autohide="false"  style="  background-color: #DCDCDC; position: absolute; top: 10; right: 10px;">
       <div class="toast-header">
-        Greška!
+        Obavijest!
       </div>
       <div class="toast-body"><?php
       if( isset($errorFlag))
@@ -59,7 +59,7 @@
     <div class="col-12">
 
 
-<h2>Unesite podatke za registraciju!</h2>
+<h2>Unesite podatke za registraciju korisnika!</h2>
 
 <p>Nakon registracije primit ćete e-mail potvrdu sa poveznicom za aktivaciju korisničkog računa.</p>
 

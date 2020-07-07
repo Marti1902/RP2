@@ -47,9 +47,9 @@
 
 <!--        NOTIFICATION    4   ERROR       -->
 <div style="position: relative;" >
-  <div class="toast" data-autohide="false"  style="  background-color: #DCDCDC; position: absolute; top: 10; right: 10px;">
+  <div class="toast" data-autohide="true" data-delay="4000" style="  background-color: #DCDCDC; position: absolute; top: 10; right: 10px;">
       <div class="toast-header">
-        Greška!
+        Obavijest!
       </div>
       <div class="toast-body"><?php
       if( isset($errorFlag))
@@ -68,11 +68,11 @@
 <form action="<?php echo __SITE_URL;?>/index.php?rt=index/login" method='post'>
 <div class="form-group">
     <label for="text">Username:</label>
-    <input type="text" class="form-control" name="username"  placeholder="Unesi username">
+    <input type="text" class="form-control" name="username"  placeholder="Unesi username" required>
 </div>
 <div class="form-group">
     <label for="password">Password:</label>
-    <input type="password" name="password" class="form-control" placeholder="Unesi password" id="password"> <br><br>
+    <input type="password" name="password" class="form-control" placeholder="Unesi password" id="password" required> <br><br>
 </div>
 <button type="submit" class="btn btn-primary btn-block" name="log_in" value="login_user">Log in</button>
 </form>
@@ -81,7 +81,6 @@
     <input type="submit" class="btn btn-primary btn-block" value="Register" />
 </form>
 
-<div style="height: 250px;"> </div>
 
 <?php /*            SAMO    BACKUP
 <hr>
@@ -96,9 +95,10 @@
     <input type="submit" value="Login for deliverers" />
 </form>
 */ ?>
+<div style="height: 250px;"> </div>
 
-</div>
-</div>
+    </div>
+  </div>
 </div>
 
 <script>

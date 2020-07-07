@@ -3,35 +3,110 @@
 <head>
     <meta charset="UTF-8"> 
     <title>Spiza</title>
-   
+    <link rel="icon" href="<?php echo __SITE_URL; ?>/css/logo.png" />
+
+    <!--        BOOTSTRAP           -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-    <h1><?php echo $title; ?></h1>
+<div class="jumbotron text-center" style="margin-bottom: 0px;">
+    <h1>Spiza.hr</h1>
+    <h2><?php echo $title; ?> login</h2>
+</div>
 
-     <?php
-    if( isset($errorFlag))
-        if( $errorFlag )
-            echo $errorMsg . '<br>';
-    ?>
-     
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;">
+    <a class="navbar-brand" href="#">
+        <img src="<?php echo __SITE_URL; ?>/css/logo.png" alt="Spiza.hr" style="width:40px;">
+    </a>
+
+    <!-- Linkovi -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+        <a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index">Natrag </a>
+        </li>
+
+        <!-- Dropdown meni -->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Restorani/dostavljači
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="<?php echo __SITE_URL; ?>/index.php?rt=index/loginRestaurants">Login restaurants</a>
+            <a class="dropdown-item" href="<?php echo __SITE_URL; ?>/index.php?rt=index/registerForward_restaurants">Register new restaurant</a>
+            <a class="dropdown-item" href="<?php echo __SITE_URL; ?>//index.php?rt=index/loginDeliverers">Login dostavljač</a>
+        </div>
+        </li>
+    </ul>
+</nav> 
+
+<!--        NOTIFICATION    4   ERROR       -->
+<div style="position: relative;" >
+  <div class="toast" data-autohide="ture" data-delay="4000" style="  background-color: #DCDCDC; position: absolute; top: 10; right: 10px;">
+      <div class="toast-header">
+        Obavijest!
+      </div>
+      <div class="toast-body"><?php
+      if( isset($errorFlag))
+          if( $errorFlag )
+              echo $errorMsg . '<br>';
+      ?></div>
+  </div>
+</div>
+    
+
+<!----      BODY         -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+
 <form action="<?php echo __SITE_URL;?>/index.php?rt=index/login" method='post'>
-Username:
-<input type="text" name="username">
-<br>
-Password:
-<input type="password" name="password"> <br><br>
-<button type="submit" name="log_in" value="login_restaurants">Log in</button>
+    <div class="form-group">
+        <label for="text">Username:</label>
+        <input type="text" class="form-control" name="username"  placeholder="Unesi username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" class="form-control" placeholder="Unesi password" id="password" required> <br><br>
+    </div>
+
+    <button type="submit" name="log_in" class="btn btn-primary btn-block" value="login_restaurants">Log in</button>
 </form>
 
-<p>ili</p> 
 
 <form action="<?php echo __SITE_URL; ?>/index.php?rt=index/registerForward_restaurants" method='post'>
-    <input type="submit" value="Register" />
+    <input type="submit" value="Registriraj novi restoran" class="btn btn-primary btn-block" />
 </form>
 
 
+<div style="height: 250px;"> </div>
 
 
+
+        </div>
+    </div>
+</div>
+
+<script>
+  $( document ).ready( function()
+{
+  var toast =   $( 'div.toast-body');
+  if( toast.html() !== '')
+    $( 'div.toast' ).toast('show');
+});
+</script>
 
 </body>
+<footer>
+<div class="jumbotron text-center" style="margin-bottom:0">
+
+&copy; <?php echo date("Y");?>
+
+</div>
+</footer>
 </html>
