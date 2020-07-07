@@ -25,7 +25,8 @@ class UserController extends BaseController{
                             $i++;
                         }
                     }
-                    $restorani[] = [$rest, $s/$i]; // za svaki restoran koji je korisnik ocijenio, računamo prosječnu ocijenu
+                    $ocjena = $s/$i;
+                    $restorani[] = [$rest, number_format((float)$ocjena, 2, '.', '')]; // za svaki restoran koji je korisnik ocijenio, računamo prosječnu ocijenu
                 }
             }
         }
@@ -101,7 +102,7 @@ class UserController extends BaseController{
 
         $restaurant = $ls->getRestaurantById ( $_GET['id_restaurant'] );
         $this->registry->template->title = $restaurant->name;
-        $this->registry->template->rating = $ls->getRestaurantRatingById( $_GET['id_restaurant'] );
+        $this->registry->template->rating = number_format((float)$ls->getRestaurantRatingById( $_GET['id_restaurant'] ), 2, '.', '');
         $_SESSION['tab'] = 'User restaurant';
         $this->registry->template->foodList = $ls->getFoodListByRestaurantId( $restaurant->id_restaurant );
         $pomocni = $ls->getOrderListByRestaurantId( $restaurant->id_restaurant );
