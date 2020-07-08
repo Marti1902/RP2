@@ -84,10 +84,10 @@ class Service{
         $to       = $_POST['email'];
         $subject  = 'Registracijski mail';
         $message  = 'Poštovani ' . $_POST['username'] . "!\nZa dovršetak registracije kliknite na sljedeći link: ";
-        $message = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/register.php?niz=' . $reg_seq . "\n";
+        $message = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/app/register.php?niz=' . $reg_seq . "\n";
 
         if( $databaseName === 'spiza_restaurants' )
-            $message = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/register_restaurant.php?niz=' . $reg_seq . "\n";
+            $message = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/app/register_restaurant.php?niz=' . $reg_seq . "\n";
 
         $headers  = 'From: rp2@studenti.math.hr' . "\r\n" .
                     'Reply-To: rp2@studenti.math.hr' . "\r\n" .
