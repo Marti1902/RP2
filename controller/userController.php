@@ -12,21 +12,23 @@ class UserController extends BaseController{
         $this->registry->template->title = $_SESSION['tab'] = 'Vaši omiljeni restorani';
         $narudzbe = $ls->getOrderListByUserId( $_SESSION['user']->id ); // dohvaćamo sve userove narudzbe
         $restorani = [];
-        foreach ( $narudzbe as $narudzba ){
-            if( $narudzba->active == 0 && $narudzba->rating != 0 ){ //Pobrinemo se da promatramo samo dostavljene narudzbe
-                //echo $narudzba->rating;
-                $rest = $ls->getRestaurantById( $narudzba->id_restaurant );
-                if ( !in_array( $rest, array_column( $restorani, 0 ) ) ){ // ako već nije u $restorani, stavljamo ga
-                    $i = 0;
-                    $s = 0;
-                    foreach( $narudzbe as $nar ){ // pregledavamo sve narudzbe istog restorana da bi došli do svih ocijena
-                        if( $nar->id_restaurant == $rest->id_restaurant && $nar->active == 0 && $nar->rating != 0 ){
-                            $s = $s + $nar->rating;
-                            $i++;
+        if( $narudzbe != null ){
+            foreach ( $narudzbe as $narudzba ){
+                if( $narudzba->active == 0 && $narudzba->rating != 0 ){ //Pobrinemo se da promatramo samo dostavljene narudzbe
+                    //echo $narudzba->rating;
+                    $rest = $ls->getRestaurantById( $narudzba->id_restaurant );
+                    if ( !in_array( $rest, array_column( $restorani, 0 ) ) ){ // ako već nije u $restorani, stavljamo ga
+                        $i = 0;
+                        $s = 0;
+                        foreach( $narudzbe as $nar ){ // pregledavamo sve narudzbe istog restorana da bi došli do svih ocijena
+                            if( $nar->id_restaurant == $rest->id_restaurant && $nar->active == 0 && $nar->rating != 0 ){
+                                $s = $s + $nar->rating;
+                                $i++;
+                            }
                         }
+                        $ocjena = $s/$i;
+                        $restorani[] = [$rest, number_format((float)$ocjena, 2, '.', '')]; // za svaki restoran koji je korisnik ocijenio, računamo prosječnu ocijenu
                     }
-                    $ocjena = $s/$i;
-                    $restorani[] = [$rest, number_format((float)$ocjena, 2, '.', '')]; // za svaki restoran koji je korisnik ocijenio, računamo prosječnu ocijenu
                 }
             }
         }
@@ -79,15 +81,17 @@ class UserController extends BaseController{
         $_SESSION['tab'] = 'User orders';
         $narudzbe = $ls->getOrderListByUserId( $_SESSION['user']->id );
         $pomocni = [];
-        foreach ( $narudzbe as $narudzba ){
-            $id_restaurant = $narudzba->id_restaurant;
-            $narudzba->id_restaurant = ( $ls->getRestaurantById ( $narudzba->id_restaurant ) )->name;
-            $hrana = $ls->getFoodIdListByOrderId( $narudzba->id_order );
-            $spiza = [];
-            for ( $i=0; $i < count( $hrana ); $i++ ){
-                $spiza[] = [$ls->getFoodById( $hrana[$i][0] ), $hrana[$i][1]];
+        if( $narudzbe != null ){
+            foreach ( $narudzbe as $narudzba ){
+                $id_restaurant = $narudzba->id_restaurant;
+                $narudzba->id_restaurant = ( $ls->getRestaurantById ( $narudzba->id_restaurant ) )->name;
+                $hrana = $ls->getFoodIdListByOrderId( $narudzba->id_order );
+                $spiza = [];
+                for ( $i=0; $i < count( $hrana ); $i++ ){
+                    $spiza[] = [$ls->getFoodById( $hrana[$i][0] ), $hrana[$i][1]];
+                }
+                $pomocni[] = [$narudzba, $spiza, $id_restaurant];
             }
-            $pomocni[] = [$narudzba, $spiza, $id_restaurant];
         }
         $this->registry->template->orderList = $pomocni;
 
