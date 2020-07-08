@@ -2,13 +2,16 @@
 
 <div class="list-group">
     <?php 
-        foreach( $foodType as $food ){ //u css-u maknuti točkice kod liste
-            echo '<a class="list-group-item list-group-item-action" href="index.php?rt=user/restaurantsByFoodType&id_foodType=' . $food->id_foodType . '">';
-            echo ucfirst( $food->name );
-            if( $food->image_path !== null )
-                echo '<img src="'. __SITE_URL . $food->image_path .'"width="100", height="100">';
-            echo '</a>';
+        if( $foodType != [] ){
+            foreach( $foodType as $food ){ //u css-u maknuti točkice kod liste
+                echo '<a class="list-group-item list-group-item-action" href="index.php?rt=user/restaurantsByFoodType&id_foodType=' . $food->id_foodType . '">';
+                echo ucfirst( $food->name );
+                if( $food->image_path !== null )
+                    echo '<img src="'. __SITE_URL . $food->image_path .'"width="100", height="100">';
+                echo '</a>';
+            }
         }
+        else echo '<div class="list-group-item">Trenutno nema raspoloživih vrsta hrane</div>';
     ?>
 </div>
 

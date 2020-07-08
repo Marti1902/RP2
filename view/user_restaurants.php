@@ -2,12 +2,15 @@
 
 <div class="list-group">
     <?php 
-    foreach( $restaurantList as $restaurant ){
-        echo '<a class="list-group-item list-group-item-action" href="index.php?rt=user/restaurant&id_restaurant=' . $restaurant->id_restaurant . '">' . 
-            $restaurant->name . '<br>';
-        echo '<small>' . $restaurant->description .'</small>';
-        echo '</a>';
+    if( $restaurantList != [] ){
+        foreach( $restaurantList as $restaurant ){
+            echo '<a class="list-group-item list-group-item-action" href="index.php?rt=user/restaurant&id_restaurant=' . $restaurant->id_restaurant . '">' . 
+                $restaurant->name . '<br>';
+            echo '<small>' . $restaurant->description .'</small>';
+            echo '</a>';
+        }
     }
+    else echo '<li class="list-group-item">Nema dostupnih restorana</li>';
     ?>
 </div>
 
