@@ -503,15 +503,15 @@ class Service{
         }
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
         $row=$st->fetch();
-
-        if($row['active']==='3')
-        {   
+  
+        if ($st->rowCount()===0)
+            return null;
+        else
+        {
             $id_order=$row['id_order'];
             $aktivna=$ls->getCurrentOrder($id_order);
             return $aktivna;
         }
-        else
-            return null;
     }
 
     function getCurrentOrder($id)
