@@ -15,14 +15,17 @@ function show_galery(event)
     var img = $(event.target);
 
     title.html( img.attr('name') )
+        .css( 'margin-top', '10px')
+        .css( 'margin-bottom', '5px')
         .css( 'color', 'white' );
 
     // link za zatvaranje boxa i okvira
     close.html('&times')
         .css( 'color', '#aaaaaa' )
         .css( 'float', 'right' )
-        .css( 'font-size', '35')
+        .css( 'font-size', '28pt')
         .css( 'font-weight', 'bold')
+        .css( 'margin-right', '10px')
         .attr( 'x', '1')
         .css( 'cursor', 'pointer' )
         .on( 'click', destroy_ )         //izbrise sve kreirane elemente u divu kada se klikne

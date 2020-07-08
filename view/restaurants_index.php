@@ -199,8 +199,9 @@
 
 
 <br><br>
-<h3>Ocjena Vašeg restorana <?php echo $restaurantRating;?></h3>
+<h3>Ocjena Vašeg restorana je <?php echo $restaurantRating;?>.</h3>
 <br>
+
 <h3>Detalji o restoranu: </h3>
 Ime: <?php echo $restaurantInfo->name;?>
 <br>

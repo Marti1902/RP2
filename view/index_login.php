@@ -17,7 +17,7 @@
 
 <div class="jumbotron text-center" style="margin-bottom: 0px;">
     <h1>Spiza.hr</h1>
-    <h2><?php echo $title; ?></h2>
+    <h2>Prijava</h2>
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;">

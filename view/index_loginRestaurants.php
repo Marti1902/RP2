@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8"> 
     <title>Spiza</title>
     <link rel="icon" href="<?php echo __SITE_URL; ?>/css/logo.png" />
@@ -16,7 +17,7 @@
 <body>
 <div class="jumbotron text-center" style="margin-bottom: 0px;">
     <h1>Spiza.hr</h1>
-    <h2><?php echo $title; ?> login</h2>
+    <h2><?php echo $title; ?> prijava</h2>
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;">
