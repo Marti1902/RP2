@@ -7,6 +7,7 @@
 <h3>Prošle narudžbe</h3>
 <p>Kako bi vidjeli detalje narudžbe te recenzije kliknite na prikaži detalje.</p>
 
+<?php if( $orderList != [] ){ ?>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -73,6 +74,8 @@
     ?>
     </tbody>
 </table>
+<?php }
+else echo "Nemate prethodnih narudžbi"; ?>
 
 
 <div style="height: 250px;"> </div>
