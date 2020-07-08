@@ -25,11 +25,12 @@
     <h2><?php echo $title; ?></h2>
 </div>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;filter: brightness(0) invert(1);"">   
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;">   
     <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL;?>/index.php?rt=deliverers">Naslovnica</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL;?>/index.php?rt=deliverers/active">Aktivne narudžbe</a></li>
+
     </ul>
 </nav>
 
