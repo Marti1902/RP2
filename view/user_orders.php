@@ -46,7 +46,7 @@
                 $spopustom = $order[0]->price_total * 0.9;
                 echo 'Cijena s popustom: ' . $spopustom . ' kn<br>';
             }
-            echo '<span class="badge badge-success">Dostavljeno</span';
+            echo '<span class="badge badge-success">Dostavljeno</span><br>';
             if( $order[0]->rating != 1 && $order[0]->rating != 2 && $order[0]->rating != 3 && $order[0]->rating != 4 && $order[0]->rating != 5 && $order[0]->rating != 6 && $order[0]->rating != 7 && $order[0]->rating != 8 && $order[0]->rating != 9 && $order[0]->rating != 10)
                 echo "<button class='btn btn-primary'klasa='ocijeni' ord='" . $order[0]->id_order . "'>Ocijeni</button>";
             echo '</li>';

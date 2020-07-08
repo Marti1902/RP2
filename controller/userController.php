@@ -110,8 +110,10 @@ class UserController extends BaseController{
         $this->registry->template->foodList = $ls->getFoodListByRestaurantId( $restaurant->id_restaurant );
         $pomocni = $ls->getOrderListByRestaurantId( $restaurant->id_restaurant );
         
-        foreach ( $pomocni as $pom )
-            $pom->id_user = ( $ls->getUserById( $pom->id_user ) )->username;
+        if( $pomocni != null ){
+            foreach ( $pomocni as $pom )
+                $pom->id_user = ( $ls->getUserById( $pom->id_user ) )->username;
+        }
 
         $this->registry->template->orderList = $pomocni;
 

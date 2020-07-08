@@ -370,7 +370,8 @@ class Service{
                     $count += 1;
                 }
             }
-            return $sum / $count;
+            if( $count != 0) return $sum / $count;
+            else return 0;
         }
     }
 
@@ -427,7 +428,7 @@ class Service{
             
             while( $row = $st->fetch() )
             {
-                $ratingList[] = new Feedback( $row['id'], $row['id_user'], $row['id_restaurant'], $row['content'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
+                $ratingList[] = new Feedback( $row['id_order'], $row['id_user'], $row['id_restaurant'], $row['feedback'], $row['rating'], $row['thumbs_up'], $row['thumbs_down'] );
             }
             return $ratingList;
         }

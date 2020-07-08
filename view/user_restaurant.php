@@ -58,17 +58,20 @@
 <ul class="list-group">
     <?php 
     $i=0;
-    foreach( $orderList as $order ){
-        if( $order->active == 0 ){
-            echo '<li class="list-group-item">' .
-                $order->id_user . ': ' . $order->rating . '<br>' .
-                '<div id="ovaj' . $i . '">' . $order->feedback . '</div><br>' .
-                '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="gori" broj="' . $order->thumbs_up . '"> &#x1F44D;' . $order->thumbs_up . '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>' . 
-                '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="doli" broj="' . $order->thumbs_down . '">  &#x1F44E;' . $order->thumbs_down . '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></button>' . 
-                '</li>';
-            $i++;
+    if( $orderList != null ){
+        foreach( $orderList as $order ){
+            if( $order->active == 0 ){
+                echo '<li class="list-group-item">' .
+                    $order->id_user . ': ' . $order->rating . '<br>' .
+                    '<div id="ovaj' . $i . '">' . $order->feedback . '</div><br>' .
+                    '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="gori" broj="' . $order->thumbs_up . '"> &#x1F44D;' . $order->thumbs_up . '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>' . 
+                    '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="doli" broj="' . $order->thumbs_down . '">  &#x1F44E;' . $order->thumbs_down . '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></button>' . 
+                    '</li>';
+                $i++;
+            }
         }
-    } ?>
+    } 
+    else echo '<li class="list-group-item">Restoran nema niti jednu recenziju.</span>'?>
 </ul>
 
 <span id="povratna" hidden>Narudžba poslana restoranu. Za više detalja pogledajte <a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a>.</span>

@@ -5,8 +5,8 @@
     foreach( $restaurantList as $restaurant ){
         echo '<a class="list-group-item list-group-item-action" href="index.php?rt=user/restaurant&id_restaurant=' . $restaurant->id_restaurant . '">' . 
             $restaurant->name . '<br>';
-        echo $restaurant->description .'<br>';
-        echo '</li></a>';
+        echo '<small>' . $restaurant->description .'</small>';
+        echo '</a>';
     }
     ?>
 </div>
