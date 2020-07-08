@@ -1,13 +1,11 @@
 
 $( document ).ready( function()
 {
-    //$( 'img' ).on('click', show_galery );
     $('img').attr('galerija', '1');
-    //$( 'body' ).on( 'click', 'img', show_galery );
     $( 'body' ).on( 'click', 'img[galerija="1"]', show_galery );
 
-  //$( 'img[galerija="1"]').off('click', show_galery);
-
+    $( 'img:not([style])' ).css( 'box-shadow', '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)')
+            .css( 'cursor', 'pointer' );
 });
 
 
@@ -97,6 +95,8 @@ function show_galery(event)
         //.css( 'display', 'block')
         //.css( 'margin', 'auto')
         .attr('galerija', '0')
+        .css( 'box-shadow', '')
+        .css( 'cursor', '' )
         .show();
     //console.log(okvirSlike.height(), okvirSlike.width());        
     if( okvirSlike.height() / duplicate_4show.prop('naturalHeight') < okvirSlike.width() / duplicate_4show.prop('naturalWidth') )

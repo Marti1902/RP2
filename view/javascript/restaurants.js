@@ -27,7 +27,7 @@ $( document ).ready( function()
     $( 'input.removeFood:checkbox' ).on('click', sakrij_pokazi_submit );
 
     //  samo za prošle narudđbe na pastOrders.php
-    $( 'td.orderDetails').on( 'click', show_details);
+    $( 'button[name="orderDetails"]' ).on( 'click', show_details);
 
 });
 

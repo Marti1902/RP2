@@ -43,7 +43,7 @@
                 echo "<td>".$order[0]->delivery_time."</td>\n";
                 echo "<td>".$order[0]->price_total."kn</td>\n";
                 echo "<td>".$order[0]->rating."</td>\n";
-                echo "<td class='orderDetails' ordernumber='".$order[0]->id_order."'>Prikaži detalje  &#8592;</td>\n";
+                echo "<td style='cursor: pointer;' ><button type='button' class='btn btn-info' name='orderDetails' ordernumber='".$order[0]->id_order."'>Prikaži detalje  &#8592;</td></button>\n";
             echo "</tr>\n";
             echo "<tr class='orderDetails' ordernumber='".$order[0]->id_order."' style='display: none;'>\n";
                 echo "<td colspan='7'>\n";

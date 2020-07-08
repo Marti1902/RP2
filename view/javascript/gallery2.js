@@ -1,16 +1,25 @@
 
 $( document ).ready( function()
 {
-    //$( 'img' ).on('click', show_galery );
     $('img').attr('galerija', '1');
-    //$( 'body' ).on( 'click', 'img', show_galery );
     $( 'body' ).on( 'click', 'img[galerija="1"]', show_galery );
 
-  //$( 'img[galerija="1"]').off('click', show_galery);
+    $( 'img:not([style])' ).css( 'box-shadow', '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)')
+            //.mouseover()
+            //.mouseout();
+            .css( 'cursor', 'pointer' );
 
+     
+    
 });
-
-
+//  možda kasnije
+function ulaz(event) {
+    $( event.target ).find( "span" ).text( "mouse over x " + i );
+}
+function izlaz() {
+    $( this ).find( "span" ).text( "mouse out " );
+}
+///////////////////////////////////////////
 function show_galery(event)
 {
     var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>'), close = $( '<span>' );
@@ -97,6 +106,9 @@ function show_galery(event)
         //.css( 'display', 'block')
         //.css( 'margin', 'auto')
         .attr('galerija', '0')
+        //   mićemo dodatke
+        .css( 'box-shadow', '')
+        .css( 'cursor', '' )
         .show();
     //console.log(okvirSlike.height(), okvirSlike.width());        
     if( okvirSlike.height() / duplicate_4show.prop('naturalHeight') < okvirSlike.width() / duplicate_4show.prop('naturalWidth') )
