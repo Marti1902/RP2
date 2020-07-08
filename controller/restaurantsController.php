@@ -27,14 +27,17 @@ class RestaurantsController extends BaseController{
         ////////////////////////////////
         $narudzbe = $ls->getOrderListByRestaurantId2( $_SESSION['restaurants']->id_restaurant );
         $pomocni = [];
-        foreach ( $narudzbe as $narudzba ){
-            $narudzba->id_restaurant = ( $ls->getRestaurantById ( $narudzba->id_restaurant ) )->name;
-            $hrana = $ls->getFoodIdListByOrderId( $narudzba->id_order );
-            $spiza = [];
-            for ( $i=0; $i < count( $hrana ); $i++ ){
-                $spiza[] = $ls->getFoodById( $hrana[$i][0] );
+        if($narudzbe!=null)
+        {
+            foreach ( $narudzbe as $narudzba ){
+                $narudzba->id_restaurant = ( $ls->getRestaurantById ( $narudzba->id_restaurant ) )->name;
+                $hrana = $ls->getFoodIdListByOrderId( $narudzba->id_order );
+                $spiza = [];
+                for ( $i=0; $i < count( $hrana ); $i++ ){
+                    $spiza[] = $ls->getFoodById( $hrana[$i][0] );
+                }
+                $pomocni[] = [$narudzba, $spiza];
             }
-            $pomocni[] = [$narudzba, $spiza];
         }
         $this->registry->template->orderList = $pomocni;
         $this->registry->template->show( 'restaurants_pastOrders' );
