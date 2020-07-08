@@ -6,8 +6,10 @@
 <ul class="list-group">
     <?php 
     if( $orderList != [] ){
+        $provjera = 0;
         foreach( $orderList as $order ){
             if ( $order[0]->active != 0 && $order[0]->active != -1 && $order[0]->active != -2 ){
+                $provjera = 1;
                 if( $order[0]->active == 1 )
                     $status = 'Narudžba poslana. Čeka se odgovor restorana.';
                 else if( $order[0]->active == 2 )
@@ -28,6 +30,7 @@
                 echo '</li>';
             }
         }
+        if( $provjera == 0 ) echo '<li class="list-group-item">Nemate aktivnih narudžbi</li>';
     }
     else echo '<li class="list-group-item">Nemate aktivnih narudžbi</li>';
     ?>
@@ -39,8 +42,10 @@
 <ul class="list-group">
     <?php 
     if( $orderList != [] ){
+        $provjera = 0;
         foreach( $orderList as $order ){
             if ( $order[0]->active == 0 ){
+                $provjera = 1;
                 echo '<li class="list-group-item">' .
                     'Iz ' . '<a href="index.php?rt=user/restaurant&id_restaurant=' . $order[2] . '">' . $order[0]->id_restaurant . '</a>:<br>';
                 foreach ( $order[1] as $food )
@@ -56,6 +61,7 @@
                 echo '</li>';
             }
             else if( $order[0]->active == -1 || $order[0]->active == -2 ){
+                $provjera = 1;
                 echo '<li class="list-group-item">' .
                     'Iz ' . '<a href="index.php?rt=user/restaurant&id_restaurant=' . $order[2] . '">' . $order[0]->id_restaurant . '</a>:<br>';
                 foreach ( $order[1] as $food )
@@ -69,6 +75,7 @@
                 echo '</li>';
             }
         }
+        if( $provjera == 0 ) echo '<li class="list-group-item">Nemate prethodnih narudžbi</li>';
     }
     else echo '<li class="list-group-item">Nemate prethodnih narudžbi</li>';
     ?>
