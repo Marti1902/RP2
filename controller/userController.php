@@ -203,8 +203,19 @@ class UserController extends BaseController{
             //debug();
     
             $this->registry->template->title = $_SESSION['tab'] = 'Restorani u kvartu ' . $_POST['kvart'];
+
+            $ocjene = [];
+            $restaurants = $ls->getRestaurantListByNeighborhood( $_POST['kvart']);
+            
+            foreach( $restaurants as $restaurant ){
+                $res_id = $restaurant->id_restaurant;
+                $res_rating = $ls->getRestaurantRatingById( $res_id );
+                
+                $ocjene[] = number_format((float)$res_rating, 2, '.', '');
+            }
+
+            $this->registry->template->ratings = $ocjene;
             $this->registry->template->restaurantList = $ls->getRestaurantListByNeighborhood( $_POST['kvart']);
-           
             $this->registry->template->show( 'user_restaurants' ); 
         }
     }
