@@ -99,7 +99,7 @@
       </label>
     </div>
 
-    <input type="submit" name="Register user" value="Registriraj se" class="btn btn-primary btn-block">
+    <input type="submit" name="Register user" value="Register user" class="btn btn-primary btn-block">
 </form>
 
 <div style="height: 250px;"> </div>

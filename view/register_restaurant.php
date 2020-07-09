@@ -111,7 +111,7 @@
         <div class="invalid-feedback">Označite da prihvaćate uvjete korištenja stranice.</div>
       </label>
     </div>
-    <input type="submit" name="Register restaurant" value="Registriraj restoran" class="btn btn-primary btn-block">
+    <input type="submit" name="Register restaurant" value="Register restaurant" class="btn btn-primary btn-block">
 </form>
 
 
