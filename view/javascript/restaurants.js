@@ -486,7 +486,7 @@ function getActiveOrders()
                 else{
                     timestamp = data.timestamp;
 
-                    console.log(data.active.length);
+                    console.log(data.active);
 
                     var tbl = $( '<table>' ), tr_head = $( '<thead>' ), tbody= $('<tbody>');
 

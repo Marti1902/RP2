@@ -265,27 +265,29 @@ function show_form(){
 function fja_naruci() {
     if( localStorage.getItem( 'ukupno' ) !== '0' ){
         var posalji = $( '<button class="btn btn-primary" klasa="posalji" style="margin:5px;"> Pošalji narudžbu! </button>' );
-        var span = $( '<span name="adresa"> <br> Adresa: </span>' );
-        var napomena = $( '<div name="napomena">' );
-        var komentar = $( '<textarea name="note">' );
-        napomena.html( 'Napomena restoranu i/ili dostavljaču: ' );
+        var div = $( '<div name="adresa" class="form-group">' );
+        var addr_lab = $( '<label for="addr">Adresa:</label>' );
+        var addr_input = $( '<input name="adresa" type="text" class="form-control" id="addr" style="width: 50%; margin: auto;">' );
+        var adresa = $( '#gl_adresa' ).attr( 'gl_adresa' );
+        addr_input.attr( 'value', adresa );
+
+        div.append( addr_lab );
+        div.append( addr_input );
+
+        var napomena = $( '<div class="form-group" name="napomena">' );
+        var label = $( '<label for="comment">Napomena restoranu i/ili dostavljaču:</label>' )
+        var komentar = $( '<textarea class="form-control" rows="5" id="comment" name="note" style="width: 50%; margin: auto;">' );
+        napomena.append( label );
         napomena.append( komentar );
+
         $( 'body' ).on( 'click', 'button[klasa="posalji"]', fja_posalji_narudzbu );
         $( 'button[klasa="naruci"]' ).hide();
         $( 'button[klasa="plus"]' ).hide();
         $( 'button[klasa="minus"]' ).hide();
 
-        var adresa = $( '#gl_adresa' ).attr( 'gl_adresa' );
-        var input = $( '<input name="adresa">' );
-        input
-            .prop( 'type', 'text' )
-            .attr( 'value', adresa );
-
-        span.append( input );
-        $( '.box' ).append( span );
         $( '.box' ).append( '<br>' );
+        $( '.box' ).append( div );
         $( '.box' ).append( napomena );
-        $( '.box' ).append( '<br>' );
         $( '.box' ).append( posalji );
         $( '.box' ).append( $( 'button[klasa="odbaci"]' ) );
     }
@@ -310,21 +312,23 @@ function fja_posalji_narudzbu(){
     if( $( "#pop" ).html() == "Ostvarili ste popust!" ) disc = 10.00;
     else disc = 0.00;
     console.log( price_total, id_restaurant, id_user, disc );
+    var k = 0;
 
     var i = localStorage.getItem( 'i' );
-
+    console.log( i );
     for( var j = 0; j < i; ++j ){
-        var k = 0;
+        console.log( localStorage.getItem( 'jelo' + j ) );
         if( localStorage.getItem( 'jelo' + j ) ){
             var temp = localStorage.getItem( 'jelo' + j ).split( "," );
             if( temp[3] != 0 ){
                 id_food[k] = temp[0];
+                console.log( '------',k );
                 quantity[k] = temp[3];
-                k++;
+                k += 1;
             }
         }     
     }
-
+    console.log( id_food );
     $.ajax( {
             url: location.protocol + "//" + location.hostname  + location.pathname.replace('index.php', '') + 'app/userOrder.php',
             method: 'get',
@@ -352,7 +356,8 @@ function fja_posalji_narudzbu(){
                     $( "#pop" ).html( '' );
                     $( '#jela' ).remove();
                     $( 'div[name="napomena"]' ).remove();
-                    $( 'span[name="adresa"]' ).remove();
+                    $( 'div[name="adresa"]' ).remove();
+                    $( 'input[name="adresa"]' ).remove();
                     $( '#ukupno' ).remove();
                     //$( 'div[name="uk"]').html( 'Narudžba poslana restoranu. Za više detalja pogledajte <a href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a>.' )
                     $( "div[name='uk'" ).html( '' );
@@ -375,7 +380,8 @@ function fja_odbaci(){
     $( "#pop" ).html( '' );
     $( '#jela' ).remove();
     $( 'div[name="napomena"]' ).remove();
-    $( 'span[name="adresa"]' ).remove();
+    $( 'div[name="adresa"]' ).remove();
+    $( 'input[name="adresa"]' ).remove();
     $( '#ukupno' ).remove();
     $( 'div[name="uk"]').html( 'Odbacili ste narudžbu.' );
     $( 'button[klasa="posalji"]' ).remove();
