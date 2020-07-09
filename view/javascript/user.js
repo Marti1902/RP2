@@ -176,8 +176,10 @@ function show_form(){
     close.html('&times')
         .css( 'color', '#aaaaaa' )
         .css( 'float', 'right' )
-        .css( 'font-size', '35')
+        .css( 'font-size', '28pt')
         .css( 'font-weight', 'bold')
+        .css( 'margin-right', '10px')
+        .css( 'margin-top', '0')
         .css( 'cursor', 'pointer' )
         .on( 'click', function(event){
             destroy($(event.target));
