@@ -2,11 +2,13 @@
 
 <!--            NOTIFIKACIJA            -->
 <div style="position: relative;" >
-<div class="toast" data-autohide="true"  data-delay="4000" style="  background-color: #DCDCDC; position: absolute; top: 0; right: 10px;">
-    <div class="toast-header">
-      Nova narudžba
+<div class="toast" data-autohide="true"  data-delay="4000" style=" z-index: 1; background-color: #DCDCDC; position: absolute; top: 0; right: 10px;">
+    <div class="toast-header" >
+        <strong class="mr-auto text-primary">Nova narudžba</strong>     
+        <small class="text-muted"><!--5 min--></small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
     </div>
-    <div class="toast-body">
+    <div class="toast-body" >
       Pristigla je nova narudžba! Pogledajte trenutne narudžbe.
     </div>
 </div>

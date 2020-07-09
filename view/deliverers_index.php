@@ -2,9 +2,11 @@
 
 <!--            NOTIFIKACIJA            -->
 <div style="position: relative;" >
-<div class="toast" data-autohide="false"  style="  background-color: #DCDCDC; position: absolute; top: 0; right: 10px;">
+<div class="toast" data-autohide="false"  style=" z-index: 1;  background-color: #DCDCDC; position: absolute; top: 0; right: 10px;">
     <div class="toast-header">
-      Imate prihvaćenu narudžbu
+      <strong class="mr-auto text-primary">Imate prihvaćenu narudžbu</strong>     
+      <small class="text-muted"><!--5 min--></small>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
     </div>
     <div class="toast-body">
       Pogledajte <a class="link" href="<?php echo __SITE_URL;?>/index.php?rt=deliverers/active">aktivne narudžbe</a> za detalje.

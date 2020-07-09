@@ -47,9 +47,11 @@
 
 <!--        NOTIFICATION    4   ERROR       -->
 <div style="position: relative;" >
-  <div class="toast" data-autohide="ture" data-delay="4000" style="  background-color: #DCDCDC; position: absolute; top: 10; right: 10px;">
+  <div class="toast" data-autohide="ture" data-delay="4000" style=" z-index: 1; background-color: #DCDCDC; position: absolute; top: 10; right: 10px;">
       <div class="toast-header">
-        Obavijest!
+        <strong class="mr-auto text-primary">Obavijest</strong>     
+        <small class="text-muted"><!--5 min--></small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
       </div>
       <div class="toast-body"><?php
       if( isset($errorFlag))

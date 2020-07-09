@@ -19,7 +19,7 @@
   <!---     FONT AWSOME     -->
   <script src="https://kit.fontawesome.com/a66aaa461b.js" crossorigin="anonymous"></script>  
   
-  <link rel="stylesheet"  href="<?php echo __SITE_URL; ?>/css/preIgnore1.css">
+  <link rel="stylesheet"  href="<?php echo __SITE_URL; ?>/css/preIgnore.css">
 
 </head>
 
