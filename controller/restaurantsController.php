@@ -13,6 +13,8 @@ class RestaurantsController extends BaseController{
         $this->registry->template->restaurantRating = $ls->getRestaurantRatingById( $_SESSION['restaurants']->id_restaurant );
         $this->registry->template->restaurantInfo = $ls->getRestaurantById( $_SESSION['restaurants']->id_restaurant );
         $this->registry->template->restaurantImages = $ls->getRestaurantImagesById( $_SESSION['restaurants']->id_restaurant );
+        $this->registry->template->foodType = $ls->getFoodTypeByRestaurantId( $_SESSION['restaurants']->id_restaurant);
+        $this->registry->template->foodTypeList = $ls->getFoodTypeList( );
 
         $this->registry->template->show( 'restaurants_index' );
     }
@@ -62,6 +64,27 @@ class RestaurantsController extends BaseController{
 
          //$this->index();
          header( 'Location: ' . __SITE_URL . '/index.php?rt=restaurants/index');
+    }
+
+    public function addCategory(){
+        $ls = new Service();
+        error404();
+        debug();
+        
+        $ls->addCategory();
+
+         header( 'Location: ' . __SITE_URL . '/index.php?rt=restaurants/index');
+         
+    }
+    public function removeCategory(){
+        $ls = new Service();
+        error404();
+        debug();
+        
+        $ls->removeCategory();
+
+         header( 'Location: ' . __SITE_URL . '/index.php?rt=restaurants/index');
+         
     }
     
     

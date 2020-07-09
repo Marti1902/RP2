@@ -260,6 +260,63 @@
 </form>
 <br>
 
+<!--        KATEGORIJA HRANE        -->
+<h3>Kategorija hrane u ponudi:</h3>
+
+U ponudi je: 
+<?php 
+for( $i = 0; $i < sizeof( $foodType ); ++$i)
+{
+    echo $foodType[$i]->name;
+    if( $i === sizeof($foodType)-1 )
+        echo '.';
+    else 
+        echo ', ';
+}
+?>
+
+<!--        GUMB ZA PRIKAZ FORME ZA MJENJANJE HRANE     -->
+<div class="btn-group btn-block">
+    <button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown">
+      Uredi kategoriju hrane
+    </button>
+    <div class="dropdown-menu btn-block">
+        <button class="dropdown-item" name="addCategory" title="addCategory">Dodaj kategoriju hrane u ponudu</button>
+        <button class="dropdown-item" name="removeCategory" title="removeCategory">Makni kategoriju hrane iz ponude</button>
+    </div>
+</div>
+
+<!--         FORME ZA MJENJANJE HRANE     -->
+<form klasa="addCategory" method="post"  id="addCategory" action="<?php echo __SITE_URL;?>/index.php?rt=restaurants/addCategory" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
+    <h3>Dodaj kategoriju hrane u ponudu restorana:</h3>
+
+    <select class="custom-select" style="width:auto;" name="addCategory">
+            <?php
+                    foreach( $foodTypeList as $food)
+                    {
+                        echo "<option value='".$food->id_foodType."'>".$food->name."</option>\n";
+                    }
+            ?>
+    </select>
+    <input type="submit" class="btn btn-primary btn-block" form="addCategory" value="Dodaj kategoriju hrane u ponudu">
+</form>
+<form klasa="removeCategory" method="post"  id="removeCategory" action="<?php echo __SITE_URL;?>/index.php?rt=restaurants/removeCategory" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
+    <h3>Makni kategoriju iz ponude:</h3>
+
+    <select class="custom-select" style="width:auto;" name="removeCategory">
+            <?php
+                    foreach( $foodType as $food)
+                    {
+                        echo "<option value='".$food->id_foodType."'>".$food->name."</option>\n";
+                    }
+            ?>
+    </select>
+
+    <input type="submit" class="btn btn-primary btn-block" form="removeCategory" value="Dodaj kategoriju hrane u ponudu">
+</form>
+
+
+
 
 <h3>Podaci o restoranu: </h3>
 Ime: <?php echo $restaurantInfo->name;?>

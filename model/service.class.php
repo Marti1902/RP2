@@ -375,6 +375,59 @@ class Service{
         }
     }
 
+    function addCategory()
+    {
+        $db=DB::getConnection();
+        try
+        {
+            $st = $db->prepare( 'INSERT INTO spiza_has_food_type(id_foodType, id_restaurant)  VALUES (:id_foodType, :id_restaurant)' );
+            $st->execute( [ 'id_foodType' => intval($_POST['addCategory']), 'id_restaurant' => $_SESSION['restaurants']->id_restaurant ] );    
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+    }
+    function removeCategory()
+    {
+        $db=DB::getConnection();
+        try
+        {
+            $st = $db->prepare( 'DELETE FROM spiza_has_food_type WHERE id_foodType=:id_foodType AND id_restaurant=:id_restaurant' );
+            $st->execute( [ 'id_foodType' => intval($_POST['removeCategory']), 'id_restaurant' => $_SESSION['restaurants']->id_restaurant ] );    
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+    }
+
+    function getFoodTypeByRestaurantId( $restaurantId )
+    {
+        $typeid = [];
+        $foodType = [];
+        $db = DB::getConnection();
+
+        try
+        {
+            $st = $db->prepare( 'SELECT * FROM spiza_has_food_type WHERE id_restaurant=:val');
+            $st->execute( [ 'val' => $restaurantId ] );    
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        
+        while( $row = $st->fetch() )
+            $typeid[] = $row['id_foodType'];
+
+        foreach( $typeid as $food )
+        {
+            try
+            {
+                $st = $db->prepare( 'SELECT * FROM spiza_food_type WHERE id_foodType=:val');
+                $st->execute( [ 'val' => $food ] );    
+            }
+            catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+            
+            $row = $st->fetch();
+            $foodType[] = new FoodType( $row['id_foodType'], $row['name'], $row['image_path'] );
+        }
+
+        return $foodType;
+    }
+
     function getFoodTypeList()
     {
         $foodType = [];

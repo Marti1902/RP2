@@ -10,7 +10,10 @@ $( document ).ready( function()
     $( 'button[name="addFood"]' ).on( 'click', show_form );
     $( 'button[name="changeDetails"]' ).on( 'click', show_form );
     $( 'button[name="addPhotos"]' ).on( 'click', show_form );
+    $( 'button[name="addCategory"]' ).on( 'click', show_form );
+    $( 'button[name="removeCategory"]' ).on( 'click', show_form );
 
+    
 
     // Obrada formi
     $( 'form[klasa="editFood"]').on( 'submit', obradi_editFood );
@@ -153,6 +156,16 @@ function addCorrectForm( box,title, foot)
     }
     else if( title === 'addPhotos'){
         var form = $( 'form[klasa="addPhotos"]' ).removeAttr( 'hidden' );
+        foot.append( form.children( 'input[type="submit"]') );
+        box.append( form );
+    }
+    else if( title === 'addCategory'){
+        var form = $( 'form[klasa="addCategory"]' ).removeAttr( 'hidden' );
+        foot.append( form.children( 'input[type="submit"]') );
+        box.append( form );
+    }
+    else if( title === 'removeCategory'){
+        var form = $( 'form[klasa="removeCategory"]' ).removeAttr( 'hidden' );
         foot.append( form.children( 'input[type="submit"]') );
         box.append( form );
     }
