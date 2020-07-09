@@ -12,6 +12,7 @@ seed_table_contains();
 seed_table_has_food_type();
 seed_table_deliverers();
 seed_table_neighborhood();
+seed_table_image();
 
 exit( 0 );
 
@@ -248,6 +249,31 @@ function seed_table_neighborhood()
 		$st->execute( array( 'id_restaurant' => '8', 'neighborhood' => 'Centar'  ) );
 		$st->execute( array( 'id_restaurant' => '9', 'neighborhood' => 'Centar'  ) );
 		$st->execute( array( 'id_restaurant' => '10', 'neighborhood' => 'Centar'  ) );
+
+		
+	}
+	catch( PDOException $e ) { exit( "PDO error [insert spiza_neighborhood]: " . $e->getMessage() ); }
+
+	echo "Ubacio u tablicu spiza_neighborhood.<br />";
+}
+
+
+
+
+
+function seed_table_image()
+{
+	$db = DB::getConnection();
+
+	try
+	{
+		$st = $db->prepare( 'INSERT INTO spiza_image(name, id_restaurant, image) VALUES (:name, :id_restaurant, :image)' );
+
+		$st->execute( array( 'name' => '', 'id_restaurant' => '3', 'image' => '/app/images/restaurants/1.jpg' ) );
+		$st->execute( array( 'name' => '', 'id_restaurant' => '3', 'image' => '/app/images/restaurants/2.jpeg' ) );
+		$st->execute( array( 'name' => '', 'id_restaurant' => '3', 'image' => '/app/images/restaurants/3.jpg' ) );
+
+
 
 		
 	}

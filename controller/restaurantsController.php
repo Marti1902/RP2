@@ -7,11 +7,12 @@ class RestaurantsController extends BaseController{
         $ls = new Service();
         error404();
         debug();
-
+        
         $this->registry->template->title = $_SESSION['tab'] = 'Restaurants index';
         $this->registry->template->FoodList = $ls->getFoodListByRestaurantId( $_SESSION['restaurants']->id_restaurant );
         $this->registry->template->restaurantRating = $ls->getRestaurantRatingById( $_SESSION['restaurants']->id_restaurant );
         $this->registry->template->restaurantInfo = $ls->getRestaurantById( $_SESSION['restaurants']->id_restaurant );
+        $this->registry->template->restaurantImages = $ls->getRestaurantImagesById( $_SESSION['restaurants']->id_restaurant );
 
         $this->registry->template->show( 'restaurants_index' );
     }
@@ -42,6 +43,26 @@ class RestaurantsController extends BaseController{
         $this->registry->template->orderList = $pomocni;
         $this->registry->template->show( 'restaurants_pastOrders' );
     }
+
+    public function addPhotos(){
+        $ls = new Service();
+        error404();
+        //debug();
+      
+        ////////////////////////////////
+        $polje = $ls->addResturantPhotos( );
+
+        $this->registry->template->errorFlag = True;
+        $poruka='';
+        if( $polje[1] !== '' )
+         {
+			$poruka = 'ERROR: Nisu ubačene slike: '+$polje[1];
+         }
+         $this->registry->template->errorMsg = $poruka . ' Ubačene su slike: '. $polje[0];
+
+         //$this->index();
+         header( 'Location: ' . __SITE_URL . '/index.php?rt=restaurants/index');
+    }
     
     
 
@@ -55,10 +76,21 @@ function error404(){        //  provjerava ako se korisnik odlogirao pa ga preus
     }
 }
 
+
 function debug()
 {
 	echo '<pre>$_POST=';
-	print_r( $_POST );
+    print_r( $_POST );
+    if( isset( $_GET ) )
+    {
+        echo '$_GET=';
+        print_r( $_GET );
+    }
+    if( isset( $_FILES ) )
+    {
+        echo '$_FILES=';
+        print_r( $_FILES );
+    }
 	if (session_status() !== PHP_SESSION_NONE) {
 		
 	echo '$_SESSION=';

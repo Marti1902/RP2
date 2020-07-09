@@ -1,16 +1,18 @@
 
 $( document ).ready( function()
 {
-    $('img').attr('galerija', '1');
+    $('img:not([name="restaurantImg"])').attr('galerija', '1');
     $( 'body' ).on( 'click', 'img[galerija="1"]', show_galery );
 
-    $( 'img:not([style])' ).css( 'box-shadow', '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)')
+    $( 'img:not(img[name="restaurantImg"])' ).css( 'box-shadow', '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)')
             //.mouseover()
             //.mouseout();
             .css( 'cursor', 'pointer' );
 
-     
-    
+    if( parseInt( $( 'div[id="slike_restorani"]' ).attr( 'brslika') ) === 0)
+        $( 'div[id="slike_restorani"]' ).hide()
+                                        .after( $( '<p>' ).html( 'Trenutno nema dostupnih slika, dodajte slike kako bi se prikazala galerija.') );
+
 });
 //  možda kasnije
 function ulaz(event) {

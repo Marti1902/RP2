@@ -537,7 +537,88 @@ class Service{
         return [$o,$user->username,$restaurant->name,$hrana];
     }
 
+
+    function addResturantPhotos(  )
+    {
+
+        $location = [];
+
+        try{    // Pomoću transakcije ubacujemo u bazu info o hrani pa postavljamo ime slike
+            // id_food.___ pa ubacujemo path u bazu, u slučaju da se ne uspiju u bacit
+            // sve promjene u bazi se poništavaju
+            $db=DB::getConnection();
+
+            $db->beginTransaction();
+
+            foreach( $_FILES['addPhotos']['name'] as $image)
+            {
+
+                $st=$db->prepare( 'INSERT INTO spiza_image(name, id_restaurant)  VALUES (:name, :id_restaurant)' );
+                $st->execute( array( 'name' => '', 'id_restaurant' => intval( $_SESSION['restaurants']->id_restaurant ) ) );		
+                
+                $lastInsertedID = $db->lastInsertId();
+    
+                $tmp = explode( '.', $image);
+                $location[] = 'images/restaurants/' . $lastInsertedID . '.'.end($tmp);
+
+                $st2=$db->prepare( 'UPDATE spiza_image SET image=:val WHERE id_image=:val2' );
+                $st2->execute( array(  'val' => '/app/' . end($location) , 'val2' =>  $lastInsertedID ) );		
+            }
+            $db->commit();
+        }
+        catch( PDOException $e ) { 
+            $db->rollBack();
+            return [ '','Greška u bazi!'];
+        }
+
+        $ubaceno='';
+        $nijeubaceno='';
+        for( $i = 0; $i < sizeof($_FILES['addPhotos']['name']); ++$i )
+        {   
+                //  Premještamo preimenovanu sliku u folder za slike 
+            if( move_uploaded_file($_FILES['addPhotos']['tmp_name'][$i], __SITE_PATH.'/app/'. $location[$i]) ){
+                $a =explode('/',$location[$i]);
+                $ubaceno = $ubaceno . end($a) . ', ';
+                //echo 'Food and image added for ' . $_FILES['addPhotos']['name'][$i] . '.';
+            }   // U slučaju da premještanje nije uspjelo poništavamo unos hrane u bazu
+            else{
+                $a =explode('/',$location[$i]);
+                $nijeubaceno = $nijeubaceno . end($a);
+                //$st=$db->prepare( 'DELETE FROM spiza_food WHERE id_food=:val' );
+                //$st->execute( array( 'val' => $lastInsertedID ) );		
+                //echo 'ERROR: Moveing image! Changes not applied!';
+            }
+
+        }
+        $_FILES['addPhotos']='';
+        return [$ubaceno, $nijeubaceno];
+
+
+
+    }
+
+    function getRestaurantImagesById( $id )
+    {
+        $image['name'] = [];
+        $image['image'] = [];
+        $image['id_restaurant'] = [];
+
+        try{
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT * FROM spiza_image WHERE id_restaurant=:id_restaurant');
+            $st->execute( [ 'id_restaurant' => $id ] );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+        while($row=$st->fetch()){
+            $image['name'][] = $row['name'];
+            $image['image'][] = $row['image'];
+            $image['id_restaurant'][] = $row['id_restaurant'];
+        }
+        return $image;
+    }
 };
+
+
 
 //  -------------------------------------------------------------
 

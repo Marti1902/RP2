@@ -188,7 +188,7 @@
             <th>Slika: </th>
             <td>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" name="imgFood_input" required>
+                    <input type="file" class="custom-file-input" id="customFile" name="imgFood_input" accept="image/png, image/jpeg, image/jpg"required>
                     <label class="custom-file-label" for="customFile">Izaberi sliku</label>
                 </div>
             </td>
@@ -202,7 +202,64 @@
 <h3>Ocjena Vašeg restorana je <?php echo $restaurantRating;?>.</h3>
 <br>
 
-<h3>Detalji o restoranu: </h3>
+
+<h3>Galerija restorana</h3>
+
+<!--        GALERIJA        RESTORANI       -->
+<div id="slike_restorani" class="carousel slide" brslika="<?php echo sizeof($restaurantImages['image']);?>" data-ride="carousel">
+
+  <!-- SLIDEOVI -->
+  <ul class="carousel-indicators">
+    <li data-target="#slike_restorani" data-slide-to="0" class="active"></li>
+    <?php 
+        for( $i=1; $i < sizeof($restaurantImages['image']); ++$i ) // as $image )
+        {
+            echo '<li data-target="#slike_restorani" data-slide-to="'.$i.'" ></li>';
+        }
+    ?>
+  </ul>
+  
+  <!-- SLIKE -->
+  <div class="carousel-inner">
+    <?php 
+        echo '<div class="carousel-item active">';
+            echo '<img src="'. __SITE_URL . $restaurantImages['image'][0] .'" alt="Slika" width="1100" height="500" name="restaurantImg"  style="color:black;">';
+        echo '</div>';
+        for( $i=1; $i < sizeof($restaurantImages['image']); ++$i ) // as $image )
+        {
+            echo '<div class="carousel-item">';
+                echo '<img src="'. __SITE_URL . $restaurantImages['image'][$i] .'" alt="Slika" width="1100" height="500" name="restaurantImg" >';
+            echo '</div>';
+        }
+    ?>
+  </div>
+  <br>
+  
+  <!-- STRELICE -->
+  <a class="carousel-control-prev" href="#slike_restorani" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#slike_restorani" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+<!--          DODAVANJE SLIKA RESTORANA      -->
+
+<button class="btn btn-primary btn-block" name="addPhotos" title="addPhotos">Dodaj slike u galeriju</button>
+<form klasa="addPhotos" method="post" id="addPhotos" enctype="multipart/form-data" action="<?php echo __SITE_URL;?>/index.php?rt=restaurants/addPhotos" restaurant="<?php echo $_SESSION['restaurants']->id_restaurant;?>" hidden>
+    <h3>Dodaj slike restorana u galeriju:</h3>
+    <br>
+   <div class="custom-file" >
+        <input type="file" class="custom-file-input" id="galerija" name="addPhotos[]" multiple accept="image/png, image/jpeg, image/jpg"  required>
+        <label class="custom-file-label" for="galerija">Izaberi sliku</label>
+    </div>
+    <input type="submit"  class="btn btn-primary btn-block" form="addPhotos"  value="Dodaj slike" >
+</form>
+<br>
+
+
+<h3>Podaci o restoranu: </h3>
 Ime: <?php echo $restaurantInfo->name;?>
 <br>
 Opis: <?php echo $restaurantInfo->description;?>
@@ -251,6 +308,13 @@ E-mail: <?php echo $restaurantInfo->email;?>
   </div>
 </div>
 
+
+<script>
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
 
 <hr>
 

@@ -22,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-    <?php
+    <?php   
     foreach( $orderList as $order)
     {
         if( intval($order[0]->active) <= 0){

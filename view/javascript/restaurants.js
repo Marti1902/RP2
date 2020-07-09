@@ -9,12 +9,15 @@ $( document ).ready( function()
     $( 'button[name="removeFood"]' ).on( 'click', show_form );
     $( 'button[name="addFood"]' ).on( 'click', show_form );
     $( 'button[name="changeDetails"]' ).on( 'click', show_form );
+    $( 'button[name="addPhotos"]' ).on( 'click', show_form );
+
 
     // Obrada formi
     $( 'form[klasa="editFood"]').on( 'submit', obradi_editFood );
     $( 'form[klasa="removeFood"]').on( 'submit', obradi_removeFood );
     $( 'form[klasa="addFood"]').on( 'submit', obradi_addFood );
     $( 'form[klasa="changeDetails"]' ).on( 'submit', obradi_changeDetails );
+    //$( 'form[klasa="addPhotos"]' ).on( 'submit', obradi_addPhotos );
 
     
     // za editFood  prati checkboxove i otključava ih
@@ -148,6 +151,11 @@ function addCorrectForm( box,title, foot)
         foot.append( form.children( 'input[type="submit"]') );
         box.append( form );
     }
+    else if( title === 'addPhotos'){
+        var form = $( 'form[klasa="addPhotos"]' ).removeAttr( 'hidden' );
+        foot.append( form.children( 'input[type="submit"]') );
+        box.append( form );
+    }
 }
 
 
@@ -187,7 +195,7 @@ function sakrij_pokazi_submit()
 }
 
 function obradi_addFood()
-{console.log('a');
+{
     var fd = new FormData();
     var p = $( '<p>' ), files = $( 'input[name="imgFood_input"]' )[0].files[0];
     
@@ -649,7 +657,18 @@ function destroy( vari = null)
     else
         parent.parent().remove();
     location.reload();
+   
+}
+
+function obradi_addPhotos(){
+    var fd = new FormData();
+    var p = $( '<p>' ), files = $( 'input[name="addPhotos"]' )[0].files[0];
     
+    event.preventDefault();
+
+    console.log( $( 'input[name="addPhotos"]' ) );
+
+
 }
 
 ///////////////////////////  <link rel="stylesheet"  href="<?php echo __SITE_URL; ?>/css/preIgnore.css">

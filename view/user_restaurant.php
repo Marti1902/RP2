@@ -9,6 +9,48 @@ echo '<span id="gl_adresa" gl_adresa="' . $_SESSION['user']->address . '" hidden
 
 <h5>Ocjena: <?php echo $rating; ?></h5><br><br>
 
+
+<h3>Galerija restorana</h3>
+
+<!--        GALERIJA        RESTORANI       -->
+<div id="slike_restorani" class="carousel slide" brslika="<?php echo sizeof($restaurantImages['image']);?>" data-ride="carousel">
+
+  <!-- SLIDEOVI -->
+  <ul class="carousel-indicators">
+    <li data-target="#slike_restorani" data-slide-to="0" class="active"></li>
+    <?php 
+        for( $i=1; $i < sizeof($restaurantImages['image']); ++$i ) // as $image )
+        {
+            echo '<li data-target="#slike_restorani" data-slide-to="'.$i.'" ></li>';
+        }
+    ?>
+  </ul>
+  
+  <!-- SLIKE -->
+  <div class="carousel-inner">
+    <?php 
+        echo '<div class="carousel-item active">';
+            echo '<img src="'. __SITE_URL . $restaurantImages['image'][0] .'" alt="Slika" width="1100" height="500" name="restaurantImg"  style="color:black;">';
+        echo '</div>';
+        for( $i=1; $i < sizeof($restaurantImages['image']); ++$i ) // as $image )
+        {
+            echo '<div class="carousel-item">';
+                echo '<img src="'. __SITE_URL . $restaurantImages['image'][$i] .'" alt="Slika" width="1100" height="500" name="restaurantImg" style="width:1100; height:500;" >';
+            echo '</div>';
+        }
+    ?>
+  </div>
+  <br>
+  
+  <!-- STRELICE -->
+  <a class="carousel-control-prev" href="#slike_restorani" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#slike_restorani" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
 <h3> Meni: </h3>
 
 <?php

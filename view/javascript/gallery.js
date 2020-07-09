@@ -1,11 +1,17 @@
 
 $( document ).ready( function()
 {
-    $('img').attr('galerija', '1');
+    $('img:not([style])').attr('galerija', '1');
     $( 'body' ).on( 'click', 'img[galerija="1"]', show_galery );
 
     $( 'img:not([style])' ).css( 'box-shadow', '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)')
             .css( 'cursor', 'pointer' );
+    
+    if( parseInt( $( 'div[id="slike_restorani"]' ).attr( 'brslika') ) === 0)
+            $( 'div[id="slike_restorani"]' ).hide()
+                                            .after( $( '<p>' ).html( 'Trenutno nedostupna.') );
+
+
 });
 
 
@@ -13,6 +19,8 @@ function show_galery(event)
 {
     var div = $( '<div>' ), title = $( '<h2>' ), box = $( '<div>'), close = $( '<span>' );
     var img = $(event.target);
+
+    $( 'li[data-target="#slike_restorani"]' ).hide();
 
     title.html( img.attr('name') )
         .css( 'margin-top', '10px')
@@ -85,7 +93,7 @@ function show_galery(event)
         .css('width', '85%')
         .css( 'position', 'relative')
         .css( 'display', 'block')
-        //.css( 'margin', 'auto')
+        .css( 'margin', 'auto')
         //.css( 'margin-left', 'auto' )
         .css( 'top', '5%' )
         .attr('okvir', '1')
@@ -133,6 +141,10 @@ function destroy_(event)
 {
     if( $(event.target).attr('class') === 'galerija_okvir' ||
         $(event.target).attr('x') === '1' )
+    {
         $('div.galerija_okvir').remove();
+        $( 'li[data-target="#slike_restorani"]' ).show();
+
+    }
 }
 

@@ -14,11 +14,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
   
   <!---     FONT AWSOME     -->
   <script src="https://kit.fontawesome.com/a66aaa461b.js" crossorigin="anonymous"></script>  
   
-  <link rel="stylesheet"  href="<?php echo __SITE_URL; ?>/css/preIgnore.css">
+  <link rel="stylesheet"  href="<?php echo __SITE_URL; ?>/css/preIgnore1.css">
 
 </head>
 
@@ -36,12 +37,12 @@
     </ul>
 </nav>
 
- 
-     <?php
+
+     
+<?php /*
     if( isset($errorFlag))
         if( $errorFlag )
-            echo $errorMsg . '<br>';
+            echo $errorMsg ;*/
     ?>
-
 
 

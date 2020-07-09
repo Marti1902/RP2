@@ -114,6 +114,9 @@ class UserController extends BaseController{
         $this->registry->template->foodList = $ls->getFoodListByRestaurantId( $restaurant->id_restaurant );
         $pomocni = $ls->getOrderListByRestaurantId( $restaurant->id_restaurant );
         
+        $this->registry->template->restaurantImages = $ls->getRestaurantImagesById(  $_GET['id_restaurant'] );
+
+
         if( $pomocni != null ){
             foreach ( $pomocni as $pom )
                 $pom->id_user = ( $ls->getUserById( $pom->id_user ) )->username;
