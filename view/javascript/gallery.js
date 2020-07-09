@@ -73,7 +73,7 @@ function show_galery(event)
         .css( 'padding-top', '100px')
         .css('height', '100%')
         .css( 'width', '100%' )
-        .css( 'z-index', '1')
+        .css( 'z-index', '5')
         .css( 'background-color', 'rgba(0,0,0,0.4)' )
         .css( 'overflow', 'auto' )
         .prop( 'class', 'galerija_okvir');

@@ -2,12 +2,15 @@
 
 <div class="list-group">
     <?php 
+    $i = 0;
+
     if( $restaurantList != [] ){
         foreach( $restaurantList as $restaurant ){
-            echo '<a class="list-group-item list-group-item-action" href="index.php?rt=user/restaurant&id_restaurant=' . $restaurant->id_restaurant . '">' . 
-                $restaurant->name . '<br>';
-            echo '<small>' . $restaurant->description .'</small>';
+            echo '<a class="list-group-item list-group-item-action" href="index.php?rt=user/restaurant&id_restaurant=' . 
+            $restaurant->id_restaurant . '">' . '<h5>' . $restaurant->name . '</h5>' . 'Ocjena: ' . '<span class="badge badge-info">' . $ratings[$i] . '</span><br>' ;
+            echo '<small>' . $restaurant->description . '</small>';
             echo '</a>';
+            $i++;
         }
     }
     else echo '<li class="list-group-item">Nema dostupnih restorana</li>';
@@ -19,16 +22,6 @@
 </div>
 </div>
 </div>
-
-<!-- <h4>Istraži više restorana:</h4> -->
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">   
-    <ul class="nav navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user/popular">Popularni</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user/restaurants">Svi restorani</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user/neighborhood">U kvartu</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user/foodType">Prema vrsti hrane</a></li>
-    </ul>
-</nav> 
 
 <!-- <div style="height: 250px;"> </div> -->
 

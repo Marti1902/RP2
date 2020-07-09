@@ -88,7 +88,7 @@ if( $foodList != null ){
 </table>
 <?php } ?>
 
-<?php if( $foodList == null ) echo '<div class="list-group-item">Restoran još nema ništa u ponudi.</div><br>'; ?>
+<?php if( $foodList == null ) echo '<div class="list-group-item">Restoran još nema jela u ponudi.</div><br>'; ?>
 
 <!--
 <ul>

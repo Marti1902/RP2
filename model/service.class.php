@@ -356,7 +356,7 @@ class Service{
         try
 		{
             $db=DB::getConnection();
-            $st=$db->prepare('SELECT rating FROM spiza_orders WHERE id_restaurant=:restaurant');
+            $st=$db->prepare('SELECT rating FROM spiza_orders WHERE id_restaurant=:restaurant' );
             $st->execute(['restaurant'=>$id]);
 		}
         catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }

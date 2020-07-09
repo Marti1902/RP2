@@ -44,8 +44,18 @@ class UserController extends BaseController{
         //debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Svi restorani';
-        $this->registry->template->restaurantList = $ls->getRestaurantList();
+        $ocjene = [];
+        $restaurants = $ls->getRestaurantList();
         
+        foreach( $restaurants as $restaurant ){
+            $res_id = $restaurant->id_restaurant;
+            $res_rating = $ls->getRestaurantRatingById( $res_id );
+            
+            $ocjene[] = number_format((float)$res_rating, 2, '.', '');
+        }
+
+        $this->registry->template->ratings = $ocjene;
+        $this->registry->template->restaurantList = $ls->getRestaurantList();
         $this->registry->template->show( 'user_restaurants' );
     }
 
@@ -56,8 +66,19 @@ class UserController extends BaseController{
         //debug();
 
         $this->registry->template->title = $_SESSION['tab'] = 'Restorani prema vrsti hrane';
-        $this->registry->template->restaurantList = $ls->getRestaurantListByFoodType( $_GET['id_foodType']);
+
+        $ocjene = [];
+        $restaurants = $ls->getRestaurantListByFoodType( $_GET['id_foodType']);
         
+        foreach( $restaurants as $restaurant ){
+            $res_id = $restaurant->id_restaurant;
+            $res_rating = $ls->getRestaurantRatingById( $res_id );
+            
+            $ocjene[] = number_format((float)$res_rating, 2, '.', '');
+        }
+
+        $this->registry->template->ratings = $ocjene;
+        $this->registry->template->restaurantList = $ls->getRestaurantListByFoodType( $_GET['id_foodType']);
         $this->registry->template->show( 'user_restaurants' );
     }
 

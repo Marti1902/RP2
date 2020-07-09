@@ -21,17 +21,28 @@
     <h1>Spiza.hr</h1>
 </div>
 
-<nav class="navbar navbar-expand-sm sticky-top bg-dark navbar-dark" style="margin-bottom: 50px;">
+<nav class="navbar navbar-expand-sm sticky-top bg-dark navbar-dark" style="margin-bottom: 50px; z-index: 2;">
     <a class="navbar-brand" href="#">
-        <img src="<?php echo __SITE_URL; ?>/css/logo.png" alt="Spiza.hr" style="width:40px;filter: brightness(0) invert(1);"">
+        <img src="<?php echo __SITE_URL; ?>/css/logo.png" alt="Spiza.hr" style="width:40px;filter: brightness(0) invert(1);">
     </a>
     <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index/logout">Logout</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user/orders">Moje narudžbe</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user">Vaši omiljeni restorani</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=user/restaurants">Svi restorani</a></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Restorani
+            </a>
+                <div class="dropdown-menu bg-dark">
+                    <a style="color: grey" class="dropdown-item" href="<?php echo __SITE_URL; ?>/index.php?rt=user/popular">Popularni restorani</a>
+                    <a style="color: grey" class="dropdown-item" href="<?php echo __SITE_URL; ?>/index.php?rt=user/restaurants">Svi restorani</a>
+                    <a style="color: grey" class="dropdown-item" href="<?php echo __SITE_URL; ?>/index.php?rt=user/neighborhood">U kvartu</a>
+                    <a style="color: grey" class="dropdown-item" href="<?php echo __SITE_URL; ?>/index.php?rt=user/foodType">Prema vrsti hrane</a>
+                </div>
+            </li>
     </ul>
 </nav> 
+
 
 <div class="container">
 <div class="row">
