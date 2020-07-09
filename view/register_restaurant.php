@@ -69,16 +69,16 @@
 
 <form action="<?php echo __SITE_URL; ?>/index.php?rt=index/register" method='post' class="was-validated">
     <div class="form-group">
-        <label for="uname">Unesi username:</label>
-        <input type="text" name="username" class="form-control" id="uname" placeholder="Username" required>
+        <label for="uname">Unesi korisničko ime:</label>
+        <input type="text" name="username" class="form-control" id="uname" placeholder="Korisničko ime" required>
         <div class="valid-feedback">Ispunjeno.</div>
-        <div class="invalid-feedback">Nije unjet username!</div>
+        <div class="invalid-feedback">Niste unijeli korisničko ime!</div>
     </div>
     <div class="form-group">
       <label for="pwd">Unesi password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Password" name="password" required>
+      <input type="password" class="form-control" id="pwd" placeholder="Lozinka" name="password" required>
       <div class="valid-feedback">Ispunjeno.</div>
-      <div class="invalid-feedback">Nije unjet password!</div>
+      <div class="invalid-feedback">Niste unijeli lozinku!</div>
     </div>
     <div class="form-group">
         <label for="email">Unesi e-mail addresu:</label>
@@ -90,28 +90,28 @@
         <label for="naziv">Unesi naziv resotrana:</label>
         <input type="text" class="form-control" placeholder="Naziv restorana" id="naziv" name="name" required>
         <div class="valid-feedback">Ispunjeno.</div>
-        <div class="invalid-feedback">Neispunjeno!</div>
+        <div class="invalid-feedback">Niste unijeli naziv restorana!</div>
     </div>
     <div class="form-group">
-        <label for="addr">Unesi addresu restorana:</label>
+        <label for="addr">Unesi adresu restorana:</label>
         <input type="text" class="form-control" placeholder="Adresa" id="addr" name="address" required>
         <div class="valid-feedback">Ispunjeno.</div>
-        <div class="invalid-feedback">Neispravna adresa!</div>
+        <div class="invalid-feedback">Niste unijeli adresu!</div>
     </div>
     <div class="form-group">
         <label for="opis">Unesi opis restorana:</label>
         <input type="text" class="form-control" placeholder="Opis" id="opis" name="description" required>
         <div class="valid-feedback">Ispunjeno.</div>
-        <div class="invalid-feedback">Neispravna adresa!</div>
+        <div class="invalid-feedback">Niste unijeli opis restorana!</div>
      </div>
      <div class="form-group form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox"  required> Slažem se sa uvijetima korištenja stranice.
+        <input class="form-check-input" type="checkbox"  required> Slažem se sa uvjetima korištenja stranice.
         <div class="valid-feedback">Ispunjeno.</div>
-        <div class="invalid-feedback">Označite da prihvaćate uvijete korištenja stranice.</div>
+        <div class="invalid-feedback">Označite da prihvaćate uvjete korištenja stranice.</div>
       </label>
     </div>
-    <input type="submit" name="Register restaurant" value="Register restaurant" class="btn btn-primary btn-block">
+    <input type="submit" name="Register restaurant" value="Registriraj restoran" class="btn btn-primary btn-block">
 </form>
 
 

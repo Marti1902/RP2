@@ -28,7 +28,7 @@
     <!-- Linkovi -->
     <ul class="navbar-nav">
         <li class="nav-item">
-        <a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index">Natrag </a>
+        <a class="nav-link" href="<?php echo __SITE_URL; ?>/index.php?rt=index">Prijava korisnika</a>
         </li>
 
         <!-- Dropdown meni -->
@@ -71,15 +71,15 @@
 
 <form action="<?php echo __SITE_URL;?>/index.php?rt=index/login" method='post'>
     <div class="form-group">
-        <label for="text">Username:</label>
-        <input type="text" class="form-control" name="username"  placeholder="Unesi username" required>
+        <label for="text">Korisničko ime:</label>
+        <input type="text" class="form-control" name="username"  placeholder="Unesite korisničko ime" required>
     </div>
     <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" name="password" class="form-control" placeholder="Unesi password" id="password" required> <br><br>
+        <label for="password">Lozinka:</label>
+        <input type="password" name="password" class="form-control" placeholder="Unesite password" id="password" required> <br><br>
     </div>
 
-    <button type="submit" name="log_in" class="btn btn-primary btn-block" value="login_restaurants">Log in</button>
+    <button type="submit" name="log_in" class="btn btn-primary btn-block" value="login_restaurants">Prijavi se</button>
 </form>
 
 

@@ -71,17 +71,17 @@
 <form action="<?php echo __SITE_URL;?>/index.php?rt=index/login" method='post'>
 <div class="form-group">
     <label for="text">Username:</label>
-    <input type="text" class="form-control" name="username"  placeholder="Unesi username" required>
+    <input type="text" class="form-control" name="username"  placeholder="Unesite korisničko ime" required>
 </div>
 <div class="form-group">
     <label for="password">Password:</label>
-    <input type="password" name="password" class="form-control" placeholder="Unesi password" id="password" required> <br><br>
+    <input type="password" name="password" class="form-control" placeholder="Unesite lozinku" id="password" required> <br><br>
 </div>
-<button type="submit" class="btn btn-primary btn-block" name="log_in" value="login_user">Log in</button>
+<button type="submit" class="btn btn-primary btn-block" name="log_in" value="login_user">Prijavi se</button>
 </form>
 
 <form action="<?php echo __SITE_URL; ?>/index.php?rt=index/registerForward" method='post'>
-    <input type="submit" class="btn btn-primary btn-block" value="Register" />
+    <input type="submit" class="btn btn-primary btn-block" value="Registriraj se" />
 </form>
 
 
