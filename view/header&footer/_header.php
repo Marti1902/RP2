@@ -21,7 +21,7 @@
     <h1>Spiza.hr</h1>
 </div>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;">
+<nav class="navbar navbar-expand-sm sticky-top bg-dark navbar-dark" style="margin-bottom: 50px;">
     <a class="navbar-brand" href="#">
         <img src="<?php echo __SITE_URL; ?>/css/logo.png" alt="Spiza.hr" style="width:40px;filter: brightness(0) invert(1);"">
     </a>

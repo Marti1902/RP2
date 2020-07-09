@@ -7,7 +7,7 @@ echo '<span id="gl_adresa" gl_adresa="' . $_SESSION['user']->address . '" hidden
 
 <script src="<?php echo __SITE_URL; ?>/view/javascript/gallery.js"></script>
 
-<h5>Ocjena: <?php echo $rating; ?></h5><br><br>
+<h5>Ocjena: <?php echo '<span class="badge badge-info">' . $rating . '</span>'; ?></h5><br><br>
 
 
 <h3>Galerija restorana</h3>
@@ -112,8 +112,10 @@ if( $foodList != null ){
         foreach( $orderList as $order ){
             if( $order->active == 0 ){
                 echo '<li class="list-group-item">' .
-                    $order->id_user . ': ' . $order->rating . '<br>' .
+                    'Ocjena: ' . $order->rating . '<br>'
+                    . $order->id_user . '<br>' .
                     '<div id="ovaj' . $i . '">' . $order->feedback . '</div><br>' .
+                    'Je li ovaj komentar bio koristan?<br>' . 
                     '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="gori" broj="' . $order->thumbs_up . '"> &#x1F44D;' . $order->thumbs_up . '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>' . 
                     '<button class="btn btn-primary" klasa="thumbs" id="' . $order->id_order . '" palac="doli" broj="' . $order->thumbs_down . '">  &#x1F44E;' . $order->thumbs_down . '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></button>' . 
                     '</li>';
