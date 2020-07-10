@@ -26,7 +26,7 @@
                     echo $food[0]->name . ' (' . $food[1] . ')<br>';
                 echo 'Ukupna cijena: ' . $order[0]->price_total . ' kn<br>';
                 if( $order[0]->discount != 0 ){
-                    $spopustom = $order[0]->price_total * 0.9;
+                    $spopustom = round( $order[0]->price_total * 0.9, 2 );
                     echo 'Cijena s popustom: ' . $spopustom . ' kn<br>';
                 }
                 echo '</li>';
@@ -70,7 +70,7 @@
                     echo $food[0]->name . ' (' . $food[1] . ')<br>';
                 echo 'Ukupna cijena: ' . $order[0]->price_total . ' kn<br>';
                 if( $order[0]->discount != 0 ){
-                    $spopustom = $order[0]->price_total * 0.9;
+                    $spopustom = round( $order[0]->price_total * 0.9, 2 );
                     echo 'Cijena s popustom: ' . $spopustom . ' kn<br>';
                 }
                 echo '<span class="badge badge-danger">Odbijeno</span>';
