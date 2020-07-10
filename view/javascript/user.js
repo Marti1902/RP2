@@ -231,7 +231,7 @@ function show_form(){
                         .append( title )
                         .append( ul )
                         .append( pop )
-                        .append( '<div name="uk"> Ukupno: <span id="ukupno">' + localStorage.getItem( 'spopustom' ) + ' kn</span></div>' )
+                        .append( '<div name="uk"> Ukupno: <span id="ukupno">' + u.toFixed( 2 ) + ' kn</span></div>' )
                         .append( naruci )
                         .append( odbaci );
                 
@@ -399,7 +399,7 @@ function fja_plus(){
     if( $( "#pop" ).html() == "Ostvarili ste popust!" ) d = 0.9;
     else d = 1;
     localStorage.setItem( 'spopustom', Number( localStorage.getItem( 'ukupno' ) ) * d );
-    $( '#ukupno' ).html( localStorage.getItem( 'spopustom' ) + ' kn' );
+    $( '#ukupno' ).html( Number( localStorage.getItem( 'spopustom' ) ).toFixed( 2 ) + ' kn' );
 }
 
 function fja_minus(){
@@ -413,7 +413,7 @@ function fja_minus(){
         if( $( "#pop" ).html() == "Ostvarili ste popust!" ) d = 0.9;
         else d = 1;
         localStorage.setItem( 'spopustom', Number( localStorage.getItem( 'ukupno' ) ) * d );
-        $( '#ukupno' ).html( localStorage.getItem( 'spopustom' ) + ' kn' );
+        $( '#ukupno' ).html( Number( localStorage.getItem( 'spopustom' ) ).toFixed( 2 ) + ' kn' );
     }
 }
 
